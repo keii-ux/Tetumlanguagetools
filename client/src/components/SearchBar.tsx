@@ -1,0 +1,225 @@
+import { useState, useEffect } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Search, Settings } from "lucide-react";
+import { SearchQuery } from "@shared/schema";
+import { DICTIONARY_TYPES, LANGUAGES } from "@/lib/dictionaries";
+
+interface SearchBarProps {
+  onSearch: (query: SearchQuery) => void;
+  initialQuery?: SearchQuery;
+}
+
+export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
+  const [searchTerm, setSearchTerm] = useState(initialQuery?.query || "");
+  const [advancedQuery, setAdvancedQuery] = useState<SearchQuery>(
+    initialQuery || {
+      query: "",
+      dictionaryType: "all",
+      language: "all",
+      exactMatch: false,
+      includeDefinitions: true,
+      caseSensitive: false,
+    }
+  );
+  const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
+
+  // Handle simple search
+  const handleSimpleSearch = (value: string) => {
+    setSearchTerm(value);
+    onSearch({
+      ...advancedQuery,
+      query: value,
+    });
+  };
+
+  // Handle advanced search
+  const handleAdvancedSearch = () => {
+    onSearch({
+      ...advancedQuery,
+      query: searchTerm,
+    });
+    setIsAdvancedOpen(false);
+  };
+
+  // Clear search
+  const handleClear = () => {
+    setSearchTerm("");
+    setAdvancedQuery({
+      query: "",
+      dictionaryType: "all",
+      language: "all",
+      exactMatch: false,
+      includeDefinitions: true,
+      caseSensitive: false,
+    });
+    onSearch({
+      query: "",
+      dictionaryType: "all",
+      language: "all",
+      exactMatch: false,
+      includeDefinitions: true,
+      caseSensitive: false,
+    });
+  };
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        document.getElementById("main-search")?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  return (
+    <div className="flex-1 max-w-2xl mx-8">
+      <div className="relative">
+        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <Search className="h-4 w-4 text-slate-400" />
+        </div>
+        <Input
+          id="main-search"
+          type="text"
+          placeholder="Search across all dictionaries..."
+          value={searchTerm}
+          onChange={(e) => handleSimpleSearch(e.target.value)}
+          className="block w-full pl-10 pr-20 py-2 border border-slate-300 rounded-lg bg-white text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
+        />
+        <div className="absolute inset-y-0 right-0 pr-3 flex items-center space-x-2">
+          <Dialog open={isAdvancedOpen} onOpenChange={setIsAdvancedOpen}>
+            <DialogTrigger asChild>
+              <Button variant="ghost" size="sm" className="p-1">
+                <Settings className="h-4 w-4" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle>Advanced Search</DialogTitle>
+              </DialogHeader>
+              
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="search-term">Search Term</Label>
+                  <Input
+                    id="search-term"
+                    placeholder="Enter search term..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label>Dictionary</Label>
+                    <Select
+                      value={advancedQuery.dictionaryType}
+                      onValueChange={(value) =>
+                        setAdvancedQuery({ ...advancedQuery, dictionaryType: value as any })
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Object.entries(DICTIONARY_TYPES).map(([key, label]) => (
+                          <SelectItem key={key} value={key}>
+                            {label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div>
+                    <Label>Language</Label>
+                    <Select
+                      value={advancedQuery.language}
+                      onValueChange={(value) =>
+                        setAdvancedQuery({ ...advancedQuery, language: value as any })
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Object.entries(LANGUAGES).map(([key, label]) => (
+                          <SelectItem key={key} value={key}>
+                            {label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div>
+                  <Label>Search Options</Label>
+                  <div className="space-y-2 mt-2">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="exact-match"
+                        checked={advancedQuery.exactMatch}
+                        onCheckedChange={(checked) =>
+                          setAdvancedQuery({ ...advancedQuery, exactMatch: !!checked })
+                        }
+                      />
+                      <Label htmlFor="exact-match" className="text-sm">
+                        Exact match
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="include-definitions"
+                        checked={advancedQuery.includeDefinitions}
+                        onCheckedChange={(checked) =>
+                          setAdvancedQuery({ ...advancedQuery, includeDefinitions: !!checked })
+                        }
+                      />
+                      <Label htmlFor="include-definitions" className="text-sm">
+                        Include definitions
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="case-sensitive"
+                        checked={advancedQuery.caseSensitive}
+                        onCheckedChange={(checked) =>
+                          setAdvancedQuery({ ...advancedQuery, caseSensitive: !!checked })
+                        }
+                      />
+                      <Label htmlFor="case-sensitive" className="text-sm">
+                        Case sensitive
+                      </Label>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex justify-end space-x-3 pt-4">
+                  <Button variant="outline" onClick={handleClear}>
+                    Clear
+                  </Button>
+                  <Button onClick={handleAdvancedSearch}>
+                    Search
+                  </Button>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+          
+          <kbd className="px-2 py-1 text-xs font-semibold text-slate-500 bg-slate-100 border border-slate-300 rounded">
+            ⌘K
+          </kbd>
+        </div>
+      </div>
+    </div>
+  );
+}
