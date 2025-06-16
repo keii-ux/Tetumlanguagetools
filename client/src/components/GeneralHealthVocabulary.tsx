@@ -141,18 +141,16 @@ export function GeneralHealthVocabulary() {
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">General Health Vocabulary</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-2 pt-[23px] pb-[23px]">General Health Vocabulary</h2>
         <p className="text-gray-600">
           AI-powered medical translations with comprehensive definitions and authoritative sources
         </p>
       </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Tetum to English Translation */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <span className="text-lg">🇹🇱 Tetum → English</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -180,7 +178,6 @@ export function GeneralHealthVocabulary() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <span className="text-lg">🇺🇸 English → Tetum</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -204,7 +201,6 @@ export function GeneralHealthVocabulary() {
           </CardContent>
         </Card>
       </div>
-
       <div className="text-center text-sm text-gray-500">
         <p>Powered by AI with medical sources from authoritative textbooks, journals, and medical references</p>
       </div>
