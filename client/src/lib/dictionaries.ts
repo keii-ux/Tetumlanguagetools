@@ -60,7 +60,7 @@ export function highlightSearchTerm(text: string, searchTerm: string): string {
 export function buildSearchQuery(params: Partial<SearchQuery>): SearchQuery {
   return {
     query: params.query || "",
-    dictionaryType: params.dictionaryType || "all",
+    dictionaryType: params.dictionaryType || "medical", // Default to medical for this medical dictionary app
     language: params.language || "all",
     exactMatch: params.exactMatch || false,
     includeDefinitions: params.includeDefinitions ?? true,

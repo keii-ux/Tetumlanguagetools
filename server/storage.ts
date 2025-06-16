@@ -58,8 +58,13 @@ export class MemStorage implements IStorage {
   async searchEntries(query: SearchQuery): Promise<DictionaryEntry[]> {
     const entries = Array.from(this.entries.values());
     
-    // If no query provided, return empty array for predictive search
-    if (!query.query || query.query.trim() === "") return [];
+    // If no query provided but dictionary type is specified, return filtered results
+    if (!query.query || query.query.trim() === "") {
+      if (query.dictionaryType !== "all") {
+        return entries.filter(entry => entry.dictionaryType === query.dictionaryType).slice(0, 20);
+      }
+      return [];
+    }
 
     const searchTerm = query.caseSensitive ? query.query.trim() : query.query.trim().toLowerCase();
     

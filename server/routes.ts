@@ -86,6 +86,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       await storage.bulkCreateEntries(allMedicalEntries);
       
       console.log(`Loaded ${allMedicalEntries.length} medical dictionary entries`);
+      
+      // Debug: Log first few entries to verify structure
+      if (allMedicalEntries.length > 0) {
+        console.log("Sample entry:", JSON.stringify(allMedicalEntries[0], null, 2));
+      }
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
