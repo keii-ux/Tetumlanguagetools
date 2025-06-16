@@ -6,15 +6,18 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Search, Settings } from "lucide-react";
-import { SearchQuery } from "@shared/schema";
+import { SearchQuery, DictionaryEntry } from "@shared/schema";
 import { DICTIONARY_TYPES, LANGUAGES } from "@/lib/dictionaries";
 
 interface SearchBarProps {
   onSearch: (query: SearchQuery) => void;
   initialQuery?: SearchQuery;
+  searchResults?: DictionaryEntry[];
+  isLoading?: boolean;
+  onEntrySelect?: (entry: DictionaryEntry) => void;
 }
 
-export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
+export function SearchBar({ onSearch, initialQuery, searchResults = [], isLoading = false, onEntrySelect }: SearchBarProps) {
   const [tetumSearchTerm, setTetumSearchTerm] = useState(initialQuery?.language === "tetum" ? initialQuery?.query || "" : "");
   const [englishSearchTerm, setEnglishSearchTerm] = useState(initialQuery?.language === "english" ? initialQuery?.query || "" : "");
   const [advancedQuery, setAdvancedQuery] = useState<SearchQuery>(
@@ -28,11 +31,17 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
     }
   );
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
+  const [showTetumDropdown, setShowTetumDropdown] = useState(false);
+  const [showEnglishDropdown, setShowEnglishDropdown] = useState(false);
+  const [activeTerm, setActiveTerm] = useState("");
 
   // Handle Tetum search
   const handleTetumSearch = (value: string) => {
     setTetumSearchTerm(value);
     setEnglishSearchTerm(""); // Clear other search
+    setActiveTerm(value);
+    setShowTetumDropdown(value.length > 0);
+    setShowEnglishDropdown(false);
     const searchQuery: SearchQuery = {
       query: value,
       language: "tetum",
@@ -49,6 +58,9 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
   const handleEnglishSearch = (value: string) => {
     setEnglishSearchTerm(value);
     setTetumSearchTerm(""); // Clear other search
+    setActiveTerm(value);
+    setShowEnglishDropdown(value.length > 0);
+    setShowTetumDropdown(false);
     const searchQuery: SearchQuery = {
       query: value,
       language: "english",

@@ -192,54 +192,7 @@ export default function Dictionary() {
           <SearchBar onSearch={handleSearchQueryChange} initialQuery={query} />
         </div>
 
-        {/* Search Results Section */}
-        {!selectedEntry && isLoading && (
-          <div className="mb-8">
-            <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100">
-              <div className="animate-pulse">
-                <div className="h-6 bg-blue-100 rounded w-1/4 mb-4"></div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[1, 2, 3, 4, 5, 6].map((i) => (
-                    <div key={i} className="p-4 border border-blue-100 rounded-lg">
-                      <div className="h-5 bg-blue-100 rounded w-3/4 mb-2"></div>
-                      <div className="h-4 bg-gray-100 rounded w-full mb-2"></div>
-                      <div className="h-3 bg-blue-100 rounded w-1/2"></div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        
-        {!selectedEntry && !isLoading && searchResults.length > 0 && (
-          <div className="mb-8">
-            <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                Search Results ({searchResults.length} found)
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {searchResults.map((entry) => (
-                  <div
-                    key={entry.id}
-                    onClick={() => setSelectedEntry(entry)}
-                    className="p-4 border border-blue-100 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors"
-                  >
-                    <div className="font-semibold text-blue-900">
-                      {getDisplayTerm(entry)}
-                    </div>
-                    <div className="text-sm text-gray-600 mt-1 line-clamp-2">
-                      {getDefinitionText(entry)}
-                    </div>
-                    <div className="text-xs text-blue-600 mt-2">
-                      {entry.source} • {entry.category}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
+
 
         {/* Results Section */}
         {selectedEntry && (
