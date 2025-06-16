@@ -1,0 +1,1507 @@
+[
+  {
+    "portuguese": "A posteriori",
+    "tetum": "a posteriori / ikus mai",
+    "english": "at a later date",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "A prazo",
+    "tetum": "ho kréditu",
+    "english": "on credit",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "A quo; ad quem",
+    "tetum": "a quo / ad quem (tribunál husi ne'ebé disputa haruka ba seluk)",
+    "english": "court of judge from which a dispute is sent to another, which is the court or judge. These terms also refer to beginning and end of a time period",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "A receber",
+    "tetum": "atu simu / resebivel",
+    "english": "receivable",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "A título gratuito",
+    "tetum": "gratuita / la selu",
+    "english": "free of charge",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "A vencer",
+    "tetum": "sei atu selu / pendente",
+    "english": "oustanding",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "À vista",
+    "tetum": "prontu / ho osan tun",
+    "english": "on demand / cash",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Abandonar",
+    "tetum": "Abandona",
+    "english": "To abandon",
+    "source": "Código Civil / Penal"
+  },
+  {
+    "portuguese": "Abertura de capital",
+    "tetum": "loke kapitál ba públiku",
+    "english": "to go public",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Abertura de inventário",
+    "tetum": "loke prosesu inventáriu",
+    "english": "opening of probate proceedings",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Ab-rogação",
+    "tetum": "abrogasaun / revogasaun",
+    "english": "abrogation",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Absolvição",
+    "tetum": "absolvisaun / perdua",
+    "english": "absolution / acquittal / pardon / discharge / dismissal",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Abuso",
+    "tetum": "Abuzu",
+    "english": "Abuse",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Abuso de convenção",
+    "tetum": "abuzu konvensaun",
+    "english": "treaty shopping",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Ação",
+    "tetum": "Aksaun",
+    "english": "Action / Lawsuit / Proceeding",
+    "source": "Código de Processo Civil de Timor-Leste",
+    "notes": "The term 'Ação' can also refer to a financial 'share' or 'stock', but in this legal context, 'lawsuit' is the primary meaning."
+  },
+  {
+    "portuguese": "Ação anulatória",
+    "tetum": "asaun anulasaun",
+    "english": "annulment action",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Ação cautelar",
+    "tetum": "asaun kautelár",
+    "english": "writ of prevention / court action / precautionary action / ancillary action",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Ação civil pública",
+    "tetum": "asaun sívil públika",
+    "english": "public class action / public civil action",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Ação de cobrança",
+    "tetum": "asaun kobransa",
+    "english": "collection action",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Ação de despejo",
+    "tetum": "asaun despeju / asaun eviksaun",
+    "english": "eviction action / action for repossession / eviction action for failure to pay",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Ação judicial",
+    "tetum": "asaun judisiál / prosesu judisiál",
+    "english": "litigation / court suit / judicial suit",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Aceitação",
+    "tetum": "Aseitasaun",
+    "english": "Acceptance",
+    "source": "Código Civil de Timor-Leste"
+  },
+  {
+    "portuguese": "Acesso aos tribunais",
+    "tetum": "Asesu ba tribunál",
+    "english": "Access to courts",
+    "source": "Constituição da RDTL"
+  },
+  {
+    "portuguese": "Acionista",
+    "tetum": "asionista / na'in ba asaun",
+    "english": "shareholder (U.K.) / stockholder (U.S.A.)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Acordo",
+    "tetum": "Akordu",
+    "english": "Agreement / Settlement",
+    "source": "Código Civil / Processual"
+  },
+  {
+    "portuguese": "Acórdão",
+    "tetum": "akórdaun / desizaun tribunál superiór",
+    "english": "entry of judgment / final court decision",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Aditamento",
+    "tetum": "aditamentu / adenda",
+    "english": "addendum / amendment of complaint / addition to (cláusulas de contrato)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Adjudicação",
+    "tetum": "Ajudikasaun",
+    "english": "Adjudication / Award (in a bidding process)",
+    "source": "Código de Processo Civil de Timor-Leste",
+    "notes": "The spelling 'Ajudikasau' is also found, but 'Ajudikasaun' aligns with INL standards."
+  },
+  {
+    "portuguese": "Administrar justiça",
+    "tetum": "Administra justisa",
+    "english": "To administer justice",
+    "source": "Constituição da RDTL / Lei de Organização Judiciária"
+  },
+  {
+    "portuguese": "Admoestação",
+    "tetum": "Admoestasaun",
+    "english": "Admonition / Formal warning",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Advogado",
+    "tetum": "advogadu / defensór",
+    "english": "attorney / lawyer / legal counsel (jur.) / solicitor (U.K.) / counsel",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Afectação",
+    "tetum": "Afetasaun",
+    "english": "Allocation / Affectation",
+    "source": "Direito Administrativo / Urbanístico"
+  },
+  {
+    "portuguese": "Agente",
+    "tetum": "Ajente",
+    "english": "Agent / Perpetrator",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Agravo",
+    "tetum": "Agravu",
+    "english": "Interlocutory appeal",
+    "source": "Código de Processo Civil (revogado, mas termo histórico)"
+  },
+  {
+    "portuguese": "Ajuizamento",
+    "tetum": "ajuizamentu / aprezentasaun keixa",
+    "english": "prosecuting / filing (lawsuit)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Alienação",
+    "tetum": "alienasaun / fa'an",
+    "english": "disposal, sale, alienation",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Alienação fiduciária",
+    "tetum": "alienasaun fiduciária",
+    "english": "chattel mortgage, conditional sale (de coisa móvel) / trust receipt (cf. Black's) / statutory lien",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Alvará judicial",
+    "tetum": "alvará judisiál / mandadu judisiál",
+    "english": "court order or writ / court order (jur.)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Ameaça",
+    "tetum": "Ameasa",
+    "english": "Threat",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Anormal",
+    "tetum": "Anormál",
+    "english": "Abnormal",
+    "source": "Vocabulário Geral"
+  },
+  {
+    "portuguese": "Anulação",
+    "tetum": "Anulasaun",
+    "english": "Annulment",
+    "source": "Código Civil / Direito Administrativo"
+  },
+  {
+    "portuguese": "Apelação",
+    "tetum": "apelasaun / rekursu",
+    "english": "appeal",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Apólice",
+    "tetum": "apólise / seguru",
+    "english": "bond / policy / security",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Apropriação ilegal de bens",
+    "tetum": "Apropriasaun ilegál ba rikusoin",
+    "english": "Illegal appropriation of assets",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Apropriação indébita",
+    "tetum": "apropriasaun indebita / uza sala sasán",
+    "english": "embezzlement / misappropriation",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Arbitragem",
+    "tetum": "Arbitrajen",
+    "english": "Arbitration",
+    "source": "Lei de Arbitragem, Mediação e Conciliação"
+  },
+  {
+    "portuguese": "Árbitro",
+    "tetum": "Árbitru",
+    "english": "Arbitrator",
+    "source": "Lei de Arbitragem, Mediação e Conciliação"
+  },
+  {
+    "portuguese": "Arresto",
+    "tetum": "arestu / apreensaun",
+    "english": "arrest / attachment / seizure",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Arrendamento",
+    "tetum": "arendamentu / aluga",
+    "english": "leasing",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Ato constitutivo",
+    "tetum": "atu konstitutivu / estatutu",
+    "english": "charter / formation agreement / articles of incorporation",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Audiência",
+    "tetum": "audiénsia",
+    "english": "hearing / public hearing",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Audiência final",
+    "tetum": "Audiénsia finál",
+    "english": "Final hearing",
+    "source": "Código de Processo Civil de Timor-Leste"
+  },
+  {
+    "portuguese": "Autos",
+    "tetum": "Autus",
+    "english": "Case file / Court records",
+    "source": "Código de Processo Civil / Penal"
+  },
+  {
+    "portuguese": "Aval",
+    "tetum": "avál / garantia",
+    "english": "countersignature / endorsement / “aval” guarantee",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Averbação",
+    "tetum": "averbasaun / rejistu",
+    "english": "annotation / approval / recordal / approval of contracts",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Averiguar",
+    "tetum": "averiguasaun / investiga",
+    "english": "to investigate / to verify",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Ação de execução",
+    "tetum": "asaun ekusaun",
+    "english": "execution action / enforcement action",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Ação de regresso",
+    "tetum": "asaun regresu",
+    "english": "action for recourse / action for reimbursement / action for indemnity",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Ação penal pública",
+    "tetum": "asaun penal públika",
+    "english": "public criminal action / public prosecution",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Ação penal privada",
+    "tetum": "asaun penal privada",
+    "english": "private criminal action / private prosecution",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Ação popular",
+    "tetum": "asaun populu / asaun públiku",
+    "english": "(popular) class action / public interest action / public civil action (cf. Brasil)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "(a) título oneroso",
+    "tetum": "(a) título oneroso",
+    "english": "(a) onerous title",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Baixa (contab.)",
+    "tetum": "baixa / kanselamentu (kontabilidade)",
+    "english": "write-off / cancelation / clearance (de inscrição)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Balanço patrimonial",
+    "tetum": "balansu patrimoniál",
+    "english": "balance sheet",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Bancarrota",
+    "tetum": "bankarota / falénsia",
+    "english": "bankrupt",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Base de cálculo do imposto",
+    "tetum": "baze kalkulasaun impostu nian",
+    "english": "tax calculation basis / tax assessable basis",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Base legal",
+    "tetum": "baze legál",
+    "english": "legal grounds",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Bem de família",
+    "tetum": "sasán família nian (impenhoravel)",
+    "english": "homestead right",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Bem jurídico",
+    "tetum": "Bem jurídiku",
+    "english": "Legally protected interest / Juridical good",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Beneficiário",
+    "tetum": "benefisiáriu",
+    "english": "beneficiary (trust) / drawer / payee / transferee / recipient",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Benefício da dúvida",
+    "tetum": "benefísiu dúvida nian",
+    "english": "benefit of doubt",
+    "source": "Legal Dictionary",
+    "notes": "Original Tetum 'benefísiu dúvidaj' corrected for clarity."
+  },
+  {
+    "portuguese": "Bens",
+    "tetum": "Rikusoin",
+    "english": "Assets / Goods",
+    "source": "Código Civil de Timor-Leste"
+  },
+  {
+    "portuguese": "Bens imóveis",
+    "tetum": "béns imoveis / propriedade imobiliária",
+    "english": "immovable assets / real property",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Bens imóveis abandonados",
+    "tetum": "Rikusoin la-namanas abandonadu",
+    "english": "Abandoned immovable property",
+    "source": "Código Civil de Timor-Leste"
+  },
+  {
+    "portuguese": "Bens móveis",
+    "tetum": "béns moveis / sasán ne'ebé bele book",
+    "english": "movable asset / personal property / personalty",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Bens penhorados",
+    "tetum": "Rikusoin peñoradu",
+    "english": "Seized assets / Attached property",
+    "source": "Código de Processo Civil (Processo Executivo)"
+  },
+  {
+    "portuguese": "Bitributação",
+    "tetum": "tributasaun dupla",
+    "english": "double taxation",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Boa fé",
+    "tetum": "boa fé / laran-moos",
+    "english": "bona fide / good faith",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Bolsa de valores",
+    "tetum": "bolsa de valores / merkadu asaun",
+    "english": "stock exchange / stock market",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Bônus de subscrição",
+    "tetum": "bónus subskrisaun",
+    "english": "warrant / sub bonus / bonus issue / subscription bond/bonus",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Branqueamento de capitais",
+    "tetum": "Brankeamentu kapitál nian",
+    "english": "Money laundering",
+    "source": "Lei do Branqueamento de Capitais"
+  },
+  {
+    "portuguese": "Busca e apreensão",
+    "tetum": "buska no apreensaun",
+    "english": "distraint / search and seizure",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Cabimento de recurso",
+    "tetum": "kabimentu rekursu / posibilidade atu rekore",
+    "english": "acceptance of appeal / admissibility of an appeal",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Caducidade",
+    "tetum": "kadusidade / perda direitu tanba prazu",
+    "english": "forfeiture / lapse (of a right due to time) / expiration",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Cambial",
+    "tetum": "kambiál / instrumentu negosiável",
+    "english": "negotiable instrument / commercial paper",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Cancelar hipoteca",
+    "tetum": "kansela ipoteka",
+    "english": "to discharge / to lift a mortgage",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Capital social",
+    "tetum": "kapitál sosiál",
+    "english": "capital stock / corporate capital / share capital (S.A.) / quota capital (Ltda.)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Caput",
+    "tetum": "caput (ulun artigu nian)",
+    "english": "main section / main clause / lead paragraph (of a legal article)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Carência",
+    "tetum": "karénsia / períodu grasia",
+    "english": "grace period / waiting period / lack of grounds (for an action)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Carta precatória",
+    "tetum": "Karta prekatória",
+    "english": "Letter of request (domestic)",
+    "source": "Código de Processo Civil de Timor-Leste",
+    "notes": "A formal request from a court in one jurisdiction to a court in another within the same country to perform a judicial act. Different from 'carta rogatória' (international letter rogatory)."
+  },
+  {
+    "portuguese": "Carta rogatória",
+    "tetum": "karta rogatória",
+    "english": "letter rogatory",
+    "source": "Legal Dictionary",
+    "notes": "A formal request from a court to a court in a foreign country for some type of judicial assistance."
+  },
+  {
+    "portuguese": "Cartório de Notas",
+    "tetum": "Kartóriu Notariál",
+    "english": "Notary Office",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Caso fortuito",
+    "tetum": "kazu fortuitu / akontesimentu imprevizivel",
+    "english": "act of God / fortuitous event",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Caução",
+    "tetum": "kausaun / garantia",
+    "english": "bail / escrow / pledge / security / guarantee / bond / collateral",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Causa de pedir",
+    "tetum": "Kauza de pedir",
+    "english": "Cause of action",
+    "source": "Código de Processo Civil de Timor-Leste"
+  },
+  {
+    "portuguese": "Cédula de crédito",
+    "tetum": "sédula kréditu",
+    "english": "credit certificate",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Certidão",
+    "tetum": "sertidaun",
+    "english": "certificate / certified copy",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Cessão de direitos",
+    "tetum": "sesaun direitu / transferénsia direitu",
+    "english": "assignment of claim / assignment of rights",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Cidadão com deficiência",
+    "tetum": "Sidadaun ho defisiénsia",
+    "english": "Citizen with a disability",
+    "source": "Constituição da RDTL",
+    "notes": "The term 'Cidadão com deficiência' is more modern and respectful than 'portador de deficiência'."
+  },
+  {
+    "portuguese": "Citação",
+    "tetum": "Sitasaun",
+    "english": "Summons / Citation / Service of process",
+    "source": "Código de Processo Civil de Timor-Leste",
+    "notes": "The formal act of giving notice to a defendant that a lawsuit has been filed against them. Sometimes translated in Tetum as 'notifikasaun judisiál' (judicial notification)."
+  },
+  {
+    "portuguese": "Cláusula compromissória",
+    "tetum": "kláuzula kompromisória",
+    "english": "arbitration clause / commitment clause",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Coação",
+    "tetum": "Koasaun",
+    "english": "Coercion",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Código Penal",
+    "tetum": "Kódigu Penál",
+    "english": "Penal Code",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Coisa julgada",
+    "tetum": "koiza julgada / kazu tranzita en julgadu",
+    "english": "res judicata",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Comarca",
+    "tetum": "komarka / distritu judisiál",
+    "english": "judicial district / judiciary district",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Competência",
+    "tetum": "kompeténsia / jurisdisaun",
+    "english": "jurisdiction / authority / competence",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Comportamento concludente",
+    "tetum": "Komportamentu konkludente",
+    "english": "Conclusive behavior",
+    "source": "Código Civil de Timor-Leste"
+  },
+  {
+    "portuguese": "Concessão",
+    "tetum": "Konsesaun",
+    "english": "Concession / Grant",
+    "source": "Direito Administrativo / Lei de Petróleo"
+  },
+  {
+    "portuguese": "Conciliação",
+    "tetum": "Konsiliasaun",
+    "english": "Conciliation",
+    "source": "Lei de Arbitragem, Mediação e Conciliação"
+  },
+  {
+    "portuguese": "Concordata",
+    "tetum": "konkordata / rekuperasaun judisiál",
+    "english": "reorganization proceedings / composition with creditors",
+    "source": "Legal Dictionary",
+    "notes": "An older term for a judicial proceeding allowing a debtor to avoid bankruptcy by negotiating with creditors, similar to Chapter 11 in the U.S."
+  },
+  {
+    "portuguese": "Concurso de credores",
+    "tetum": "konkursu kredór sira-nian",
+    "english": "composition with creditors / creditors’ claims in bankruptcy proceeding",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Condenação em dinheiro",
+    "tetum": "kondenasaun ho osan / indemnizasaun",
+    "english": "monetary judgment / award of damages",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Confissão",
+    "tetum": "Konfisaun",
+    "english": "Confession",
+    "source": "Código de Processo Civil / Penal"
+  },
+  {
+    "portuguese": "Confissão de dívida",
+    "tetum": "konfisaun dívida / rekoñesimentu tusan",
+    "english": "acknowledgment of indebtedness / acknowledgment of debt",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Conflito de interesses",
+    "tetum": "Konflitu de interese",
+    "english": "Conflict of interest",
+    "source": "Código de Processo Civil / Lei da Função Pública"
+  },
+  {
+    "portuguese": "Consenso",
+    "tetum": "Konsensu",
+    "english": "Consensus",
+    "source": "Vocabulário Jurídico Geral"
+  },
+  {
+    "portuguese": "Consentimento",
+    "tetum": "Konsentimentu",
+    "english": "Consent",
+    "source": "Código Civil / Penal"
+  },
+  {
+    "portuguese": "Conservador (do Registo)",
+    "tetum": "Konservadór (Rejistu nian)",
+    "english": "Registrar",
+    "source": "Código do Registo Predial / Código do Notariado"
+  },
+  {
+    "portuguese": "Consignação em juízo",
+    "tetum": "konsignasaun en juízu / depózitu iha tribunál",
+    "english": "deposit in court",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Constituição",
+    "tetum": "Konstituisaun",
+    "english": "Constitution",
+    "source": "Constituição da RDTL",
+    "notes": "Also referred to poetically as 'Lei Inan' (Mother Law)."
+  },
+  {
+    "portuguese": "Constrangimento ilegal",
+    "tetum": "konstranjimentu ilegál / koersaun",
+    "english": "unlawful coercion / duress",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Contestar",
+    "tetum": "Kontesta",
+    "english": "To contest / To dispute (in litigation)",
+    "source": "Código de Processo Civil de Timor-Leste"
+  },
+  {
+    "portuguese": "Contestação",
+    "tetum": "Kontestasaun",
+    "english": "Statement of defense / Answer / Contestation",
+    "source": "Código de Processo Civil de Timor-Leste",
+    "notes": "The formal document filed by the defendant in response to a plaintiff's complaint. The Tetum translation sometimes includes '(husi réu)' to specify 'from the defendant'."
+  },
+  {
+    "portuguese": "Contrabando",
+    "tetum": "Kontrabandu",
+    "english": "Smuggling",
+    "source": "Código Penal / Lei Aduaneira"
+  },
+  {
+    "portuguese": "Contrato",
+    "tetum": "Kontratu",
+    "english": "Contract",
+    "source": "Código Civil de Timor-Leste"
+  },
+  {
+    "portuguese": "Contrato social",
+    "tetum": "kontratu sosiál / estatutu empreza nian",
+    "english": "articles of association",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Contribuinte",
+    "tetum": "kontribuinte / selu-na'in impostu",
+    "english": "taxpayer",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Contumácia processual",
+    "tetum": "kontumásia prosesuál / dezesu ba tribunál",
+    "english": "contempt of court",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Cônjuge",
+    "tetum": "Kaben",
+    "english": "Spouse",
+    "source": "Código Civil de Timor-Leste",
+    "notes": "'Kónjuge' is also used as a direct loanword in formal contexts."
+  },
+  {
+    "portuguese": "Corresponder",
+    "tetum": "Korresponde",
+    "english": "To correspond / To match",
+    "source": "Vocabulário Geral"
+  },
+  {
+    "portuguese": "Costume",
+    "tetum": "Lisan",
+    "english": "Custom / Customary law",
+    "source": "Direito Costumeiro / Antropologia Jurídica"
+  },
+  {
+    "portuguese": "Crédito privilegiado",
+    "tetum": "kréditu privilejiadu",
+    "english": "privileged debt / preferred claim",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Crime culposo",
+    "tetum": "krime kulpozu (la ho intensaun)",
+    "english": "culpable crime / crime of negligence",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Crime doloso",
+    "tetum": "krime dolozu (ho intensaun)",
+    "english": "felonious crime / crime with malicious intent",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Crimes contra as pessoas",
+    "tetum": "Krime hasoru ema",
+    "english": "Crimes against persons",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Crimes de falsificação",
+    "tetum": "Krime falsifikasaun nian",
+    "english": "Falsification crimes / Forgery",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Culpa",
+    "tetum": "kulpa / neglijénsia",
+    "english": "fault / negligence / guilt",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Cumprimento",
+    "tetum": "Kumprimentu",
+    "english": "Compliance / Fulfillment",
+    "source": "Vocabulário Jurídico Geral"
+  },
+  {
+    "portuguese": "Curador",
+    "tetum": "kuradór / guardián",
+    "english": "curator / conservator (of a bankrupt estate) / guardian (of a minor) / committee (of an incapacitated person)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Custas judiciais",
+    "tetum": "kustas judisiál",
+    "english": "court costs and fees of counsel / court fees",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Dação em pagamento",
+    "tetum": "dasaun en pagamentu (selu ho sasán)",
+    "english": "payment in kind / dation in payment",
+    "source": "Legal Dictionary",
+    "notes": "The act of settling a debt by giving a good or asset instead of money."
+  },
+  {
+    "portuguese": "Danos emergentes",
+    "tetum": "danu emerjente / lakon diretu",
+    "english": "actual damages / direct losses / incidental damages",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Danos morais",
+    "tetum": "danu morál",
+    "english": "moral damages / pain and suffering",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Data",
+    "tetum": "Data",
+    "english": "Date",
+    "source": "Vocabulário Geral"
+  },
+  {
+    "portuguese": "Debênture",
+    "tetum": "debenture / títulu dívida",
+    "english": "debenture",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Decadência",
+    "tetum": "dekadénsia / preskrisaun",
+    "english": "lapse of right / forfeiture / statute of limitations",
+    "source": "Legal Dictionary",
+    "notes": "The loss of a right because it was not exercised within a specific timeframe."
+  },
+  {
+    "portuguese": "Decisão judicial",
+    "tetum": "Desizaun Judisiál",
+    "english": "Judicial Decision / Ruling",
+    "source": "Código de Processo Civil / Penal"
+  },
+  {
+    "portuguese": "Decisão judicial que pode dar lugar à extradição",
+    "tetum": "Desizaun judisiál ne'ebé bele fó fatin ba estradisaun",
+    "english": "Judicial decision that can lead to extradition",
+    "source": "Constituição da RDTL"
+  },
+  {
+    "portuguese": "Decisão transitada em julgado",
+    "tetum": "desizaun tranzita en julgadu",
+    "english": "final and unappealable decision / res judicata",
+    "source": "Legal Dictionary",
+    "notes": "A decision against which no further appeal can be made."
+  },
+  {
+    "portuguese": "Decreto-Lei",
+    "tetum": "Dekretu-Lei",
+    "english": "Decree-Law",
+    "source": "Constituição da RDTL / Processo Legislativo"
+  },
+  {
+    "portuguese": "Defesa",
+    "tetum": "deféza",
+    "english": "defense / answer / plea",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Delito",
+    "tetum": "delitu / krime",
+    "english": "offense / crime",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Demanda",
+    "tetum": "demanda / ezijénsia",
+    "english": "claim / lawsuit / litigation / demand",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Denúncia (Dir. Proc. Penal)",
+    "tetum": "denúnsia / akuzasaun",
+    "english": "indictment / accusation / formal charge",
+    "source": "Legal Dictionary",
+    "notes": "Specifically, the formal accusation filed by the Public Prosecutor to initiate a criminal action."
+  },
+  {
+    "portuguese": "Depositar",
+    "tetum": "Depozita",
+    "english": "To deposit",
+    "source": "Código de Processo Civil / Código Civil"
+  },
+  {
+    "portuguese": "Depoimento",
+    "tetum": "Depoimentu",
+    "english": "Testimony / Deposition",
+    "source": "Código de Processo Civil / Penal"
+  },
+  {
+    "portuguese": "Depósito judicial",
+    "tetum": "depózitu judisiál",
+    "english": "judicial deposit / deposit in court",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Descentralização",
+    "tetum": "Desentralizasaun",
+    "english": "Decentralization",
+    "source": "Constituição da RDTL"
+  },
+  {
+    "portuguese": "Desconsideração da personalidade jurídica",
+    "tetum": "desizaun atu la konsidera personalidade jurídika",
+    "english": "disregard of corporate entity / piercing of the corporate veil",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Desistência",
+    "tetum": "Dezisténsia",
+    "english": "Withdrawal / Renunciation (of a claim)",
+    "source": "Código de Processo Civil de Timor-Leste"
+  },
+  {
+    "portuguese": "Despejo",
+    "tetum": "Despeju",
+    "english": "Eviction / Ejectment",
+    "source": "Lei do Arrendamento Urbano / Código Civil"
+  },
+  {
+    "portuguese": "Dever de colaboração",
+    "tetum": "Devér atu kolabora",
+    "english": "Duty to cooperate",
+    "source": "Código de Processo Civil de Timor-Leste"
+  },
+  {
+    "portuguese": "Direito adquirido",
+    "tetum": "direitu ne'ebé hetan ona",
+    "english": "vested right / grandfather's rights",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Direito anterior",
+    "tetum": "Direitu anteriór",
+    "english": "Prior law",
+    "source": "Constituição da RDTL"
+  },
+  {
+    "portuguese": "Direito ao trabalho",
+    "tetum": "Direitu ba traballu",
+    "english": "Right to work",
+    "source": "Constituição da RDTL"
+  },
+  {
+    "portuguese": "Direito autoral",
+    "tetum": "direitu autór",
+    "english": "copyright",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Direito à greve e proibição de lock-out",
+    "tetum": "Direitu ba greve no proibisaun ba lock-out",
+    "english": "Right to strike and prohibition of lock-out",
+    "source": "Constituição da RDTL"
+  },
+  {
+    "portuguese": "Direito de petição",
+    "tetum": "Direitu ba petisaun",
+    "english": "Right to petition",
+    "source": "Constituição da RDTL"
+  },
+  {
+    "portuguese": "Direito de queixa",
+    "tetum": "Direitu ba keixa",
+    "english": "Right to file a complaint",
+    "source": "Código de Processo Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Direito de retenção",
+    "tetum": "direitu retensaun",
+    "english": "lien / right of retention",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Direito indisponível",
+    "tetum": "Direitu indisponível",
+    "english": "Inalienable right / Non-disposable right",
+    "source": "Código Civil / Direito da Família"
+  },
+  {
+    "portuguese": "Disposição",
+    "tetum": "Dispozisaun",
+    "english": "Provision (of a law)",
+    "source": "Terminologia Legislativa"
+  },
+  {
+    "portuguese": "Dissídio coletivo",
+    "tetum": "disídiu koletivu / disputa traballu nian",
+    "english": "labor dispute / collective bargaining",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Distribuição",
+    "tetum": "Distribuisaun",
+    "english": "Distribution (of cases)",
+    "source": "Código de Processo Civil de Timor-Leste"
+  },
+  {
+    "portuguese": "Divórcio",
+    "tetum": "Divórsiu",
+    "english": "Divorce",
+    "source": "Código Civil de Timor-Leste"
+  },
+  {
+    "portuguese": "Dívida ativa",
+    "tetum": "dívida ativa / tusan atu simu",
+    "english": "outstanding debt / executable tax debt",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Documento",
+    "tetum": "Dokumentu",
+    "english": "Document",
+    "source": "Vocabulário Jurídico Geral"
+  },
+  {
+    "portuguese": "Dolo",
+    "tetum": "dolu / intensaun aat",
+    "english": "malice / criminal intent / fraudulent intent / willful misconduct",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Domicílio fiscal",
+    "tetum": "domisíliu fiskál",
+    "english": "tax residence / tax domicile",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Duplicata",
+    "tetum": "duplikata",
+    "english": "trade acceptance bill",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Edital",
+    "tetum": "editál / avizu públiku",
+    "english": "public notice / public announcement / bidding documents",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Efeito suspensivo",
+    "tetum": "efeitu suspensivu",
+    "english": "suspensive effect / stay of execution / stay of proceedings",
+    "source": "Legal Dictionary",
+    "notes": "An effect of an appeal that suspends the enforcement of the lower court's decision until the appeal is resolved."
+  },
+  {
+    "portuguese": "Em flagrante",
+    "tetum": "en flagrante / kaer iha aktu",
+    "english": "in flagrante delicto (in the act, caught red-handed)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Embargos de declaração",
+    "tetum": "embargu deklarasaun / rekursu atu klarifika desizaun",
+    "english": "motion for clarification / motion to clarify judgment",
+    "source": "Legal Dictionary",
+    "notes": "A procedural motion asking the court to clarify an ambiguity, correct a clerical error, or address an omission in its own judgment, without changing the substance of the decision."
+  },
+  {
+    "portuguese": "Emolumento",
+    "tetum": "emolumentu / taxa",
+    "english": "fee(s) / due(s)",
+    "source": "Legal Dictionary",
+    "notes": "Often used in plural form ('Emolumentos')."
+  },
+  {
+    "portuguese": "Emprego",
+    "tetum": "Empregu",
+    "english": "Employment",
+    "source": "Legislação Laboral"
+  },
+  {
+    "portuguese": "Encargos moratórios",
+    "tetum": "enkargu moratóriu / funan tanba tarde",
+    "english": "late payment fees / default charges",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Enriquecimento ilícito",
+    "tetum": "enrikesimentu ilísitu / riku-an ilegalmente",
+    "english": "unjust enrichment / unlawful enrichment",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Escravidão",
+    "tetum": "Eskravidaun",
+    "english": "Slavery",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Escritura pública",
+    "tetum": "eskritura públika",
+    "english": "public deed",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Especificar",
+    "tetum": "Espesifika",
+    "english": "To specify",
+    "source": "Vocabulário Jurídico Geral"
+  },
+  {
+    "portuguese": "Espólio",
+    "tetum": "espóliu / eransa",
+    "english": "estate (of a deceased person)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Estado de direito",
+    "tetum": "estadu direitu",
+    "english": "rule of law",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Estatuto social",
+    "tetum": "estatutu sosiál",
+    "english": "by-laws / articles of incorporation / charter",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Estelionato",
+    "tetum": "estelionatu / burla",
+    "english": "fraud / swindling / fraudulent misrepresentation",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Evasão fiscal",
+    "tetum": "evazaun fiskál",
+    "english": "tax evasion / tax dodging",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Evicção",
+    "tetum": "eviksaun / perda sasán tanba desizaun judisiál",
+    "english": "eviction (in property law, the dispossession of a person from land or property by someone with a superior legal title)",
+    "source": "Legal Dictionary",
+    "notes": "Distinct from 'Despejo' (eviction for breach of lease, etc.). 'Evicção' is about losing property due to a third-party's superior title."
+  },
+  {
+    "portuguese": "Ex-officio",
+    "tetum": "ex-officio / tanba de'it kargu",
+    "english": "ex officio",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Exação",
+    "tetum": "ezasaun / kobransa impostu",
+    "english": "exaction / levying of taxes",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Exame",
+    "tetum": "Ezame",
+    "english": "Examination (e.g., of evidence, handwriting)",
+    "source": "Código de Processo Civil de Timor-Leste"
+  },
+  {
+    "portuguese": "Exceção de incompetência",
+    "tetum": "esesaun inkompeténsia",
+    "english": "plea of lack of jurisdiction / motion to dismiss for improper venue",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Executado",
+    "tetum": "Ezekutadu",
+    "english": "Execution debtor",
+    "source": "Código de Processo Civil (Processo Executivo)"
+  },
+  {
+    "portuguese": "Execução",
+    "tetum": "Ezekusaun",
+    "english": "Execution (of a judgment or debt) / Enforcement / Foreclosure (of a mortgage)",
+    "source": "Código de Processo Civil (Processo Executivo)"
+  },
+  {
+    "portuguese": "Execução fiscal",
+    "tetum": "ezekusaun fiskál",
+    "english": "tax execution / legal action for tax collection",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Exequatur",
+    "tetum": "exequatur (rekoñesimentu sentensa estranjeira)",
+    "english": "exequatur / writ of execution (for a foreign judgment)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Exequente",
+    "tetum": "Ezekuente",
+    "english": "Execution creditor / Plaintiff in execution",
+    "source": "Código de Processo Civil (Processo Executivo)"
+  },
+  {
+    "portuguese": "Exercício fiscal",
+    "tetum": "ezersísiu fiskál / tinan fiskál",
+    "english": "fiscal year / tax year",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Exploração",
+    "tetum": "Explorasaun",
+    "english": "Exploitation",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Expulsão",
+    "tetum": "Expulsaun",
+    "english": "Expulsion",
+    "source": "Código Penal / Lei de Migração e Asilo"
+  },
+  {
+    "portuguese": "Expropriação",
+    "tetum": "Expropriasaun",
+    "english": "Expropriation / Eminent domain",
+    "source": "Constituição da RDTL / Legislação Específica"
+  },
+  {
+    "portuguese": "Extinção",
+    "tetum": "estinsaun / hakotu",
+    "english": "extinguishment / termination / dissolution (of a company) / dismissal (of an action)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Extradição",
+    "tetum": "Estradisaun",
+    "english": "Extradition",
+    "source": "Constituição da RDTL / Lei de Cooperação Judiciária"
+  },
+  {
+    "portuguese": "Extrajudicial",
+    "tetum": "Extrajudisiál",
+    "english": "Extrajudicial / Out-of-court",
+    "source": "Vocabulário Jurídico Geral"
+  },
+  {
+    "portuguese": "Falência",
+    "tetum": "falénsia / bankarota",
+    "english": "bankruptcy",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Falsificação de documento",
+    "tetum": "Falsifikasaun dokumentu nian",
+    "english": "Falsification of documents / Document forgery",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Falso testemunho",
+    "tetum": "testemuñu falsu",
+    "english": "perjury",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Fé pública",
+    "tetum": "fé públika",
+    "english": "public faith / full faith and credit",
+    "source": "Legal Dictionary",
+    "notes": "The public trust in the authenticity of official documents and acts."
+  },
+  {
+    "portuguese": "Férias judiciais",
+    "tetum": "Férias judisiál",
+    "english": "Judicial vacation / Court recess",
+    "source": "Lei de Organização Judiciária"
+  },
+  {
+    "portuguese": "Fiador",
+    "tetum": "fiadór / garante",
+    "english": "guarantor / surety",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Fiança",
+    "tetum": "fiansa",
+    "english": "surety / guarantee / bail bond",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Fideicomisso",
+    "tetum": "fideikomisu",
+    "english": "fideicommissum / testamentary trust",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Filial",
+    "tetum": "filiál / sukursál",
+    "english": "branch / subsidiary",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Fiscalização",
+    "tetum": "Fiskalizasaun",
+    "english": "Oversight / Supervision / Inspection",
+    "source": "Direito Administrativo / Constitucional"
+  },
+  {
+    "portuguese": "Fiscalização concreta da constitucionalidade",
+    "tetum": "Fiskalizasaun konkreta ba konstitusionalidade",
+    "english": "Concrete review of constitutionality",
+    "source": "Constituição da RDTL"
+  },
+  {
+    "portuguese": "Fisco",
+    "tetum": "fisku / autoridade tributária",
+    "english": "Tax authorities / The Treasury / Revenue service",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Fluxo de caixa",
+    "tetum": "fluxu kaixa / osan tama-sai",
+    "english": "cash flow",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Forçado",
+    "tetum": "Forsadu",
+    "english": "Forced",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Foro",
+    "tetum": "foru / jurisdisaun",
+    "english": "venue / jurisdiction / court",
+    "source": "Legal Dictionary",
+    "notes": "Can also refer to an annual rent or fee in the context of land tenure (emphyteusis), but the primary legal meaning is related to jurisdiction."
+  },
+  {
+    "portuguese": "Fraude",
+    "tetum": "Fraude",
+    "english": "Fraud",
+    "source": "Código Penal de Timor-Leste"
+  },
+  {
+    "portuguese": "Fraude fiscal",
+    "tetum": "Fraude fiskál",
+    "english": "Tax fraud / Tax evasion",
+    "source": "Lei Tributária / Código Penal"
+  },
+  {
+    "portuguese": "Fusão",
+    "tetum": "fuzaun",
+    "english": "merger / consolidation (of companies)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Má-fé",
+    "tetum": "má-fé / laran-aat",
+    "english": "bad faith / malice",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Mandado de segurança",
+    "tetum": "mandadu seguransa",
+    "english": "writ of mandamus / writ of security",
+    "source": "Legal Dictionary",
+    "notes": "A judicial remedy in the form of an order from a court to any government, subordinate court, or public authority to do some specific act which that body is obliged under law to do."
+  },
+  {
+    "portuguese": "Manifestar",
+    "tetum": "Manifesta",
+    "english": "To manifest / To state / To show / To declare",
+    "source": "Vocabulário Jurídico Geral"
+  },
+  {
+    "portuguese": "Massa falida",
+    "tetum": "masa falida / patrimóniu falénsia nian",
+    "english": "bankrupt estate",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Medida cautelar",
+    "tetum": "medida kautelár",
+    "english": "interim measure / precautionary measure / preliminary injunction",
+    "source": "Legal Dictionary",
+    "notes": "A generic term for a court order intended to preserve the status quo or protect a right pending the final outcome of a case. 'Liminar' is a type of 'medida cautelar'."
+  },
+  {
+    "portuguese": "Medida de segurança",
+    "tetum": "Medida seguransa nian",
+    "english": "Security measure",
+    "source": "Código Penal de Timor-Leste",
+    "notes": "A non-punitive measure applied to individuals deemed dangerous, such as compulsory internment in a psychiatric facility."
+  },
+  {
+    "portuguese": "Mérito",
+    "tetum": "méritu / substánsia kazu nian",
+    "english": "merits (of a case)",
+    "source": "Legal Dictionary",
+    "notes": "The substantive issues of a case, as opposed to procedural or jurisdictional matters."
+  },
+  {
+    "portuguese": "Ministério Público",
+    "tetum": "Ministériu Públiku",
+    "english": "Public Prosecutor's Office",
+    "source": "Constituição da RDTL / Lei do Ministério Público"
+  },
+  {
+    "portuguese": "Mora",
+    "tetum": "mora / tarde atu selu",
+    "english": "default / arrears / delay (in performance of an obligation)",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Multa",
+    "tetum": "multa",
+    "english": "fine / penalty",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Mútuo",
+    "tetum": "mútuu / empréstimu",
+    "english": "loan (of fungible goods) / mutuum",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Nacionalidade",
+    "tetum": "Nasionálidade",
+    "english": "Nationality"
+  },
+  {
+    "portuguese": "Nacionalidade",
+    "tetum": "Nasionálidade",
+    "english": "Nationality"
+  },
+  {
+    "portuguese": "Zelar por",
+    "tetum": "zelar / kuida / asegura",
+    "english": "to ensure compliance with / to safeguard / to look after",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Zona económica exclusiva",
+    "tetum": "zona ekonómika eksluziva",
+    "english": "exclusive economic zone",
+    "source": "Legal Dictionary"
+  },
+  {
+    "portuguese": "Zona franca",
+    "tetum": "zona franka",
+    "english": "free-trade zone / free zone",
+    "source": "Legal Dictionary"
+  }
+]
