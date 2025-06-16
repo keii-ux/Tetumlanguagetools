@@ -93,9 +93,7 @@ export default function Home() {
             </h1>
 
             {/* Description */}
-            <p className="text-white/80 text-lg mb-12 max-w-xl leading-relaxed">
-              Specialized terminology and tools for healthcare, legal, educational, and linguistic professionals working with Tetum, Portuguese, and English.
-            </p>
+            <p className="text-white/80 text-lg mb-12 max-w-xl leading-relaxed">Specialized terminology and tools for the medical and legal areas, and other language resources for professionals working with Tetum, Portuguese, and English.</p>
 
             {/* Stats */}
             <div className="flex items-center space-x-8 text-center text-[14px]">
