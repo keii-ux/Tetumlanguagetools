@@ -33,22 +33,32 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
   const handleTetumSearch = (value: string) => {
     setTetumSearchTerm(value);
     setEnglishSearchTerm(""); // Clear other search
-    onSearch({
-      ...advancedQuery,
+    const searchQuery: SearchQuery = {
       query: value,
       language: "tetum",
-    });
+      dictionaryType: "medical",
+      exactMatch: advancedQuery.exactMatch,
+      includeDefinitions: advancedQuery.includeDefinitions,
+      caseSensitive: advancedQuery.caseSensitive,
+    };
+    console.log("Tetum search query:", searchQuery);
+    onSearch(searchQuery);
   };
 
   // Handle English search
   const handleEnglishSearch = (value: string) => {
     setEnglishSearchTerm(value);
     setTetumSearchTerm(""); // Clear other search
-    onSearch({
-      ...advancedQuery,
+    const searchQuery: SearchQuery = {
       query: value,
       language: "english",
-    });
+      dictionaryType: "medical",
+      exactMatch: advancedQuery.exactMatch,
+      includeDefinitions: advancedQuery.includeDefinitions,
+      caseSensitive: advancedQuery.caseSensitive,
+    };
+    console.log("English search query:", searchQuery);
+    onSearch(searchQuery);
   };
 
   // Handle advanced search
