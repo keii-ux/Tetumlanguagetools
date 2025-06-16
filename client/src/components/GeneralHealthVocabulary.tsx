@@ -141,7 +141,7 @@ export function GeneralHealthVocabulary() {
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2 pt-[23px] pb-[23px]">General Health Vocabulary</h2>
+        <h2 className="text-gray-900 mb-2 pt-[23px] pb-[23px] text-[26px] font-medium">General Health Vocabulary</h2>
         <p className="text-gray-600">AI-powered medical translations with comprehensive definitions from reliable sources.</p>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
