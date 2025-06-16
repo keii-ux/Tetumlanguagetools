@@ -136,7 +136,16 @@ export default function Dictionary() {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => setLocation("/")}
+                onClick={() => {
+                  setSelectedEntry(null);
+                  setQuery(buildSearchQuery({
+                    query: "",
+                    dictionaryType: "medical",
+                    language: "all",
+                  }));
+                  setSearchQuery("");
+                  setActiveTab("definitions");
+                }}
                 className="flex items-center space-x-2 text-[#0f0f0f] hover:text-blue-700 hover:bg-blue-50"
                 title="Return to Homepage"
               >
