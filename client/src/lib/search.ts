@@ -12,10 +12,15 @@ export function useSearchEntries(searchQuery: SearchQuery) {
     }
   });
 
+
+
   return useQuery<DictionaryEntry[]>({
     queryKey: ["/api/search", queryParams.toString()],
     enabled: !!searchQuery.query || searchQuery.dictionaryType !== "all",
     staleTime: 0, // Always fetch fresh results for search
+    refetchOnMount: true,
+    refetchOnReconnect: true,
+    refetchOnWindowFocus: false,
   });
 }
 
