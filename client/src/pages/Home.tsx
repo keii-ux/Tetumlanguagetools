@@ -197,7 +197,7 @@ export default function Home() {
             </Link>
 
             {/* Legal Glossary */}
-            <Link href="/dictionary?type=legal">
+            <Link href="/legal-glossary">
               <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg border-gray-200 hover:border-blue-200">
                 <CardHeader className="flex flex-row items-center space-y-0 pb-4">
                   <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mr-4 group-hover:bg-blue-100 transition-colors">
@@ -228,7 +228,7 @@ export default function Home() {
             </Link>
 
             {/* Portuguese-English Dictionary */}
-            <Link href="/dictionary?type=portuguese">
+            <Link href="/portuguese-dictionary">
               <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg border-gray-200 hover:border-green-200">
                 <CardHeader className="flex flex-row items-center space-y-0 pb-4">
                   <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mr-4 group-hover:bg-green-100 transition-colors">
@@ -259,7 +259,7 @@ export default function Home() {
             </Link>
 
             {/* Tetum Dictionary (INL) */}
-            <Link href="/dictionary?type=general">
+            <Link href="/tetum-dictionary">
               <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg border-gray-200 hover:border-orange-200">
                 <CardHeader className="flex flex-row items-center space-y-0 pb-4">
                   <div className="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center mr-4 group-hover:bg-orange-100 transition-colors">
