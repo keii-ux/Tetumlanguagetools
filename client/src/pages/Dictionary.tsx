@@ -12,6 +12,7 @@ import {
 import { useSearchEntries, useDictionaryStats } from "@/lib/search";
 import { SearchQuery, DictionaryEntry } from "@shared/schema";
 import { buildSearchQuery } from "@/lib/dictionaries";
+import { SearchBar } from "@/components/SearchBar";
 
 const DEFAULT_USER_ID = "demo-user";
 
@@ -39,17 +40,15 @@ export default function Dictionary() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
   const [activeTab, setActiveTab] = useState("definitions");
   const [currentDefinition, setCurrentDefinition] = useState(1);
+  const [query, setQuery] = useState<SearchQuery>(buildSearchQuery({
+    query: "",
+    dictionaryType: "medical",
+    language: "all",
+  }));
   
   const searchInputRef = useRef<HTMLInputElement>(null);
   
   const { data: stats } = useDictionaryStats();
-  
-  // Build search query - focus on medical terms
-  const query: SearchQuery = buildSearchQuery({
-    query: searchQuery,
-    dictionaryType: "medical",
-    language: "all",
-  });
   
   const { data: searchResults = [], isLoading } = useSearchEntries(query);
   
@@ -72,6 +71,14 @@ export default function Dictionary() {
     setSearchQuery(value);
     setShowSuggestions(value.length > 0);
     if (value.length === 0) {
+      setSelectedEntry(null);
+    }
+  };
+
+  const handleSearchQueryChange = (newQuery: SearchQuery) => {
+    setQuery(newQuery);
+    setSearchQuery(newQuery.query);
+    if (newQuery.query.length === 0) {
       setSelectedEntry(null);
     }
   };
@@ -180,52 +187,52 @@ export default function Dictionary() {
           </p>
         </div>
 
+        {/* Separator */}
+        <div className="flex items-center justify-center mb-8">
+          <div className="flex-1 border-t border-gray-200"></div>
+          <div className="px-4 text-sm text-gray-500 font-medium">SEARCH</div>
+          <div className="flex-1 border-t border-gray-200"></div>
+        </div>
+
+        {/* Language Menu */}
+        <div className="flex justify-center mb-6">
+          <div className="bg-white rounded-xl shadow-md p-2 inline-flex">
+            <button
+              onClick={() => setQuery(prev => ({ ...prev, language: "tetum" }))}
+              className={`px-6 py-2 rounded-lg text-sm font-medium transition-all ${
+                query.language === "tetum"
+                  ? "bg-blue-600 text-white shadow-sm"
+                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              }`}
+            >
+              🇹🇱 Tetum
+            </button>
+            <button
+              onClick={() => setQuery(prev => ({ ...prev, language: "english" }))}
+              className={`px-6 py-2 rounded-lg text-sm font-medium transition-all ${
+                query.language === "english"
+                  ? "bg-blue-600 text-white shadow-sm"
+                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              }`}
+            >
+              🇺🇸 English
+            </button>
+            <button
+              onClick={() => setQuery(prev => ({ ...prev, language: "all" }))}
+              className={`px-6 py-2 rounded-lg text-sm font-medium transition-all ${
+                query.language === "all"
+                  ? "bg-blue-600 text-white shadow-sm"
+                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              }`}
+            >
+              🌐 All Languages
+            </button>
+          </div>
+        </div>
+
         {/* Search Section */}
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-          <div className="relative" ref={searchInputRef}>
-            <div className="flex items-center">
-              <Menu className="w-5 h-5 text-gray-400 mr-4" />
-              <div className="relative flex-1">
-                <Input
-                  type="text"
-                  placeholder="Search a word or phrase"
-                  value={searchQuery}
-                  onChange={(e) => handleSearchChange(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                  className="w-full text-lg py-3 px-4 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0"
-                />
-                <Button
-                  onClick={handleSearch}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 rounded-lg px-4"
-                >
-                  <Search className="w-5 h-5" />
-                </Button>
-              </div>
-            </div>
-            
-            {/* Search Suggestions */}
-            {showSuggestions && suggestions.length > 0 && (
-              <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-lg mt-2 z-50 ml-9">
-                {suggestions.map((entry, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleSuggestionClick(entry)}
-                    className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 first:rounded-t-lg last:rounded-b-lg"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-gray-900">{getDisplayTerm(entry)}</span>
-                      <Badge variant="secondary" className="text-xs">
-                        {entry.dictionaryType}
-                      </Badge>
-                    </div>
-                    <span className="text-sm text-gray-500 truncate block mt-1">
-                      {getDefinitionText(entry).substring(0, 80)}...
-                    </span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+          <SearchBar onSearch={handleSearchQueryChange} initialQuery={query} />
         </div>
 
         {/* Results Section */}
