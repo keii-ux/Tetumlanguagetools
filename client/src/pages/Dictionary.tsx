@@ -174,7 +174,6 @@ export default function Dictionary() {
           </div>
         </div>
       </header>
-
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Title */}
@@ -190,45 +189,11 @@ export default function Dictionary() {
         {/* Separator */}
         <div className="flex items-center justify-center mb-8">
           <div className="flex-1 border-t border-gray-200"></div>
-          <div className="px-4 text-sm text-gray-500 font-medium">SEARCH</div>
+          <div className="px-4 text-sm font-medium text-[#242729]">SEARCH</div>
           <div className="flex-1 border-t border-gray-200"></div>
         </div>
 
-        {/* Language Menu */}
-        <div className="flex justify-center mb-6">
-          <div className="bg-white rounded-xl shadow-md p-2 inline-flex">
-            <button
-              onClick={() => setQuery(prev => ({ ...prev, language: "tetum" }))}
-              className={`px-6 py-2 rounded-lg text-sm font-medium transition-all ${
-                query.language === "tetum"
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-              }`}
-            >
-              🇹🇱 Tetum
-            </button>
-            <button
-              onClick={() => setQuery(prev => ({ ...prev, language: "english" }))}
-              className={`px-6 py-2 rounded-lg text-sm font-medium transition-all ${
-                query.language === "english"
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-              }`}
-            >
-              🇺🇸 English
-            </button>
-            <button
-              onClick={() => setQuery(prev => ({ ...prev, language: "all" }))}
-              className={`px-6 py-2 rounded-lg text-sm font-medium transition-all ${
-                query.language === "all"
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-              }`}
-            >
-              🌐 All Languages
-            </button>
-          </div>
-        </div>
+        
 
         {/* Search Section */}
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
