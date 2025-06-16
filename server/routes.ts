@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { searchQuerySchema, insertBookmarkSchema, insertSearchHistorySchema } from "@shared/schema";
+import { translateMedicalTerm, generateMedicalVocabulary, MedicalTranslation } from "./openrouter";
 import fs from "fs/promises";
 import path from "path";
 
@@ -208,6 +209,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(stats);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch statistics" });
+    }
+  });
+
+  // AI-powered medical translation
+  app.post("/api/translate", async (req, res) => {
+    try {
+      const { term, fromLanguage, toLanguage } = req.body;
+      
+      if (!term || !fromLanguage || !toLanguage) {
+        return res.status(400).json({ error: "Missing required fields: term, fromLanguage, toLanguage" });
+      }
+
+      const translation = await translateMedicalTerm(term, fromLanguage, toLanguage);
+      res.json(translation);
+    } catch (error) {
+      console.error("Translation error:", error);
+      res.status(500).json({ error: "Failed to translate medical term" });
+    }
+  });
+
+  // Generate medical vocabulary
+  app.post("/api/vocabulary", async (req, res) => {
+    try {
+      const { category = "general", language = "english", count = 10 } = req.body;
+      
+      const vocabulary = await generateMedicalVocabulary(category, language, count);
+      res.json(vocabulary);
+    } catch (error) {
+      console.error("Vocabulary generation error:", error);
+      res.status(500).json({ error: "Failed to generate medical vocabulary" });
     }
   });
 
