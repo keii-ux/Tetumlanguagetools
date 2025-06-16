@@ -1,0 +1,22 @@
+Please perform a comprehensive technical audit and fix issues in my [describe app, e.g., "React-based e-commerce web app with a Node.js backend and PostgreSQL database"]. Follow these steps:
+
+1. **Analyze the Codebase**: Review the entire codebase to identify potential bugs, performance issues, or areas not following best practices. Focus on [specific areas, e.g., "authentication, database queries, or frontend routing"].
+2. **Propose a Plan**: Before making changes, provide a detailed step-by-step plan explaining:
+   - The issues found (e.g., error messages, performance bottlenecks, or broken functionality).
+   - How each issue impacts the app (e.g., user experience, system stability).
+   - Proposed fixes, including pros and cons for each solution.
+3. **Implement Fixes Safely**: Apply fixes incrementally, ensuring no unrelated functionality is affected. For each fix:
+   - Specify the file(s) and code sections to modify.
+   - Explain how the change addresses the issue.
+   - Include comments in the code to clarify the fix.
+4. **Test and Validate**: After each fix, verify that it resolves the issue without introducing new errors. Provide a summary of tests performed (e.g., manual testing, checking console logs, or running automated tests).
+5. **Handle Errors**: If an error persists (e.g., [specific error, like "TypeError: undefined is not a function"]), include the error message, relevant code, and steps already tried. Suggest further debugging steps if needed.
+6. **Documentation**: Summarize all changes made, including updated files, dependencies added/removed, and any new configurations.
+
+Additional Instructions:
+- Use [specific tech stack, e.g., "React, Node.js, Express, PostgreSQL"] and ensure compatibility with existing dependencies.
+- If clarification is needed, ask me specific questions before proceeding.
+- Use the `search_filesystem` tool to locate relevant files and `restart_workflow` only when necessary to avoid disrupting the app.
+- If the app is too large, prioritize [specific features or issues, e.g., "fix the login flow first"] and break the task into smaller steps.
+
+Current Issue (if applicable): [Describe specific problem, e.g., "The login page throws a 'User not found' error despite correct credentials. Error message: [paste error]. Relevant files: [list files]. Steps tried: [list attempts]."]
