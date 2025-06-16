@@ -43,6 +43,8 @@ export default function TetumDictionary() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
   const [showFilters, setShowFilters] = useState(false);
   const [wordClassFilter, setWordClassFilter] = useState("all");
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [searchPerformed, setSearchPerformed] = useState(false);
   
   const [query, setQuery] = useState<SearchQuery>(buildSearchQuery({
     query: "",
@@ -60,6 +62,7 @@ export default function TetumDictionary() {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchInputRef.current && !searchInputRef.current.contains(event.target as Node)) {
         setShowLanguageDropdown(false);
+        setShowSuggestions(false);
       }
     };
     
@@ -72,6 +75,8 @@ export default function TetumDictionary() {
       ...prev,
       query: searchQuery,
     }));
+    setSearchPerformed(true);
+    setShowSuggestions(false);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -80,8 +85,31 @@ export default function TetumDictionary() {
     }
   };
 
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    setShowSuggestions(value.length > 0);
+    setSearchPerformed(false);
+    
+    // Update query for predictive search
+    if (value.length > 0) {
+      setQuery(prev => buildSearchQuery({
+        ...prev,
+        query: value,
+      }));
+    }
+  };
+
+  const handleSuggestionSelect = (entry: DictionaryEntry) => {
+    setSearchQuery(getDisplayTerm(entry));
+    setSelectedEntry(entry);
+    setShowSuggestions(false);
+    setSearchPerformed(true);
+  };
+
   const getDisplayTerm = (entry: DictionaryEntry) => {
-    return entry.tetum || entry.portuguese || entry.english || "Unknown";
+    const term = entry.tetum || entry.portuguese || entry.english || "Unknown";
+    // Remove trailing comma from INL dictionary terms
+    return term.replace(/,$/, '');
   };
 
   const getDefinitionText = (entry: DictionaryEntry) => {
@@ -174,7 +202,7 @@ export default function TetumDictionary() {
         {/* Search Section */}
         <div className="bg-white rounded-xl shadow-lg border border-orange-200 p-6 mb-8">
           <div className="flex flex-col lg:flex-row gap-4">
-            <div className="flex-1">
+            <div className="flex-1 relative">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                 <Input
@@ -182,11 +210,40 @@ export default function TetumDictionary() {
                   type="text"
                   placeholder="Buka liafuan Tetun nian..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => handleSearchChange(e.target.value)}
                   onKeyPress={handleKeyPress}
                   className="pl-10 h-12 text-lg border-gray-300 focus:border-orange-500 focus:ring-orange-500"
                 />
               </div>
+              
+              {/* Predictive Search Dropdown */}
+              {showSuggestions && results.length > 0 && (
+                <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                  {results.slice(0, 8).map((entry, index) => (
+                    <div
+                      key={entry.id}
+                      onClick={() => handleSuggestionSelect(entry)}
+                      className="px-4 py-3 hover:bg-orange-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+                    >
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <div className="font-medium text-orange-900">
+                            {getDisplayTerm(entry)}
+                          </div>
+                          {entry.wordClass && (
+                            <div className="text-xs text-gray-500 mt-1">
+                              {entry.wordClass}
+                            </div>
+                          )}
+                        </div>
+                        <div className="text-xs text-gray-400 ml-2">
+                          INL
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="flex gap-2">
               <Button 
@@ -229,77 +286,115 @@ export default function TetumDictionary() {
           )}
         </div>
 
-        {/* Results */}
-        {filteredResults.length > 0 ? (
-          <div className="grid gap-4">
-            {filteredResults.map((entry: DictionaryEntry) => (
-              <Card key={entry.id} className="hover:shadow-md transition-shadow">
-                <CardHeader className="pb-3">
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <CardTitle className="text-xl text-orange-900 mb-2">
-                        {getDisplayTerm(entry)}
-                      </CardTitle>
-                      <div className="flex items-center space-x-2">
-                        {entry.wordClass && (
-                          <Badge className={`text-xs ${getWordClassColor(entry.wordClass)}`}>
-                            {entry.wordClass}
-                          </Badge>
-                        )}
-                        <Badge variant="outline" className="text-xs bg-orange-50 text-orange-700 border-orange-200">
-                          INL Dictionary
-                        </Badge>
-                      </div>
-                    </div>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="ml-4 text-orange-600 hover:bg-orange-50"
-                    >
-                      <Volume2 className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div>
-                      <span className="font-medium text-gray-600">Definisaun / Definition:</span>
-                      <p className="text-gray-700 leading-relaxed mt-1 text-lg">
-                        {getDefinitionText(entry)}
-                      </p>
-                    </div>
-                    
-                    {entry.tetum && (
-                      <div className="bg-orange-50 p-3 rounded-lg">
-                        <span className="font-medium text-orange-800">Liafuan:</span>
-                        <div className="text-orange-900 text-lg font-medium mt-1">{entry.tetum}</div>
-                      </div>
+        {/* Selected Entry Detail */}
+        {selectedEntry && (
+          <Card className="mb-8 border-orange-200">
+            <CardHeader className="pb-3">
+              <div className="flex justify-between items-start">
+                <div className="flex-1">
+                  <CardTitle className="text-2xl text-orange-900 mb-2">
+                    {getDisplayTerm(selectedEntry)}
+                  </CardTitle>
+                  <div className="flex items-center space-x-2">
+                    {selectedEntry.wordClass && (
+                      <Badge className={`text-xs ${getWordClassColor(selectedEntry.wordClass)}`}>
+                        {selectedEntry.wordClass}
+                      </Badge>
                     )}
+                    <Badge variant="outline" className="text-xs bg-orange-50 text-orange-700 border-orange-200">
+                      INL Dictionary
+                    </Badge>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-orange-600 hover:bg-orange-50"
+                  >
+                    <Volume2 className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setSelectedEntry(null)}
+                    className="text-gray-600 hover:bg-gray-50"
+                  >
+                    ✕
+                  </Button>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div>
+                  <span className="font-medium text-gray-600">Definisaun / Definition:</span>
+                  <p className="text-gray-700 leading-relaxed mt-2 text-lg">
+                    {getDefinitionText(selectedEntry)}
+                  </p>
+                </div>
 
-                    {entry.notes && (
-                      <div className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
-                        <span className="font-medium">Notes:</span>
-                        <div className="mt-1">{entry.notes}</div>
-                      </div>
-                    )}
+                {selectedEntry.notes && (
+                  <div className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
+                    <span className="font-medium">Notes:</span>
+                    <div className="mt-1">{selectedEntry.notes}</div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        ) : searchQuery && !isLoading ? (
-          <div className="text-center py-12">
-            <Globe className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-600 mb-2">La hetan liafuan</h3>
-            <p className="text-gray-500">Kuda buka liafuan seluk ka verifika soletrasaun.</p>
-          </div>
-        ) : !searchQuery ? (
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Search Results (only show when search performed and no selected entry) */}
+        {searchPerformed && !selectedEntry && (
+          filteredResults.length > 0 ? (
+            <div className="grid gap-4">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                Rezultadu buka ({filteredResults.length} {filteredResults.length === 1 ? 'liafuan' : 'liafuan sira'})
+              </h2>
+              {filteredResults.map((entry: DictionaryEntry) => (
+                <Card key={entry.id} className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => setSelectedEntry(entry)}>
+                  <CardHeader className="pb-3">
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <CardTitle className="text-lg text-orange-900 mb-2">
+                          {getDisplayTerm(entry)}
+                        </CardTitle>
+                        <div className="flex items-center space-x-2">
+                          {entry.wordClass && (
+                            <Badge className={`text-xs ${getWordClassColor(entry.wordClass)}`}>
+                              {entry.wordClass}
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-700 leading-relaxed text-sm line-clamp-2">
+                      {getDefinitionText(entry)}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <Globe className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-gray-600 mb-2">La hetan liafuan</h3>
+              <p className="text-gray-500">Kuda buka liafuan seluk ka verifika soletrasaun.</p>
+            </div>
+          )
+        )}
+
+        {/* Welcome message when no search performed */}
+        {!searchPerformed && !selectedEntry && (
           <div className="text-center py-12">
             <BookOpen className="h-16 w-16 text-orange-300 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-gray-600 mb-2">Hahu buka liafuan Tetun</h3>
             <p className="text-gray-500">Hakerek liafuan ida atu buka nia definisaun no signifikadu.</p>
           </div>
-        ) : null}
+        )}
 
         {isLoading && (
           <div className="text-center py-12">
