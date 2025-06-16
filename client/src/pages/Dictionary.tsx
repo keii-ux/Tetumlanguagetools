@@ -44,11 +44,11 @@ export default function Dictionary() {
   
   const { data: stats } = useDictionaryStats();
   
-  // Build search query
+  // Build search query - focus on medical terms
   const query: SearchQuery = buildSearchQuery({
-    term: searchQuery,
-    languages: ["tetum", "portuguese", "english"],
-    types: ["legal", "medical", "general", "inl"],
+    query: searchQuery,
+    dictionaryType: "medical",
+    language: "all",
   });
   
   const { data: searchResults = [], isLoading } = useSearchEntries(query);
@@ -96,10 +96,7 @@ export default function Dictionary() {
   };
   
   const getDefinitionText = (entry: DictionaryEntry) => {
-    if (entry.type === "legal") {
-      return entry.definition_pt || entry.definition_en || entry.portuguese || entry.english || "No definition available";
-    }
-    return entry.definition_en || entry.definition_pt || entry.portuguese || entry.english || "No definition available";
+    return entry.explanation || entry.portuguese || entry.english || "No definition available";
   };
   
   const getPhonetic = (entry: DictionaryEntry) => {
@@ -176,8 +173,11 @@ export default function Dictionary() {
         {/* Title */}
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Access Millions of Trusted Definitions
+            Medical Dictionary & Glossary
           </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Comprehensive medical terminology in Tetum and English for healthcare professionals
+          </p>
         </div>
 
         {/* Search Section */}
@@ -215,7 +215,7 @@ export default function Dictionary() {
                     <div className="flex items-center justify-between">
                       <span className="font-medium text-gray-900">{getDisplayTerm(entry)}</span>
                       <Badge variant="secondary" className="text-xs">
-                        {entry.type}
+                        {entry.dictionaryType}
                       </Badge>
                     </div>
                     <span className="text-sm text-gray-500 truncate block mt-1">
@@ -302,22 +302,21 @@ export default function Dictionary() {
                         </div>
                       </div>
                       
-                      {selectedEntry.type === "legal" && (
+                      {selectedEntry.dictionaryType === "medical" && (
                         <div className="flex items-start space-x-3">
                           <span className="text-blue-600 font-semibold mt-1">2</span>
                           <div>
-                            <p className="text-gray-900">Legal context or specialized usage</p>
-                            <p className="text-gray-600 italic mt-1">Used in legal documentation and proceedings</p>
+                            <p className="text-gray-900">Medical terminology context</p>
+                            <p className="text-gray-600 italic mt-1">Used in healthcare and medical settings</p>
                           </div>
                         </div>
                       )}
                       
-                      {selectedEntry.type === "medical" && (
+                      {selectedEntry.notes && (
                         <div className="flex items-start space-x-3">
                           <span className="text-blue-600 font-semibold mt-1">3</span>
                           <div>
-                            <p className="text-gray-900">Medical terminology context</p>
-                            <p className="text-gray-600 italic mt-1">Used in healthcare and medical settings</p>
+                            <p className="text-gray-900">{selectedEntry.notes}</p>
                           </div>
                         </div>
                       )}
@@ -374,15 +373,15 @@ export default function Dictionary() {
           <div className="text-center py-12">
             <div className="bg-white rounded-2xl shadow-lg p-12">
               <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Search for any term</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Search medical terminology</h3>
               <p className="text-gray-600 mb-6">
-                Start typing to search across {stats?.total?.toLocaleString() || 0} terms in our comprehensive dictionary
+                Start typing to search across medical terms in Tetum and English
               </p>
               <div className="flex justify-center space-x-4 text-sm text-gray-500">
-                <span>• Legal terminology</span>
-                <span>• Medical glossary</span>
-                <span>• General dictionary</span>
-                <span>• INL resources</span>
+                <span>• Medical conditions</span>
+                <span>• Anatomy terms</span>
+                <span>• Treatment procedures</span>
+                <span>• Healthcare equipment</span>
               </div>
             </div>
           </div>
