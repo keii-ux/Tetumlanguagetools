@@ -454,20 +454,7 @@ export default function Dictionary() {
           </div>
         )}
 
-        
-        
-        {/* No Results */}
-        {!selectedEntry && searchQuery.length > 0 && !isLoading && searchResults.length === 0 && (
-          <div className="text-center py-12">
-            <div className="bg-white rounded-2xl shadow-lg p-12">
-              <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">No results found</h3>
-              <p className="text-gray-600">
-                No matches found for "{searchQuery}". Try a different search term.
-              </p>
-            </div>
-          </div>
-        )}
+
       </div>
     </div>
   );
