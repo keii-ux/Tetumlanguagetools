@@ -23,7 +23,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const generalDictData = JSON.parse(await fs.readFile(generalDictPath, "utf-8"));
       
       // Load medical dictionary
-      const medicalDictPath = path.resolve(process.cwd(), "server", "data", "medical-dictionary.json");
+      const medicalDictPath = path.resolve(process.cwd(), "server", "data", "medical-dictionary-comprehensive.json");
       const medicalDictData = JSON.parse(await fs.readFile(medicalDictPath, "utf-8"));
 
       // Process legal dictionary entries

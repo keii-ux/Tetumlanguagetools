@@ -1,0 +1,1100 @@
+[
+  {
+    "tetum": "Paralizia Flásida Aguda (PFA)",
+    "english": "Acute flaccid paralysis (AFP)",
+    "portuguese": "Paralisia Flácida Aguda",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "WHO Guidelines",
+    "explanation": "A sudden onset of weakness in muscle groups with loss of muscle tone and reflexes"
+  },
+  {
+    "tetum": "Antraks",
+    "english": "Anthrax",
+    "portuguese": "Antraz",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A serious infectious disease caused by gram-positive, rod-shaped bacteria known as Bacillus anthracis"
+  },
+  {
+    "tetum": "Kampilobakterioze",
+    "english": "Campylobacteriosis",
+    "portuguese": "Campilobacteriose",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A bacterial infection caused by Campylobacter bacteria, commonly causing diarrheal illness"
+  },
+  {
+    "tetum": "Varisela",
+    "english": "Chicken pox (Zoster) - Varisela",
+    "portuguese": "Varicela",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A highly contagious viral infection causing an itchy, blister-like rash on the skin"
+  },
+  {
+    "tetum": "Infeksaun virus Chikungunya",
+    "english": "Chikungunya virus infection",
+    "portuguese": "Infecção por vírus Chikungunya",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A mosquito-borne viral disease transmitted by Aedes mosquitoes"
+  },
+  {
+    "tetum": "Kólera",
+    "english": "Cholera - Kolera",
+    "portuguese": "Cólera",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "An acute diarrheal infection caused by ingestion of food or water contaminated with Vibrio cholerae"
+  },
+  {
+    "tetum": "COVID-19 (Moras Coronavirus 2019)",
+    "english": "COVID-19 (Coronavirus disease 2019)",
+    "portuguese": "COVID-19 (Doença do Coronavírus 2019)",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "WHO",
+    "explanation": "A contagious disease caused by SARS-CoV-2 virus affecting primarily the respiratory system"
+  },
+  {
+    "tetum": "Síndrome Rubéola Konjénita (SRK)",
+    "english": "Congenital rubella syndrome (CRS)",
+    "portuguese": "Síndrome da Rubéola Congênita",
+    "category": "congenital_conditions",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A condition that occurs in a developing fetus when a pregnant woman gets rubella"
+  },
+  {
+    "tetum": "Infeksaun Rubéola Konjénita (IRK)",
+    "english": "Congenital rubella infection (CRI)",
+    "portuguese": "Infecção da Rubéola Congênita",
+    "category": "congenital_conditions",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A rubella infection that occurs in a developing fetus"
+  },
+  {
+    "tetum": "Infeksaun virus Denge",
+    "english": "Dengue virus infection",
+    "portuguese": "Infecção por vírus Dengue",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A mosquito-borne tropical disease caused by the dengue virus"
+  },
+  {
+    "tetum": "Diarrea ho raan / Tebeen ho raan",
+    "english": "Diarrhoea (Bloody) - Diarea ho ran – Te'ben ho ran",
+    "portuguese": "Diarreia com sangue",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Loose, watery stools containing blood, often indicating serious intestinal infection"
+  },
+  {
+    "tetum": "Diarrea simples / Tebeen baibain",
+    "english": "Diarrhea (simple) - Diarea simples",
+    "portuguese": "Diarreia simples",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Loose, watery stools without blood"
+  },
+  {
+    "tetum": "Difteria",
+    "english": "Diphtheria – Difteria",
+    "portuguese": "Difteria",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A serious bacterial infection affecting the mucous membranes of the nose and throat"
+  },
+  {
+    "tetum": "Asu tata",
+    "english": "Dog bite – Asu tata",
+    "portuguese": "Mordida de cão",
+    "category": "injuries",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A wound caused by a dog's teeth penetrating the skin"
+  },
+  {
+    "tetum": "Isin-manas ho taxidu (rash)",
+    "english": "Fever with rash - Isin manas ho rash",
+    "portuguese": "Febre com erupção cutânea",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Elevated body temperature accompanied by skin eruption or rash"
+  },
+  {
+    "tetum": "Haemophilus influenzae (invazivu)",
+    "english": "Haemophilus influenzae (invasive) - Haemophilus influenzae (invasivu)",
+    "portuguese": "Haemophilus influenzae (invasivo)",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A serious form of bacterial infection that can cause meningitis and other severe diseases"
+  },
+  {
+    "tetum": "Epatite Virál (Síndrome Ikterísia Aguda)",
+    "english": "Hepatitis – Viral (Acute jaundice syndrome) - Síndroma ikterísia agudu",
+    "portuguese": "Hepatite Viral (Síndrome de Icterícia Aguda)",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A viral liver infection causing yellowing of skin and eyes"
+  },
+  {
+    "tetum": "Epatite A",
+    "english": "Hepatitis A",
+    "portuguese": "Hepatite A",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A viral liver infection that causes liver inflammation and damage"
+  },
+  {
+    "tetum": "Epatite B",
+    "english": "Hepatitis B",
+    "portuguese": "Hepatite B",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A serious liver infection caused by the hepatitis B virus"
+  },
+  {
+    "tetum": "Epatite C",
+    "english": "Hepatitis C",
+    "portuguese": "Hepatite C",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A liver infection caused by the hepatitis C virus"
+  },
+  {
+    "tetum": "Virus Imunodefisiénsia Umana (VIU) / HIV",
+    "english": "Human immunodeficiency virus (HIV)",
+    "portuguese": "Vírus da Imunodeficiência Humana",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A virus that attacks the body's immune system"
+  },
+  {
+    "tetum": "Gripe",
+    "english": "Influenza - Gripe",
+    "portuguese": "Gripe",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A viral respiratory infection causing fever, aches, and fatigue"
+  },
+  {
+    "tetum": "Moras hanesan Gripe (ILI) / Infeksaun Respiratória Aguda (IRA)",
+    "english": "Influenza Like Illness (ILI) - Infesaun Respiratoriu Superior Agudu",
+    "portuguese": "Doença Semelhante à Gripe",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A respiratory illness with symptoms similar to influenza"
+  },
+  {
+    "tetum": "Virus ensefalite Japaun (VEJ)",
+    "english": "Japanese encephalitis virus (JEV)",
+    "portuguese": "Vírus da encefalite japonesa",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A mosquito-borne viral infection that affects the brain"
+  },
+  {
+    "tetum": "Lepra / Moras-kulit",
+    "english": "Leprosy - Lepra",
+    "portuguese": "Lepra",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A chronic infectious disease affecting skin, nerves, and mucous membranes"
+  },
+  {
+    "tetum": "Malária",
+    "english": "Malaria",
+    "portuguese": "Malária",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A mosquito-borne infectious disease caused by parasites"
+  },
+  {
+    "tetum": "Sarampu",
+    "english": "Measles – Sarampo",
+    "portuguese": "Sarampo",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A highly contagious viral disease causing fever and a red rash"
+  },
+  {
+    "tetum": "Meninjite / Ensefalite",
+    "english": "Meningitis/encephalitis - Meningitis ka enkefalitis",
+    "portuguese": "Meningite/Encefalite",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Inflammation of the protective membranes covering the brain and spinal cord"
+  },
+  {
+    "tetum": "Infeksaun virus monkeypox",
+    "english": "Monkeypox virus infection – Infeksaun monkeypox",
+    "portuguese": "Infecção por vírus monkeypox",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A viral disease similar to smallpox but milder"
+  },
+  {
+    "tetum": "Papeira",
+    "english": "Mumps - Papeira",
+    "portuguese": "Caxumba",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A viral infection that affects the salivary glands"
+  },
+  {
+    "tetum": "Pertusis / Me'ar bibi",
+    "english": "Pertussis - Pertusis",
+    "portuguese": "Coqueluche",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A highly contagious respiratory disease known for uncontrollable coughing"
+  },
+  {
+    "tetum": "Peste",
+    "english": "Plague",
+    "portuguese": "Peste",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A serious bacterial infection transmitted by fleas"
+  },
+  {
+    "tetum": "Pneumonia (iha labarik tinan <5)",
+    "english": "Pneumonia (<5 years old) - Pnewmonia",
+    "portuguese": "Pneumonia (em crianças <5 anos)",
+    "category": "respiratory_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Infection that inflames air sacs in lungs, particularly in young children"
+  },
+  {
+    "tetum": "Polio (Poliomielite)",
+    "english": "Polio (Poliomyelitis)",
+    "portuguese": "Pólio (Poliomielite)",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A viral disease that can cause paralysis"
+  },
+  {
+    "tetum": "Raiva",
+    "english": "Rabies – Ravies",
+    "portuguese": "Raiva",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A deadly viral disease transmitted through animal bites"
+  },
+  {
+    "tetum": "Moras fuan reumátika",
+    "english": "Rheumatic heart disease (RHD) - Moras fuan reumatika",
+    "portuguese": "Doença cardíaca reumática",
+    "category": "cardiovascular_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Heart damage caused by rheumatic fever"
+  },
+  {
+    "tetum": "Rotavirus",
+    "english": "Rotavirus",
+    "portuguese": "Rotavírus",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A virus that causes severe diarrhea in infants and young children"
+  },
+  {
+    "tetum": "Rubéola",
+    "english": "Rubella",
+    "portuguese": "Rubéola",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A contagious viral infection causing mild fever and rash"
+  },
+  {
+    "tetum": "Salmoneloze",
+    "english": "Salmonellosis",
+    "portuguese": "Salmonelose",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A bacterial infection causing diarrhea, fever, and abdominal cramps"
+  },
+  {
+    "tetum": "Sarna / Kutu-isir",
+    "english": "Scabies",
+    "portuguese": "Sarna",
+    "category": "skin_conditions",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A contagious skin condition caused by tiny mites"
+  },
+  {
+    "tetum": "Infeksaun Respiratória Aguda Grave (IRAG)",
+    "english": "Severe Acute Respiratory Infection (SARI)",
+    "portuguese": "Infecção Respiratória Aguda Grave",
+    "category": "respiratory_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A severe respiratory infection requiring hospitalization"
+  },
+  {
+    "tetum": "Síndrome Respiratória Aguda Grave (SARS)",
+    "english": "Severe Acute Respiratory Syndrome (SARS)",
+    "portuguese": "Síndrome Respiratória Aguda Grave",
+    "category": "respiratory_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A severe respiratory illness caused by coronavirus"
+  },
+  {
+    "tetum": "Infeksaun Transmite husi Relasaun sexuál (ITRS) (Kanek jenitál/líkidu sai husi uretra)",
+    "english": "Sexually Transmitted Infections (STI) (Genital ulcers/urethral discharge)",
+    "portuguese": "Infecções Sexualmente Transmissíveis (IST)",
+    "category": "sexual_health",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Infections transmitted through sexual contact"
+  },
+  {
+    "tetum": "Xigeloze",
+    "english": "Shigellosis",
+    "portuguese": "Shigelose",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A bacterial infection causing severe diarrhea"
+  },
+  {
+    "tetum": "Variola",
+    "english": "Smallpox",
+    "portuguese": "Varíola",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A serious contagious disease that has been eradicated"
+  },
+  {
+    "tetum": "Streptococcus pneumoniae (invazivu)",
+    "english": "Streptococcus pneumonia (invasive) - Streptococcus pneumoniae (invasivu)",
+    "portuguese": "Streptococcus pneumoniae (invasivo)",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A serious bacterial infection that can cause pneumonia and meningitis"
+  },
+  {
+    "tetum": "Tétanu neonatál",
+    "english": "Tetanus neonatal - Tetanus neonatorum",
+    "portuguese": "Tétano neonatal",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Tetanus infection in newborn babies"
+  },
+  {
+    "tetum": "Tétanu",
+    "english": "Tetanus",
+    "portuguese": "Tétano",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A bacterial infection causing painful muscle spasms"
+  },
+  {
+    "tetum": "Asidente tráfegu",
+    "english": "Traffic accident - Asidente trafiku",
+    "portuguese": "Acidente de trânsito",
+    "category": "injuries",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Injuries sustained in vehicle accidents"
+  },
+  {
+    "tetum": "Tuberkuloze (TB)",
+    "english": "Tuberculosis (TB)",
+    "portuguese": "Tuberculose",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A potentially serious infectious bacterial disease that mainly affects the lungs"
+  },
+  {
+    "tetum": "Tifoide / Febre tifoide",
+    "english": "Typhoid",
+    "portuguese": "Febre tifoide",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A bacterial infection causing high fever and diarrhea"
+  },
+  {
+    "tetum": "Febre emorrájika virál (Ebola, febre Lassa, Marburg, Krimeia-Kongu)",
+    "english": "Viral haemorrhagic fevers (Ebola, Lassa fever, Marburg, Crimean Congo)",
+    "portuguese": "Febres hemorrágicas virais",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Severe viral infections causing bleeding and organ failure"
+  },
+  {
+    "tetum": "Framboezia",
+    "english": "Yaws - Frambuzia",
+    "portuguese": "Bouba",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A tropical bacterial infection affecting skin and bones"
+  },
+  {
+    "tetum": "Febre amarela",
+    "english": "Yellow fever",
+    "portuguese": "Febre amarela",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A viral infection transmitted by mosquitoes causing fever and jaundice"
+  },
+  {
+    "tetum": "Infeksaun virus Zika",
+    "english": "Zika virus infection",
+    "portuguese": "Infecção por vírus Zika",
+    "category": "infectious_diseases",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A mosquito-borne viral infection that can cause birth defects"
+  },
+  {
+    "tetum": "Paralizia flásida aguda",
+    "english": "Acute flaccid paralysis",
+    "portuguese": "Paralisia flácida aguda",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Sudden onset of muscle weakness and loss of reflexes"
+  },
+  {
+    "tetum": "Liman-ain fraku",
+    "english": "Weakness of extremities",
+    "portuguese": "Fraqueza das extremidades",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Loss of strength in arms and legs"
+  },
+  {
+    "tetum": "Muskulu dada-i'is no tolan nian fraku",
+    "english": "Weakness of muscles of respiration and swallowing",
+    "portuguese": "Fraqueza dos músculos respiratórios e de deglutição",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Difficulty breathing and swallowing due to muscle weakness"
+  },
+  {
+    "tetum": "Kanek kulit (antraks)",
+    "english": "Skin lesion (anthrax)",
+    "portuguese": "Lesão de pele (antraz)",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Skin wound or sore caused by anthrax infection"
+  },
+  {
+    "tetum": "Inxasu / Edema",
+    "english": "Oedema",
+    "portuguese": "Edema",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Swelling caused by fluid retention in body tissues"
+  },
+  {
+    "tetum": "Deskonfortu iha kabun",
+    "english": "Abdominal distress",
+    "portuguese": "Desconforto abdominal",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Pain or discomfort in the stomach area"
+  },
+  {
+    "tetum": "Laran-sa'e / Nausea",
+    "english": "Nausea",
+    "portuguese": "Náusea",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Feeling of sickness with an inclination to vomit"
+  },
+  {
+    "tetum": "Muta",
+    "english": "Vomiting",
+    "portuguese": "Vômito",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "The forceful expulsion of stomach contents through the mouth"
+  },
+  {
+    "tetum": "La iha vontade han / Anoreksia",
+    "english": "Anorexia",
+    "portuguese": "Anorexia",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Loss of appetite or desire to eat"
+  },
+  {
+    "tetum": "Isin-manas",
+    "english": "Fever",
+    "portuguese": "Febre",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Elevated body temperature, often indicating infection or illness"
+  },
+  {
+    "tetum": "Ipoksemia (oksijéniu menus iha raan)",
+    "english": "Hypoxia",
+    "portuguese": "Hipoxemia",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Low oxygen levels in the blood"
+  },
+  {
+    "tetum": "Susar atu dada iis / Dispneia",
+    "english": "Dyspnoea",
+    "portuguese": "Dispneia",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Difficulty breathing or shortness of breath"
+  },
+  {
+    "tetum": "Kejang / Konvulsaun",
+    "english": "Convulsions",
+    "portuguese": "Convulsões",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Sudden, violent, irregular movement of the body caused by involuntary muscle contraction"
+  },
+  {
+    "tetum": "Lakon konxiénsia / Dezmaia",
+    "english": "Loss of consciousness",
+    "portuguese": "Perda de consciência",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Fainting or becoming unconscious"
+  },
+  {
+    "tetum": "Me'ar",
+    "english": "Cough",
+    "portuguese": "Tosse",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A sudden, forceful hacking sound to release air and clear irritation in the throat or airway"
+  },
+  {
+    "tetum": "Sente fraku/kole (Astenia)",
+    "english": "Feeling weak/tired (Asthenia)",
+    "portuguese": "Sentir-se fraco/cansado",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "General weakness and fatigue"
+  },
+  {
+    "tetum": "Ulun-moras",
+    "english": "Headache",
+    "portuguese": "Dor de cabeça",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Pain located in the head or upper neck"
+  },
+  {
+    "tetum": "Isin-ruin moras / Mialjia",
+    "english": "Myalgia (muscle pain/body aches)",
+    "portuguese": "Mialgia (dor muscular)",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Pain in muscles throughout the body"
+  },
+  {
+    "tetum": "Kakorok-moras",
+    "english": "Sore throat",
+    "portuguese": "Dor de garganta",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Pain, scratchiness or irritation of the throat"
+  },
+  {
+    "tetum": "Inus-been",
+    "english": "Coryza",
+    "portuguese": "Coriza",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Runny nose with nasal discharge"
+  },
+  {
+    "tetum": "Estadu mentál trokadu",
+    "english": "Altered mental state",
+    "portuguese": "Estado mental alterado",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Changes in consciousness, awareness, or mental function"
+  },
+  {
+    "tetum": "La bele sente gostu ka iis",
+    "english": "Loss of taste or smell",
+    "portuguese": "Perda do paladar ou olfato",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Inability to taste food or smell odors"
+  },
+  {
+    "tetum": "Moras iha matan-fukun kotuk",
+    "english": "Retro-orbital pain",
+    "portuguese": "Dor retro-orbital",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Pain behind the eyes"
+  },
+  {
+    "tetum": "Ruin-fukun moras / Artraljia",
+    "english": "Arthralgia",
+    "portuguese": "Artralgia",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Joint pain without swelling or other signs of arthritis"
+  },
+  {
+    "tetum": "Diarrea / Tebeen",
+    "english": "Diarrhoea",
+    "portuguese": "Diarreia",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Loose, watery stools occurring more frequently than normal"
+  },
+  {
+    "tetum": "Taxidu makulopapular agudu",
+    "english": "Acute maculopapular rash",
+    "portuguese": "Erupção maculopapular aguda",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A sudden skin rash with flat and raised spots"
+  },
+  {
+    "tetum": "Folikula / Bubulak ho bee",
+    "english": "Vesicles",
+    "portuguese": "Vesículas",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Small fluid-filled blisters on the skin"
+  },
+  {
+    "tetum": "Kaskar",
+    "english": "Crusts",
+    "portuguese": "Crostas",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Hard outer layer formed over a wound during healing"
+  },
+  {
+    "tetum": "Diarrea ho bee agudu",
+    "english": "Acute watery diarrhoea",
+    "portuguese": "Diarreia aquosa aguda",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Sudden onset of very watery bowel movements"
+  },
+  {
+    "tetum": "Dezidratasaun grave",
+    "english": "Severe dehydration",
+    "portuguese": "Desidratação grave",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Dangerous loss of body fluids"
+  },
+  {
+    "tetum": "Barukteen / Letárjiku",
+    "english": "Lethargy",
+    "portuguese": "Letargia",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A state of tiredness, lack of energy, or listlessness"
+  },
+  {
+    "tetum": "Matan kuak",
+    "english": "Sunken eyes",
+    "portuguese": "Olhos fundos",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Eyes that appear to be deep-set due to dehydration"
+  },
+  {
+    "tetum": "Isin-kinur / Ikterísia",
+    "english": "Jaundice",
+    "portuguese": "Icterícia",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Yellowing of the skin and whites of the eyes"
+  },
+  {
+    "tetum": "Mii kor metan",
+    "english": "Dark urine",
+    "portuguese": "Urina escura",
+    "category": "symptoms",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Urine that is darker than normal, often indicating liver problems"
+  },
+  {
+    "tetum": "Ai-moruk",
+    "english": "Medicine",
+    "portuguese": "Medicina",
+    "category": "treatment",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Substances used to treat or prevent disease"
+  },
+  {
+    "tetum": "Vasinasaun (Imunizasaun)",
+    "english": "Vaccination (Immunization)",
+    "portuguese": "Vacinação (Imunização)",
+    "category": "prevention",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "The administration of vaccines to help the immune system develop protection from diseases"
+  },
+  {
+    "tetum": "Sirurjia",
+    "english": "Surgery",
+    "portuguese": "Cirurgia",
+    "category": "treatment",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Medical treatment involving an incision with instruments to repair damage or arrest disease"
+  },
+  {
+    "tetum": "Anestesia",
+    "english": "Anesthesia",
+    "portuguese": "Anestesia",
+    "category": "procedures",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A state of controlled, temporary loss of sensation or awareness induced for medical purposes"
+  },
+  {
+    "tetum": "Raiu-X",
+    "english": "X-ray",
+    "portuguese": "Raio-X",
+    "category": "diagnostics",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A photographic or digital image of the internal composition of something"
+  },
+  {
+    "tetum": "Teste raan",
+    "english": "Blood test",
+    "portuguese": "Exame de sangue",
+    "category": "diagnostics",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A laboratory analysis performed on a blood sample"
+  },
+  {
+    "tetum": "Teste antijéniu ràpidu (RAT)",
+    "english": "Rapid antigen test (RAT)",
+    "portuguese": "Teste de antígeno rápido",
+    "category": "diagnostics",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A quick test to detect specific proteins from a virus"
+  },
+  {
+    "tetum": "Teste diagnóstiku ràpidu (TDR)",
+    "english": "Rapid diagnostic test (RDT)",
+    "portuguese": "Teste diagnóstico rápido",
+    "category": "diagnostics",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Quick medical tests for immediate diagnosis"
+  },
+  {
+    "tetum": "Mikroskopia",
+    "english": "Microscopy",
+    "portuguese": "Microscopia",
+    "category": "diagnostics",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Examination using a microscope to see very small objects"
+  },
+  {
+    "tetum": "Serolojia",
+    "english": "Serology",
+    "portuguese": "Sorologia",
+    "category": "diagnostics",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Blood tests to detect antibodies or antigens"
+  },
+  {
+    "tetum": "Kultura",
+    "english": "Culture",
+    "portuguese": "Cultura",
+    "category": "diagnostics",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Growing bacteria or other microorganisms in the laboratory"
+  },
+  {
+    "tetum": "Ospitál",
+    "english": "Hospital",
+    "portuguese": "Hospital",
+    "category": "healthcare_facilities",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "An institution providing medical and surgical treatment and nursing care for sick or injured people"
+  },
+  {
+    "tetum": "Laboratóriu",
+    "english": "Laboratory",
+    "portuguese": "Laboratório",
+    "category": "healthcare_facilities",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A room or building equipped for scientific experiments, research, or teaching"
+  },
+  {
+    "tetum": "Doutór",
+    "english": "Doctor",
+    "portuguese": "Médico",
+    "category": "healthcare_professionals",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A person who is qualified to treat people who are ill"
+  },
+  {
+    "tetum": "Enfermeira",
+    "english": "Nurse",
+    "portuguese": "Enfermeira",
+    "category": "healthcare_professionals",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A person trained to care for the sick or infirm, especially in a hospital"
+  },
+  {
+    "tetum": "Vijilánsia ba moras",
+    "english": "Disease surveillance",
+    "portuguese": "Vigilância de doenças",
+    "category": "public_health",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Systematic monitoring of disease occurrence and spread"
+  },
+  {
+    "tetum": "Vijilánsia no Resposta Integradu ba Moras (VRIM)",
+    "english": "Integrated Disease Surveillance and Response (IDSR)",
+    "portuguese": "Vigilância e Resposta Integrada de Doenças",
+    "category": "public_health",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "A comprehensive system for monitoring and responding to disease outbreaks"
+  },
+  {
+    "tetum": "Deteksaun",
+    "english": "Detection",
+    "portuguese": "Detecção",
+    "category": "public_health",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Finding or discovering disease cases"
+  },
+  {
+    "tetum": "Relata / Notifikasaun",
+    "english": "Reporting",
+    "portuguese": "Notificação",
+    "category": "public_health",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Informing health authorities about disease cases"
+  },
+  {
+    "tetum": "Resposta",
+    "english": "Response",
+    "portuguese": "Resposta",
+    "category": "public_health",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Actions taken to control disease spread"
+  },
+  {
+    "tetum": "Eliminasaun ka eradikasaun (moras sira ne'ebé sai alvu)",
+    "english": "Elimination or eradication (diseases targeted for)",
+    "portuguese": "Eliminação ou erradicação (doenças alvo)",
+    "category": "public_health",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Complete removal of diseases from populations"
+  },
+  {
+    "tetum": "Buka kazu",
+    "english": "Case finding",
+    "portuguese": "Busca de casos",
+    "category": "public_health",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Active search for disease cases in the community"
+  },
+  {
+    "tetum": "Rastreiu kontaktu / Buka tuir kontaktu",
+    "english": "Contact tracing",
+    "portuguese": "Rastreamento de contatos",
+    "category": "public_health",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Finding people who may have been exposed to infection"
+  },
+  {
+    "tetum": "Medida preventiva",
+    "english": "Preventative measures",
+    "portuguese": "Medidas preventivas",
+    "category": "public_health",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Actions taken to prevent disease occurrence"
+  },
+  {
+    "tetum": "Medida kontrolu",
+    "english": "Control measure(s)",
+    "portuguese": "Medidas de controle",
+    "category": "public_health",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Actions to reduce disease transmission"
+  },
+  {
+    "tetum": "Izola kazu",
+    "english": "Isolate the case",
+    "portuguese": "Isolar o caso",
+    "category": "public_health",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Separating infected persons from healthy people"
+  },
+  {
+    "tetum": "Prátika ijiene (fase liman)",
+    "english": "Hygienic practices (hand washing)",
+    "portuguese": "Práticas de higiene (lavagem das mãos)",
+    "category": "prevention",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Clean practices to prevent infection spread"
+  },
+  {
+    "tetum": "Tratamentu antivirál",
+    "english": "Antiviral treatment",
+    "portuguese": "Tratamento antiviral",
+    "category": "treatment",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Medications used to treat viral infections"
+  },
+  {
+    "tetum": "Antibiótiku profilátiku",
+    "english": "Prophylactic antibiotics",
+    "portuguese": "Antibióticos profiláticos",
+    "category": "treatment",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Antibiotics given to prevent infection"
+  },
+  {
+    "tetum": "Profilaxia hafoin espozisaun",
+    "english": "Post exposure prophylaxis",
+    "portuguese": "Profilaxia pós-exposição",
+    "category": "treatment",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Treatment given after exposure to prevent infection"
+  },
+  {
+    "tetum": "Tratamentu sintomátiku",
+    "english": "Symptomatic treatment",
+    "portuguese": "Tratamento sintomático",
+    "category": "treatment",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Treatment focused on relieving symptoms"
+  },
+  {
+    "tetum": "Monitorizasaun ba komplikasaun",
+    "english": "Monitoring for complications",
+    "portuguese": "Monitoramento de complicações",
+    "category": "treatment",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Watching for additional health problems"
+  },
+  {
+    "tetum": "Kuidadu saúde mentál",
+    "english": "Mental health care",
+    "portuguese": "Cuidados de saúde mental",
+    "category": "treatment",
+    "dictionaryType": "medical",
+    "source": "Medical Dictionary",
+    "explanation": "Care for psychological and emotional well-being"
+  }
+]
