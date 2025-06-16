@@ -7,7 +7,8 @@ import {
   ChevronDown,
   Volume2,
   Share2,
-  Menu
+  Menu,
+  Home
 } from "lucide-react";
 import { useSearchEntries, useDictionaryStats } from "@/lib/search";
 import { SearchQuery, DictionaryEntry } from "@shared/schema";
@@ -128,8 +129,18 @@ export default function Dictionary() {
       <header className="bg-white shadow-sm border-b border-blue-100">
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
+            {/* Logo and Home Button */}
             <div className="flex items-center space-x-3">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => window.location.reload()}
+                className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                title="Return to Homepage"
+              >
+                <Home className="h-5 w-5" />
+                <span className="hidden sm:inline">Home</span>
+              </Button>
               <img 
                 src="/liantek-logo.png" 
                 alt="LianTek" 
