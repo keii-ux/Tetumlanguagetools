@@ -102,10 +102,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Search entries
   app.get("/api/search", async (req, res) => {
     try {
+      console.log("Raw query params:", req.query);
       const searchQuery = searchQuerySchema.parse(req.query);
-      console.log("Search query:", searchQuery);
+      console.log("Parsed search query:", searchQuery);
       const results = await storage.searchEntries(searchQuery);
       console.log(`Search returned ${results.length} results`);
+      if (results.length > 0) {
+        console.log("First result:", results[0]);
+      }
       res.json(results);
     } catch (error) {
       console.error("Search validation error:", error);
