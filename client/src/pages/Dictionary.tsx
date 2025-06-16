@@ -16,15 +16,15 @@ import {
   Bookmark,
   History,
   Settings,
-  ChevronRight
+  ChevronRight,
+  Menu,
+  X
 } from "lucide-react";
 import { useSearchEntries, useAddSearchHistory, useAllEntries, useDictionaryStats } from "@/lib/search";
 import { SearchQuery, DictionaryEntry } from "@shared/schema";
 import { buildSearchQuery } from "@/lib/dictionaries";
 import { TermDetail } from "@/components/TermDetail";
 import { BookmarkPanel } from "@/components/BookmarkPanel";
-// Using placeholder since asset imports need proper configuration
-const logoPath = "/logo.png";
 
 const DEFAULT_USER_ID = "demo-user";
 
@@ -56,7 +56,7 @@ const NAVIGATION_ITEMS = [
   },
   {
     icon: FileText,
-    label: "Idioms, Proverbs & Expressions",
+    label: "Idioms & Proverbs",
     active: false,
   },
   {
@@ -116,6 +116,7 @@ export default function Dictionary() {
   const [showBookmarks, setShowBookmarks] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [globalSearch, setGlobalSearch] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const { data: stats } = useDictionaryStats();
   const { data: searchResults = [], isLoading: searchLoading } = useSearchEntries(searchQuery);
@@ -152,237 +153,388 @@ export default function Dictionary() {
   const displayResults = searchQuery.query || selectedTool ? searchResults : allEntries;
   const isLoading = searchQuery.query || selectedTool ? searchLoading : allLoading;
 
-  return (
-    <div className="min-h-screen bg-slate-50 flex">
-      {/* Left Sidebar */}
-      <div className="w-64 bg-white border-r border-slate-200 flex flex-col">
-        {/* Logo */}
-        <div className="p-6 border-b border-slate-200">
-          <div className="flex items-center space-x-3">
-            <img src={logoPath} alt="LianTek" className="w-8 h-8" />
-            <span className="text-lg font-semibold text-slate-900">LianTek</span>
-          </div>
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex-1 p-4">
-          <div className="space-y-2">
-            {NAVIGATION_ITEMS.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <button
-                  key={index}
-                  className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
-                    item.active 
-                      ? "bg-blue-600 text-white" 
-                      : "text-slate-600 hover:bg-slate-100"
-                  }`}
+  if (selectedTool) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        {/* Header for Results View */}
+        <header className="bg-white shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-16">
+              <div className="flex items-center space-x-4">
+                <Button
+                  variant="ghost"
+                  onClick={() => setSelectedTool(null)}
+                  className="text-green-600 hover:text-green-700"
                 >
-                  <Icon className="w-4 h-4" />
-                  <span className="text-sm font-medium">{item.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </nav>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Header */}
-        <header className="bg-white border-b border-slate-200 px-8 py-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="mb-6">
-              <h1 className="text-3xl font-bold text-slate-900 mb-2">Pro Tools</h1>
-              <p className="text-lg text-slate-600">Professional Technical Glossaries & Language Resources</p>
-              <p className="text-sm text-slate-500 mt-2">
-                Specialized terminology and tools for healthcare, legal, educational, and linguistic professionals working with Tetum, Portuguese, and English.
-              </p>
-            </div>
-
-            {/* Global Search */}
-            <div className="relative max-w-2xl">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
-              <Input
-                type="text"
-                placeholder="Search across all dictionaries..."
-                value={globalSearch}
-                onChange={(e) => handleGlobalSearch(e.target.value)}
-                className="pl-10 py-3 text-base border-slate-300 focus:border-blue-500 focus:ring-blue-500"
-              />
+                  ← Back to Tools
+                </Button>
+                <div>
+                  <h1 className="text-xl font-bold text-gray-900">
+                    {TOOL_CARDS.find(t => t.id === selectedTool)?.title}
+                  </h1>
+                  <p className="text-sm text-gray-600">
+                    {displayResults.length} entries {globalSearch && `for "${globalSearch}"`}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowBookmarks(true)}
+                >
+                  <Bookmark className="w-4 h-4 mr-2" />
+                  Bookmarks
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowHistory(true)}
+                >
+                  <History className="w-4 h-4 mr-2" />
+                  History
+                </Button>
+              </div>
             </div>
           </div>
         </header>
 
-        {/* Content Area */}
-        <div className="flex-1 px-8 py-6">
-          <div className="max-w-6xl mx-auto">
-            {!selectedTool ? (
-              /* Tool Cards Grid */
-              <div className="grid md:grid-cols-2 gap-6">
-                {TOOL_CARDS.map((tool) => {
-                  const Icon = tool.icon;
-                  const termCount = getToolStats(tool.id);
-                  
-                  return (
-                    <Card 
-                      key={tool.id}
-                      className="p-6 hover:shadow-lg transition-all cursor-pointer border-2 hover:border-blue-200"
-                      onClick={() => handleToolSelect(tool.id)}
-                    >
-                      <CardContent className="p-0">
-                        <div className="flex items-start space-x-4">
-                          <div className={`w-12 h-12 ${tool.bgColor} rounded-lg flex items-center justify-center`}>
-                            <Icon className={`w-6 h-6 ${tool.iconColor}`} />
-                          </div>
-                          <div className="flex-1">
-                            <div className="flex items-center space-x-3 mb-2">
-                              <h3 className="text-lg font-semibold text-slate-900">{tool.title}</h3>
-                              <Badge variant="secondary" className="text-xs">
-                                {tool.category}
-                              </Badge>
-                            </div>
-                            <p className="text-sm text-slate-600 mb-3">
-                              {tool.description}
-                            </p>
-                            <div className="flex items-center justify-between">
-                              <span className="text-sm text-slate-500">
-                                {termCount.toLocaleString()} terms
-                              </span>
-                              <ChevronRight className="w-4 h-4 text-slate-400" />
-                            </div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
+        {/* Search Results Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex gap-8">
+            <div className="flex-1">
+              {/* Search Bar */}
+              <div className="relative mb-8">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Input
+                  type="text"
+                  placeholder="Search in this dictionary..."
+                  value={globalSearch}
+                  onChange={(e) => handleGlobalSearch(e.target.value)}
+                  className="pl-12 py-3 text-base border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg"
+                />
               </div>
-            ) : (
-              /* Search Results */
-              <div className="flex gap-6">
-                <div className="flex-1">
-                  {/* Results Header */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div>
-                      <Button
-                        variant="ghost"
-                        onClick={() => setSelectedTool(null)}
-                        className="mb-2 text-blue-600 hover:text-blue-700"
-                      >
-                        ← Back to Tools
-                      </Button>
-                      <h2 className="text-2xl font-bold text-slate-900">
-                        {TOOL_CARDS.find(t => t.id === selectedTool)?.title}
-                      </h2>
-                      <p className="text-slate-600">
-                        {displayResults.length} entries {globalSearch && `for "${globalSearch}"`}
-                      </p>
-                    </div>
-                    <div className="flex space-x-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setShowBookmarks(true)}
-                      >
-                        <Bookmark className="w-4 h-4 mr-2" />
-                        Bookmarks
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setShowHistory(true)}
-                      >
-                        <History className="w-4 h-4 mr-2" />
-                        History
-                      </Button>
-                    </div>
-                  </div>
 
-                  {/* Results List */}
-                  {isLoading ? (
-                    <div className="space-y-4">
-                      {[...Array(5)].map((_, i) => (
-                        <Card key={i} className="p-6">
-                          <div className="animate-pulse">
-                            <div className="h-5 bg-slate-200 rounded w-1/3 mb-3"></div>
-                            <div className="h-4 bg-slate-200 rounded w-2/3 mb-2"></div>
-                            <div className="h-4 bg-slate-200 rounded w-1/2"></div>
-                          </div>
-                        </Card>
-                      ))}
-                    </div>
-                  ) : displayResults.length === 0 ? (
-                    <Card className="p-12 text-center">
-                      <div className="text-slate-500">
-                        <p className="text-lg font-medium mb-2">No results found</p>
-                        <p className="text-sm">Try adjusting your search terms.</p>
+              {/* Results List */}
+              {isLoading ? (
+                <div className="space-y-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Card key={i} className="p-6">
+                      <div className="animate-pulse">
+                        <div className="h-5 bg-gray-200 rounded w-1/3 mb-3"></div>
+                        <div className="h-4 bg-gray-200 rounded w-2/3 mb-2"></div>
+                        <div className="h-4 bg-gray-200 rounded w-1/2"></div>
                       </div>
                     </Card>
-                  ) : (
-                    <div className="space-y-4">
-                      {displayResults.map((entry) => (
-                        <Card 
-                          key={entry.id}
-                          className="p-6 hover:shadow-md transition-shadow cursor-pointer"
-                          onClick={() => setSelectedEntry(entry)}
-                        >
-                          <div>
-                            <div className="flex items-start justify-between mb-3">
-                              <h3 className="text-lg font-semibold text-slate-900">
-                                {entry.tetum || entry.portuguese || entry.english || "Unknown"}
-                              </h3>
-                              <Badge variant="secondary" className="text-xs">
-                                {entry.category || entry.dictionaryType}
-                              </Badge>
-                            </div>
-                            
-                            <div className="space-y-2 mb-3">
-                              {entry.portuguese && (
-                                <div className="flex">
-                                  <span className="text-xs font-medium text-slate-500 w-12">PT:</span>
-                                  <span className="text-slate-700">{entry.portuguese}</span>
-                                </div>
-                              )}
-                              {entry.english && (
-                                <div className="flex">
-                                  <span className="text-xs font-medium text-slate-500 w-12">EN:</span>
-                                  <span className="text-slate-700">{entry.english}</span>
-                                </div>
-                              )}
-                            </div>
-                            
-                            {entry.explanation && (
-                              <p className="text-sm text-slate-600 line-clamp-2">
-                                {entry.explanation}
-                              </p>
-                            )}
-                            
-                            <div className="flex justify-between items-center mt-3 text-xs text-slate-500">
-                              <span>Source: {entry.source}</span>
-                            </div>
-                          </div>
-                        </Card>
-                      ))}
-                    </div>
-                  )}
+                  ))}
                 </div>
+              ) : displayResults.length === 0 ? (
+                <Card className="p-12 text-center">
+                  <div className="text-gray-500">
+                    <p className="text-lg font-medium mb-2">No results found</p>
+                    <p className="text-sm">Try adjusting your search terms.</p>
+                  </div>
+                </Card>
+              ) : (
+                <div className="space-y-4">
+                  {displayResults.map((entry) => (
+                    <Card 
+                      key={entry.id}
+                      className="p-6 hover:shadow-lg transition-shadow cursor-pointer border hover:border-green-200"
+                      onClick={() => setSelectedEntry(entry)}
+                    >
+                      <div>
+                        <div className="flex items-start justify-between mb-3">
+                          <h3 className="text-lg font-semibold text-gray-900">
+                            {entry.tetum || entry.portuguese || entry.english || "Unknown"}
+                          </h3>
+                          <Badge variant="secondary" className="text-xs">
+                            {entry.category || entry.dictionaryType}
+                          </Badge>
+                        </div>
+                        
+                        <div className="space-y-2 mb-3">
+                          {entry.portuguese && (
+                            <div className="flex">
+                              <span className="text-xs font-medium text-gray-500 w-12">PT:</span>
+                              <span className="text-gray-700">{entry.portuguese}</span>
+                            </div>
+                          )}
+                          {entry.english && (
+                            <div className="flex">
+                              <span className="text-xs font-medium text-gray-500 w-12">EN:</span>
+                              <span className="text-gray-700">{entry.english}</span>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {entry.explanation && (
+                          <p className="text-sm text-gray-600 line-clamp-2">
+                            {entry.explanation}
+                          </p>
+                        )}
+                        
+                        <div className="flex justify-between items-center mt-3 text-xs text-gray-500">
+                          <span>Source: {entry.source}</span>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </div>
 
-                {/* Term Detail Panel */}
-                {selectedEntry && (
-                  <TermDetail
-                    entry={selectedEntry}
-                    onClose={() => setSelectedEntry(null)}
-                    userId={DEFAULT_USER_ID}
-                  />
-                )}
-              </div>
+            {/* Term Detail Panel */}
+            {selectedEntry && (
+              <TermDetail
+                entry={selectedEntry}
+                onClose={() => setSelectedEntry(null)}
+                userId={DEFAULT_USER_ID}
+              />
             )}
           </div>
         </div>
-      </div>
 
-      {/* Bookmarks Dialog */}
+        {/* Dialogs */}
+        <Dialog open={showBookmarks} onOpenChange={setShowBookmarks}>
+          <DialogContent className="p-0 max-w-md">
+            <BookmarkPanel
+              userId={DEFAULT_USER_ID}
+              onClose={() => setShowBookmarks(false)}
+              onEntrySelect={(entry) => {
+                setSelectedEntry(entry);
+                setShowBookmarks(false);
+              }}
+            />
+          </DialogContent>
+        </Dialog>
+
+        <Dialog open={showHistory} onOpenChange={setShowHistory}>
+          <DialogContent className="max-w-md">
+            <div className="p-6">
+              <h2 className="text-lg font-semibold mb-4">Search History</h2>
+              <p className="text-sm text-gray-500">
+                Your recent searches will appear here.
+              </p>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Top Navigation Header */}
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">LT</span>
+              </div>
+              <span className="text-xl font-bold text-gray-900">LianTek</span>
+            </div>
+
+            {/* Desktop Navigation Menu */}
+            <nav className="hidden lg:flex space-x-8">
+              {NAVIGATION_ITEMS.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    key={index}
+                    className={`flex items-center space-x-2 px-3 py-2 text-sm font-medium transition-colors ${
+                      item.active 
+                        ? "text-green-600 bg-green-50 rounded-lg" 
+                        : "text-gray-700 hover:text-green-600"
+                    }`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
+            </nav>
+
+            {/* Header Actions */}
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowBookmarks(true)}
+                className="hidden md:flex text-gray-600 hover:text-green-600 border-gray-300"
+              >
+                <Bookmark className="h-4 w-4 mr-2" />
+                Bookmarks
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowHistory(true)}
+                className="hidden md:flex text-gray-600 hover:text-green-600 border-gray-300"
+              >
+                <History className="h-4 w-4 mr-2" />
+                History
+              </Button>
+              <Button 
+                className="bg-green-600 hover:bg-green-700 text-white px-6"
+                onClick={() => setGlobalSearch("")}
+              >
+                Get Started
+              </Button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+              <div className="inline-flex items-center px-4 py-2 rounded-full text-sm bg-blue-800/50 text-blue-100 mb-8">
+                <Settings className="w-4 h-4 mr-2" />
+                Professional Tools
+              </div>
+              
+              <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
+                Professional Technical
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
+                  {" "}Glossaries{" "}
+                </span>
+                & Language Resources
+              </h1>
+              
+              <p className="text-xl text-blue-100 mb-10 leading-relaxed max-w-lg">
+                Specialized terminology and tools for healthcare, legal, educational, and linguistic professionals working with Tetum, Portuguese, and English.
+              </p>
+
+              {/* Search Bar */}
+              <div className="relative max-w-2xl mb-8">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-6 w-6 text-gray-400" />
+                <Input
+                  type="text"
+                  placeholder="Search across all dictionaries..."
+                  value={globalSearch}
+                  onChange={(e) => handleGlobalSearch(e.target.value)}
+                  className="pl-12 py-4 text-lg bg-white border-0 focus:ring-2 focus:ring-green-500 rounded-xl shadow-lg"
+                />
+              </div>
+
+              {/* Stats */}
+              <div className="flex items-center space-x-8 text-blue-100">
+                <div>
+                  <div className="text-2xl font-bold text-white">{stats?.total || 0}</div>
+                  <div className="text-sm">Total Terms</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-white">4</div>
+                  <div className="text-sm">Dictionaries</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-white">3</div>
+                  <div className="text-sm">Languages</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Illustration/Card */}
+            <div className="lg:flex justify-center">
+              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 max-w-md">
+                <div className="flex items-center space-x-3 mb-8">
+                  <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-xl flex items-center justify-center">
+                    <Languages className="w-7 h-7 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">Multi-Language Dictionary System</h3>
+                    <p className="text-blue-100 text-sm">Professional Terminology Tools</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
+                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                    <span className="text-sm font-medium">Tetum ↔ Portuguese ↔ English</span>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
+                    <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
+                    <span className="text-sm font-medium">Legal & Medical Terminology</span>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
+                    <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
+                    <span className="text-sm font-medium">Professional Reference Tools</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Choose Your Professional Tool
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Access specialized dictionaries and glossaries designed for professional use across multiple languages and domains.
+            </p>
+          </div>
+
+          {/* Tool Cards Grid */}
+          <div className="grid md:grid-cols-2 xl:grid-cols-2 gap-8">
+            {TOOL_CARDS.map((tool) => {
+              const Icon = tool.icon;
+              const termCount = getToolStats(tool.id);
+              
+              return (
+                <Card 
+                  key={tool.id}
+                  className="group p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-green-200 bg-white"
+                  onClick={() => handleToolSelect(tool.id)}
+                >
+                  <CardContent className="p-0">
+                    <div className="flex items-start space-x-6">
+                      <div className={`w-16 h-16 ${tool.bgColor} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                        <Icon className={`w-8 h-8 ${tool.iconColor}`} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center space-x-3 mb-3">
+                          <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-600 transition-colors">
+                            {tool.title}
+                          </h3>
+                          <Badge variant="secondary" className="text-xs bg-gray-100">
+                            {tool.category}
+                          </Badge>
+                        </div>
+                        <p className="text-gray-600 mb-6 leading-relaxed">
+                          {tool.description}
+                        </p>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <span className="text-2xl font-bold text-green-600">
+                              {termCount.toLocaleString()}
+                            </span>
+                            <span className="text-gray-500">terms</span>
+                          </div>
+                          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-green-500 group-hover:translate-x-1 transition-all" />
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Dialogs */}
       <Dialog open={showBookmarks} onOpenChange={setShowBookmarks}>
         <DialogContent className="p-0 max-w-md">
           <BookmarkPanel
@@ -396,12 +548,11 @@ export default function Dictionary() {
         </DialogContent>
       </Dialog>
 
-      {/* Search History Dialog */}
       <Dialog open={showHistory} onOpenChange={setShowHistory}>
         <DialogContent className="max-w-md">
           <div className="p-6">
             <h2 className="text-lg font-semibold mb-4">Search History</h2>
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-gray-500">
               Your recent searches will appear here.
             </p>
           </div>
