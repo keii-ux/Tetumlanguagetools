@@ -22,10 +22,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       try {
         const enTtContent = await fs.readFile(medicalDictEnTtPath, "utf-8");
+        
+        // Fix malformed JSON - add missing opening bracket
+        let fixedContent = enTtContent.trim();
+        if (!fixedContent.startsWith('[')) {
+          fixedContent = '[' + fixedContent;
+        }
+        if (!fixedContent.endsWith(']')) {
+          fixedContent = fixedContent + ']';
+        }
+        
         // Clean the JSON content to handle any encoding or formatting issues
-        const cleanContent = enTtContent
+        const cleanContent = fixedContent
           .replace(/^\uFEFF/, '') // Remove BOM if present
-          .trim()
           .replace(/[\x00-\x1F\x7F-\x9F]/g, '') // Remove control characters
           .replace(/,\s*}/g, '}') // Fix trailing commas in objects
           .replace(/,\s*]/g, ']'); // Fix trailing commas in arrays
@@ -34,40 +43,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.log(`Loaded ${medicalDictEnTtData.length} EN-TT medical entries`);
       } catch (error) {
         console.warn("Could not parse medical_dic_en-tt.json:", error);
-        console.warn("Attempting alternative parsing...");
+        console.warn("Attempting manual object parsing...");
         
-        // Try alternative parsing by reading line by line
         try {
           const enTtContent = await fs.readFile(medicalDictEnTtPath, "utf-8");
-          const lines = enTtContent.split('\n');
-          let jsonString = '';
-          let inObject = false;
-          let currentObject = '';
+          const entries = [];
           
-          for (const line of lines) {
-            const trimmedLine = line.trim();
-            if (trimmedLine === '{') {
-              inObject = true;
-              currentObject = '{';
-            } else if (trimmedLine === '}' || trimmedLine === '},') {
-              currentObject += '}';
-              if (currentObject.includes('"english"') && currentObject.includes('"tetum"')) {
-                if (jsonString) jsonString += ',';
-                jsonString += currentObject;
+          // Split content by object boundaries
+          const objectMatches = enTtContent.match(/\{[^{}]*"english"[^{}]*"tetum"[^{}]*\}/g);
+          
+          if (objectMatches) {
+            for (const match of objectMatches) {
+              try {
+                const parsed = JSON.parse(match);
+                if (parsed.english && parsed.tetum) {
+                  entries.push(parsed);
+                }
+              } catch (parseError) {
+                continue;
               }
-              inObject = false;
-              currentObject = '';
-            } else if (inObject) {
-              currentObject += trimmedLine;
             }
-          }
-          
-          if (jsonString) {
-            medicalDictEnTtData = JSON.parse('[' + jsonString + ']');
-            console.log(`Successfully parsed ${medicalDictEnTtData.length} EN-TT medical entries using alternative method`);
+            
+            medicalDictEnTtData = entries;
+            console.log(`Successfully parsed ${medicalDictEnTtData.length} EN-TT medical entries using regex method`);
           }
         } catch (altError) {
-          console.warn("Alternative parsing also failed:", altError);
+          console.warn("Manual parsing also failed:", altError);
           console.warn("Skipping medical EN-TT entries");
         }
       }
