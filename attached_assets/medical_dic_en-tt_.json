@@ -1,0 +1,142 @@
+[
+  {
+    "english": "abdomen",
+    "tetum": "abdomen",
+    "portuguese": "abdómen", 
+    "category": "anatomy",
+    "source": "medical"
+  },
+  {
+    "english": "acute",
+    "tetum": "akutu",
+    "portuguese": "agudo",
+    "category": "condition",
+    "source": "medical"
+  },
+  {
+    "english": "anemia",
+    "tetum": "anemia",
+    "portuguese": "anemia",
+    "category": "condition",
+    "source": "medical"
+  },
+  {
+    "english": "antibiotic",
+    "tetum": "antibiotiku",
+    "portuguese": "antibiótico",
+    "category": "medication",
+    "source": "medical"
+  },
+  {
+    "english": "blood pressure",
+    "tetum": "presaun raan",
+    "portuguese": "pressão arterial",
+    "category": "vital signs",
+    "source": "medical"
+  },
+  {
+    "english": "chronic",
+    "tetum": "kroniku",
+    "portuguese": "crónico",
+    "category": "condition",
+    "source": "medical"
+  },
+  {
+    "english": "diagnosis",
+    "tetum": "diagnoza",
+    "portuguese": "diagnóstico",
+    "category": "procedure",
+    "source": "medical"
+  },
+  {
+    "english": "emergency",
+    "tetum": "emerjénsia",
+    "portuguese": "emergência",
+    "category": "care",
+    "source": "medical"
+  },
+  {
+    "english": "fever",
+    "tetum": "buras",
+    "portuguese": "febre",
+    "category": "symptom",
+    "source": "medical"
+  },
+  {
+    "english": "heart",
+    "tetum": "fuan",
+    "portuguese": "coração",
+    "category": "anatomy",
+    "source": "medical"
+  },
+  {
+    "english": "hospital",
+    "tetum": "ospitál",
+    "portuguese": "hospital",
+    "category": "facility",
+    "source": "medical"
+  },
+  {
+    "english": "infection",
+    "tetum": "infeksaun",
+    "portuguese": "infecção",
+    "category": "condition",
+    "source": "medical"
+  },
+  {
+    "english": "injection",
+    "tetum": "injeksaun",
+    "portuguese": "injecção",
+    "category": "procedure",
+    "source": "medical"
+  },
+  {
+    "english": "medicine",
+    "tetum": "ai-moruk",
+    "portuguese": "medicina",
+    "category": "medication",
+    "source": "medical"
+  },
+  {
+    "english": "nurse",
+    "tetum": "enfermeira",
+    "portuguese": "enfermeiro/a",
+    "category": "profession",
+    "source": "medical"
+  },
+  {
+    "english": "patient",
+    "tetum": "moras",
+    "portuguese": "paciente",
+    "category": "person",
+    "source": "medical"
+  },
+  {
+    "english": "prescription",
+    "tetum": "rezeta",
+    "portuguese": "receita",
+    "category": "document",
+    "source": "medical"
+  },
+  {
+    "english": "surgery",
+    "tetum": "sirurjia",
+    "portuguese": "cirurgia",
+    "category": "procedure",
+    "source": "medical"
+  },
+  {
+    "english": "symptom",
+    "tetum": "sintoma",
+    "portuguese": "sintoma",
+    "category": "indication",
+    "source": "medical"
+  },
+  {
+    "english": "treatment",
+    "tetum": "tratamentu",
+    "portuguese": "tratamento",
+    "category": "care",
+    "source": "medical"
+  }
+]
