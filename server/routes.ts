@@ -22,12 +22,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const generalDictPath = path.resolve(process.cwd(), "attached_assets", "legal dic tt copy_1750040265136.json");
       const generalDictData = JSON.parse(await fs.readFile(generalDictPath, "utf-8"));
       
-      // Load additional dictionaries
-      const portugueseGlossaryPath = path.resolve(process.cwd(), "attached_assets", "glos juridico pt_1750040233711.json");
-      const generalTetumDictPath = path.resolve(process.cwd(), "attached_assets", "inl_tt_dic_final_1750040241832.json");
+      // Load medical dictionaries
+      const medicalDictEnTtPath = path.resolve(process.cwd(), "medical_dic_en-tt.json");
+      const medicalDictTtEnPath = path.resolve(process.cwd(), "medical-dic_tt_en.json");
       
-      const portugueseGlossaryData = JSON.parse(await fs.readFile(portugueseGlossaryPath, "utf-8"));
-      const generalTetumDictData = JSON.parse(await fs.readFile(generalTetumDictPath, "utf-8"));
+      const medicalDictEnTtData = JSON.parse(await fs.readFile(medicalDictEnTtPath, "utf-8"));
+      const medicalDictTtEnData = JSON.parse(await fs.readFile(medicalDictTtEnPath, "utf-8"));
 
       // Process legal dictionary entries
       const legalEntries = legalDictData.map((item: any) => ({
@@ -80,16 +80,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Process Portuguese glossary entries
-      const portugueseGlossaryEntries = portugueseGlossaryData.map((item: any) => ({
-        tetum: "",
-        portuguese: item.termo || "",
-        english: "",
-        source: "Glossário Jurídico Português",
-        category: "legal",
-        dictionaryType: "legal",
+      // Process medical dictionary entries (English to Tetum)
+      const medicalEntriesEnTt = medicalDictEnTtData.map((item: any) => ({
+        tetum: item.tetum || "",
+        portuguese: "",
+        english: item.english || "",
+        source: "Medical Dictionary EN-TT",
+        category: "medical",
+        dictionaryType: "medical",
         notes: "",
-        explanation: item.significado || "",
+        explanation: "",
         pronunciation: "",
         wordClass: "",
         etymology: "",
@@ -97,31 +97,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Process general Tetum dictionary entries
-      const generalTetumEntries = generalTetumDictData
-        .filter((item: any) => item.word) // Filter out empty entries
-        .map((item: any) => ({
-          tetum: item.word || "",
-          portuguese: "",
-          english: "",
-          source: "Dicionário Tetum Geral",
-          category: "general",
-          dictionaryType: "general",
-          notes: "",
-          explanation: item.meaning || "",
-          pronunciation: "",
-          wordClass: item.class || "",
-          etymology: "",
-          usageExamples: [],
-          relatedTerms: [],
-        }));
+      // Process medical dictionary entries (Tetum to English)
+      const medicalEntriesTtEn = medicalDictTtEnData.map((item: any) => ({
+        tetum: item.term || "",
+        portuguese: "",
+        english: item.translation || "",
+        source: item.source || "Medical Dictionary TT-EN",
+        category: "medical",
+        dictionaryType: "medical",
+        notes: item.usage || "",
+        explanation: "",
+        pronunciation: "",
+        wordClass: "",
+        etymology: "",
+        usageExamples: [],
+        relatedTerms: item.similar ? [item.similar] : [],
+      }));
 
-      const allAdditionalEntries = [...portugueseGlossaryEntries, ...generalTetumEntries];
+      const allMedicalEntries = [...medicalEntriesEnTt, ...medicalEntriesTtEn];
 
       // Bulk insert all entries
-      await storage.bulkCreateEntries([...legalEntries, ...glossaryEntries, ...generalEntries, ...allAdditionalEntries]);
+      await storage.bulkCreateEntries([...legalEntries, ...glossaryEntries, ...generalEntries, ...allMedicalEntries]);
       
-      console.log(`Loaded ${legalEntries.length + glossaryEntries.length + generalEntries.length + allAdditionalEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + glossaryEntries.length + generalEntries.length + allMedicalEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
