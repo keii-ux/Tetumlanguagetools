@@ -180,9 +180,7 @@ export default function Dictionary() {
         {/* Title */}
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Medical Terminology</h1>
-          <p className="max-w-2xl mx-auto text-[24px] text-[#111112] font-medium">Medical Technical Language
-          
-          Comprehensive medical terminology in Tetum and English for professionals from academic checked literature, according to the INL standard.</p>
+          <p className="max-w-2xl mx-auto text-[#111112] font-normal text-[15px] pt-[14px] pb-[14px]">Comprehensive medical terminology in Tetum and English for professionals from academic checked literature, according to the INL standard.</p>
         </div>
 
         
