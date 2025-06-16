@@ -188,7 +188,7 @@ export default function Dictionary() {
         
 
         {/* Search Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+        <div className="rounded-2xl shadow-lg p-8 mb-8 bg-[#dfe8f0]">
           <SearchBar onSearch={handleSearchQueryChange} initialQuery={query} />
         </div>
 
