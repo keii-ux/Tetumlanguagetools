@@ -36,7 +36,7 @@ export default function Home() {
               <img 
                 src={logoTransp} 
                 alt="LianTek Logo" 
-                className="w-10 h-10 object-contain"
+                className="w-10 h-10 object-contain ml-[25px] mr-[25px] mt-[20px] mb-[20px] pl-[15px] pr-[15px] pt-[12px] pb-[12px]"
               />
               <span className="text-white font-medium">LianTek</span>
             </div>
