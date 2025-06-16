@@ -182,15 +182,10 @@ export default function Dictionary() {
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Medical Dictionary & Glossary
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">Comprehensive medical terminology in Tetum and English for professionals</p>
+          <p className="text-gray-600 max-w-2xl mx-auto text-[16px]">Comprehensive medical terminology in Tetum and English for professionals from academic checked literature, according to the INL standard. </p>
         </div>
 
-        {/* Separator */}
-        <div className="flex items-center justify-center mb-8">
-          <div className="flex-1 border-t border-gray-200"></div>
-          <div className="px-4 text-sm font-medium text-[#242729]">SEARCH</div>
-          <div className="flex-1 border-t border-gray-200"></div>
-        </div>
+        
 
         
 
@@ -346,24 +341,7 @@ export default function Dictionary() {
           </div>
         )}
 
-        {/* Empty State */}
-        {!selectedEntry && searchQuery.length === 0 && (
-          <div className="text-center py-12">
-            <div className="bg-white rounded-2xl shadow-lg p-12">
-              <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Search medical terminology</h3>
-              <p className="text-gray-600 mb-6">
-                Start typing to search across medical terms in Tetum and English
-              </p>
-              <div className="flex justify-center space-x-4 text-sm text-gray-500">
-                <span>• Medical conditions</span>
-                <span>• Anatomy terms</span>
-                <span>• Treatment procedures</span>
-                <span>• Healthcare equipment</span>
-              </div>
-            </div>
-          </div>
-        )}
+        
         
         {/* No Results */}
         {!selectedEntry && searchQuery.length > 0 && !isLoading && searchResults.length === 0 && (
