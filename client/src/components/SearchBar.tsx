@@ -110,7 +110,14 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
 
   // Trigger search on mount to show medical terms by default
   useEffect(() => {
-    onSearch(advancedQuery);
+    onSearch({
+      query: "",
+      dictionaryType: "medical",
+      language: "all",
+      exactMatch: false,
+      includeDefinitions: true,
+      caseSensitive: false,
+    });
   }, []);
 
   return (
@@ -133,7 +140,7 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
           <Button
             onClick={() => tetumSearchTerm && handleTetumSearch(tetumSearchTerm)}
             size="sm"
-            className="absolute right-12 top-1/2 transform -translate-y-1/2 h-7 w-7 p-0 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 h-7 w-7 p-0 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
           >
             <Search className="h-3 w-3" />
           </Button>
