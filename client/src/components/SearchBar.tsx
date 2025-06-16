@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -23,8 +23,8 @@ export function SearchBar({ onSearch, initialQuery, searchResults = [], isLoadin
   const [advancedQuery, setAdvancedQuery] = useState<SearchQuery>(
     initialQuery || {
       query: "",
-      dictionaryType: "medical",
-      language: "all",
+      dictionaryType: "medical" as const,
+      language: "all" as const,
       exactMatch: false,
       includeDefinitions: true,
       caseSensitive: false,
@@ -34,6 +34,21 @@ export function SearchBar({ onSearch, initialQuery, searchResults = [], isLoadin
   const [showTetumDropdown, setShowTetumDropdown] = useState(false);
   const [showEnglishDropdown, setShowEnglishDropdown] = useState(false);
   const [activeTerm, setActiveTerm] = useState("");
+  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
+
+  // Debounced search function
+  const debouncedSearch = useCallback((searchQuery: SearchQuery) => {
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+    
+    const timeout = setTimeout(() => {
+      console.log("Executing search:", searchQuery);
+      onSearch(searchQuery);
+    }, 300); // 300ms debounce
+    
+    setSearchTimeout(timeout);
+  }, [onSearch, searchTimeout]);
 
   // Handle Tetum search
   const handleTetumSearch = (value: string) => {
@@ -42,16 +57,20 @@ export function SearchBar({ onSearch, initialQuery, searchResults = [], isLoadin
     setActiveTerm(value);
     setShowTetumDropdown(value.length > 0);
     setShowEnglishDropdown(false);
+    
     const searchQuery: SearchQuery = {
       query: value,
-      language: "tetum",
-      dictionaryType: "medical",
+      language: "tetum" as const,
+      dictionaryType: "medical" as const,
       exactMatch: advancedQuery.exactMatch,
       includeDefinitions: advancedQuery.includeDefinitions,
       caseSensitive: advancedQuery.caseSensitive,
     };
-    console.log("Tetum search query:", searchQuery);
-    onSearch(searchQuery);
+    
+    // Only search if there's a query or it's empty (to show default results)
+    if (value.trim() || value === "") {
+      debouncedSearch(searchQuery);
+    }
   };
 
   // Handle English search
@@ -61,16 +80,20 @@ export function SearchBar({ onSearch, initialQuery, searchResults = [], isLoadin
     setActiveTerm(value);
     setShowEnglishDropdown(value.length > 0);
     setShowTetumDropdown(false);
+    
     const searchQuery: SearchQuery = {
       query: value,
-      language: "english",
-      dictionaryType: "medical",
+      language: "english" as const,
+      dictionaryType: "medical" as const,
       exactMatch: advancedQuery.exactMatch,
       includeDefinitions: advancedQuery.includeDefinitions,
       caseSensitive: advancedQuery.caseSensitive,
     };
-    console.log("English search query:", searchQuery);
-    onSearch(searchQuery);
+    
+    // Only search if there's a query or it's empty (to show default results)
+    if (value.trim() || value === "") {
+      debouncedSearch(searchQuery);
+    }
   };
 
   // Handle advanced search
@@ -89,22 +112,16 @@ export function SearchBar({ onSearch, initialQuery, searchResults = [], isLoadin
   const handleClear = () => {
     setTetumSearchTerm("");
     setEnglishSearchTerm("");
-    setAdvancedQuery({
+    const clearQuery: SearchQuery = {
       query: "",
-      dictionaryType: "medical",
-      language: "all",
+      dictionaryType: "medical" as const,
+      language: "all" as const,
       exactMatch: false,
       includeDefinitions: true,
       caseSensitive: false,
-    });
-    onSearch({
-      query: "",
-      dictionaryType: "medical",
-      language: "all",
-      exactMatch: false,
-      includeDefinitions: true,
-      caseSensitive: false,
-    });
+    };
+    setAdvancedQuery(clearQuery);
+    onSearch(clearQuery);
   };
 
   // Keyboard shortcuts
@@ -122,15 +139,30 @@ export function SearchBar({ onSearch, initialQuery, searchResults = [], isLoadin
 
   // Trigger search on mount to show medical terms by default
   useEffect(() => {
-    onSearch({
+    const initialQuery: SearchQuery = {
       query: "",
-      dictionaryType: "medical",
-      language: "all",
+      dictionaryType: "medical" as const,
+      language: "all" as const,
       exactMatch: false,
       includeDefinitions: true,
       caseSensitive: false,
-    });
-  }, []);
+    };
+    // Use timeout to avoid immediate search on mount
+    const timeout = setTimeout(() => {
+      onSearch(initialQuery);
+    }, 100);
+    
+    return () => clearTimeout(timeout);
+  }, [onSearch]);
+
+  // Cleanup search timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (searchTimeout) {
+        clearTimeout(searchTimeout);
+      }
+    };
+  }, [searchTimeout]);
 
   // Handle entry selection from dropdown
   const handleEntrySelect = (entry: DictionaryEntry) => {

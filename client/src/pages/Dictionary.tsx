@@ -202,9 +202,79 @@ export default function Dictionary() {
           />
         </div>
 
+        {/* Search Results List */}
+        {searchResults.length > 0 && !selectedEntry && (
+          <div className="bg-white rounded-xl shadow-lg border border-blue-100 mb-8">
+            <div className="p-6 border-b border-gray-100">
+              <h2 className="text-xl font-semibold text-gray-900">
+                Search Results ({searchResults.length} {searchResults.length === 1 ? 'entry' : 'entries'})
+              </h2>
+            </div>
+            <div className="divide-y divide-gray-100">
+              {searchResults.map((entry) => (
+                <div
+                  key={entry.id}
+                  onClick={() => setSelectedEntry(entry)}
+                  className="p-6 hover:bg-blue-50 cursor-pointer transition-colors"
+                >
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-blue-900 mb-2">
+                        {getDisplayTerm(entry)}
+                      </h3>
+                      <p className="text-gray-700 mb-2 line-clamp-2">
+                        {getDefinitionText(entry)}
+                      </p>
+                      <div className="flex items-center space-x-4 text-sm text-gray-500">
+                        <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                          {entry.dictionaryType}
+                        </span>
+                        <span>{entry.source}</span>
+                        {entry.category && <span>• {entry.category}</span>}
+                      </div>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-blue-600 hover:text-blue-800"
+                    >
+                      View Details
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
+        {/* Loading State */}
+        {isLoading && (
+          <div className="bg-white rounded-xl shadow-lg p-12 text-center border border-blue-100 mb-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Searching medical terminology...</p>
+          </div>
+        )}
 
-        {/* Results Section */}
+        {/* No Results State */}
+        {!isLoading && searchResults.length === 0 && query.query && (
+          <div className="bg-white rounded-xl shadow-lg p-12 text-center border border-blue-100 mb-8">
+            <div className="text-gray-400 mb-4">
+              <Search className="h-12 w-12 mx-auto" />
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">No results found</h3>
+            <p className="text-gray-600 mb-4">
+              We couldn't find any medical terms matching "{query.query}". Try:
+            </p>
+            <ul className="text-sm text-gray-500 space-y-1">
+              <li>• Checking your spelling</li>
+              <li>• Using different keywords</li>
+              <li>• Searching in both Tetum and English</li>
+              <li>• Using the advanced search options</li>
+            </ul>
+          </div>
+        )}
+
+        {/* Selected Entry Details */}
         {selectedEntry && (
           <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100">
             {/* Word Header */}
