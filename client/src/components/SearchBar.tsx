@@ -169,7 +169,7 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
       <div className="mt-2 flex justify-center">
         <Dialog open={isAdvancedOpen} onOpenChange={setIsAdvancedOpen}>
           <DialogTrigger asChild>
-            <Button variant="ghost" size="sm" className="text-xs text-blue-600 hover:text-blue-700 hover:bg-blue-50">
+            <Button variant="ghost" size="sm" className="text-xs hover:text-blue-700 hover:bg-blue-50 text-[#0f0f0f]">
               <Settings className="h-3 w-3 mr-1" />
               Advanced Search
             </Button>
