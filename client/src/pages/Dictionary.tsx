@@ -13,6 +13,7 @@ import { useSearchEntries, useDictionaryStats } from "@/lib/search";
 import { SearchQuery, DictionaryEntry } from "@shared/schema";
 import { buildSearchQuery } from "@/lib/dictionaries";
 import { SearchBar } from "@/components/SearchBar";
+import { GeneralHealthVocabulary } from "@/components/GeneralHealthVocabulary";
 
 const DEFAULT_USER_ID = "demo-user";
 
@@ -77,8 +78,8 @@ export default function Dictionary() {
 
   const handleSearchQueryChange = (newQuery: SearchQuery) => {
     setQuery(newQuery);
-    setSearchQuery(newQuery.query);
-    if (newQuery.query.length === 0) {
+    setSearchQuery(newQuery.query || "");
+    if ((newQuery.query || "").length === 0) {
       setSelectedEntry(null);
     }
   };
@@ -338,6 +339,13 @@ export default function Dictionary() {
           </div>
         )}
         
+        {/* General Health Vocabulary Section */}
+        {!selectedEntry && (
+          <div className="mb-12">
+            <GeneralHealthVocabulary />
+          </div>
+        )}
+
         {/* Empty State */}
         {!selectedEntry && searchQuery.length === 0 && (
           <div className="text-center py-12">
