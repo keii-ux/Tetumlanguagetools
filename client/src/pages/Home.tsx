@@ -13,6 +13,8 @@ import {
 import { useDictionaryStats } from "@/lib/search";
 import logoTransp from "@assets/logo transp_1750045871999.png";
 
+import logo_transp from "@assets/logo transp.png";
+
 // Language options for website interface
 const LANGUAGE_OPTIONS = [
   { code: "en", label: "English", flag: "🇺🇸" },
@@ -34,7 +36,7 @@ export default function Home() {
             {/* Logo */}
             <div className="flex items-center space-x-3">
               <img 
-                src={logoTransp} 
+                src={logo_transp} 
                 alt="LianTek Logo" 
                 className="w-10 h-10 object-contain ml-[25px] mr-[25px] mt-[20px] mb-[20px] pl-[15px] pr-[15px] pt-[12px] pb-[12px]"
               />
