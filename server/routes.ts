@@ -22,19 +22,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       try {
         const enTtContent = await fs.readFile(medicalDictEnTtPath, "utf-8");
-        // Handle complex JSON structure by extracting only the first array section
-        const firstArrayMatch = enTtContent.match(/\[([\s\S]*?)\]/);
-        if (firstArrayMatch) {
-          medicalDictEnTtData = JSON.parse(`[${firstArrayMatch[1]}]`);
-        }
+        // The file appears to contain individual objects without proper array structure
+        // Let's try to convert it to a proper JSON array
+        const cleanContent = enTtContent
+          .replace(/}\s*,?\s*{/g, '},{') // Ensure proper object separation
+          .replace(/^{/, '[{')           // Add opening bracket
+          .replace(/}$/, '}]');          // Add closing bracket
+        
+        medicalDictEnTtData = JSON.parse(cleanContent);
+        console.log(`Loaded ${medicalDictEnTtData.length} EN-TT medical entries`);
       } catch (error) {
-        console.warn("Could not parse medical_dic_en-tt.json, skipping medical EN-TT entries");
+        console.warn("Could not parse medical_dic_en-tt.json:", error);
+        console.warn("Skipping medical EN-TT entries");
       }
       
       try {
         medicalDictTtEnData = JSON.parse(await fs.readFile(medicalDictTtEnPath, "utf-8"));
+        console.log(`Loaded ${medicalDictTtEnData.length} TT-EN medical entries`);
       } catch (error) {
-        console.warn("Could not parse medical-dic_tt_en.json, skipping medical TT-EN entries");
+        console.warn("Could not parse medical-dic_tt_en.json:", error);
+        console.warn("Skipping medical TT-EN entries");
       }
 
 
@@ -91,7 +98,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/search", async (req, res) => {
     try {
       const searchQuery = searchQuerySchema.parse(req.query);
+      console.log("Search query:", searchQuery);
       const results = await storage.searchEntries(searchQuery);
+      console.log(`Search returned ${results.length} results`);
       res.json(results);
     } catch (error) {
       console.error("Search validation error:", error);
