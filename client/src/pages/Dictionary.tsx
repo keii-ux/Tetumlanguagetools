@@ -10,6 +10,7 @@ import {
   Menu,
   Home
 } from "lucide-react";
+import { useLocation } from "wouter";
 import { useSearchEntries, useDictionaryStats } from "@/lib/search";
 import { SearchQuery, DictionaryEntry } from "@shared/schema";
 import { buildSearchQuery } from "@/lib/dictionaries";
@@ -35,6 +36,7 @@ const TAB_OPTIONS = [
 ];
 
 export default function Dictionary() {
+  const [location, setLocation] = useLocation();
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -134,12 +136,11 @@ export default function Dictionary() {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => window.location.reload()}
-                className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                onClick={() => setLocation("/")}
+                className="flex items-center space-x-2 text-[#0f0f0f] hover:text-blue-700 hover:bg-blue-50"
                 title="Return to Homepage"
               >
                 <Home className="h-5 w-5" />
-                <span className="hidden sm:inline">Home</span>
               </Button>
               <img 
                 src="/liantek-logo.png" 
@@ -154,7 +155,7 @@ export default function Dictionary() {
                 variant="outline"
                 size="sm"
                 onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
-                className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 border-blue-200 bg-blue-50"
+                className="flex items-center space-x-2 text-[#050505] hover:text-blue-700 border-blue-200 bg-blue-50"
               >
                 <span>{LANGUAGE_OPTIONS.find(lang => lang.code === selectedLanguage)?.flag}</span>
                 <span className="hidden sm:inline">{LANGUAGE_OPTIONS.find(lang => lang.code === selectedLanguage)?.label}</span>
