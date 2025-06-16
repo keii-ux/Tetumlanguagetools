@@ -200,7 +200,7 @@ export function GeneralHealthVocabulary() {
         </Card>
       </div>
       <div className="text-center text-sm text-gray-500">
-        <p>Powered by AI with medical sources from authoritative textbooks, journals, and medical references</p>
+        <p className="pt-[47px] pb-[47px] mt-[16px] mb-[16px]">Powered by AI with medical sources from authoritative textbooks, journals, and medical references</p>
       </div>
     </div>
   );
