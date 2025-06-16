@@ -150,7 +150,9 @@ export function SearchBar({ onSearch, initialQuery, searchResults = [], isLoadin
   // Filter results based on active search
   const getFilteredResults = () => {
     if (!activeTerm || activeTerm.length === 0) return [];
-    return searchResults.slice(0, 6); // Limit to 6 results for dropdown
+    // The backend already filters results based on the search query,
+    // so we just need to return the results as-is
+    return searchResults || [];
   };
 
   // Get display term for entry
