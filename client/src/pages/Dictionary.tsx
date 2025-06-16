@@ -134,9 +134,9 @@ export default function Dictionary() {
             {/* Logo and Home Button */}
             <div className="flex items-center space-x-3">
               <a
-                href="https://liantek.tl"
+                href="https://replit.com/@freethekindle/LianTek-Pro-Tools?v=1"
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-9 rounded-md px-3 flex items-center space-x-2 text-[#0f0f0f] hover:text-blue-700 hover:bg-blue-50"
-                title="Return to Homepage"
+                title="Return to LianTek Pro Tools"
               >
                 <Home className="h-5 w-5" />
               </a>
