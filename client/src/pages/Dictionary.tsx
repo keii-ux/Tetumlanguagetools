@@ -18,7 +18,8 @@ import {
   Settings,
   ChevronRight,
   Menu,
-  X
+  X,
+  ChevronDown
 } from "lucide-react";
 import { useSearchEntries, useAddSearchHistory, useAllEntries, useDictionaryStats } from "@/lib/search";
 import { SearchQuery, DictionaryEntry } from "@shared/schema";
@@ -27,6 +28,13 @@ import { TermDetail } from "@/components/TermDetail";
 import { BookmarkPanel } from "@/components/BookmarkPanel";
 
 const DEFAULT_USER_ID = "demo-user";
+
+// Language options for website interface
+const LANGUAGE_OPTIONS = [
+  { code: "en", label: "English", flag: "🇺🇸" },
+  { code: "pt", label: "Português", flag: "🇵🇹" },
+  { code: "tet", label: "Tetum", flag: "🇹🇱" },
+];
 
 const NAVIGATION_ITEMS = [
   {
@@ -117,6 +125,8 @@ export default function Dictionary() {
   const [showHistory, setShowHistory] = useState(false);
   const [globalSearch, setGlobalSearch] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
   
   const { data: stats } = useDictionaryStats();
   const { data: searchResults = [], isLoading: searchLoading } = useSearchEntries(searchQuery);
@@ -331,58 +341,48 @@ export default function Dictionary() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">LT</span>
+              <div className="w-10 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                </div>
               </div>
               <span className="text-xl font-bold text-gray-900">LianTek</span>
             </div>
 
-            {/* Desktop Navigation Menu */}
-            <nav className="hidden lg:flex space-x-8">
-              {NAVIGATION_ITEMS.map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <button
-                    key={index}
-                    className={`flex items-center space-x-2 px-3 py-2 text-sm font-medium transition-colors ${
-                      item.active 
-                        ? "text-green-600 bg-green-50 rounded-lg" 
-                        : "text-gray-700 hover:text-green-600"
-                    }`}
-                  >
-                    <Icon className="w-4 h-4" />
-                    <span>{item.label}</span>
-                  </button>
-                );
-              })}
-            </nav>
-
-            {/* Header Actions */}
-            <div className="flex items-center space-x-4">
+            {/* Language Selector */}
+            <div className="relative">
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => setShowBookmarks(true)}
-                className="hidden md:flex text-gray-600 hover:text-green-600 border-gray-300"
+                onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
+                className="flex items-center space-x-2 text-gray-600 hover:text-green-600 border-gray-300"
               >
-                <Bookmark className="h-4 w-4 mr-2" />
-                Bookmarks
+                <span>{LANGUAGE_OPTIONS.find(lang => lang.code === selectedLanguage)?.flag}</span>
+                <span className="hidden sm:inline">{LANGUAGE_OPTIONS.find(lang => lang.code === selectedLanguage)?.label}</span>
+                <ChevronDown className="w-4 h-4" />
               </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowHistory(true)}
-                className="hidden md:flex text-gray-600 hover:text-green-600 border-gray-300"
-              >
-                <History className="h-4 w-4 mr-2" />
-                History
-              </Button>
-              <Button 
-                className="bg-green-600 hover:bg-green-700 text-white px-6"
-                onClick={() => setGlobalSearch("")}
-              >
-                Get Started
-              </Button>
+              
+              {showLanguageDropdown && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                  <div className="py-1">
+                    {LANGUAGE_OPTIONS.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          setSelectedLanguage(lang.code);
+                          setShowLanguageDropdown(false);
+                        }}
+                        className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center space-x-3 ${
+                          selectedLanguage === lang.code ? "bg-green-50 text-green-600" : "text-gray-700"
+                        }`}
+                      >
+                        <span>{lang.flag}</span>
+                        <span>{lang.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
