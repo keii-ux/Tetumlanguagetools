@@ -108,6 +108,11 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Trigger search on mount to show medical terms by default
+  useEffect(() => {
+    onSearch(advancedQuery);
+  }, []);
+
   return (
     <div className="flex-1 max-w-4xl mx-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -168,7 +173,7 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
       <div className="mt-2 flex justify-center">
         <Dialog open={isAdvancedOpen} onOpenChange={setIsAdvancedOpen}>
           <DialogTrigger asChild>
-            <Button variant="ghost" size="sm" className="text-xs text-slate-500 hover:text-slate-700">
+            <Button variant="ghost" size="sm" className="text-xs text-blue-600 hover:text-blue-700 hover:bg-blue-50">
               <Settings className="h-3 w-3 mr-1" />
               Advanced Search
             </Button>
