@@ -58,9 +58,10 @@ export class MemStorage implements IStorage {
   async searchEntries(query: SearchQuery): Promise<DictionaryEntry[]> {
     const entries = Array.from(this.entries.values());
     
-    if (!query.query) return entries;
+    // If no query provided, return empty array for predictive search
+    if (!query.query || query.query.trim() === "") return [];
 
-    const searchTerm = query.caseSensitive ? query.query : query.query.toLowerCase();
+    const searchTerm = query.caseSensitive ? query.query.trim() : query.query.trim().toLowerCase();
     
     return entries.filter(entry => {
       // Filter by dictionary type
@@ -85,14 +86,22 @@ export class MemStorage implements IStorage {
         fields.push(entry.explanation);
       }
 
-      // Search in relevant fields
+      // Improved search logic for predictive matching
       return fields.some(field => {
+        if (!field) return false;
+        
         const fieldValue = query.caseSensitive ? field : field.toLowerCase();
-        return query.exactMatch 
-          ? fieldValue === searchTerm
-          : fieldValue.includes(searchTerm);
+        
+        if (query.exactMatch) {
+          return fieldValue === searchTerm;
+        }
+        
+        // For predictive search, check if any word in the field starts with the search term
+        // This provides better matching for partial inputs like "médiku"
+        const words = fieldValue.split(/\s+/);
+        return words.some(word => word.startsWith(searchTerm)) || fieldValue.includes(searchTerm);
       });
-    });
+    }).slice(0, 10); // Limit results for predictive search performance
   }
 
   async createEntry(entry: InsertDictionaryEntry): Promise<DictionaryEntry> {
