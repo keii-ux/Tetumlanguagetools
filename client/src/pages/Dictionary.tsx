@@ -54,10 +54,13 @@ export default function Dictionary() {
   
   const { data: stats } = useDictionaryStats();
   
-  const { data: searchResults = [], isLoading } = useSearchEntries(query);
+  const { data: searchResults = [], isLoading, error: searchError } = useSearchEntries(query);
+  
+  // Ensure searchResults is always an array
+  const results = Array.isArray(searchResults) ? searchResults : [];
   
   // Get suggestions for predictive search
-  const suggestions = searchResults.slice(0, 6);
+  const suggestions = results.slice(0, 6);
   
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -196,22 +199,22 @@ export default function Dictionary() {
           <SearchBar 
             onSearch={handleSearchQueryChange} 
             initialQuery={query}
-            searchResults={searchResults}
+            searchResults={results}
             isLoading={isLoading}
             onEntrySelect={setSelectedEntry}
           />
         </div>
 
         {/* Search Results List */}
-        {searchResults.length > 0 && !selectedEntry && (
+        {results.length > 0 && !selectedEntry && (
           <div className="bg-white rounded-xl shadow-lg border border-blue-100 mb-8">
             <div className="p-6 border-b border-gray-100">
               <h2 className="text-xl font-semibold text-gray-900">
-                Search Results ({searchResults.length} {searchResults.length === 1 ? 'entry' : 'entries'})
+                Search Results ({results.length} {results.length === 1 ? 'entry' : 'entries'})
               </h2>
             </div>
             <div className="divide-y divide-gray-100">
-              {searchResults.map((entry) => (
+              {results.map((entry: DictionaryEntry) => (
                 <div
                   key={entry.id}
                   onClick={() => setSelectedEntry(entry)}
@@ -255,8 +258,27 @@ export default function Dictionary() {
           </div>
         )}
 
+        {/* Error State */}
+        {searchError && (
+          <div className="bg-red-50 rounded-xl shadow-lg p-12 text-center border border-red-200 mb-8">
+            <div className="text-red-400 mb-4">
+              <Search className="h-12 w-12 mx-auto" />
+            </div>
+            <h3 className="text-lg font-semibold text-red-900 mb-2">Search Error</h3>
+            <p className="text-red-600 mb-4">
+              Unable to search the medical dictionary. Please try again or check your connection.
+            </p>
+            <Button 
+              onClick={() => window.location.reload()} 
+              className="bg-red-600 hover:bg-red-700 text-white"
+            >
+              Reload Page
+            </Button>
+          </div>
+        )}
+
         {/* No Results State */}
-        {!isLoading && searchResults.length === 0 && query.query && (
+        {!isLoading && !searchError && results.length === 0 && query.query && (
           <div className="bg-white rounded-xl shadow-lg p-12 text-center border border-blue-100 mb-8">
             <div className="text-gray-400 mb-4">
               <Search className="h-12 w-12 mx-auto" />
@@ -277,6 +299,17 @@ export default function Dictionary() {
         {/* Selected Entry Details */}
         {selectedEntry && (
           <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100">
+            {/* Back Button */}
+            <div className="mb-6">
+              <Button
+                variant="ghost"
+                onClick={() => setSelectedEntry(null)}
+                className="text-blue-600 hover:text-blue-800 hover:bg-blue-50"
+              >
+                ← Back to Results
+              </Button>
+            </div>
+            
             {/* Word Header */}
             <div className="flex items-center space-x-4 mb-6">
               <h2 className="text-3xl font-bold text-gray-900">{getDisplayTerm(selectedEntry)}</h2>

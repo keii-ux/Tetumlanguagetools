@@ -12,8 +12,6 @@ export function useSearchEntries(searchQuery: SearchQuery) {
     }
   });
 
-
-
   return useQuery<DictionaryEntry[]>({
     queryKey: ["/api/search", queryParams.toString()],
     enabled: !!searchQuery.query || searchQuery.dictionaryType !== "all",
@@ -21,6 +19,8 @@ export function useSearchEntries(searchQuery: SearchQuery) {
     refetchOnMount: true,
     refetchOnReconnect: true,
     refetchOnWindowFocus: false,
+    retry: 2,
+    retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000)
   });
 }
 
