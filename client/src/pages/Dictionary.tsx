@@ -48,9 +48,21 @@ export default function Dictionary() {
   // Get dictionary type from URL parameters
   const urlParams = new URLSearchParams(location.split('?')[1] || '');
   const rawType = urlParams.get('type') || 'medical';
-  const dictionaryType = ['medical', 'legal', 'general', 'portuguese'].includes(rawType) 
-    ? rawType as 'medical' | 'legal' | 'general' 
-    : 'medical';
+  
+  // Map URL types to schema types
+  const getDictionaryType = (): 'medical' | 'legal' | 'general' => {
+    switch (rawType) {
+      case 'legal':
+      case 'portuguese': // Portuguese dictionary is part of legal glossary
+        return 'legal';
+      case 'general':
+        return 'general';
+      default:
+        return 'medical';
+    }
+  };
+  
+  const dictionaryType = getDictionaryType();
 
   const [query, setQuery] = useState<SearchQuery>(buildSearchQuery({
     query: "",
@@ -70,7 +82,7 @@ export default function Dictionary() {
 
   // Get dictionary display information
   const getDictionaryInfo = () => {
-    switch (dictionaryType) {
+    switch (rawType) {
       case 'legal':
         return { title: 'Legal Glossary', icon: '⚖️', color: 'blue' };
       case 'general':
@@ -218,8 +230,13 @@ export default function Dictionary() {
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-8">
         {/* Title */}
         <div className="text-center mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-[#141414]">Medical Dictionary</h1>
-          <p className="max-w-3xl mx-auto font-normal text-base leading-relaxed px-4 text-[#000000]">Comprehensive medical terminology in Tetum and English for professionals from academic checked literature, according to the INL standard.</p>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-[#141414]">{dictionaryInfo.icon} {dictionaryInfo.title}</h1>
+          <p className="max-w-3xl mx-auto font-normal text-base leading-relaxed px-4 text-[#000000]">
+            {rawType === 'legal' && "Legal terminology in Tetum with Portuguese equivalents for professionals working in legal contexts."}
+            {rawType === 'portuguese' && "Comprehensive Portuguese legal dictionary with detailed explanations and terminology."}
+            {rawType === 'general' && "General Tetum dictionary from Instituto Nacional de Linguística with comprehensive word definitions and classifications."}
+            {rawType === 'medical' && "Comprehensive medical terminology in Tetum and English for professionals from academic checked literature, according to the INL standard."}
+          </p>
         </div>
 
         
