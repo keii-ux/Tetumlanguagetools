@@ -72,17 +72,17 @@ export class MemStorage implements IStorage {
       // Language-specific search
       const fields: string[] = [];
       if (query.language === "all" || query.language === "tetum") {
-        if (entry.tetum) fields.push(entry.tetum);
+        if (entry.tetum && typeof entry.tetum === 'string') fields.push(entry.tetum);
       }
       if (query.language === "all" || query.language === "portuguese") {
-        if (entry.portuguese) fields.push(entry.portuguese);
+        if (entry.portuguese && typeof entry.portuguese === 'string') fields.push(entry.portuguese);
       }
       if (query.language === "all" || query.language === "english") {
-        if (entry.english) fields.push(entry.english);
+        if (entry.english && typeof entry.english === 'string') fields.push(entry.english);
       }
 
       // Include explanations if requested
-      if (query.includeDefinitions && entry.explanation) {
+      if (query.includeDefinitions && entry.explanation && typeof entry.explanation === 'string') {
         fields.push(entry.explanation);
       }
 
