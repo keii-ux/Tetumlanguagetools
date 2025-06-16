@@ -13,7 +13,7 @@ export function validateQuery(schema: ZodSchema) {
           details: error.errors.map(err => ({
             field: err.path.join('.'),
             message: err.message,
-            received: err.received
+            code: err.code
           })),
           timestamp: new Date().toISOString()
         });
@@ -35,7 +35,7 @@ export function validateBody(schema: ZodSchema) {
           details: error.errors.map(err => ({
             field: err.path.join('.'),
             message: err.message,
-            received: err.received
+            code: err.code
           })),
           timestamp: new Date().toISOString()
         });
@@ -57,7 +57,7 @@ export function validateParams(schema: ZodSchema) {
           details: error.errors.map(err => ({
             field: err.path.join('.'),
             message: err.message,
-            received: err.received
+            code: err.code
           })),
           timestamp: new Date().toISOString()
         });

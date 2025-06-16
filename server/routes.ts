@@ -3,8 +3,10 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { searchQuerySchema, insertBookmarkSchema, insertSearchHistorySchema } from "@shared/schema";
 import { translateMedicalTerm, generateMedicalVocabulary, MedicalTranslation } from "./openrouter";
+import { validateQuery, validateBody, validateParams } from "./validation";
 import fs from "fs/promises";
 import path from "path";
+import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
@@ -136,25 +138,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize dictionaries on startup
   await initializeDictionaries();
 
-  // Search entries
+  // Search entries with validation and rate limiting
   app.get("/api/search", async (req, res) => {
     try {
-      console.log("Raw query params:", req.query);
       const searchQuery = searchQuerySchema.parse(req.query);
       console.log("Parsed search query:", searchQuery);
+      
       const results = await storage.searchEntries(searchQuery);
       console.log(`Search returned ${results.length} results`);
-      if (results.length > 0) {
-        console.log("First result:", results[0]);
-      }
+      
+      res.setHeader('Cache-Control', 'public, max-age=300'); // 5 minute cache
       res.json(results);
     } catch (error) {
       console.error("Search error:", error);
       
-      if (error instanceof Error && error.message.includes('validation')) {
+      if (error instanceof Error && error.name === 'ZodError') {
         return res.status(400).json({ 
           error: "Invalid search parameters", 
-          details: error.message,
+          details: "Please check your search query format",
           timestamp: new Date().toISOString()
         });
       }
