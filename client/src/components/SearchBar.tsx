@@ -36,6 +36,15 @@ export function SearchBar({ onSearch, initialQuery, searchResults = [], isLoadin
   const [activeTerm, setActiveTerm] = useState("");
   const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
 
+  // Cleanup timeout on unmount to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      if (searchTimeout) {
+        clearTimeout(searchTimeout);
+      }
+    };
+  }, [searchTimeout]);
+
   // Debounced search function
   const debouncedSearch = useCallback((searchQuery: SearchQuery) => {
     if (searchTimeout) {

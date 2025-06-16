@@ -149,8 +149,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       res.json(results);
     } catch (error) {
-      console.error("Search validation error:", error);
-      res.status(400).json({ error: "Invalid search parameters", details: error instanceof Error ? error.message : "Unknown error" });
+      console.error("Search error:", error);
+      
+      if (error instanceof Error && error.message.includes('validation')) {
+        return res.status(400).json({ 
+          error: "Invalid search parameters", 
+          details: error.message,
+          timestamp: new Date().toISOString()
+        });
+      }
+      
+      if (error instanceof Error && error.message.includes('storage')) {
+        return res.status(503).json({ 
+          error: "Search service temporarily unavailable",
+          timestamp: new Date().toISOString()
+        });
+      }
+      
+      res.status(500).json({ 
+        error: "Internal server error during search",
+        timestamp: new Date().toISOString()
+      });
     }
   });
 

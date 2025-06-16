@@ -143,22 +143,30 @@ export class MemStorage implements IStorage {
 
   async createEntry(entry: InsertDictionaryEntry): Promise<DictionaryEntry> {
     const id = this.currentEntryId++;
+    
+    // Robust data validation and sanitization
     const newEntry: DictionaryEntry = { 
       ...entry, 
       id,
-      source: entry.source || null,
-      tetum: entry.tetum || null,
-      portuguese: entry.portuguese || null,
-      english: entry.english || null,
-      category: entry.category || null,
-      notes: entry.notes || null,
-      explanation: entry.explanation || null,
-      pronunciation: entry.pronunciation || null,
-      wordClass: entry.wordClass || null,
-      etymology: entry.etymology || null,
-      usageExamples: Array.isArray(entry.usageExamples) ? entry.usageExamples as string[] : null,
-      relatedTerms: Array.isArray(entry.relatedTerms) ? entry.relatedTerms as string[] : null,
+      source: typeof entry.source === 'string' ? entry.source : null,
+      tetum: typeof entry.tetum === 'string' ? entry.tetum : null,
+      portuguese: typeof entry.portuguese === 'string' ? entry.portuguese : null,
+      english: typeof entry.english === 'string' ? entry.english : null,
+      category: typeof entry.category === 'string' ? entry.category : "general",
+      notes: typeof entry.notes === 'string' ? entry.notes : null,
+      explanation: typeof entry.explanation === 'string' ? entry.explanation : null,
+      pronunciation: typeof entry.pronunciation === 'string' ? entry.pronunciation : null,
+      wordClass: typeof entry.wordClass === 'string' ? entry.wordClass : null,
+      etymology: typeof entry.etymology === 'string' ? entry.etymology : null,
+      usageExamples: Array.isArray(entry.usageExamples) ? entry.usageExamples.filter(item => typeof item === 'string') : [],
+      relatedTerms: Array.isArray(entry.relatedTerms) ? entry.relatedTerms.filter(item => typeof item === 'string') : [],
     };
+    
+    // Validate required fields
+    if (!newEntry.dictionaryType) {
+      throw new Error('Dictionary type is required');
+    }
+    
     this.entries.set(id, newEntry);
     return newEntry;
   }
