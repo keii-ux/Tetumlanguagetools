@@ -18,10 +18,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const medicalDictEnTtPath = path.resolve(process.cwd(), "medical_dic_en-tt.json");
       const medicalDictTtEnPath = path.resolve(process.cwd(), "medical-dic_tt_en.json");
       
+      // Load legal dictionaries
+      const legalTetumPath = path.resolve(process.cwd(), "attached_assets/legal tetum glossay_1750040265136.json");
+      const legalPortuguesePath = path.resolve(process.cwd(), "attached_assets/glos juridico pt_1750040233711.json");
+      
+      // Load general Tetum dictionary
+      const tetumDictPath = path.resolve(process.cwd(), "attached_assets/inl_tt_dic_final_1750040241832.json");
+      
       // Parse medical dictionaries with error handling for complex JSON structure
       let medicalDictEnTtData = [];
       let medicalDictTtEnData = [];
+      let legalTetumData = [];
+      let legalPortugueseData = [];
+      let tetumDictData = [];
       
+      // Load Medical Dictionaries
       try {
         const enTtContent = await fs.readFile(medicalDictEnTtPath, "utf-8");
         
@@ -83,7 +94,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.warn("Skipping medical TT-EN entries");
       }
 
+      // Load Legal Dictionaries
+      try {
+        legalTetumData = JSON.parse(await fs.readFile(legalTetumPath, "utf-8"));
+        console.log(`Loaded ${legalTetumData.length} legal Tetum entries`);
+      } catch (error) {
+        console.warn("Could not parse legal tetum glossary:", error);
+        console.warn("Skipping legal Tetum entries");
+      }
 
+      try {
+        legalPortugueseData = JSON.parse(await fs.readFile(legalPortuguesePath, "utf-8"));
+        console.log(`Loaded ${legalPortugueseData.length} legal Portuguese entries`);
+      } catch (error) {
+        console.warn("Could not parse legal Portuguese glossary:", error);
+        console.warn("Skipping legal Portuguese entries");
+      }
+
+      // Load General Tetum Dictionary
+      try {
+        tetumDictData = JSON.parse(await fs.readFile(tetumDictPath, "utf-8"));
+        console.log(`Loaded ${tetumDictData.length} general Tetum entries`);
+      } catch (error) {
+        console.warn("Could not parse general Tetum dictionary:", error);
+        console.warn("Skipping general Tetum entries");
+      }
 
       // Process medical dictionary entries (English to Tetum)
       const medicalEntriesEnTt = medicalDictEnTtData.map((item: any) => ({
@@ -119,16 +154,79 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: item.similar ? [item.similar] : [],
       }));
 
-      const allMedicalEntries = [...medicalEntriesEnTt, ...medicalEntriesTtEn];
+      // Process legal Tetum entries
+      const legalTetumEntries = legalTetumData.map((item: any) => ({
+        tetum: item.tetum_term || "",
+        portuguese: item.tetum_explanation || "",
+        english: "",
+        source: item.source || "Legal Dictionary TT",
+        category: "legal",
+        dictionaryType: "legal",
+        notes: "",
+        explanation: item.tetum_explanation || "",
+        pronunciation: "",
+        wordClass: "",
+        etymology: "",
+        usageExamples: [],
+        relatedTerms: [],
+      }));
 
-      // Bulk insert medical entries only
-      await storage.bulkCreateEntries(allMedicalEntries);
+      // Process legal Portuguese entries
+      const legalPortugueseEntries = legalPortugueseData.map((item: any) => ({
+        tetum: "",
+        portuguese: item.termo || "",
+        english: "",
+        source: "Legal Dictionary PT",
+        category: "legal",
+        dictionaryType: "legal",
+        notes: "",
+        explanation: item.significado || "",
+        pronunciation: "",
+        wordClass: "",
+        etymology: "",
+        usageExamples: [],
+        relatedTerms: [],
+      }));
+
+      // Process general Tetum dictionary entries
+      const tetumGeneralEntries = tetumDictData.filter((item: any) => item.word && item.meaning).map((item: any) => ({
+        tetum: item.word || "",
+        portuguese: "",
+        english: "",
+        source: "General Tetum Dictionary",
+        category: "general",
+        dictionaryType: "general",
+        notes: "",
+        explanation: item.meaning || "",
+        pronunciation: "",
+        wordClass: item.class || "",
+        etymology: "",
+        usageExamples: [],
+        relatedTerms: [],
+      }));
+
+      // Combine all entries
+      const allEntries = [
+        ...medicalEntriesEnTt,
+        ...medicalEntriesTtEn,
+        ...legalTetumEntries,
+        ...legalPortugueseEntries,
+        ...tetumGeneralEntries
+      ];
+
+      // Bulk insert all entries
+      await storage.bulkCreateEntries(allEntries);
       
-      console.log(`Loaded ${allMedicalEntries.length} medical dictionary entries`);
+      console.log(`Loaded ${allEntries.length} total dictionary entries:`);
+      console.log(`- Medical: ${medicalEntriesEnTt.length + medicalEntriesTtEn.length}`);
+      console.log(`- Legal: ${legalTetumEntries.length + legalPortugueseEntries.length}`);
+      console.log(`- General: ${tetumGeneralEntries.length}`);
       
       // Debug: Log first few entries to verify structure
-      if (allMedicalEntries.length > 0) {
-        console.log("Sample entry:", JSON.stringify(allMedicalEntries[0], null, 2));
+      if (allEntries.length > 0) {
+        console.log("Sample medical entry:", JSON.stringify(medicalEntriesEnTt[0] || medicalEntriesTtEn[0], null, 2));
+        console.log("Sample legal entry:", JSON.stringify(legalTetumEntries[0] || legalPortugueseEntries[0], null, 2));
+        console.log("Sample general entry:", JSON.stringify(tetumGeneralEntries[0], null, 2));
       }
     } catch (error) {
       console.error("Error initializing dictionaries:", error);

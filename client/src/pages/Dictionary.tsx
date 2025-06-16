@@ -44,13 +44,45 @@ export default function Dictionary() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
   const [activeTab, setActiveTab] = useState("definitions");
   const [currentDefinition, setCurrentDefinition] = useState(1);
+
+  // Get dictionary type from URL parameters
+  const urlParams = new URLSearchParams(location.split('?')[1] || '');
+  const rawType = urlParams.get('type') || 'medical';
+  const dictionaryType = ['medical', 'legal', 'general', 'portuguese'].includes(rawType) 
+    ? rawType as 'medical' | 'legal' | 'general' 
+    : 'medical';
+
   const [query, setQuery] = useState<SearchQuery>(buildSearchQuery({
     query: "",
-    dictionaryType: "medical",
+    dictionaryType: dictionaryType,
     language: "all",
   }));
   
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Update query when dictionary type changes
+  useEffect(() => {
+    setQuery(prev => buildSearchQuery({
+      ...prev,
+      dictionaryType: dictionaryType,
+    }));
+  }, [dictionaryType]);
+
+  // Get dictionary display information
+  const getDictionaryInfo = () => {
+    switch (dictionaryType) {
+      case 'legal':
+        return { title: 'Legal Glossary', icon: '⚖️', color: 'blue' };
+      case 'general':
+        return { title: 'Tetum Dictionary (INL)', icon: '🌍', color: 'orange' };
+      case 'portuguese':
+        return { title: 'Portuguese-English Dictionary', icon: '📚', color: 'green' };
+      default:
+        return { title: 'Medical Glossary', icon: '🏥', color: 'red' };
+    }
+  };
+
+  const dictionaryInfo = getDictionaryInfo();
   
   const { data: stats } = useDictionaryStats();
   

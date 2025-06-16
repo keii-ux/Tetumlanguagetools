@@ -197,91 +197,97 @@ export default function Home() {
             </Link>
 
             {/* Legal Glossary */}
-            <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg border-gray-200 hover:border-blue-200">
-              <CardHeader className="flex flex-row items-center space-y-0 pb-4">
-                <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mr-4 group-hover:bg-blue-100 transition-colors">
-                  <Scale className="h-6 w-6 text-blue-600" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle className="text-lg font-semibold text-gray-900">Legal Glossary</CardTitle>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Legal</span>
-                      </div>
-                    </div>
-                    <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
+            <Link href="/dictionary?type=legal">
+              <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg border-gray-200 hover:border-blue-200">
+                <CardHeader className="flex flex-row items-center space-y-0 pb-4">
+                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mr-4 group-hover:bg-blue-100 transition-colors">
+                    <Scale className="h-6 w-6 text-blue-600" />
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-gray-600 mb-4">
-                  Legal terminology in Tetum with Portuguese and English equivalents
-                </CardDescription>
-                <div className="flex items-center space-x-2">
-                  <span className="text-2xl font-bold text-green-600">1,510</span>
-                  <span className="text-gray-500 text-sm">terms</span>
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <CardTitle className="text-lg font-semibold text-gray-900">Legal Glossary</CardTitle>
+                        <div className="flex items-center space-x-2 mt-1">
+                          <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Legal</span>
+                        </div>
+                      </div>
+                      <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-gray-600 mb-4">
+                    Legal terminology in Tetum with Portuguese and English equivalents
+                  </CardDescription>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-2xl font-bold text-green-600">{stats?.legal || 0}</span>
+                    <span className="text-gray-500 text-sm">terms</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
 
             {/* Portuguese-English Dictionary */}
-            <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg border-gray-200 hover:border-green-200">
-              <CardHeader className="flex flex-row items-center space-y-0 pb-4">
-                <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mr-4 group-hover:bg-green-100 transition-colors">
-                  <BookOpen className="h-6 w-6 text-green-600" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle className="text-lg font-semibold text-gray-900">Portuguese-English Dictionary</CardTitle>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Translation</span>
-                      </div>
-                    </div>
-                    <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-green-600 transition-colors" />
+            <Link href="/dictionary?type=portuguese">
+              <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg border-gray-200 hover:border-green-200">
+                <CardHeader className="flex flex-row items-center space-y-0 pb-4">
+                  <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mr-4 group-hover:bg-green-100 transition-colors">
+                    <BookOpen className="h-6 w-6 text-green-600" />
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-gray-600 mb-4">
-                  Comprehensive dictionary with translations between Portuguese and English
-                </CardDescription>
-                <div className="flex items-center space-x-2">
-                  <span className="text-2xl font-bold text-green-600">247</span>
-                  <span className="text-gray-500 text-sm">terms</span>
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <CardTitle className="text-lg font-semibold text-gray-900">Portuguese-English Dictionary</CardTitle>
+                        <div className="flex items-center space-x-2 mt-1">
+                          <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Translation</span>
+                        </div>
+                      </div>
+                      <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-green-600 transition-colors" />
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-gray-600 mb-4">
+                    Comprehensive dictionary with translations between Portuguese and English
+                  </CardDescription>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-2xl font-bold text-green-600">{stats?.legal || 0}</span>
+                    <span className="text-gray-500 text-sm">terms</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
 
             {/* Tetum Dictionary (INL) */}
-            <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg border-gray-200 hover:border-orange-200">
-              <CardHeader className="flex flex-row items-center space-y-0 pb-4">
-                <div className="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center mr-4 group-hover:bg-orange-100 transition-colors">
-                  <Globe className="h-6 w-6 text-orange-600" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle className="text-lg font-semibold text-gray-900">Tetum Dictionary (INL)</CardTitle>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <span className="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full">Reference</span>
-                      </div>
-                    </div>
-                    <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-orange-600 transition-colors" />
+            <Link href="/dictionary?type=general">
+              <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg border-gray-200 hover:border-orange-200">
+                <CardHeader className="flex flex-row items-center space-y-0 pb-4">
+                  <div className="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center mr-4 group-hover:bg-orange-100 transition-colors">
+                    <Globe className="h-6 w-6 text-orange-600" />
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-gray-600 mb-4">
-                  Instituto Nacional de Linguística Tetum dictionary with comprehensive entries
-                </CardDescription>
-                <div className="flex items-center space-x-2">
-                  <span className="text-2xl font-bold text-green-600">0</span>
-                  <span className="text-gray-500 text-sm">terms</span>
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <CardTitle className="text-lg font-semibold text-gray-900">Tetum Dictionary (INL)</CardTitle>
+                        <div className="flex items-center space-x-2 mt-1">
+                          <span className="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full">Reference</span>
+                        </div>
+                      </div>
+                      <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-orange-600 transition-colors" />
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-gray-600 mb-4">
+                    Instituto Nacional de Linguística Tetum dictionary with comprehensive entries
+                  </CardDescription>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-2xl font-bold text-green-600">{stats?.general || 0}</span>
+                    <span className="text-gray-500 text-sm">terms</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
         </div>
       </div>
