@@ -149,6 +149,7 @@ export function GeneralHealthVocabulary() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
+              <span className="text-lg">🇹🇱 Tetum → English</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -176,6 +177,7 @@ export function GeneralHealthVocabulary() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
+              <span className="text-lg">🇺🇸 English → Tetum</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
