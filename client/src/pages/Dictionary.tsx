@@ -133,24 +133,13 @@ export default function Dictionary() {
           <div className="flex items-center justify-between h-16">
             {/* Logo and Home Button */}
             <div className="flex items-center space-x-3">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => {
-                  setSelectedEntry(null);
-                  setQuery(buildSearchQuery({
-                    query: "",
-                    dictionaryType: "medical",
-                    language: "all",
-                  }));
-                  setSearchQuery("");
-                  setActiveTab("definitions");
-                }}
-                className="flex items-center space-x-2 text-[#0f0f0f] hover:text-blue-700 hover:bg-blue-50"
+              <a
+                href="/"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-9 rounded-md px-3 flex items-center space-x-2 text-[#0f0f0f] hover:text-blue-700 hover:bg-blue-50"
                 title="Return to Homepage"
               >
                 <Home className="h-5 w-5" />
-              </Button>
+              </a>
               <img 
                 src="/liantek-logo.png" 
                 alt="LianTek" 
