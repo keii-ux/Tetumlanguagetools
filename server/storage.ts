@@ -37,11 +37,14 @@ export class MemStorage implements IStorage {
   private currentEntryId: number;
   private currentBookmarkId: number;
   private currentHistoryId: number;
+  private searchCache: Map<string, { results: DictionaryEntry[], timestamp: number }>;
+  private readonly CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
   constructor() {
     this.entries = new Map();
     this.bookmarksMap = new Map();
     this.searchHistoryMap = new Map();
+    this.searchCache = new Map();
     this.currentEntryId = 1;
     this.currentBookmarkId = 1;
     this.currentHistoryId = 1;
@@ -56,12 +59,23 @@ export class MemStorage implements IStorage {
   }
 
   async searchEntries(query: SearchQuery): Promise<DictionaryEntry[]> {
+    // Generate cache key
+    const cacheKey = JSON.stringify(query);
+    
+    // Check cache first
+    const cached = this.searchCache.get(cacheKey);
+    if (cached && Date.now() - cached.timestamp < this.CACHE_TTL) {
+      return cached.results;
+    }
+    
     const entries = Array.from(this.entries.values());
     
     // If no query provided but dictionary type is specified, return filtered results
     if (!query.query || query.query.trim() === "") {
       if (query.dictionaryType !== "all") {
-        return entries.filter(entry => entry.dictionaryType === query.dictionaryType).slice(0, 20);
+        const results = entries.filter(entry => entry.dictionaryType === query.dictionaryType).slice(0, 20);
+        this.searchCache.set(cacheKey, { results, timestamp: Date.now() });
+        return results;
       }
       return [];
     }
@@ -137,6 +151,21 @@ export class MemStorage implements IStorage {
       .sort((a, b) => b!.score - a!.score)
       .slice(0, 10)
       .map(item => item!.entry);
+
+    // Cache the results
+    this.searchCache.set(cacheKey, { results: scoredEntries, timestamp: Date.now() });
+    
+    // Cleanup old cache entries periodically
+    if (this.searchCache.size > 100) {
+      const cutoff = Date.now() - this.CACHE_TTL;
+      const entriesToDelete: string[] = [];
+      Array.from(this.searchCache.entries()).forEach(([key, value]) => {
+        if (value.timestamp < cutoff) {
+          entriesToDelete.push(key);
+        }
+      });
+      entriesToDelete.forEach(key => this.searchCache.delete(key));
+    }
 
     return scoredEntries;
   }
