@@ -386,7 +386,6 @@ export default function Dictionary() {
           </div>
         </div>
       </header>
-
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -401,7 +400,7 @@ export default function Dictionary() {
               <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
                 Professional Technical
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
-                  {" "}Glossaries{" "}
+                  {" "}Tetum  Glossaries {" "}
                 </span>
                 & Language Resources
               </h1>
@@ -410,17 +409,7 @@ export default function Dictionary() {
                 Specialized terminology and tools for healthcare, legal, educational, and linguistic professionals working with Tetum, Portuguese, and English.
               </p>
 
-              {/* Search Bar */}
-              <div className="relative max-w-2xl mb-8">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-6 w-6 text-gray-400" />
-                <Input
-                  type="text"
-                  placeholder="Search across all dictionaries..."
-                  value={globalSearch}
-                  onChange={(e) => handleGlobalSearch(e.target.value)}
-                  className="pl-12 py-4 text-lg bg-white border-0 focus:ring-2 focus:ring-green-500 rounded-xl shadow-lg"
-                />
-              </div>
+              
 
               {/* Stats */}
               <div className="flex items-center space-x-8 text-blue-100">
@@ -471,7 +460,6 @@ export default function Dictionary() {
           </div>
         </div>
       </section>
-
       {/* Main Content Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -532,7 +520,6 @@ export default function Dictionary() {
           </div>
         </div>
       </section>
-
       {/* Dialogs */}
       <Dialog open={showBookmarks} onOpenChange={setShowBookmarks}>
         <DialogContent className="p-0 max-w-md">
@@ -546,7 +533,6 @@ export default function Dictionary() {
           />
         </DialogContent>
       </Dialog>
-
       <Dialog open={showHistory} onOpenChange={setShowHistory}>
         <DialogContent className="max-w-md">
           <div className="p-6">
