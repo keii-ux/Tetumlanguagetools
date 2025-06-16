@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-800 via-blue-700 to-blue-900">
       {/* Header */}
-      <header className="bg-white/10 backdrop-blur-sm border-b border-white/20">
+      <header className="backdrop-blur-sm border-b border-white/20 bg-[#8badf07a]">
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
