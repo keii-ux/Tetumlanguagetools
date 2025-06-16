@@ -26,8 +26,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const medicalDictEnTtPath = path.resolve(process.cwd(), "medical_dic_en-tt.json");
       const medicalDictTtEnPath = path.resolve(process.cwd(), "medical-dic_tt_en.json");
       
-      const medicalDictEnTtData = JSON.parse(await fs.readFile(medicalDictEnTtPath, "utf-8"));
-      const medicalDictTtEnData = JSON.parse(await fs.readFile(medicalDictTtEnPath, "utf-8"));
+      // Parse medical dictionaries with error handling for complex JSON structure
+      let medicalDictEnTtData = [];
+      let medicalDictTtEnData = [];
+      
+      try {
+        const enTtContent = await fs.readFile(medicalDictEnTtPath, "utf-8");
+        // Handle complex JSON structure by extracting only the first array section
+        const firstArrayMatch = enTtContent.match(/\[(.*?)\]/s);
+        if (firstArrayMatch) {
+          medicalDictEnTtData = JSON.parse(`[${firstArrayMatch[1]}]`);
+        }
+      } catch (error) {
+        console.warn("Could not parse medical_dic_en-tt.json, skipping medical EN-TT entries");
+      }
+      
+      try {
+        medicalDictTtEnData = JSON.parse(await fs.readFile(medicalDictTtEnPath, "utf-8"));
+      } catch (error) {
+        console.warn("Could not parse medical-dic_tt_en.json, skipping medical TT-EN entries");
+      }
 
       // Process legal dictionary entries
       const legalEntries = legalDictData.map((item: any) => ({
