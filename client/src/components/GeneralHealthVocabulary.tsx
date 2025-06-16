@@ -147,7 +147,7 @@ export function GeneralHealthVocabulary() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Tetum to English Translation */}
         <Card>
-          <CardHeader>
+          <CardHeader className="bg-[#dfe8f0]">
             <CardTitle className="flex items-center space-x-2">
             </CardTitle>
           </CardHeader>
@@ -174,7 +174,7 @@ export function GeneralHealthVocabulary() {
 
         {/* English to Tetum Translation */}
         <Card>
-          <CardHeader>
+          <CardHeader className="bg-[#dfe8f0]">
             <CardTitle className="flex items-center space-x-2">
             </CardTitle>
           </CardHeader>
