@@ -68,45 +68,77 @@ export class MemStorage implements IStorage {
 
     const searchTerm = query.caseSensitive ? query.query.trim() : query.query.trim().toLowerCase();
     
-    return entries.filter(entry => {
-      // Filter by dictionary type
-      if (query.dictionaryType !== "all" && entry.dictionaryType !== query.dictionaryType) {
-        return false;
-      }
+    // Score and filter entries
+    const scoredEntries = entries
+      .map(entry => {
+        // Filter by dictionary type
+        if (query.dictionaryType !== "all" && entry.dictionaryType !== query.dictionaryType) {
+          return null;
+        }
 
-      // Language-specific search
-      const fields: string[] = [];
-      if (query.language === "all" || query.language === "tetum") {
-        if (entry.tetum && typeof entry.tetum === 'string') fields.push(entry.tetum);
-      }
-      if (query.language === "all" || query.language === "portuguese") {
-        if (entry.portuguese && typeof entry.portuguese === 'string') fields.push(entry.portuguese);
-      }
-      if (query.language === "all" || query.language === "english") {
-        if (entry.english && typeof entry.english === 'string') fields.push(entry.english);
-      }
+        // Language-specific search
+        const fields: string[] = [];
+        if (query.language === "all" || query.language === "tetum") {
+          if (entry.tetum && typeof entry.tetum === 'string') fields.push(entry.tetum);
+        }
+        if (query.language === "all" || query.language === "portuguese") {
+          if (entry.portuguese && typeof entry.portuguese === 'string') fields.push(entry.portuguese);
+        }
+        if (query.language === "all" || query.language === "english") {
+          if (entry.english && typeof entry.english === 'string') fields.push(entry.english);
+        }
 
-      // Include explanations if requested
-      if (query.includeDefinitions && entry.explanation && typeof entry.explanation === 'string') {
-        fields.push(entry.explanation);
-      }
+        // Include explanations if requested
+        if (query.includeDefinitions && entry.explanation && typeof entry.explanation === 'string') {
+          fields.push(entry.explanation);
+        }
 
-      // Improved search logic for predictive matching
-      return fields.some(field => {
-        if (!field) return false;
+        let bestScore = 0;
         
-        const fieldValue = query.caseSensitive ? field : field.toLowerCase();
-        
-        if (query.exactMatch) {
-          return fieldValue === searchTerm;
+        for (const field of fields) {
+          if (!field) continue;
+          
+          const fieldValue = query.caseSensitive ? field : field.toLowerCase();
+          
+          if (query.exactMatch) {
+            if (fieldValue === searchTerm) {
+              bestScore = Math.max(bestScore, 100);
+            }
+            continue;
+          }
+          
+          const words = fieldValue.split(/\s+/);
+          
+          // Exact full field match (highest priority)
+          if (fieldValue === searchTerm) {
+            bestScore = Math.max(bestScore, 95);
+          }
+          // Exact word match
+          else if (words.some(word => word === searchTerm)) {
+            bestScore = Math.max(bestScore, 90);
+          }
+          // Field starts with search term
+          else if (fieldValue.startsWith(searchTerm)) {
+            bestScore = Math.max(bestScore, 85);
+          }
+          // Word starts with search term
+          else if (words.some(word => word.startsWith(searchTerm))) {
+            bestScore = Math.max(bestScore, 80);
+          }
+          // Field contains search term
+          else if (fieldValue.includes(searchTerm)) {
+            bestScore = Math.max(bestScore, 70);
+          }
         }
         
-        // For predictive search, check if any word in the field starts with the search term
-        // This provides better matching for partial inputs like "médiku"
-        const words = fieldValue.split(/\s+/);
-        return words.some(word => word.startsWith(searchTerm)) || fieldValue.includes(searchTerm);
-      });
-    }).slice(0, 10); // Limit results for predictive search performance
+        return bestScore > 0 ? { entry, score: bestScore } : null;
+      })
+      .filter(item => item !== null)
+      .sort((a, b) => b!.score - a!.score)
+      .slice(0, 10)
+      .map(item => item!.entry);
+
+    return scoredEntries;
   }
 
   async createEntry(entry: InsertDictionaryEntry): Promise<DictionaryEntry> {
