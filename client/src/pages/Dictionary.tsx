@@ -398,11 +398,11 @@ export default function Dictionary() {
               </div>
               
               <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-                Professional Technical
+                Technical
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
-                  {" "}Tetum  Glossaries {" "}
+                  {" "}Tetum Glossaries{" "}
                 </span>
-                & Language Resources
+                & Dictionaries
               </h1>
               
               <p className="text-xl text-blue-100 mb-10 leading-relaxed max-w-lg">
