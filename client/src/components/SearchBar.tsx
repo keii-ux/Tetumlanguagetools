@@ -137,9 +137,7 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
           >
             <Search className="h-3 w-3" />
           </Button>
-          <div className="absolute top-0 right-0 px-2 py-1 text-xs text-blue-600 bg-blue-50 rounded-tr-lg rounded-bl">
-            Tetum
-          </div>
+          
         </div>
 
         {/* English Search */}
@@ -163,9 +161,7 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
           >
             <Search className="h-3 w-3" />
           </Button>
-          <div className="absolute top-0 right-0 px-2 py-1 text-xs text-blue-600 bg-blue-50 rounded-tr-lg rounded-bl">
-            English
-          </div>
+          
         </div>
       </div>
       
