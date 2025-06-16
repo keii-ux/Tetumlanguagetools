@@ -24,8 +24,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Load medical dictionaries
       const medicalDict1Path = path.resolve(process.cwd(), "attached_assets", "medical_dic_tt-en_.json");
-      const medicalDict2Path = path.resolve(process.cwd(), "attached_assets", "medical_dic_en-tt_.json");
-      const medicalDict3Path = path.resolve(process.cwd(), "attached_assets", "medical_dic_tt_en.json");
+      const medicalDict2Path = path.resolve(process.cwd(), "medical_dic_en-tt.json");
+      const medicalDict3Path = path.resolve(process.cwd(), "medical-dic_tt_en.json");
       
       const medicalDict1Data = JSON.parse(await fs.readFile(medicalDict1Path, "utf-8"));
       const medicalDict2Data = JSON.parse(await fs.readFile(medicalDict2Path, "utf-8"));
