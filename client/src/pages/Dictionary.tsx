@@ -125,8 +125,8 @@ export default function Dictionary() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header className="bg-white shadow-sm border-b border-blue-100">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center space-x-3">
@@ -143,7 +143,7 @@ export default function Dictionary() {
                 variant="outline"
                 size="sm"
                 onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
-                className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 border-gray-300"
+                className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 border-blue-200 bg-blue-50"
               >
                 <span>{LANGUAGE_OPTIONS.find(lang => lang.code === selectedLanguage)?.flag}</span>
                 <span className="hidden sm:inline">{LANGUAGE_OPTIONS.find(lang => lang.code === selectedLanguage)?.label}</span>
@@ -176,11 +176,11 @@ export default function Dictionary() {
         </div>
       </header>
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-8">
         {/* Title */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Medical Glossary</h1>
-          <p className="max-w-2xl mx-auto text-[#111112] font-normal text-[15px] pt-[14px] pb-[14px]">Comprehensive medical terminology in Tetum and English for professionals from academic checked literature, according to the INL standard.</p>
+        <div className="text-center mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">Medical Glossary</h1>
+          <p className="max-w-3xl mx-auto text-blue-700 font-normal text-base leading-relaxed px-4">Comprehensive medical terminology in Tetum and English for professionals from academic checked literature, according to the INL standard.</p>
         </div>
 
         
@@ -188,20 +188,20 @@ export default function Dictionary() {
         
 
         {/* Search Section */}
-        <div className="rounded-2xl shadow-lg p-8 mb-8 bg-[#dfe8f0]">
+        <div className="rounded-xl shadow-lg p-6 mb-8 bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200">
           <SearchBar onSearch={handleSearchQueryChange} initialQuery={query} />
         </div>
 
         {/* Results Section */}
         {selectedEntry && (
-          <div className="bg-white rounded-2xl shadow-lg p-8">
+          <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100">
             {/* Word Header */}
             <div className="flex items-center space-x-4 mb-6">
               <h2 className="text-3xl font-bold text-gray-900">{getDisplayTerm(selectedEntry)}</h2>
-              <Button variant="ghost" size="sm" className="text-gray-500 hover:text-gray-700">
+              <Button variant="ghost" size="sm" className="text-blue-500 hover:text-blue-700 hover:bg-blue-50">
                 <Volume2 className="w-5 h-5" />
               </Button>
-              <Button variant="ghost" size="sm" className="text-gray-500 hover:text-gray-700">
+              <Button variant="ghost" size="sm" className="text-blue-500 hover:text-blue-700 hover:bg-blue-50">
                 <Share2 className="w-5 h-5" />
               </Button>
             </div>

@@ -114,7 +114,7 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
         {/* Tetum Search */}
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="h-4 w-4 text-slate-400" />
+            <Search className="h-4 w-4 text-blue-400" />
           </div>
           <Input
             id="tetum-search"
@@ -122,9 +122,17 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
             placeholder="Search Tetum terms..."
             value={tetumSearchTerm}
             onChange={(e) => handleTetumSearch(e.target.value)}
-            className="block w-full pl-10 pr-16 py-2 border border-slate-300 rounded-lg bg-white text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
+            onKeyDown={(e) => e.key === 'Enter' && tetumSearchTerm && handleTetumSearch(tetumSearchTerm)}
+            className="block w-full pl-10 pr-20 py-3 border border-blue-200 rounded-lg bg-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
           />
-          <div className="absolute top-0 right-0 px-2 py-1 text-xs text-slate-500 bg-slate-100 rounded-tr-lg rounded-bl">
+          <Button
+            onClick={() => tetumSearchTerm && handleTetumSearch(tetumSearchTerm)}
+            size="sm"
+            className="absolute right-12 top-1/2 transform -translate-y-1/2 h-7 w-7 p-0 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
+          >
+            <Search className="h-3 w-3" />
+          </Button>
+          <div className="absolute top-0 right-0 px-2 py-1 text-xs text-blue-600 bg-blue-50 rounded-tr-lg rounded-bl">
             Tetum
           </div>
         </div>
@@ -132,7 +140,7 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
         {/* English Search */}
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="h-4 w-4 text-slate-400" />
+            <Search className="h-4 w-4 text-blue-400" />
           </div>
           <Input
             id="english-search"
@@ -140,9 +148,17 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
             placeholder="Search English terms..."
             value={englishSearchTerm}
             onChange={(e) => handleEnglishSearch(e.target.value)}
-            className="block w-full pl-10 pr-16 py-2 border border-slate-300 rounded-lg bg-white text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
+            onKeyDown={(e) => e.key === 'Enter' && englishSearchTerm && handleEnglishSearch(englishSearchTerm)}
+            className="block w-full pl-10 pr-20 py-3 border border-blue-200 rounded-lg bg-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
           />
-          <div className="absolute top-0 right-0 px-2 py-1 text-xs text-slate-500 bg-slate-100 rounded-tr-lg rounded-bl">
+          <Button
+            onClick={() => englishSearchTerm && handleEnglishSearch(englishSearchTerm)}
+            size="sm"
+            className="absolute right-12 top-1/2 transform -translate-y-1/2 h-7 w-7 p-0 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
+          >
+            <Search className="h-3 w-3" />
+          </Button>
+          <div className="absolute top-0 right-0 px-2 py-1 text-xs text-blue-600 bg-blue-50 rounded-tr-lg rounded-bl">
             English
           </div>
         </div>
