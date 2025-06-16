@@ -341,12 +341,11 @@ export default function Dictionary() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                </div>
-              </div>
-              <span className="text-xl font-bold text-gray-900">LianTek</span>
+              <img 
+                src="/liantek-logo.png" 
+                alt="LianTek" 
+                className="h-8 w-auto object-contain"
+              />
             </div>
 
             {/* Language Selector */}
