@@ -96,7 +96,7 @@ export default function Home() {
             </p>
 
             {/* Stats */}
-            <div className="flex items-center space-x-8">
+            <div className="flex items-center space-x-8 text-center text-[14px]">
               <div>
                 <div className="text-3xl font-bold text-white">{stats?.total || 1757}</div>
                 <div className="text-white/60 text-sm">Total Terms</div>
