@@ -97,7 +97,22 @@ export class MemStorage implements IStorage {
 
   async createEntry(entry: InsertDictionaryEntry): Promise<DictionaryEntry> {
     const id = this.currentEntryId++;
-    const newEntry: DictionaryEntry = { ...entry, id };
+    const newEntry: DictionaryEntry = { 
+      ...entry, 
+      id,
+      source: entry.source || null,
+      tetum: entry.tetum || null,
+      portuguese: entry.portuguese || null,
+      english: entry.english || null,
+      category: entry.category || null,
+      notes: entry.notes || null,
+      explanation: entry.explanation || null,
+      pronunciation: entry.pronunciation || null,
+      wordClass: entry.wordClass || null,
+      etymology: entry.etymology || null,
+      usageExamples: Array.isArray(entry.usageExamples) ? entry.usageExamples as string[] : null,
+      relatedTerms: Array.isArray(entry.relatedTerms) ? entry.relatedTerms as string[] : null,
+    };
     this.entries.set(id, newEntry);
     return newEntry;
   }
@@ -117,7 +132,11 @@ export class MemStorage implements IStorage {
 
   async createBookmark(bookmark: InsertBookmark): Promise<Bookmark> {
     const id = this.currentBookmarkId++;
-    const newBookmark: Bookmark = { ...bookmark, id };
+    const newBookmark: Bookmark = { 
+      ...bookmark, 
+      id,
+      entryId: bookmark.entryId || null,
+    };
     const key = `${bookmark.userId}-${bookmark.entryId}`;
     this.bookmarksMap.set(key, newBookmark);
     return newBookmark;
