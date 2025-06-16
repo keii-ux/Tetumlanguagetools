@@ -135,7 +135,7 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
             value={tetumSearchTerm}
             onChange={(e) => handleTetumSearch(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && tetumSearchTerm && handleTetumSearch(tetumSearchTerm)}
-            className="block w-full pl-10 pr-20 py-3 border border-blue-200 rounded-lg bg-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
+            className="block w-full pl-10 pr-10 py-3 border border-blue-200 rounded-lg bg-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
           />
           <Button
             onClick={() => tetumSearchTerm && handleTetumSearch(tetumSearchTerm)}
@@ -159,12 +159,12 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
             value={englishSearchTerm}
             onChange={(e) => handleEnglishSearch(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && englishSearchTerm && handleEnglishSearch(englishSearchTerm)}
-            className="block w-full pl-10 pr-20 py-3 border border-blue-200 rounded-lg bg-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
+            className="block w-full pl-10 pr-10 py-3 border border-blue-200 rounded-lg bg-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
           />
           <Button
             onClick={() => englishSearchTerm && handleEnglishSearch(englishSearchTerm)}
             size="sm"
-            className="absolute right-12 top-1/2 transform -translate-y-1/2 h-7 w-7 p-0 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 h-7 w-7 p-0 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
           >
             <Search className="h-3 w-3" />
           </Button>
