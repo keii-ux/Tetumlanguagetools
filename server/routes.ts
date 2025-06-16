@@ -22,14 +22,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const generalDictPath = path.resolve(process.cwd(), "attached_assets", "legal dic tt copy_1750040265136.json");
       const generalDictData = JSON.parse(await fs.readFile(generalDictPath, "utf-8"));
       
-      // Load medical dictionaries
-      const medicalDict1Path = path.resolve(process.cwd(), "attached_assets", "medical_dic_tt-en_.json");
-      const medicalDict2Path = path.resolve(process.cwd(), "medical_dic_en-tt.json");
-      const medicalDict3Path = path.resolve(process.cwd(), "medical-dic_tt_en.json");
+      // Load additional dictionaries
+      const portugueseGlossaryPath = path.resolve(process.cwd(), "attached_assets", "glos juridico pt_1750040233711.json");
+      const generalTetumDictPath = path.resolve(process.cwd(), "attached_assets", "inl_tt_dic_final_1750040241832.json");
       
-      const medicalDict1Data = JSON.parse(await fs.readFile(medicalDict1Path, "utf-8"));
-      const medicalDict2Data = JSON.parse(await fs.readFile(medicalDict2Path, "utf-8"));
-      const medicalDict3Data = JSON.parse(await fs.readFile(medicalDict3Path, "utf-8"));
+      const portugueseGlossaryData = JSON.parse(await fs.readFile(portugueseGlossaryPath, "utf-8"));
+      const generalTetumDictData = JSON.parse(await fs.readFile(generalTetumDictPath, "utf-8"));
 
       // Process legal dictionary entries
       const legalEntries = legalDictData.map((item: any) => ({
@@ -82,32 +80,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Process medical dictionary entries from multiple sources
-      const medicalEntries1 = medicalDict1Data.map((item: any) => ({
-        tetum: item.term || "",
-        portuguese: "",
-        english: item.translation || "",
-        source: item.source || "Medical Dictionary TT-EN",
-        category: "medical",
-        dictionaryType: "medical",
-        notes: item.usage || "",
-        explanation: "",
-        pronunciation: "",
-        wordClass: "",
-        etymology: "",
-        usageExamples: [],
-        relatedTerms: item.similar ? [item.similar] : [],
-      }));
-
-      const medicalEntries2 = medicalDict2Data.map((item: any) => ({
-        tetum: item.tetum || "",
-        portuguese: item.portuguese || "",
-        english: item.english || "",
-        source: item.source || "Medical Dictionary EN-TT",
-        category: item.category || "medical",
-        dictionaryType: "medical",
+      // Process Portuguese glossary entries
+      const portugueseGlossaryEntries = portugueseGlossaryData.map((item: any) => ({
+        tetum: "",
+        portuguese: item.termo || "",
+        english: "",
+        source: "Glossário Jurídico Português",
+        category: "legal",
+        dictionaryType: "legal",
         notes: "",
-        explanation: "",
+        explanation: item.significado || "",
         pronunciation: "",
         wordClass: "",
         etymology: "",
@@ -115,28 +97,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      const medicalEntries3 = medicalDict3Data.map((item: any) => ({
-        tetum: item.tetum || "",
-        portuguese: item.portuguese || "",
-        english: item.english || "",
-        source: item.source || "Medical Dictionary TT-EN",
-        category: item.category || "medical",
-        dictionaryType: "medical",
-        notes: "",
-        explanation: "",
-        pronunciation: "",
-        wordClass: "",
-        etymology: "",
-        usageExamples: [],
-        relatedTerms: [],
-      }));
+      // Process general Tetum dictionary entries
+      const generalTetumEntries = generalTetumDictData
+        .filter((item: any) => item.word) // Filter out empty entries
+        .map((item: any) => ({
+          tetum: item.word || "",
+          portuguese: "",
+          english: "",
+          source: "Dicionário Tetum Geral",
+          category: "general",
+          dictionaryType: "general",
+          notes: "",
+          explanation: item.meaning || "",
+          pronunciation: "",
+          wordClass: item.class || "",
+          etymology: "",
+          usageExamples: [],
+          relatedTerms: [],
+        }));
 
-      const allMedicalEntries = [...medicalEntries1, ...medicalEntries2, ...medicalEntries3];
+      const allAdditionalEntries = [...portugueseGlossaryEntries, ...generalTetumEntries];
 
       // Bulk insert all entries
-      await storage.bulkCreateEntries([...legalEntries, ...glossaryEntries, ...generalEntries, ...allMedicalEntries]);
+      await storage.bulkCreateEntries([...legalEntries, ...glossaryEntries, ...generalEntries, ...allAdditionalEntries]);
       
-      console.log(`Loaded ${legalEntries.length + glossaryEntries.length + generalEntries.length + allMedicalEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + glossaryEntries.length + generalEntries.length + allAdditionalEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
