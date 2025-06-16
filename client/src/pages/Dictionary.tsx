@@ -10,7 +10,7 @@ import {
   Menu,
   Home
 } from "lucide-react";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 import { useSearchEntries, useDictionaryStats } from "@/lib/search";
 import { SearchQuery, DictionaryEntry } from "@shared/schema";
 import { buildSearchQuery } from "@/lib/dictionaries";
@@ -133,18 +133,12 @@ export default function Dictionary() {
           <div className="flex items-center justify-between h-16">
             {/* Logo and Home Button */}
             <div className="flex items-center space-x-3">
-              <a
-                href="https://replit.com/@freethekindle/LianTek-Pro-Tools"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-9 rounded-md px-3 flex items-center space-x-2 text-[#0f0f0f] hover:text-blue-700 hover:bg-blue-50"
-                title="Return to LianTek Pro Tools"
-              >
-                <Home className="h-5 w-5" />
-              </a>
-              <img 
-                src="/liantek-logo.png" 
-                alt="LianTek" 
-                className="h-10 w-auto object-contain"
-              />
+              <Link href="/">
+                <div className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity">
+                  <Home className="h-8 w-8 text-blue-600" />
+                  <span className="text-xl font-bold text-gray-900">LianTek Pro Tools</span>
+                </div>
+              </Link>
             </div>
 
             {/* Language Selector */}
