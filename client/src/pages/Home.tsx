@@ -11,6 +11,7 @@ import {
   Globe
 } from "lucide-react";
 import { useDictionaryStats } from "@/lib/search";
+import logoTransp from "@assets/logo transp_1750045871999.png";
 
 // Language options for website interface
 const LANGUAGE_OPTIONS = [
@@ -32,9 +33,11 @@ export default function Home() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                <span className="text-blue-800 font-bold text-xl">L</span>
-              </div>
+              <img 
+                src={logoTransp} 
+                alt="LianTek Logo" 
+                className="w-10 h-10 object-contain"
+              />
               <span className="text-white font-medium">LianTek</span>
             </div>
 
