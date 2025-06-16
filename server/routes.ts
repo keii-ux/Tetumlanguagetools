@@ -21,6 +21,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Load general dictionary
       const generalDictPath = path.resolve(process.cwd(), "attached_assets", "legal dic tt copy_1750040265136.json");
       const generalDictData = JSON.parse(await fs.readFile(generalDictPath, "utf-8"));
+      
+      // Load medical dictionary
+      const medicalDictPath = path.resolve(process.cwd(), "server", "data", "medical-dictionary.json");
+      const medicalDictData = JSON.parse(await fs.readFile(medicalDictPath, "utf-8"));
 
       // Process legal dictionary entries
       const legalEntries = legalDictData.map((item: any) => ({
@@ -73,10 +77,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
+      // Process medical dictionary entries
+      const medicalEntries = medicalDictData.map((item: any) => ({
+        tetum: item.tetum || "",
+        portuguese: item.portuguese || "",
+        english: item.english || "",
+        source: item.source || "Medical Dictionary",
+        category: item.category || "medical",
+        dictionaryType: "medical",
+        notes: item.notes || "",
+        explanation: item.explanation || "",
+        pronunciation: item.pronunciation || "",
+        wordClass: item.wordClass || "",
+        etymology: item.etymology || "",
+        usageExamples: item.usageExamples || [],
+        relatedTerms: item.relatedTerms || [],
+      }));
+
       // Bulk insert all entries
-      await storage.bulkCreateEntries([...legalEntries, ...glossaryEntries, ...generalEntries]);
+      await storage.bulkCreateEntries([...legalEntries, ...glossaryEntries, ...generalEntries, ...medicalEntries]);
       
-      console.log(`Loaded ${legalEntries.length + glossaryEntries.length + generalEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + glossaryEntries.length + generalEntries.length + medicalEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
