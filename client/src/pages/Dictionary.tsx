@@ -454,6 +454,10 @@ export default function Dictionary() {
                     <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
                     <span className="text-sm font-medium">Professional Reference Tools</span>
                   </div>
+                  <div className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
+                    <div className="w-3 h-3 bg-orange-400 rounded-full"></div>
+                    <span className="text-sm font-medium">ASEAN Professional Glossary</span>
+                  </div>
                 </div>
               </div>
             </div>
