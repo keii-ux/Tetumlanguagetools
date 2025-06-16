@@ -63,7 +63,10 @@ Respond in JSON format:
       temperature: 0.1, // Low temperature for accuracy
     });
 
-    const result = JSON.parse(response.choices[0].message.content || "{}");
+    // Clean the response content to remove control characters that cause JSON parsing errors
+    const rawContent = response.choices[0].message.content || "{}";
+    const cleanContent = rawContent.replace(/[\x00-\x1F\x7F-\x9F]/g, "");
+    const result = JSON.parse(cleanContent);
     
     return {
       term: result.term || term,

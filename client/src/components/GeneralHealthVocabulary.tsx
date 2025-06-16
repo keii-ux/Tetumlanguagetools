@@ -109,7 +109,7 @@ export function GeneralHealthVocabulary() {
           </div>
         )}
 
-        {result.relatedTerms.length > 0 && (
+        {result.relatedTerms && result.relatedTerms.length > 0 && (
           <div className="bg-gray-50 rounded-lg p-4">
             <div className="flex items-center space-x-2 mb-2">
               <span className="font-semibold text-gray-900">Related Terms</span>
