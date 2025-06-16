@@ -34,14 +34,11 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center space-x-3">
-              <img 
-                src={logo_transp} 
-                alt="LianTek Logo" 
-                className="w-10 h-10 object-contain ml-[25px] mr-[25px] mt-[20px] mb-[20px] pl-[15px] pr-[15px] pt-[12px] pb-[12px]"
-              />
-              <span className="text-white font-medium">LianTek</span>
-            </div>
+            <img 
+              src={logoTransp} 
+              alt="LianTek Logo" 
+              className="h-12 object-contain"
+            />
 
             {/* Language Selector */}
             <div className="relative">
