@@ -344,7 +344,7 @@ export default function Dictionary() {
               <img 
                 src="/liantek-logo.png" 
                 alt="LianTek" 
-                className="h-8 w-auto object-contain"
+                className="h-10 w-auto object-contain"
               />
             </div>
 
