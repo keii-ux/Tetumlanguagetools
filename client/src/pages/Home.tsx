@@ -76,17 +76,12 @@ export default function Home() {
           </div>
         </div>
       </header>
-
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
         <div className="flex flex-col lg:flex-row items-start gap-12">
           {/* Left Side - Hero Content */}
           <div className="flex-1">
-            {/* Professional Tools Badge */}
-            <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-8">
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              <span className="text-white/90 text-sm">Professional Tools</span>
-            </div>
+            
 
             {/* Main Heading */}
             <h1 className="text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
@@ -119,7 +114,7 @@ export default function Home() {
 
           {/* Right Side - Tools Panel */}
           <div className="flex-1 max-w-md">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 text-[23px] pl-[31px] pr-[31px] pt-[40px] pb-[40px] font-normal text-left">
               {/* Panel Header */}
               <div className="flex items-center space-x-3 mb-6">
                 <div className="w-10 h-10 bg-green-400 rounded-lg flex items-center justify-center">
@@ -158,7 +153,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       {/* Bottom Section - Tool Selection */}
       <div className="bg-white">
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
