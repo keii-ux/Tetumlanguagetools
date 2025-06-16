@@ -460,7 +460,7 @@ export default function Dictionary() {
                   </div>
                   <div className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
                     <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                    <span className="text-sm font-medium">Educational Language Resources</span>
+                    <span className="text-sm font-medium">AI-Powered Language Resources</span>
                   </div>
                 </div>
               </div>
