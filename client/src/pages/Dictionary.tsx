@@ -436,7 +436,7 @@ export default function Dictionary() {
                     <Languages className="w-7 h-7 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold">Multi-Language Dictionary System</h3>
+                    <h3 className="text-xl font-bold">All-in-one multilingual language tools</h3>
                     <p className="text-blue-100 text-sm">Professional Terminology</p>
                   </div>
                 </div>
