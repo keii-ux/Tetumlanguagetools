@@ -10,17 +10,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize dictionary data from JSON files
   async function initializeDictionaries() {
     try {
-      // Load legal dictionary
-      const legalDictPath = path.resolve(process.cwd(), "attached_assets", "legal dic tt_1750040265133.json");
-      const legalDictData = JSON.parse(await fs.readFile(legalDictPath, "utf-8"));
-      
-      // Load legal glossary
-      const legalGlossaryPath = path.resolve(process.cwd(), "attached_assets", "legal tetum glossay_1750040265136.json");
-      const legalGlossaryData = JSON.parse(await fs.readFile(legalGlossaryPath, "utf-8"));
-      
-      // Load general dictionary
-      const generalDictPath = path.resolve(process.cwd(), "attached_assets", "legal dic tt copy_1750040265136.json");
-      const generalDictData = JSON.parse(await fs.readFile(generalDictPath, "utf-8"));
       
       // Load medical dictionaries
       const medicalDictEnTtPath = path.resolve(process.cwd(), "medical_dic_en-tt.json");
@@ -33,7 +22,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       try {
         const enTtContent = await fs.readFile(medicalDictEnTtPath, "utf-8");
         // Handle complex JSON structure by extracting only the first array section
-        const firstArrayMatch = enTtContent.match(/\[(.*?)\]/s);
+        const firstArrayMatch = enTtContent.match(/\[([\s\S]*?)\]/);
         if (firstArrayMatch) {
           medicalDictEnTtData = JSON.parse(`[${firstArrayMatch[1]}]`);
         }
@@ -47,56 +36,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.warn("Could not parse medical-dic_tt_en.json, skipping medical TT-EN entries");
       }
 
-      // Process legal dictionary entries
-      const legalEntries = legalDictData.map((item: any) => ({
-        tetum: item.tetum || "",
-        portuguese: item.portuguese || "",
-        english: item.english || "",
-        source: item.source || "",
-        category: "legal",
-        dictionaryType: "legal",
-        notes: item.notes || "",
-        explanation: "",
-        pronunciation: "",
-        wordClass: "",
-        etymology: "",
-        usageExamples: [],
-        relatedTerms: [],
-      }));
 
-      // Process legal glossary entries
-      const glossaryEntries = legalGlossaryData.map((item: any) => ({
-        tetum: item.tetum_term || "",
-        portuguese: "",
-        english: "",
-        source: item.source || "Legal Dictionary",
-        category: "legal",
-        dictionaryType: "legal",
-        notes: "",
-        explanation: item.tetum_explanation || "",
-        pronunciation: "",
-        wordClass: "",
-        etymology: "",
-        usageExamples: [],
-        relatedTerms: [],
-      }));
-
-      // Process general dictionary entries
-      const generalEntries = generalDictData.map((item: any) => ({
-        tetum: item.tetum || "",
-        portuguese: item.portuguese || "",
-        english: item.english || "",
-        source: item.source || "",
-        category: "general",
-        dictionaryType: "general",
-        notes: item.notes || "",
-        explanation: "",
-        pronunciation: "",
-        wordClass: "",
-        etymology: "",
-        usageExamples: [],
-        relatedTerms: [],
-      }));
 
       // Process medical dictionary entries (English to Tetum)
       const medicalEntriesEnTt = medicalDictEnTtData.map((item: any) => ({
@@ -134,10 +74,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const allMedicalEntries = [...medicalEntriesEnTt, ...medicalEntriesTtEn];
 
-      // Bulk insert all entries
-      await storage.bulkCreateEntries([...legalEntries, ...glossaryEntries, ...generalEntries, ...allMedicalEntries]);
+      // Bulk insert medical entries only
+      await storage.bulkCreateEntries(allMedicalEntries);
       
-      console.log(`Loaded ${legalEntries.length + glossaryEntries.length + generalEntries.length + allMedicalEntries.length} dictionary entries`);
+      console.log(`Loaded ${allMedicalEntries.length} medical dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
