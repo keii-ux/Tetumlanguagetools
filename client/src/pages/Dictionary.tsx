@@ -189,7 +189,13 @@ export default function Dictionary() {
 
         {/* Search Section */}
         <div className="rounded-xl shadow-lg p-6 bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 pl-[24px] pr-[24px] mt-[59px] mb-[59px] pt-[47px] pb-[47px]">
-          <SearchBar onSearch={handleSearchQueryChange} initialQuery={query} />
+          <SearchBar 
+            onSearch={handleSearchQueryChange} 
+            initialQuery={query}
+            searchResults={searchResults}
+            isLoading={isLoading}
+            onEntrySelect={setSelectedEntry}
+          />
         </div>
 
 

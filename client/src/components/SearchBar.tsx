@@ -132,6 +132,40 @@ export function SearchBar({ onSearch, initialQuery, searchResults = [], isLoadin
     });
   }, []);
 
+  // Handle entry selection from dropdown
+  const handleEntrySelect = (entry: DictionaryEntry) => {
+    const term = entry.tetum || entry.english || "";
+    if (showTetumDropdown) {
+      setTetumSearchTerm(term);
+    } else if (showEnglishDropdown) {
+      setEnglishSearchTerm(term);
+    }
+    setShowTetumDropdown(false);
+    setShowEnglishDropdown(false);
+    if (onEntrySelect) {
+      onEntrySelect(entry);
+    }
+  };
+
+  // Filter results based on active search
+  const getFilteredResults = () => {
+    if (!activeTerm || activeTerm.length === 0) return [];
+    return searchResults.slice(0, 6); // Limit to 6 results for dropdown
+  };
+
+  // Get display term for entry
+  const getDisplayTerm = (entry: DictionaryEntry) => {
+    return entry.tetum || entry.english || entry.portuguese || "Unknown";
+  };
+
+  // Get definition text for entry
+  const getDefinitionText = (entry: DictionaryEntry) => {
+    if (entry.english && entry.tetum) {
+      return showTetumDropdown ? entry.english : entry.tetum;
+    }
+    return entry.explanation || entry.english || entry.tetum || entry.portuguese || "";
+  };
+
   return (
     <div className="flex-1 max-w-4xl mx-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -157,6 +191,34 @@ export function SearchBar({ onSearch, initialQuery, searchResults = [], isLoadin
             <Search className="h-3 w-3" />
           </Button>
           
+          {/* Tetum Predictive Dropdown */}
+          {showTetumDropdown && getFilteredResults().length > 0 && (
+            <div className="absolute top-full left-0 right-0 z-50 bg-white border border-blue-200 rounded-lg shadow-lg mt-1 max-h-60 overflow-y-auto">
+              {isLoading ? (
+                <div className="p-3 text-center text-gray-500">
+                  <div className="animate-pulse">Searching...</div>
+                </div>
+              ) : (
+                getFilteredResults().map((entry) => (
+                  <div
+                    key={entry.id}
+                    onClick={() => handleEntrySelect(entry)}
+                    className="p-3 hover:bg-blue-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+                  >
+                    <div className="font-semibold text-blue-900 text-sm">
+                      {getDisplayTerm(entry)}
+                    </div>
+                    <div className="text-xs text-gray-600 mt-1 line-clamp-1">
+                      {getDefinitionText(entry)}
+                    </div>
+                    <div className="text-xs text-blue-600 mt-1">
+                      {entry.source} • {entry.category}
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          )}
         </div>
 
         {/* English Search */}
@@ -181,6 +243,34 @@ export function SearchBar({ onSearch, initialQuery, searchResults = [], isLoadin
             <Search className="h-3 w-3" />
           </Button>
           
+          {/* English Predictive Dropdown */}
+          {showEnglishDropdown && getFilteredResults().length > 0 && (
+            <div className="absolute top-full left-0 right-0 z-50 bg-white border border-blue-200 rounded-lg shadow-lg mt-1 max-h-60 overflow-y-auto">
+              {isLoading ? (
+                <div className="p-3 text-center text-gray-500">
+                  <div className="animate-pulse">Searching...</div>
+                </div>
+              ) : (
+                getFilteredResults().map((entry) => (
+                  <div
+                    key={entry.id}
+                    onClick={() => handleEntrySelect(entry)}
+                    className="p-3 hover:bg-blue-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+                  >
+                    <div className="font-semibold text-blue-900 text-sm">
+                      {getDisplayTerm(entry)}
+                    </div>
+                    <div className="text-xs text-gray-600 mt-1 line-clamp-1">
+                      {getDefinitionText(entry)}
+                    </div>
+                    <div className="text-xs text-blue-600 mt-1">
+                      {entry.source} • {entry.category}
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          )}
         </div>
       </div>
       
