@@ -7,6 +7,7 @@ import Dictionary from "@/pages/Dictionary";
 import MedicalDictionaryModule from "@/pages/MedicalDictionaryModule";
 import LegalDictionaryModule from "@/pages/LegalDictionaryModule";
 import TetumGlossaryModule from "@/pages/TetumGlossaryModule";
+import PortugueseGlossaryModule from "@/pages/PortugueseGlossaryModule";
 import TetumMonolingualModule from "@/pages/TetumMonolingualModule";
 import INLTetumDictionaryModule from "@/pages/INLTetumDictionaryModule";
 import NotFound from "@/pages/not-found";
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/medical-dictionary" component={MedicalDictionaryModule} />
       <Route path="/legal-dictionary" component={LegalDictionaryModule} />
       <Route path="/tetum-glossary" component={TetumGlossaryModule} />
+      <Route path="/portuguese-glossary" component={PortugueseGlossaryModule} />
       <Route path="/tetum-monolingual" component={TetumMonolingualModule} />
       <Route path="/inl-tetum-dictionary" component={INLTetumDictionaryModule} />
       <Route component={NotFound} />

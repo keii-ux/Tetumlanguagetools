@@ -107,6 +107,16 @@ const TOOL_CARDS = [
     iconColor: "text-indigo-500",
   },
   {
+    id: "portuguese-glossary",
+    title: "Portuguese Legal Glossary",
+    category: "Legal Reference",
+    description: "Portuguese legal terminology with clear definitions and explanations",
+    icon: Book,
+    color: "bg-purple-500",
+    bgColor: "bg-purple-50",
+    iconColor: "text-purple-500",
+  },
+  {
     id: "general",
     title: "Portuguese-English Dictionary", 
     category: "Translation",
@@ -592,6 +602,24 @@ export default function Dictionary() {
                               >
                                 <BookOpen className="w-3 h-3 mr-2" />
                                 Full Tetum Glossary
+                              </Button>
+                            </Link>
+                          </div>
+                        )}
+
+                        {tool.id === "portuguese-glossary" && (
+                          <div className="mt-4 pt-4 border-t border-gray-100">
+                            <Link href="/portuguese-glossary">
+                              <Button 
+                                variant="outline" 
+                                size="sm" 
+                                className="w-full text-xs bg-purple-50 border-purple-200 text-purple-700 hover:bg-purple-100"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                }}
+                              >
+                                <BookOpen className="w-3 h-3 mr-2" />
+                                Full Portuguese Glossary
                               </Button>
                             </Link>
                           </div>
