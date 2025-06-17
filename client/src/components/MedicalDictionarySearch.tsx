@@ -17,6 +17,7 @@ interface PredictiveDropdownProps {
   onSelect: (entry: DictionaryEntry) => void;
   onClose: () => void;
   isVisible: boolean;
+  activeLanguage: "tetum" | "english" | "both";
 }
 
 function PredictiveDropdown({ 
@@ -24,26 +25,38 @@ function PredictiveDropdown({
   entries, 
   onSelect, 
   onClose, 
-  isVisible 
+  isVisible,
+  activeLanguage 
 }: PredictiveDropdownProps) {
   if (!isVisible || !searchTerm || entries.length === 0) return null;
 
   const filteredEntries = entries
     .filter(entry => {
-      const searchField = entry.tetum || entry.english;
-      return searchField && searchField.toLowerCase().includes(searchTerm.toLowerCase());
+      // Search in both English and Tetum fields
+      const tetumField = entry.tetum || "";
+      const englishField = entry.english || "";
+      const searchLower = searchTerm.toLowerCase();
+      
+      return tetumField.toLowerCase().includes(searchLower) || 
+             englishField.toLowerCase().includes(searchLower);
     })
     .sort((a, b) => {
-      const aField = a.tetum || a.english;
-      const bField = b.tetum || b.english;
+      // Prioritize exact matches at the beginning of words
+      const searchLower = searchTerm.toLowerCase();
       
-      const aStartsWith = aField?.toLowerCase().startsWith(searchTerm.toLowerCase());
-      const bStartsWith = bField?.toLowerCase().startsWith(searchTerm.toLowerCase());
+      const aFields = [a.english || "", a.tetum || ""];
+      const bFields = [b.english || "", b.tetum || ""];
+      
+      const aStartsWith = aFields.some(field => field.toLowerCase().startsWith(searchLower));
+      const bStartsWith = bFields.some(field => field.toLowerCase().startsWith(searchLower));
       
       if (aStartsWith && !bStartsWith) return -1;
       if (!aStartsWith && bStartsWith) return 1;
       
-      return (aField || "").localeCompare(bField || "");
+      // Secondary sort by alphabetical order
+      const aDisplay = a.english || a.tetum || "";
+      const bDisplay = b.english || b.tetum || "";
+      return aDisplay.localeCompare(bDisplay);
     })
     .slice(0, 8);
 
@@ -51,8 +64,15 @@ function PredictiveDropdown({
     <Card className="absolute top-full left-0 right-0 z-50 mt-1 max-h-64 overflow-auto border-gray-200 shadow-lg bg-white">
       <CardContent className="p-0">
         {filteredEntries.map((entry, index) => {
-          const displayTerm = entry.tetum || entry.english;
-          const translation = entry.english || entry.tetum;
+          // Display term based on active language
+          const displayTerm = activeLanguage === "english" 
+            ? (entry.english || entry.tetum)
+            : (entry.tetum || entry.english);
+          
+          // Translation based on active language
+          const translation = activeLanguage === "english"
+            ? (entry.tetum || "No translation available")
+            : (entry.english || entry.portuguese || "No translation available");
           
           return (
             <div
@@ -247,6 +267,7 @@ export function MedicalDictionarySearch({ onEntrySelect }: MedicalDictionarySear
                   onSelect={handleEntrySelect}
                   onClose={() => setShowPredictive(false)}
                   isVisible={showPredictive}
+                  activeLanguage={activeLanguage}
                 />
               </div>
             </div>
