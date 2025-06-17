@@ -30,7 +30,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       try {
         let fileContent = await fs.readFile(medicalEnTetumPath, "utf-8");
         
-        // Fix JSON structure if needed - ensure it's a proper array
+        // Fix JSON structure - the file appears to be missing array brackets
         if (!fileContent.trim().startsWith('[')) {
           fileContent = '[' + fileContent;
         }
@@ -38,14 +38,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
           fileContent = fileContent + ']';
         }
         
-        // Clean up any trailing commas before closing brackets
+        // Clean up any trailing commas and fix structural issues
         fileContent = fileContent.replace(/,(\s*[}\]])/g, '$1');
         
         medicalEnTetumData = JSON.parse(fileContent);
         console.log(`Medical English-Tetum dictionary loaded successfully with ${medicalEnTetumData.length} entries`);
-      } catch (error) {
-        console.warn("Medical English-Tetum dictionary not found or malformed:", error);
-        medicalEnTetumData = [];
+      } catch (parseError) {
+        console.warn("Medical dictionary parsing failed, attempting recovery:", parseError);
+        
+        // Fallback: Extract individual JSON objects and reconstruct array
+        try {
+          let fileContent = await fs.readFile(medicalEnTetumPath, "utf-8");
+          
+          // Extract individual medical term objects
+          const objectMatches = fileContent.match(/\{[^{}]*"english"[^{}]*"tetum"[^{}]*\}/g);
+          if (objectMatches) {
+            const cleanedObjects = objectMatches.map(obj => {
+              try {
+                return JSON.parse(obj);
+              } catch {
+                return null;
+              }
+            }).filter(obj => obj !== null);
+            
+            medicalEnTetumData = cleanedObjects;
+            console.log(`Medical dictionary recovered ${medicalEnTetumData.length} entries from malformed file`);
+          }
+        } catch (recoveryError) {
+          console.error("Medical dictionary recovery failed:", recoveryError);
+          medicalEnTetumData = [];
+        }
       }
       
       // Load INL Tetum dictionary from the new JSON file
