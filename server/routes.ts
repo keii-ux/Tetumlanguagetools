@@ -22,7 +22,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize dictionary data from JSON files
   async function initializeDictionaries() {
     try {
-      // Load medical dictionaries
+      // Load MEDICAL dictionaries - Only medical terms
       const medicalTetumEnPath = path.resolve(process.cwd(), "attached_assets", "medical-dic_tt_en_1750136885930.json");
       const medicalEnTetumPath = path.resolve(process.cwd(), "attached_assets", "medical_dic_en-tt_1750136885932.json");
       
@@ -31,6 +31,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       try {
         medicalTetumEnData = JSON.parse(await fs.readFile(medicalTetumEnPath, "utf-8"));
+        console.log(`Medical Tetum-English dictionary loaded successfully with ${medicalTetumEnData.length} entries`);
       } catch (error) {
         console.warn("Medical Tetum-English dictionary not found");
       }
@@ -265,10 +266,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Bulk insert all entries (excluding additional legal terms as requested)
-      await storage.bulkCreateEntries([...legalEntries, ...tetumGlossaryEntries, ...portugueseGlossaryEntries, ...inlTetumEntries, ...medicalTetumEntries, ...medicalEnEntries, ...generalEntries, ...tetumMonolingualEntries]);
+      // Bulk insert all entries with proper separation
+      await storage.bulkCreateEntries([
+        ...legalEntries,           // Legal module only
+        ...tetumGlossaryEntries,   // Legal module only
+        ...portugueseGlossaryEntries, // Legal module only
+        ...additionalLegalEntries, // Legal module only
+        ...medicalTetumEntries,    // Medical module only
+        ...medicalEnEntries,       // Medical module only
+        ...tetumMonolingualEntries // Tetum monolingual module only
+      ]);
       
-      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + inlTetumEntries.length + medicalTetumEntries.length + medicalEnEntries.length + generalEntries.length + tetumMonolingualEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + additionalLegalEntries.length + medicalTetumEntries.length + medicalEnEntries.length + tetumMonolingualEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
