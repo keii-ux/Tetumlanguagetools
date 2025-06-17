@@ -178,7 +178,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const results = await storage.searchEntries(searchQuery);
       res.json(results);
     } catch (error) {
-      res.status(400).json({ error: "Invalid search parameters" });
+      console.error("Search error:", error);
+      if (error instanceof Error) {
+        res.status(400).json({ error: error.message });
+      } else {
+        res.status(400).json({ error: "Invalid search parameters" });
+      }
     }
   });
 
@@ -188,6 +193,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const entries = await storage.getAllEntries();
       res.json(entries);
     } catch (error) {
+      console.error("Get all entries error:", error);
       res.status(500).json({ error: "Failed to fetch entries" });
     }
   });
@@ -196,12 +202,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/entries/:id", async (req, res) => {
     try {
       const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ error: "Invalid entry ID" });
+      }
       const entry = await storage.getEntryById(id);
       if (!entry) {
         return res.status(404).json({ error: "Entry not found" });
       }
       res.json(entry);
     } catch (error) {
+      console.error("Get entry by ID error:", error);
       res.status(500).json({ error: "Failed to fetch entry" });
     }
   });

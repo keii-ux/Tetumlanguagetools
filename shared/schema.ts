@@ -46,7 +46,7 @@ export type InsertSearchHistory = z.infer<typeof insertSearchHistorySchema>;
 
 // Search and filter types
 export const searchQuerySchema = z.object({
-  query: z.string().optional(),
+  query: z.string().optional().default(""),
   dictionaryType: z.enum(["all", "legal", "medical", "general", "asean"]).default("all"),
   language: z.enum(["all", "tetum", "portuguese", "english"]).default("all"),
   exactMatch: z.boolean().default(false),

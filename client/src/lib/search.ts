@@ -7,14 +7,14 @@ export function useSearchEntries(searchQuery: SearchQuery) {
   const queryParams = new URLSearchParams();
   
   Object.entries(searchQuery).forEach(([key, value]) => {
-    if (value !== undefined && value !== null) {
+    if (value !== undefined && value !== null && value !== "") {
       queryParams.append(key, String(value));
     }
   });
 
   return useQuery<DictionaryEntry[]>({
     queryKey: ["/api/search", queryParams.toString()],
-    enabled: !!searchQuery.query || searchQuery.dictionaryType !== "all",
+    enabled: !!searchQuery.query?.trim() || searchQuery.dictionaryType !== "all",
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 }
