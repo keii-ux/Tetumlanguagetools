@@ -55,11 +55,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Load Tetum Monolingual dictionary
       let tetumMonolingualData: any[] = [];
       try {
-        const tetumMonoPath = path.resolve(process.cwd(), "attached_assets", "tetum_monolingual_sample.json");
-        tetumMonolingualData = JSON.parse(await fs.readFile(tetumMonoPath, "utf-8"));
+        const tetumMonoPath = path.resolve(process.cwd(), "attached_assets", "Pasted--word-atletizmu-class-Substantivu-meaning-Atividade-ka-ku-1750156777749_1750156777753.txt");
+        const fileContent = await fs.readFile(tetumMonoPath, "utf-8");
+        tetumMonolingualData = JSON.parse(fileContent);
         console.log(`Tetum monolingual dictionary loaded successfully with ${tetumMonolingualData.length} entries`);
       } catch (error) {
-        console.warn("Tetum monolingual dictionary not found");
+        console.warn("Tetum monolingual dictionary not found or malformed:", error);
+        // Fallback to sample data
+        try {
+          const fallbackPath = path.resolve(process.cwd(), "attached_assets", "tetum_monolingual_sample.json");
+          tetumMonolingualData = JSON.parse(await fs.readFile(fallbackPath, "utf-8"));
+          console.log(`Using fallback Tetum monolingual data with ${tetumMonolingualData.length} entries`);
+        } catch (fallbackError) {
+          console.warn("Fallback Tetum monolingual dictionary also not found");
+        }
       }
       
       // Load legal dictionaries
@@ -213,20 +222,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }));
 
       // Process Tetum Monolingual dictionary entries
-      const tetumMonolingualEntries = tetumMonolingualData.map((item: any) => ({
-        tetum: safeStringify(item.tetum_word),
+      const tetumMonolingualEntries = tetumMonolingualData.filter(item => item && item.word).map((item: any) => ({
+        tetum: safeStringify(item.word),
         portuguese: "",
         english: "",
-        source: safeStringify(item.source),
+        source: "Tetum Monolingual Dictionary",
         category: "tetum-monolingual",
         dictionaryType: "tetum-monolingual",
-        notes: item.usage_example ? `Example: ${safeStringify(item.usage_example)}` : "",
-        explanation: safeStringify(item.tetum_definition),
+        notes: "",
+        explanation: safeStringify(item.meaning),
         pronunciation: "",
-        wordClass: safeStringify(item.word_class),
-        etymology: safeStringify(item.etymology),
-        usageExamples: item.usage_example ? [safeStringify(item.usage_example)] : [],
-        relatedTerms: item.related_terms ? (Array.isArray(item.related_terms) ? item.related_terms.map(safeStringify) : [safeStringify(item.related_terms)]) : [],
+        wordClass: safeStringify(item.class),
+        etymology: "",
+        usageExamples: [],
+        relatedTerms: [],
       }));
 
       // Bulk insert all entries
