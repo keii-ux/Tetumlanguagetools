@@ -21,8 +21,10 @@ export default function MedicalDictionary({ onBack }: MedicalDictionaryProps) {
   const { data: searchResults = [], isLoading } = useSearchEntries({
     query: searchTerm,
     dictionaryType: "medical",
-    sourceLanguage: "all",
-    targetLanguage: "all",
+    language: "all",
+    exactMatch: false,
+    includeDefinitions: true,
+    caseSensitive: false,
   });
 
   const { data: stats } = useDictionaryStats();

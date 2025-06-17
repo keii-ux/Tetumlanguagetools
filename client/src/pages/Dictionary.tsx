@@ -26,6 +26,7 @@ import { SearchQuery, DictionaryEntry } from "@shared/schema";
 import { buildSearchQuery } from "@/lib/dictionaries";
 import { TermDetail } from "@/components/TermDetail";
 import { BookmarkPanel } from "@/components/BookmarkPanel";
+import MedicalDictionary from "./MedicalDictionary";
 
 const DEFAULT_USER_ID = "demo-user";
 
@@ -127,6 +128,7 @@ export default function Dictionary() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
+  const [currentView, setCurrentView] = useState<'home' | 'medical' | 'legal' | 'general' | 'asean'>('home');
   
   const { data: stats } = useDictionaryStats();
   const { data: searchResults = [], isLoading: searchLoading } = useSearchEntries(searchQuery);
@@ -134,9 +136,13 @@ export default function Dictionary() {
   const addSearchHistory = useAddSearchHistory();
 
   const handleToolSelect = (toolId: string) => {
-    setSelectedTool(toolId);
-    const newQuery = { ...searchQuery, dictionaryType: toolId as any };
-    setSearchQuery(newQuery);
+    if (toolId === "medical") {
+      setCurrentView('medical');
+    } else {
+      setSelectedTool(toolId);
+      const newQuery = { ...searchQuery, dictionaryType: toolId as any };
+      setSearchQuery(newQuery);
+    }
   };
 
   const handleGlobalSearch = (query: string) => {
@@ -162,6 +168,11 @@ export default function Dictionary() {
 
   const displayResults = searchQuery.query || selectedTool ? searchResults : allEntries;
   const isLoading = searchQuery.query || selectedTool ? searchLoading : allLoading;
+
+  // Route to medical dictionary module
+  if (currentView === 'medical') {
+    return <MedicalDictionary onBack={() => setCurrentView('home')} />;
+  }
 
   if (selectedTool) {
     return (
