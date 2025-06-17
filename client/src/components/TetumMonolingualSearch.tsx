@@ -90,7 +90,7 @@ const searchContent = {
     contains: "Contém Palavra",
     searchDescription: "Procurar palavras Tetum que começam com uma letra ou contêm palavras específicas", 
     placeholder: "Digite uma letra para encontrar palavras Tetum que começam com...",
-    resultsFound: "Encontrado",
+    resultsFound: "Encontradas",
     resultsLabel: "palavras Tetum",
     startsWithLabel: "começando com"
   }
@@ -221,7 +221,9 @@ export function TetumMonolingualSearch({ onEntrySelect, currentLanguage = "tetum
             )}
           </div>
           <Button onClick={handleSearch} disabled={!searchTerm.trim() || isLoading}>
-            Buka
+            {currentLanguage === "tetum" ? "Buka" :
+             currentLanguage === "english" ? "Search" :
+             "Procurar"}
           </Button>
         </div>
 
@@ -237,10 +239,10 @@ export function TetumMonolingualSearch({ onEntrySelect, currentLanguage = "tetum
       {searchTerm && (
         <div className="flex items-center justify-between text-sm text-slate-600">
           <span>
-            Hetan {filteredEntries.length} liafuan Tetum
+            {content.resultsFound} {filteredEntries.length} {content.resultsLabel}
           </span>
-          {searchMode === "starts-with" && (
-            <span>Ne'ebé hahu ho: "{searchTerm}"</span>
+          {searchMode === "starts-with" && searchTerm && (
+            <span>{content.startsWithLabel} "{searchTerm}"</span>
           )}
         </div>
       )}
