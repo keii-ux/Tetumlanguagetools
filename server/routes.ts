@@ -148,9 +148,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       }
 
-      // Load LEGAL dictionaries - Portuguese/Tetum/English and Tetum Legal Glossary
+      // Load LEGAL dictionaries - Portuguese/Tetum/English, Tetum Legal Glossary, and Portuguese Legal Glossary
       let legalDictData: any[] = [];
       let tetumGlossaryData: any[] = [];
+      let portugueseGlossaryData: any[] = [];
       
       try {
         const legalDictPath = path.resolve(process.cwd(), "attached_assets", "legal dic tt.json");
@@ -169,6 +170,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } catch (error) {
         console.warn("Tetum legal glossary not found:", error);
         tetumGlossaryData = [];
+      }
+      
+      // Load Portuguese Legal Glossary
+      try {
+        const portugueseGlossaryPath = path.resolve(process.cwd(), "attached_assets", "glos juridico pt.json");
+        portugueseGlossaryData = JSON.parse(await fs.readFile(portugueseGlossaryPath, "utf-8"));
+        console.log(`Portuguese legal glossary loaded successfully with ${portugueseGlossaryData.length} entries`);
+      } catch (error) {
+        console.warn("Portuguese legal glossary not found:", error);
+        portugueseGlossaryData = [];
       }
 
       const generalDictData: any[] = [];
@@ -200,6 +211,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
         dictionaryType: "tetum-glossary",
         notes: "",
         explanation: safeStringify(item.tetum_explanation),
+        pronunciation: "",
+        wordClass: "",
+        etymology: "",
+        usageExamples: [],
+        relatedTerms: [],
+      }));
+
+      // Process Portuguese Legal Glossary entries
+      const portugueseGlossaryEntries = portugueseGlossaryData.map((item: any) => ({
+        tetum: "",
+        portuguese: safeStringify(item.termo),
+        english: "",
+        source: "Portuguese Legal Glossary",
+        category: "legal",
+        dictionaryType: "portuguese-glossary",
+        notes: "",
+        explanation: safeStringify(item.significado),
         pronunciation: "",
         wordClass: "",
         etymology: "",
@@ -281,14 +309,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Bulk insert all entries with proper separation
       await storage.bulkCreateEntries([
-        ...legalEntries,           // Legal module only
-        ...tetumGlossaryEntries,   // Tetum Legal Glossary module only
-        ...medicalEnTtEntries,     // Medical module - English to Tetum
-        ...medicalTtEnEntries,     // Medical module - Tetum to English
-        ...inlTetumEntries         // INL Tetum dictionary module
+        ...legalEntries,             // Legal module only
+        ...tetumGlossaryEntries,     // Tetum Legal Glossary module only
+        ...portugueseGlossaryEntries, // Portuguese Legal Glossary module only
+        ...medicalEnTtEntries,       // Medical module - English to Tetum
+        ...medicalTtEnEntries,       // Medical module - Tetum to English
+        ...inlTetumEntries           // INL Tetum dictionary module
       ]);
       
-      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + medicalEnTtEntries.length + medicalTtEnEntries.length + inlTetumEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + medicalEnTtEntries.length + medicalTtEnEntries.length + inlTetumEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
@@ -543,6 +572,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Tetum glossary entries error:", error);
       res.status(500).json({ error: "Failed to fetch Tetum glossary entries" });
+    }
+  });
+
+  // Portuguese Legal Glossary module endpoints - Only Portuguese legal glossary terms
+  app.get("/api/portuguese-glossary/search", async (req, res) => {
+    try {
+      const searchQuery = searchQuerySchema.parse(req.query);
+      const allResults = await storage.searchEntries(searchQuery);
+      const portugueseGlossaryResults = allResults.filter(e => e.dictionaryType === "portuguese-glossary");
+      res.json(portugueseGlossaryResults);
+    } catch (error) {
+      console.error("Portuguese glossary search error:", error);
+      res.status(400).json({ error: "Invalid search parameters" });
+    }
+  });
+
+  app.get("/api/portuguese-glossary/entries", async (req, res) => {
+    try {
+      const entries = await storage.getAllEntries();
+      const portugueseGlossaryEntries = entries.filter(e => e.dictionaryType === "portuguese-glossary");
+      res.json(portugueseGlossaryEntries);
+    } catch (error) {
+      console.error("Portuguese glossary entries error:", error);
+      res.status(500).json({ error: "Failed to fetch Portuguese glossary entries" });
     }
   });
 

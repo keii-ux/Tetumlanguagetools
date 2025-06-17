@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, Volume2, Copy, Menu } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useSearchEntries } from "@/lib/search";
-import { DictionaryEntry } from "@shared/schema";
+import { Card, CardContent } from "@/components/ui/card";
+import type { DictionaryEntry } from "@shared/schema";
 
 interface PortugueseGlossarySearchProps {
   onEntrySelect?: (entry: DictionaryEntry) => void;
@@ -24,238 +24,197 @@ function PredictiveDropdown({
   onClose, 
   isVisible 
 }: PredictiveDropdownProps) {
-  if (!isVisible || !searchTerm || entries.length === 0) return null;
+  if (!isVisible || !searchTerm || entries.length === 0) {
+    return null;
+  }
+
+  const filteredEntries = entries
+    .filter(entry => 
+      entry.portuguese?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      entry.explanation?.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .slice(0, 8);
+
+  if (filteredEntries.length === 0) {
+    return (
+      <Card className="absolute top-full left-0 right-0 z-50 mt-1 border shadow-lg bg-white dark:bg-gray-800">
+        <CardContent className="p-3">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Nenhum resultado encontrado para "{searchTerm}"
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
-    <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto z-50">
-      {entries.slice(0, 10).map((entry, index) => (
-        <div
-          key={entry.id}
-          onClick={() => onSelect(entry)}
-          className="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
-        >
-          <div className="font-medium text-gray-900">
-            {entry.portuguese}
-          </div>
-          {entry.explanation && (
-            <div className="text-sm text-gray-600 truncate">
-              {entry.explanation}
+    <Card className="absolute top-full left-0 right-0 z-50 mt-1 border shadow-lg bg-white dark:bg-gray-800 max-h-80 overflow-y-auto">
+      <CardContent className="p-0">
+        {filteredEntries.map((entry, index) => (
+          <div
+            key={entry.id}
+            className={`p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 ${
+              index !== filteredEntries.length - 1 ? 'border-b border-gray-100 dark:border-gray-700' : ''
+            }`}
+            onClick={() => onSelect(entry)}
+          >
+            <div className="font-medium text-blue-600 dark:text-blue-400 text-sm">
+              {entry.portuguese}
             </div>
-          )}
-        </div>
-      ))}
-    </div>
+            {entry.explanation && (
+              <div className="text-xs text-gray-600 dark:text-gray-300 mt-1 line-clamp-2">
+                {entry.explanation.length > 100 
+                  ? `${entry.explanation.substring(0, 100)}...`
+                  : entry.explanation
+                }
+              </div>
+            )}
+            <div className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+              {entry.source}
+            </div>
+          </div>
+        ))}
+      </CardContent>
+    </Card>
   );
 }
 
 export function PortugueseGlossarySearch({ onEntrySelect }: PortugueseGlossarySearchProps) {
-  const [wordSearch, setWordSearch] = useState("");
-  const [showResults, setShowResults] = useState(false);
-  const [showPredictive, setShowPredictive] = useState(false);
-  const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [entries, setEntries] = useState<DictionaryEntry[]>([]);
+  const [showDropdown, setShowDropdown] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
-  const { data: searchResults = [], isLoading, error } = useSearchEntries({
-    query: wordSearch,
-    dictionaryType: "portuguese-glossary",
-    language: "all",
-    exactMatch: false,
-    includeDefinitions: true,
-    caseSensitive: false,
-  });
+  // Load Portuguese glossary entries
+  useEffect(() => {
+    const loadEntries = async () => {
+      try {
+        const response = await fetch("/api/portuguese-glossary/entries");
+        if (response.ok) {
+          const data = await response.json();
+          setEntries(data);
+        }
+      } catch (error) {
+        console.error("Failed to load Portuguese glossary entries:", error);
+      }
+    };
+
+    loadEntries();
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setShowPredictive(false);
+        setShowDropdown(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSearch = () => {
-    if (wordSearch.trim() && wordSearch.length >= 2) {
-      setShowResults(true);
-      setShowPredictive(false);
-      if (searchResults.length > 0) {
-        setSelectedEntry(searchResults[0]);
-        onEntrySelect?.(searchResults[0]);
-      }
-    }
-  };
-
-  const handleWordChange = (value: string) => {
-    setWordSearch(value);
-    setShowPredictive(value.length >= 2);
-    if (!value.trim()) {
-      setShowResults(false);
-      setSelectedEntry(null);
-      setShowPredictive(false);
-    }
-  };
-
   const handleEntrySelect = (entry: DictionaryEntry) => {
-    setSelectedEntry(entry);
-    setWordSearch(entry.portuguese || "");
-    setShowPredictive(false);
-    setShowResults(true);
+    setSearchTerm(entry.portuguese || "");
+    setShowDropdown(false);
     onEntrySelect?.(entry);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
-  };
+  const handleSearch = async () => {
+    if (!searchTerm.trim()) return;
 
-  const copyToClipboard = async (text: string) => {
+    setIsLoading(true);
     try {
-      await navigator.clipboard.writeText(text);
-    } catch (err) {
-      console.error('Failed to copy text:', err);
+      const response = await fetch(`/api/portuguese-glossary/search?q=${encodeURIComponent(searchTerm)}`);
+      if (response.ok) {
+        const results = await response.json();
+        if (results.length > 0 && onEntrySelect) {
+          onEntrySelect(results[0]);
+        }
+      }
+    } catch (error) {
+      console.error("Search failed:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const speakText = (text: string) => {
-    if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      speechSynthesis.speak(utterance);
-    }
+  const handleInputChange = (value: string) => {
+    setSearchTerm(value);
+    setShowDropdown(value.length > 0);
+  };
+
+  const clearSearch = () => {
+    setSearchTerm("");
+    setShowDropdown(false);
   };
 
   return (
-    <div className="p-6">
-      {/* Header */}
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Portuguese Glossary</h2>
-        <p className="text-gray-600">Portuguese Legal Terms with Definitions</p>
+    <div className="space-y-6">
+      <div className="text-center">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          Glossário Jurídico Português
+        </h2>
+        <p className="text-gray-600 dark:text-gray-300">
+          Pesquise termos jurídicos com definições em português
+        </p>
       </div>
 
-      {/* Search Section */}
-      <div className="bg-white rounded-lg border border-gray-200 p-4 mb-8">
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="sm" className="p-2">
-            <Menu className="h-4 w-4 text-gray-600" />
-          </Button>
-          <div className="text-sm font-medium text-gray-600 w-16">SEARCH</div>
-          <div className="flex-1 relative" ref={searchRef}>
-            <Input
-              placeholder="Enter Portuguese legal term (min 2 characters)"
-              value={wordSearch}
-              onChange={(e) => handleWordChange(e.target.value)}
-              onFocus={() => setShowPredictive(wordSearch.length >= 2)}
-              onKeyPress={handleKeyPress}
-              className="border-0 focus:ring-0 text-gray-600 placeholder-gray-400"
-            />
-            <PredictiveDropdown
-              searchTerm={wordSearch}
-              entries={searchResults}
-              onSelect={handleEntrySelect}
-              onClose={() => setShowPredictive(false)}
-              isVisible={showPredictive}
-            />
-          </div>
+      <div ref={searchRef} className="relative">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+          <Input
+            type="text"
+            placeholder="Digite o termo jurídico aqui..."
+            value={searchTerm}
+            onChange={(e) => handleInputChange(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
+            className="pl-10 pr-12 py-3 text-lg border-2 focus:border-blue-500 dark:focus:border-blue-400"
+          />
+          {searchTerm && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={clearSearch}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          )}
         </div>
+
+        <PredictiveDropdown
+          searchTerm={searchTerm}
+          entries={entries}
+          onSelect={handleEntrySelect}
+          onClose={() => setShowDropdown(false)}
+          isVisible={showDropdown}
+        />
       </div>
 
-      {/* Search Button */}
-      <div className="flex justify-center mb-8">
-        <Button
+      <div className="flex gap-2 justify-center">
+        <Button 
           onClick={handleSearch}
-          className="bg-purple-500 hover:bg-purple-600 text-white px-8 py-2 rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
-          disabled={!wordSearch.trim() || wordSearch.length < 2}
+          disabled={!searchTerm.trim() || isLoading}
+          className="px-8"
         >
-          <Search className="w-4 h-4 mr-2" />
-          Search Portuguese Glossary
+          {isLoading ? "Pesquisando..." : "Pesquisar"}
         </Button>
       </div>
 
-      {/* Results Section */}
-      {showResults && selectedEntry && (
-        <div className="space-y-6">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <div className="mb-4">
-              <div className="flex items-center gap-3 mb-2">
-                <h3 className="text-lg font-semibold text-gray-900">
-                  {selectedEntry.portuguese}
-                </h3>
-                
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={() => copyToClipboard(selectedEntry.portuguese || "")}
-                  className="p-1 hover:bg-gray-100"
-                >
-                  <Copy className="h-4 w-4 text-gray-600" />
-                </Button>
-              </div>
-              <p className="text-gray-600 text-sm mb-4">Portuguese legal term with definition</p>
-            </div>
-
-            <div className="space-y-4">
-              {/* Definition */}
-              {selectedEntry.explanation && (
-                <div className="bg-purple-50 rounded-lg p-4">
-                  <h4 className="text-sm font-semibold text-purple-800 mb-2">Definition</h4>
-                  <p className="text-gray-800 leading-relaxed">{selectedEntry.explanation}</p>
-                </div>
-              )}
-
-              {/* Tetum Translation if available */}
-              {selectedEntry.tetum && (
-                <div className="flex items-start gap-3">
-                  <span className="text-gray-500 font-medium min-w-[60px]">Tetum:</span>
-                  <div className="flex-1">
-                    <p className="text-gray-800">{selectedEntry.tetum}</p>
-                  </div>
-                </div>
-              )}
-
-              {/* English Translation if available */}
-              {selectedEntry.english && (
-                <div className="flex items-start gap-3">
-                  <span className="text-gray-500 font-medium min-w-[60px]">English:</span>
-                  <div className="flex-1">
-                    <p className="text-gray-800">{selectedEntry.english}</p>
-                  </div>
-                </div>
-              )}
-
-              {/* Additional Information */}
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-sm text-gray-600">
-                  <strong>Legal Context:</strong> This Portuguese legal term is part of the 
-                  comprehensive legal terminology used in Portuguese-speaking legal systems 
-                  and Portuguese legal documentation.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* No Results */}
-      {showResults && searchResults.length === 0 && !isLoading && (
-        <div className="bg-white rounded-lg border border-gray-200 p-6 text-center">
-          <p className="text-gray-500">No Portuguese glossary terms found for "{wordSearch}"</p>
-        </div>
-      )}
-
-      {/* Loading */}
-      {isLoading && showResults && (
-        <div className="bg-white rounded-lg border border-gray-200 p-6 text-center">
-          <p className="text-gray-500">Searching Portuguese glossary...</p>
-        </div>
-      )}
-
-      {/* Error */}
-      {error && showResults && (
-        <div className="bg-red-50 rounded-lg border border-red-200 p-6 text-center">
-          <p className="text-red-600">Error searching Portuguese glossary. Please try again.</p>
-        </div>
-      )}
+      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+        <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+          Sobre o Glossário Jurídico Português
+        </h3>
+        <p className="text-sm text-blue-800 dark:text-blue-200">
+          Este glossário contém termos jurídicos importantes com definições claras em português. 
+          Inclui terminologia do direito civil, penal, constitucional, administrativo e outras áreas do direito.
+        </p>
+      </div>
     </div>
   );
 }
