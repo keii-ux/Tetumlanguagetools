@@ -74,7 +74,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       try {
-        const portugueseGlossaryPath = path.resolve(process.cwd(), "attached_assets", "glos juridico pt_1750146026940.json");
+        const portugueseGlossaryPath = path.resolve(process.cwd(), "attached_assets", "glos_juridico_pt.json");
         portugueseGlossaryData = JSON.parse(await fs.readFile(portugueseGlossaryPath, "utf-8"));
         console.log(`Portuguese glossary loaded successfully with ${portugueseGlossaryData.length} entries`);
       } catch (error) {
