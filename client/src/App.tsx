@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Dictionary from "@/pages/Dictionary";
 import MedicalDictionaryModule from "@/pages/MedicalDictionaryModule";
 import LegalDictionaryModule from "@/pages/LegalDictionaryModule";
+import TetumMonolingualModule from "@/pages/TetumMonolingualModule";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -14,6 +15,7 @@ function Router() {
       <Route path="/" component={Dictionary} />
       <Route path="/medical-dictionary" component={MedicalDictionaryModule} />
       <Route path="/legal-dictionary" component={LegalDictionaryModule} />
+      <Route path="/tetum-monolingual" component={TetumMonolingualModule} />
       <Route component={NotFound} />
     </Switch>
   );
