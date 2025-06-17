@@ -10,6 +10,7 @@ import type { DictionaryEntry } from "@shared/schema";
 
 export default function PortugueseGlossaryModule() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState("pt");
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
     setSelectedEntry(entry);
@@ -18,23 +19,27 @@ export default function PortugueseGlossaryModule() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-6">
+        <div className="mb-6 flex justify-between items-start">
           <Link href="/">
             <Button variant="ghost" className="mb-4">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Voltar à página principal
             </Button>
           </Link>
+          <LanguageSwitcher 
+            selectedLanguage={selectedLanguage}
+            onLanguageChange={setSelectedLanguage}
+          />
+        </div>
           
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Glossário Jurídico Português
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Glossário abrangente com termos jurídicos importantes e definições claras em português. 
-              Inclui terminologia do direito civil, penal, constitucional, administrativo e outras áreas do direito.
-            </p>
-          </div>
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Glossário Jurídico Português
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Glossário abrangente com termos jurídicos importantes e definições claras em português. 
+            Inclui terminologia do direito civil, penal, constitucional, administrativo e outras áreas do direito.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -91,7 +96,7 @@ export default function PortugueseGlossaryModule() {
                 Ajuda estudantes de direito, advogados e cidadãos em geral a compreender a terminologia jurídica utilizada no sistema legal.
               </p>
               <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
-                <li>Termos jurídicos com definições detalhadas</li>
+                <li>1,063+ termos jurídicos com definições detalhadas</li>
                 <li>Terminologia do direito civil e penal</li>
                 <li>Termos do direito constitucional</li>
                 <li>Terminologia do direito administrativo</li>

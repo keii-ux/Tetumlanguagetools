@@ -2,14 +2,15 @@ import { useState } from "react";
 import { ArrowLeft, Stethoscope } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-
 import { Badge } from "@/components/ui/badge";
 import { MedicalDictionarySearch } from "@/components/MedicalDictionarySearch";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useDictionaryStats } from "@/lib/search";
 import { DictionaryEntry } from "@shared/schema";
 
 export default function MedicalDictionaryModule() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
   const { data: stats } = useDictionaryStats();
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
@@ -48,6 +49,10 @@ export default function MedicalDictionaryModule() {
               <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
                 Bilingual
               </Badge>
+              <LanguageSwitcher 
+                selectedLanguage={selectedLanguage}
+                onLanguageChange={setSelectedLanguage}
+              />
             </div>
           </div>
         </div>
