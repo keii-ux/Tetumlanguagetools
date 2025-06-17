@@ -39,14 +39,21 @@ export default function MedicalDictionary({ onBack }: MedicalDictionaryProps) {
   };
 
   const getDisplayTerm = (entry: DictionaryEntry) => {
-    return entry.tetum || entry.english || entry.portuguese || "Unknown term";
+    const tetum = typeof entry.tetum === 'object' ? JSON.stringify(entry.tetum) : entry.tetum;
+    const english = typeof entry.english === 'object' ? JSON.stringify(entry.english) : entry.english;
+    const portuguese = typeof entry.portuguese === 'object' ? JSON.stringify(entry.portuguese) : entry.portuguese;
+    return tetum || english || portuguese || "Unknown term";
   };
 
   const getTranslation = (entry: DictionaryEntry) => {
-    if (entry.tetum && entry.english) {
-      return entry.tetum !== entry.english ? entry.english : entry.portuguese;
+    const tetum = typeof entry.tetum === 'object' ? JSON.stringify(entry.tetum) : entry.tetum;
+    const english = typeof entry.english === 'object' ? JSON.stringify(entry.english) : entry.english;
+    const portuguese = typeof entry.portuguese === 'object' ? JSON.stringify(entry.portuguese) : entry.portuguese;
+    
+    if (tetum && english) {
+      return tetum !== english ? english : portuguese;
     }
-    return entry.english || entry.portuguese || "";
+    return english || portuguese || "";
   };
 
   const renderDefinitions = () => {
@@ -96,13 +103,13 @@ export default function MedicalDictionary({ onBack }: MedicalDictionaryProps) {
                 
                 {selectedEntry.explanation && (
                   <div className="mb-2">
-                    <span className="font-medium">Explanation:</span> {selectedEntry.explanation}
+                    <span className="font-medium">Explanation:</span> {typeof selectedEntry.explanation === 'object' ? JSON.stringify(selectedEntry.explanation) : selectedEntry.explanation}
                   </div>
                 )}
 
                 {selectedEntry.notes && (
                   <div className="mb-2">
-                    <span className="font-medium">Notes:</span> {selectedEntry.notes}
+                    <span className="font-medium">Notes:</span> {typeof selectedEntry.notes === 'object' ? JSON.stringify(selectedEntry.notes) : selectedEntry.notes}
                   </div>
                 )}
 
@@ -111,7 +118,9 @@ export default function MedicalDictionary({ onBack }: MedicalDictionaryProps) {
                     <span className="font-medium">Usage Examples:</span>
                     <ul className="list-disc list-inside ml-4 mt-1">
                       {selectedEntry.usageExamples.map((example, index) => (
-                        <li key={index} className="text-slate-600 italic">{example}</li>
+                        <li key={index} className="text-slate-600 italic">
+                          {typeof example === 'object' ? JSON.stringify(example) : example}
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -123,7 +132,7 @@ export default function MedicalDictionary({ onBack }: MedicalDictionaryProps) {
                     <div className="flex flex-wrap gap-1 mt-1">
                       {selectedEntry.relatedTerms.map((term, index) => (
                         <Badge key={index} variant="secondary" className="text-xs">
-                          {term}
+                          {typeof term === 'object' ? JSON.stringify(term) : term}
                         </Badge>
                       ))}
                     </div>
@@ -134,8 +143,8 @@ export default function MedicalDictionary({ onBack }: MedicalDictionaryProps) {
           </div>
 
           <div className="flex items-center justify-between text-xs text-slate-500 mt-4 pt-4 border-t">
-            <span>Source: {selectedEntry.source}</span>
-            <span>Category: {selectedEntry.category}</span>
+            <span>Source: {typeof selectedEntry.source === 'object' ? JSON.stringify(selectedEntry.source) : selectedEntry.source}</span>
+            <span>Category: {typeof selectedEntry.category === 'object' ? JSON.stringify(selectedEntry.category) : selectedEntry.category}</span>
           </div>
         </div>
       </div>
@@ -235,10 +244,10 @@ export default function MedicalDictionary({ onBack }: MedicalDictionaryProps) {
                         </div>
                         <div className="flex justify-between items-center mt-1">
                           <Badge variant="outline" className="text-xs">
-                            {entry.category}
+                            {typeof entry.category === 'object' ? JSON.stringify(entry.category) : entry.category}
                           </Badge>
                           <span className="text-xs text-slate-500">
-                            {entry.source}
+                            {typeof entry.source === 'object' ? JSON.stringify(entry.source) : entry.source}
                           </span>
                         </div>
                       </button>
@@ -281,7 +290,7 @@ export default function MedicalDictionary({ onBack }: MedicalDictionaryProps) {
                       <div className="grid grid-cols-2 gap-4">
                         {selectedEntry.relatedTerms.map((term, index) => (
                           <div key={index} className="p-3 bg-slate-50 rounded-lg">
-                            <span className="font-medium">{term}</span>
+                            <span className="font-medium">{typeof term === 'object' ? JSON.stringify(term) : term}</span>
                           </div>
                         ))}
                       </div>
@@ -298,7 +307,7 @@ export default function MedicalDictionary({ onBack }: MedicalDictionaryProps) {
                       <div className="space-y-3">
                         {selectedEntry.usageExamples.map((example, index) => (
                           <div key={index} className="p-3 bg-slate-50 rounded-lg">
-                            <p className="italic text-slate-700">{example}</p>
+                            <p className="italic text-slate-700">{typeof example === 'object' ? JSON.stringify(example) : example}</p>
                           </div>
                         ))}
                       </div>
@@ -315,16 +324,16 @@ export default function MedicalDictionary({ onBack }: MedicalDictionaryProps) {
                       {selectedEntry.notes && (
                         <div>
                           <h4 className="font-medium text-slate-700 mb-2">Clinical Notes</h4>
-                          <p className="text-slate-600">{selectedEntry.notes}</p>
+                          <p className="text-slate-600">{typeof selectedEntry.notes === 'object' ? JSON.stringify(selectedEntry.notes) : selectedEntry.notes}</p>
                         </div>
                       )}
                       <div>
                         <h4 className="font-medium text-slate-700 mb-2">Category</h4>
-                        <Badge variant="outline">{selectedEntry.category}</Badge>
+                        <Badge variant="outline">{typeof selectedEntry.category === 'object' ? JSON.stringify(selectedEntry.category) : selectedEntry.category}</Badge>
                       </div>
                       <div>
                         <h4 className="font-medium text-slate-700 mb-2">Source</h4>
-                        <p className="text-slate-600">{selectedEntry.source}</p>
+                        <p className="text-slate-600">{typeof selectedEntry.source === 'object' ? JSON.stringify(selectedEntry.source) : selectedEntry.source}</p>
                       </div>
                     </div>
                   </div>
