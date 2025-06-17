@@ -3,7 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Scale, Stethoscope, Book, Globe, Bookmark, History, Download } from "lucide-react";
+import { Scale, Stethoscope, Book, Globe, Bookmark, History, Download, ExternalLink } from "lucide-react";
+import { Link } from "wouter";
 import { SearchQuery } from "@shared/schema";
 import { useDictionaryStats } from "@/lib/search";
 
