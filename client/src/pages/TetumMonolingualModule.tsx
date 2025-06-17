@@ -216,7 +216,7 @@ export default function TetumMonolingualModule() {
           <div className="lg:col-span-2">
             <Card className="bg-white border-orange-200">
               <CardContent className="p-6">
-                <TetumMonolingualSearch onEntrySelect={handleEntrySelect} />
+                <TetumMonolingualSearch onEntrySelect={handleEntrySelect} currentLanguage={currentLanguage} />
               </CardContent>
             </Card>
           </div>

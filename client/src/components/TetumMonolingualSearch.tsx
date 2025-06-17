@@ -10,6 +10,7 @@ import { DictionaryEntry } from "@shared/schema";
 
 interface TetumMonolingualSearchProps {
   onEntrySelect?: (entry: DictionaryEntry) => void;
+  currentLanguage?: "tetum" | "english" | "portuguese";
 }
 
 interface PredictiveDropdownProps {
@@ -65,7 +66,37 @@ function PredictiveDropdown({
   );
 }
 
-export function TetumMonolingualSearch({ onEntrySelect }: TetumMonolingualSearchProps) {
+const searchContent = {
+  tetum: {
+    startsWith: "Hahu ho Leta",
+    contains: "Iha Liafuan",
+    searchDescription: "Buka liafuan Tetum ne'ebé hahu ho letra ka liafuan espesífiku",
+    placeholder: "Hakerek leta atu buka liafuan Tetum sira ne'ebé hahu ho...",
+    resultsFound: "Hetan",
+    resultsLabel: "liafuan Tetum",
+    startsWithLabel: "Ne'ebé hahu ho:"
+  },
+  english: {
+    startsWith: "Starts with Letter",
+    contains: "Contains Word",
+    searchDescription: "Search for Tetum words that start with a letter or contain specific words",
+    placeholder: "Type a letter to find Tetum words that start with...",
+    resultsFound: "Found",
+    resultsLabel: "Tetum words",
+    startsWithLabel: "Starting with:"
+  },
+  portuguese: {
+    startsWith: "Começa com Letra",
+    contains: "Contém Palavra",
+    searchDescription: "Procurar palavras Tetum que começam com uma letra ou contêm palavras específicas",
+    placeholder: "Digite uma letra para encontrar palavras Tetum que começam com...",
+    resultsFound: "Encontrado",
+    resultsLabel: "palavras Tetum",
+    startsWithLabel: "Começando com:"
+  }
+};
+
+export function TetumMonolingualSearch({ onEntrySelect, currentLanguage = "tetum" }: TetumMonolingualSearchProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [searchMode, setSearchMode] = useState<"starts-with" | "contains">("starts-with");
