@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, Menu, Volume2, Copy } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Search, Volume2, Copy, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { useSearchEntries } from "@/lib/search";
 import { DictionaryEntry } from "@shared/schema";
 
@@ -23,51 +22,29 @@ function PredictiveDropdown({
   entries, 
   onSelect, 
   onClose, 
-  isVisible
+  isVisible 
 }: PredictiveDropdownProps) {
-  if (!isVisible || !searchTerm || searchTerm.length < 2) return null;
-
-  const filteredEntries = entries
-    .filter(entry => {
-      const tetumField = entry.tetum || "";
-      const explanationField = entry.explanation || "";
-      const searchLower = searchTerm.toLowerCase();
-      
-      return tetumField.toLowerCase().includes(searchLower) || 
-             explanationField.toLowerCase().includes(searchLower);
-    })
-    .slice(0, 8);
-
-  if (filteredEntries.length === 0) {
-    return (
-      <Card className="absolute top-full left-0 right-0 z-50 mt-1 border-gray-200 shadow-lg bg-white">
-        <CardContent className="p-4 text-center text-gray-500 text-sm">
-          No Tetum glossary terms found for "{searchTerm}"
-        </CardContent>
-      </Card>
-    );
-  }
+  if (!isVisible || !searchTerm || entries.length === 0) return null;
 
   return (
-    <Card className="absolute top-full left-0 right-0 z-50 mt-1 max-h-64 overflow-auto border-gray-200 shadow-lg bg-white">
-      <CardContent className="p-0">
-        {filteredEntries.map((entry, index) => (
-          <div
-            key={`${entry.id}-${index}`}
-            className="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
-            onClick={() => {
-              onSelect(entry);
-              onClose();
-            }}
-          >
-            <div className="font-medium text-gray-900">{entry.tetum}</div>
-            <div className="text-sm text-gray-600 mt-1 line-clamp-2">
+    <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto z-50">
+      {entries.slice(0, 10).map((entry, index) => (
+        <div
+          key={entry.id}
+          onClick={() => onSelect(entry)}
+          className="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+        >
+          <div className="font-medium text-gray-900">
+            {entry.tetum}
+          </div>
+          {entry.explanation && (
+            <div className="text-sm text-gray-600 truncate">
               {entry.explanation}
             </div>
-          </div>
-        ))}
-      </CardContent>
-    </Card>
+          )}
+        </div>
+      ))}
+    </div>
   );
 }
 

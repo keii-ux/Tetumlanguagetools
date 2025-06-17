@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { DictionaryEntry, SearchQuery, Bookmark, SearchHistory } from "@shared/schema";
 
-// Search entries
+// Search entries with module-specific routing
 export function useSearchEntries(searchQuery: SearchQuery) {
   const queryParams = new URLSearchParams();
   
@@ -17,8 +17,21 @@ export function useSearchEntries(searchQuery: SearchQuery) {
     }
   });
 
+  // Route to module-specific endpoints
+  let endpoint = "/api/search";
+  if (searchQuery.dictionaryType === "medical") {
+    endpoint = "/api/medical/search";
+  } else if (searchQuery.dictionaryType === "legal" || 
+             searchQuery.dictionaryType === "tetum-glossary" || 
+             searchQuery.dictionaryType === "portuguese-glossary" ||
+             searchQuery.dictionaryType === "portuguese-legal") {
+    endpoint = "/api/legal/search";
+  } else if (searchQuery.dictionaryType === "tetum-monolingual") {
+    endpoint = "/api/tetum-monolingual/search";
+  }
+
   return useQuery<DictionaryEntry[]>({
-    queryKey: ["/api/search", queryParams.toString()],
+    queryKey: [endpoint, queryParams.toString()],
     enabled: !!searchQuery.query?.trim() || searchQuery.dictionaryType !== "all",
     staleTime: 1000 * 60 * 5, // 5 minutes
   });

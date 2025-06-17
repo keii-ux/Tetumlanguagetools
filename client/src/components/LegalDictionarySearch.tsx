@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, Menu, Volume2, Copy } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Search, Volume2, Copy, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
 import { useSearchEntries } from "@/lib/search";
 import { DictionaryEntry } from "@shared/schema";
 
@@ -25,108 +23,44 @@ function PredictiveDropdown({
   entries, 
   onSelect, 
   onClose, 
-  isVisible,
+  isVisible, 
   activeLanguage 
 }: PredictiveDropdownProps) {
-  if (!isVisible || !searchTerm || searchTerm.length < 2) return null;
-
-  const filteredEntries = entries
-    .filter(entry => {
-      const tetumField = entry.tetum || "";
-      const portugueseField = entry.portuguese || "";
-      const englishField = entry.english || "";
-      const searchLower = searchTerm.toLowerCase();
-      
-      const startsWithMatch = tetumField.toLowerCase().startsWith(searchLower) || 
-                             portugueseField.toLowerCase().startsWith(searchLower) ||
-                             englishField.toLowerCase().startsWith(searchLower);
-      
-      if (startsWithMatch) return true;
-      
-      return tetumField.toLowerCase().includes(searchLower) || 
-             portugueseField.toLowerCase().includes(searchLower) ||
-             englishField.toLowerCase().includes(searchLower);
-    })
-    .sort((a, b) => {
-      const searchLower = searchTerm.toLowerCase();
-      const aFields = [a.tetum || "", a.portuguese || "", a.english || ""];
-      const bFields = [b.tetum || "", b.portuguese || "", b.english || ""];
-      
-      const aStartsWith = aFields.some(field => field.toLowerCase().startsWith(searchLower));
-      const bStartsWith = bFields.some(field => field.toLowerCase().startsWith(searchLower));
-      
-      if (aStartsWith && !bStartsWith) return -1;
-      if (!aStartsWith && bStartsWith) return 1;
-      
-      const aDisplay = getDisplayTerm(a, activeLanguage);
-      const bDisplay = getDisplayTerm(b, activeLanguage);
-      return aDisplay.localeCompare(bDisplay);
-    })
-    .slice(0, 8);
-
-  if (filteredEntries.length === 0) {
-    return (
-      <Card className="absolute top-full left-0 right-0 z-50 mt-1 border-gray-200 shadow-lg bg-white">
-        <CardContent className="p-4 text-center text-gray-500 text-sm">
-          No legal terms found for "{searchTerm}"
-        </CardContent>
-      </Card>
-    );
-  }
+  if (!isVisible || !searchTerm || entries.length === 0) return null;
 
   return (
-    <Card className="absolute top-full left-0 right-0 z-50 mt-1 max-h-64 overflow-auto border-gray-200 shadow-lg bg-white">
-      <CardContent className="p-0">
-        {filteredEntries.map((entry, index) => {
-          const displayTerm = getDisplayTerm(entry, activeLanguage);
-          const translation = getTranslation(entry, activeLanguage);
-          
-          return (
-            <div
-              key={`${entry.id}-${index}`}
-              className="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
-              onClick={() => {
-                onSelect(entry);
-                onClose();
-              }}
-            >
-              <div className="font-medium text-gray-900">{displayTerm}</div>
-              <div className="text-sm text-gray-600 mt-1">{translation}</div>
-              {entry.source && (
-                <div className="text-xs text-gray-400 mt-1">Source: {entry.source}</div>
-              )}
-            </div>
-          );
-        })}
-      </CardContent>
-    </Card>
+    <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto z-50">
+      {entries.slice(0, 10).map((entry, index) => (
+        <div
+          key={entry.id}
+          onClick={() => onSelect(entry)}
+          className="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+        >
+          <div className="font-medium text-gray-900">
+            {getDisplayTerm(entry, activeLanguage)}
+          </div>
+          <div className="text-sm text-gray-600">
+            {getTranslation(entry, activeLanguage)}
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
 
 function getDisplayTerm(entry: DictionaryEntry, activeLanguage: string) {
-  switch (activeLanguage) {
-    case "tetum":
-      return entry.tetum || entry.portuguese || entry.english || "";
-    case "portuguese":
-      return entry.portuguese || entry.tetum || entry.english || "";
-    case "english":
-      return entry.english || entry.tetum || entry.portuguese || "";
-    default:
-      return entry.tetum || entry.portuguese || entry.english || "";
-  }
+  if (activeLanguage === "tetum" && entry.tetum) return entry.tetum;
+  if (activeLanguage === "portuguese" && entry.portuguese) return entry.portuguese;
+  if (activeLanguage === "english" && entry.english) return entry.english;
+  return entry.tetum || entry.portuguese || entry.english || "";
 }
 
 function getTranslation(entry: DictionaryEntry, activeLanguage: string) {
-  switch (activeLanguage) {
-    case "tetum":
-      return [entry.portuguese, entry.english].filter(Boolean).join(" | ") || "No translation available";
-    case "portuguese":
-      return [entry.tetum, entry.english].filter(Boolean).join(" | ") || "No translation available";
-    case "english":
-      return [entry.tetum, entry.portuguese].filter(Boolean).join(" | ") || "No translation available";
-    default:
-      return [entry.portuguese, entry.english].filter(Boolean).join(" | ") || "No translation available";
-  }
+  const translations = [];
+  if (activeLanguage !== "tetum" && entry.tetum) translations.push(`Tetum: ${entry.tetum}`);
+  if (activeLanguage !== "portuguese" && entry.portuguese) translations.push(`PT: ${entry.portuguese}`);
+  if (activeLanguage !== "english" && entry.english) translations.push(`EN: ${entry.english}`);
+  return translations.join(" | ");
 }
 
 export function LegalDictionarySearch({ onEntrySelect }: LegalDictionarySearchProps) {
