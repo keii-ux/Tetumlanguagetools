@@ -32,16 +32,24 @@ function PredictiveDropdown({
 
   const filteredEntries = entries
     .filter(entry => {
-      // Search in both English and Tetum fields
+      // Search in both English and Tetum fields, but prioritize starts-with matches
       const tetumField = entry.tetum || "";
       const englishField = entry.english || "";
       const searchLower = searchTerm.toLowerCase();
       
+      // First check if any field starts with the search term
+      const startsWithMatch = tetumField.toLowerCase().startsWith(searchLower) || 
+                             englishField.toLowerCase().startsWith(searchLower);
+      
+      // If it starts with the search term, always include it
+      if (startsWithMatch) return true;
+      
+      // Otherwise, only include if it contains the search term and we have fewer than 3 starts-with matches
       return tetumField.toLowerCase().includes(searchLower) || 
              englishField.toLowerCase().includes(searchLower);
     })
     .sort((a, b) => {
-      // Prioritize exact matches at the beginning of words
+      // Prioritize words that start with the search term
       const searchLower = searchTerm.toLowerCase();
       
       const aFields = [a.english || "", a.tetum || ""];
@@ -50,12 +58,20 @@ function PredictiveDropdown({
       const aStartsWith = aFields.some(field => field.toLowerCase().startsWith(searchLower));
       const bStartsWith = bFields.some(field => field.toLowerCase().startsWith(searchLower));
       
+      // Always put starts-with matches first
       if (aStartsWith && !bStartsWith) return -1;
       if (!aStartsWith && bStartsWith) return 1;
       
-      // Secondary sort by alphabetical order
-      const aDisplay = a.english || a.tetum || "";
-      const bDisplay = b.english || b.tetum || "";
+      // Among starts-with matches, sort alphabetically
+      if (aStartsWith && bStartsWith) {
+        const aDisplay = activeLanguage === "english" ? (a.english || a.tetum || "") : (a.tetum || a.english || "");
+        const bDisplay = activeLanguage === "english" ? (b.english || b.tetum || "") : (b.tetum || b.english || "");
+        return aDisplay.localeCompare(bDisplay);
+      }
+      
+      // Among contains matches, sort alphabetically
+      const aDisplay = activeLanguage === "english" ? (a.english || a.tetum || "") : (a.tetum || a.english || "");
+      const bDisplay = activeLanguage === "english" ? (b.english || b.tetum || "") : (b.tetum || b.english || "");
       return aDisplay.localeCompare(bDisplay);
     })
     .slice(0, 8);
@@ -200,9 +216,6 @@ export function MedicalDictionarySearch({ onEntrySelect }: MedicalDictionarySear
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-teal-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-xl">MD</span>
-            </div>
             <h1 className="text-3xl font-bold text-gray-800">Medical Dictionary</h1>
           </div>
         </div>
