@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PortugueseGlossarySearch } from "@/components/PortugueseGlossarySearch";
 import { TermDetail } from "@/components/TermDetail";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import type { DictionaryEntry } from "@shared/schema";
 
 export default function PortugueseGlossaryModule() {

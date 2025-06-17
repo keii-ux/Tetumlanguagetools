@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TetumGlossarySearch } from "@/components/TetumGlossarySearch";
 import { TermDetail } from "@/components/TermDetail";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import type { DictionaryEntry } from "@shared/schema";
 
 export default function TetumGlossaryModule() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState("tet");
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
     setSelectedEntry(entry);
@@ -17,23 +19,27 @@ export default function TetumGlossaryModule() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-6">
+        <div className="mb-6 flex justify-between items-start">
           <Link href="/">
             <Button variant="ghost" className="mb-4">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Fila ba página prinsipal
             </Button>
           </Link>
+          <LanguageSwitcher 
+            selectedLanguage={selectedLanguage}
+            onLanguageChange={setSelectedLanguage}
+          />
+        </div>
           
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Glosáriu Legál Tetum
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Glosáriu komprehensivu ho termu legál importante sira ho esplikasaun detalhadu iha lian Tetum. 
-              Inklui termu husi Konstituisaun RDTL, lei sira, no dokumentu legál seluk.
-            </p>
-          </div>
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Glosáriu Legál Tetum
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Glosáriu komprehensivu ho termu legál importante sira ho esplikasaun detalhadu iha lian Tetum. 
+            Inklui termu husi Konstituisaun RDTL, lei sira, no dokumentu legál seluk.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
