@@ -270,7 +270,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         ...oldInlTetumEntries      // Old INL entries
       ]);
       
-      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + additionalLegalEntries.length + medicalTetumEntries.length + medicalEnEntries.length + inlTetumEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + additionalLegalEntries.length + medicalTetumEntries.length + medicalEnEntries.length + newInlTetumEntries.length + oldInlTetumEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
@@ -429,6 +429,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         "portuguese-glossary": entries.filter(e => e.dictionaryType === "portuguese-glossary").length,
         "tetum-monolingual": entries.filter(e => e.dictionaryType === "tetum-monolingual").length,
         "portuguese-legal": entries.filter(e => e.dictionaryType === "portuguese-legal").length,
+        "inl-tetum": entries.filter(e => e.dictionaryType === "inl-tetum").length,
       };
       res.json(stats);
     } catch (error) {
@@ -475,6 +476,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(legalResults);
     } catch (error) {
       console.error("Legal search error:", error);
+      res.status(400).json({ error: "Invalid search parameters" });
+    }
+  });
+
+  // INL Tetum dictionary endpoints
+  app.get("/api/inl-tetum/search", async (req, res) => {
+    try {
+      const searchQuery = searchQuerySchema.parse(req.query);
+      const allResults = await storage.searchEntries(searchQuery);
+      const inlTetumResults = allResults.filter(e => e.dictionaryType === "inl-tetum");
+      res.json(inlTetumResults);
+    } catch (error) {
+      console.error("INL Tetum search error:", error);
       res.status(400).json({ error: "Invalid search parameters" });
     }
   });

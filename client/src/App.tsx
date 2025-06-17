@@ -7,6 +7,7 @@ import Dictionary from "@/pages/Dictionary";
 import MedicalDictionaryModule from "@/pages/MedicalDictionaryModule";
 import LegalDictionaryModule from "@/pages/LegalDictionaryModule";
 import TetumMonolingualModule from "@/pages/TetumMonolingualModule";
+import INLTetumDictionaryModule from "@/pages/INLTetumDictionaryModule";
 import NotFound from "@/pages/not-found";
 
 function Router() {
