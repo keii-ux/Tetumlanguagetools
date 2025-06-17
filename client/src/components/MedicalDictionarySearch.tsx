@@ -465,28 +465,7 @@ export function MedicalDictionarySearch({ onEntrySelect }: MedicalDictionarySear
               </div>
             </div>
 
-            {/* Additional Related Terms */}
-            {searchResults.length > 1 && (
-              <div className="bg-white rounded-lg border border-gray-200 p-6">
-                <h4 className="text-md font-semibold text-gray-900 mb-4">Related Medical Terms</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {searchResults.slice(1, 5).map((entry, index) => (
-                    <div 
-                      key={entry.id} 
-                      className="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors"
-                      onClick={() => handleEntrySelect(entry)}
-                    >
-                      <div className="font-medium text-gray-900">
-                        {getDisplayTerm(entry)}
-                      </div>
-                      <div className="text-sm text-gray-600 mt-1">
-                        {getTranslation(entry).slice(0, 80)}...
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+            
           </div>
         )}
 

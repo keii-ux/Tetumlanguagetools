@@ -16,7 +16,7 @@ export default function MedicalDictionaryModule() {
     setSelectedEntry(entry);
   };
 
-  const medicalTermCount = stats?.medical || 0;
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
@@ -40,15 +40,11 @@ export default function MedicalDictionaryModule() {
                   <Stethoscope className="h-6 w-6 text-red-600" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-semibold text-slate-900">Medical Dictionary</h1>
                   <p className="text-sm text-slate-600">Tetum-English Medical Terminology</p>
                 </div>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200">
-                {medicalTermCount} Terms
-              </Badge>
               <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
                 Bilingual
               </Badge>
