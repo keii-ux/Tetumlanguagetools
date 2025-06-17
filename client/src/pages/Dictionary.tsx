@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -527,6 +528,24 @@ export default function Dictionary() {
                           </div>
                           <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-green-500 group-hover:translate-x-1 transition-all" />
                         </div>
+                        
+                        {/* Special button for medical dictionary */}
+                        {tool.id === "medical" && (
+                          <div className="mt-4 pt-4 border-t border-gray-100">
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="w-full text-xs bg-red-50 border-red-200 text-red-700 hover:bg-red-100"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                window.location.href = '/medical-dictionary';
+                              }}
+                            >
+                              <BookOpen className="w-3 h-3 mr-2" />
+                              Advanced Medical Dictionary
+                            </Button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </CardContent>
