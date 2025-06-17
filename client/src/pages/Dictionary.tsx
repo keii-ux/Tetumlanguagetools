@@ -26,7 +26,6 @@ import { SearchQuery, DictionaryEntry } from "@shared/schema";
 import { buildSearchQuery } from "@/lib/dictionaries";
 import { TermDetail } from "@/components/TermDetail";
 import { BookmarkPanel } from "@/components/BookmarkPanel";
-import MedicalDictionary from "./MedicalDictionary";
 
 const DEFAULT_USER_ID = "demo-user";
 

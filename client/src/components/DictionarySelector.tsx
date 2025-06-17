@@ -79,6 +79,40 @@ export function DictionarySelector({
             const isSelected = selectedType === dict.type;
             const termCount = getTermCount(dict.type);
 
+            // Special handling for medical dictionary
+            if (dict.type === "medical") {
+              return (
+                <div key={dict.type} className="space-y-2">
+                  <div
+                    onClick={() => onTypeSelect(dict.type)}
+                    className={`p-3 rounded-lg border cursor-pointer transition-colors ${
+                      isSelected
+                        ? "bg-primary/5 border-primary/20"
+                        : "hover:bg-slate-50 border-transparent hover:border-slate-200"
+                    }`}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-8 h-8 ${dict.color} rounded-md flex items-center justify-center`}>
+                        <Icon className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-medium text-slate-900">{dict.name}</h3>
+                        <p className="text-xs text-slate-500">
+                          {termCount.toLocaleString()} terms
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <Link href="/medical-dictionary">
+                    <Button variant="outline" size="sm" className="w-full text-xs">
+                      <ExternalLink className="w-3 h-3 mr-1" />
+                      Advanced Medical Dictionary
+                    </Button>
+                  </Link>
+                </div>
+              );
+            }
+
             return (
               <div
                 key={dict.type}

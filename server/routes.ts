@@ -54,17 +54,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.warn("INL Tetum dictionary not found");
       }
       
-      // Load legal dictionary
-      const legalDictPath = path.resolve(process.cwd(), "attached_assets", "legal dic tt_1750040265133.json");
-      const legalDictData = JSON.parse(await fs.readFile(legalDictPath, "utf-8"));
-      
-      // Load legal glossary
-      const legalGlossaryPath = path.resolve(process.cwd(), "attached_assets", "legal tetum glossay_1750040265136.json");
-      const legalGlossaryData = JSON.parse(await fs.readFile(legalGlossaryPath, "utf-8"));
-      
-      // Load general dictionary
-      const generalDictPath = path.resolve(process.cwd(), "attached_assets", "legal dic tt copy_1750040265136.json");
-      const generalDictData = JSON.parse(await fs.readFile(generalDictPath, "utf-8"));
+      // For now, we'll initialize without the legal dictionaries since they were removed
+      const legalDictData: any[] = [];
+      const legalGlossaryData: any[] = [];
+      const generalDictData: any[] = [];
 
       // Process legal dictionary entries
       const legalEntries = legalDictData.map((item: any) => ({

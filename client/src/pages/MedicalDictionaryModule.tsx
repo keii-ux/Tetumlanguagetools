@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowLeft, BookOpen, Stethoscope } from "lucide-react";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,11 +8,7 @@ import { MedicalDictionarySearch } from "@/components/MedicalDictionarySearch";
 import { useDictionaryStats } from "@/lib/search";
 import { DictionaryEntry } from "@shared/schema";
 
-interface MedicalDictionaryModuleProps {
-  onBack?: () => void;
-}
-
-export default function MedicalDictionaryModule({ onBack }: MedicalDictionaryModuleProps) {
+export default function MedicalDictionaryModule() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
   const { data: stats } = useDictionaryStats();
 
@@ -28,17 +25,16 @@ export default function MedicalDictionaryModule({ onBack }: MedicalDictionaryMod
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
-              {onBack && (
+              <Link href="/">
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={onBack}
                   className="flex items-center space-x-2 hover:bg-slate-100"
                 >
                   <ArrowLeft className="h-4 w-4" />
                   <span>Back to Dictionary</span>
                 </Button>
-              )}
+              </Link>
               <div className="flex items-center space-x-3">
                 <div className="p-2 bg-red-100 rounded-lg">
                   <Stethoscope className="h-6 w-6 text-red-600" />
