@@ -53,23 +53,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.warn("INL Tetum dictionary not found");
       }
 
-      // Load Tetum Monolingual dictionary
-      let tetumMonolingualData: any[] = [];
+      // Load INL Tetum Dictionary
+      let inlTetumDictData: any[] = [];
       try {
-        const tetumMonoPath = path.resolve(process.cwd(), "attached_assets", "Pasted--word-atletizmu-class-Substantivu-meaning-Atividade-ka-ku-1750156777749_1750156777753.txt");
-        const fileContent = await fs.readFile(tetumMonoPath, "utf-8");
-        tetumMonolingualData = JSON.parse(fileContent);
-        console.log(`Tetum monolingual dictionary loaded successfully with ${tetumMonolingualData.length} entries`);
+        const inlTetumPath = path.resolve(process.cwd(), "attached_assets", "Pasted--word-atletizmu-class-Substantivu-meaning-Atividade-ka-ku-1750161211628_1750161211632.txt");
+        const fileContent = await fs.readFile(inlTetumPath, "utf-8");
+        inlTetumDictData = JSON.parse(fileContent);
+        console.log(`INL Tetum dictionary loaded successfully with ${inlTetumDictData.length} entries`);
       } catch (error) {
-        console.warn("Tetum monolingual dictionary not found or malformed:", error);
-        // Fallback to sample data
-        try {
-          const fallbackPath = path.resolve(process.cwd(), "attached_assets", "tetum_monolingual_sample.json");
-          tetumMonolingualData = JSON.parse(await fs.readFile(fallbackPath, "utf-8"));
-          console.log(`Using fallback Tetum monolingual data with ${tetumMonolingualData.length} entries`);
-        } catch (fallbackError) {
-          console.warn("Fallback Tetum monolingual dictionary also not found");
-        }
+        console.warn("INL Tetum dictionary not found or malformed:", error);
       }
 
       // Load additional legal terms in Portuguese
@@ -164,12 +156,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Process INL Tetum dictionary entries (complex structure with objects)
-      const inlTetumEntries = inlTetumData.filter((item: any) => item && item.word).map((item: any) => ({
+      // Process old INL Tetum dictionary entries (from previous file)
+      const oldInlTetumEntries = inlTetumData.filter((item: any) => item && item.word).map((item: any) => ({
         tetum: safeStringify(item.word),
         portuguese: "",
         english: safeStringify(item.meaning),
-        source: "INL Tetum Dictionary",
+        source: "INL Tetum Dictionary (Old)",
         category: "general",
         dictionaryType: "general",
         notes: "",
@@ -232,14 +224,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Process Tetum Monolingual dictionary entries
-      const tetumMonolingualEntries = tetumMonolingualData.filter(item => item && item.word).map((item: any) => ({
+      // Process new INL Tetum Dictionary entries
+      const newInlTetumEntries = inlTetumDictData.filter(item => item && item.word).map((item: any) => ({
         tetum: safeStringify(item.word),
         portuguese: "",
         english: "",
-        source: "Tetum Monolingual Dictionary",
-        category: "tetum-monolingual",
-        dictionaryType: "tetum-monolingual",
+        source: "INL Tetum Dictionary",
+        category: "inl-tetum",
+        dictionaryType: "inl-tetum",
         notes: "",
         explanation: safeStringify(item.meaning),
         pronunciation: "",
@@ -274,10 +266,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         ...additionalLegalEntries, // Legal module only
         ...medicalTetumEntries,    // Medical module only
         ...medicalEnEntries,       // Medical module only
-        ...tetumMonolingualEntries // Tetum monolingual module only
+        ...newInlTetumEntries,     // INL Tetum dictionary module
+        ...oldInlTetumEntries      // Old INL entries
       ]);
       
-      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + additionalLegalEntries.length + medicalTetumEntries.length + medicalEnEntries.length + tetumMonolingualEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + additionalLegalEntries.length + medicalTetumEntries.length + medicalEnEntries.length + inlTetumEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
