@@ -7,6 +7,18 @@ import path from "path";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
+  // Helper function to safely convert values to strings
+  const safeStringify = (value: any): string => {
+    if (value === null || value === undefined) return "";
+    if (typeof value === "string") return value;
+    if (typeof value === "object") {
+      if (value.meaning) return value.meaning;
+      if (value.variant) return value.variant;
+      return JSON.stringify(value);
+    }
+    return String(value);
+  };
+
   // Initialize dictionary data from JSON files
   async function initializeDictionaries() {
     try {
@@ -30,6 +42,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         medicalEnTetumData = [];
       }
       
+      // Load INL Tetum dictionary (has complex structure with meaning/variant objects)
+      let inlTetumData: any[] = [];
+      try {
+        const inlTetumPath = path.resolve(process.cwd(), "attached_assets", "inl_tt_dic_final_1750040241832.json");
+        inlTetumData = JSON.parse(await fs.readFile(inlTetumPath, "utf-8"));
+      } catch (error) {
+        console.warn("INL Tetum dictionary not found");
+      }
+      
       // Load legal dictionary
       const legalDictPath = path.resolve(process.cwd(), "attached_assets", "legal dic tt_1750040265133.json");
       const legalDictData = JSON.parse(await fs.readFile(legalDictPath, "utf-8"));
@@ -44,13 +65,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Process legal dictionary entries
       const legalEntries = legalDictData.map((item: any) => ({
-        tetum: item.tetum || "",
-        portuguese: item.portuguese || "",
-        english: item.english || "",
-        source: item.source || "",
+        tetum: safeStringify(item.tetum),
+        portuguese: safeStringify(item.portuguese),
+        english: safeStringify(item.english),
+        source: safeStringify(item.source),
         category: "legal",
         dictionaryType: "legal",
-        notes: item.notes || "",
+        notes: safeStringify(item.notes),
         explanation: "",
         pronunciation: "",
         wordClass: "",
@@ -61,14 +82,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Process legal glossary entries
       const glossaryEntries = legalGlossaryData.map((item: any) => ({
-        tetum: item.tetum_term || "",
+        tetum: safeStringify(item.tetum_term),
         portuguese: "",
         english: "",
-        source: item.source || "Legal Dictionary",
+        source: safeStringify(item.source) || "Legal Dictionary",
         category: "legal",
         dictionaryType: "legal",
         notes: "",
-        explanation: item.tetum_explanation || "",
+        explanation: safeStringify(item.tetum_explanation),
         pronunciation: "",
         wordClass: "",
         etymology: "",
@@ -76,27 +97,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
+      // Process INL Tetum dictionary entries (complex structure with objects)
+      const inlTetumEntries = inlTetumData.filter((item: any) => item && item.word).map((item: any) => ({
+        tetum: safeStringify(item.word),
+        portuguese: "",
+        english: safeStringify(item.meaning),
+        source: "INL Tetum Dictionary",
+        category: "general",
+        dictionaryType: "general",
+        notes: "",
+        explanation: safeStringify(item.meaning),
+        pronunciation: "",
+        wordClass: safeStringify(item.class),
+        etymology: "",
+        usageExamples: [],
+        relatedTerms: [],
+      }));
+
       // Process medical dictionary entries (Tetum-English)
       const medicalTetumEntries = medicalTetumEnData.map((item: any) => ({
-        tetum: item.term || "",
-        english: Array.isArray(item.translations) ? item.translations.join("; ") : (item.translation || ""),
+        tetum: safeStringify(item.term),
+        english: Array.isArray(item.translations) ? item.translations.join("; ") : safeStringify(item.translation),
         portuguese: "",
-        source: item.source || "Medical Dictionary",
+        source: safeStringify(item.source) || "Medical Dictionary",
         category: "medical",
         dictionaryType: "medical",
-        notes: item.usage ? `Usage: ${item.usage}` : "",
-        explanation: item.similar ? `Similar: ${Array.isArray(item.similar) ? item.similar.join("; ") : item.similar}` : "",
+        notes: item.usage ? `Usage: ${safeStringify(item.usage)}` : "",
+        explanation: item.similar ? `Similar: ${Array.isArray(item.similar) ? item.similar.join("; ") : safeStringify(item.similar)}` : "",
         pronunciation: "",
         wordClass: "",
         etymology: "",
-        usageExamples: item.action ? (Array.isArray(item.action) ? item.action : [item.action]) : [],
-        relatedTerms: item.synonym ? (Array.isArray(item.synonym) ? item.synonym : [item.synonym]) : [],
+        usageExamples: item.action ? (Array.isArray(item.action) ? item.action.map(safeStringify) : [safeStringify(item.action)]) : [],
+        relatedTerms: item.synonym ? (Array.isArray(item.synonym) ? item.synonym.map(safeStringify) : [safeStringify(item.synonym)]) : [],
       }));
 
       // Process medical dictionary entries (English-Tetum)
       const medicalEnEntries = medicalEnTetumData.map((item: any) => ({
-        english: item.english || "",
-        tetum: item.tetum || "",
+        english: safeStringify(item.english),
+        tetum: safeStringify(item.tetum),
         portuguese: "",
         source: "Medical Dictionary",
         category: "medical",
@@ -112,13 +150,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Process general dictionary entries
       const generalEntries = generalDictData.map((item: any) => ({
-        tetum: item.tetum || "",
-        portuguese: item.portuguese || "",
-        english: item.english || "",
-        source: item.source || "",
+        tetum: safeStringify(item.tetum),
+        portuguese: safeStringify(item.portuguese),
+        english: safeStringify(item.english),
+        source: safeStringify(item.source),
         category: "general",
         dictionaryType: "general",
-        notes: item.notes || "",
+        notes: safeStringify(item.notes),
         explanation: "",
         pronunciation: "",
         wordClass: "",
@@ -128,9 +166,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }));
 
       // Bulk insert all entries
-      await storage.bulkCreateEntries([...legalEntries, ...glossaryEntries, ...medicalTetumEntries, ...medicalEnEntries, ...generalEntries]);
+      await storage.bulkCreateEntries([...legalEntries, ...glossaryEntries, ...inlTetumEntries, ...medicalTetumEntries, ...medicalEnEntries, ...generalEntries]);
       
-      console.log(`Loaded ${legalEntries.length + glossaryEntries.length + medicalTetumEntries.length + medicalEnEntries.length + generalEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + glossaryEntries.length + inlTetumEntries.length + medicalTetumEntries.length + medicalEnEntries.length + generalEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
