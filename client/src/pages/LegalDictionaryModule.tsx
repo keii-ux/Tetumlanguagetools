@@ -37,7 +37,7 @@ export default function LegalDictionaryModule() {
       description: "Detailed explanations of legal concepts in Tetum language",
       icon: BookOpen,
       color: "green",
-      count: 0, // Will be updated when we load the data
+      count: stats?.["tetum-glossary"] || 0,
     },
     {
       id: "portuguese-glossary",
@@ -46,7 +46,7 @@ export default function LegalDictionaryModule() {
       description: "Portuguese legal terms with definitions and explanations",
       icon: FileText,
       color: "purple",
-      count: 0, // Will be updated when we load the data
+      count: stats?.["portuguese-glossary"] || 0
     },
   ];
 
