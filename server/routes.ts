@@ -148,43 +148,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       }
 
-      // Load additional legal terms in Portuguese
-      let additionalLegalData: any[] = [];
-      try {
-        const additionalLegalPath = path.resolve(process.cwd(), "attached_assets", "Pasted--termo-Abandono-da-causa-significado-Por-incumprimento-das-dilig-ncias-proces-1750147297627_1750147297629.txt");
-        additionalLegalData = JSON.parse(await fs.readFile(additionalLegalPath, "utf-8"));
-        console.log(`Additional legal terms loaded successfully with ${additionalLegalData.length} entries`);
-      } catch (error) {
-        console.warn("Additional legal terms not found:", error);
-      }
-      
-      // Load legal dictionaries
+      // Load LEGAL dictionary - Portuguese, Tetum, and English legal terms
       let legalDictData: any[] = [];
-      let tetumGlossaryData: any[] = [];
-      let portugueseGlossaryData: any[] = [];
       
       try {
-        const legalDictPath = path.resolve(process.cwd(), "attached_assets", "legal dic tt_1750146002336.json");
+        const legalDictPath = path.resolve(process.cwd(), "attached_assets", "legal dic tt.json");
         legalDictData = JSON.parse(await fs.readFile(legalDictPath, "utf-8"));
         console.log(`Legal dictionary loaded successfully with ${legalDictData.length} entries`);
       } catch (error) {
         console.warn("Legal dictionary not found:", error);
-      }
-      
-      try {
-        const tetumGlossaryPath = path.resolve(process.cwd(), "attached_assets", "legal tetum glossay_1750146002337.json");
-        tetumGlossaryData = JSON.parse(await fs.readFile(tetumGlossaryPath, "utf-8"));
-        console.log(`Tetum glossary loaded successfully with ${tetumGlossaryData.length} entries`);
-      } catch (error) {
-        console.warn("Tetum glossary not found:", error);
-      }
-      
-      try {
-        const portugueseGlossaryPath = path.resolve(process.cwd(), "attached_assets", "glos_juridico_pt.json");
-        portugueseGlossaryData = JSON.parse(await fs.readFile(portugueseGlossaryPath, "utf-8"));
-        console.log(`Portuguese glossary loaded successfully with ${portugueseGlossaryData.length} entries`);
-      } catch (error) {
-        console.warn("Portuguese glossary not found:", error);
+        legalDictData = [];
       }
 
       const generalDictData: any[] = [];
@@ -206,39 +179,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Process Tetum glossary entries
-      const tetumGlossaryEntries = tetumGlossaryData.map((item: any) => ({
-        tetum: safeStringify(item.tetum_term),
-        portuguese: "",
-        english: "",
-        source: safeStringify(item.source) || "Legal Dictionary",
-        category: "legal",
-        dictionaryType: "tetum-glossary",
-        notes: "",
-        explanation: safeStringify(item.tetum_explanation),
-        pronunciation: "",
-        wordClass: "",
-        etymology: "",
-        usageExamples: [],
-        relatedTerms: [],
-      }));
 
-      // Process Portuguese glossary entries
-      const portugueseGlossaryEntries = portugueseGlossaryData.map((item: any) => ({
-        tetum: "",
-        portuguese: safeStringify(item.termo),
-        english: "",
-        source: "Portuguese Legal Dictionary",
-        category: "legal",
-        dictionaryType: "portuguese-glossary",
-        notes: "",
-        explanation: safeStringify(item.significado),
-        pronunciation: "",
-        wordClass: "",
-        etymology: "",
-        usageExamples: [],
-        relatedTerms: [],
-      }));
 
       // Process INL Tetum dictionary entries (new structure)
       const inlTetumEntries = inlTetumData.filter((item: any) => item && item.word).map((item: any) => ({
@@ -310,35 +251,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
 
 
-      // Process additional legal terms (Portuguese)
-      const additionalLegalEntries = additionalLegalData.filter(item => item && item.termo).map((item: any) => ({
-        tetum: "",
-        portuguese: safeStringify(item.termo),
-        english: "",
-        source: "Legal Dictionary Supplement",
-        category: "legal",
-        dictionaryType: "portuguese-legal",
-        notes: "",
-        explanation: safeStringify(item.significado),
-        pronunciation: "",
-        wordClass: "Termo Jurídico",
-        etymology: "",
-        usageExamples: [],
-        relatedTerms: [],
-      }));
+
 
       // Bulk insert all entries with proper separation
       await storage.bulkCreateEntries([
         ...legalEntries,           // Legal module only
-        ...tetumGlossaryEntries,   // Legal module only
-        ...portugueseGlossaryEntries, // Legal module only
-        ...additionalLegalEntries, // Legal module only
         ...medicalEnTtEntries,     // Medical module - English to Tetum
         ...medicalTtEnEntries,     // Medical module - Tetum to English
         ...inlTetumEntries         // INL Tetum dictionary module
       ]);
       
-      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + additionalLegalEntries.length + medicalEnTtEntries.length + medicalTtEnEntries.length + inlTetumEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + medicalEnTtEntries.length + medicalTtEnEntries.length + inlTetumEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
