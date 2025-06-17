@@ -23,7 +23,7 @@ export default function PortugueseGlossaryModule() {
           <Link href="/">
             <Button variant="ghost" className="mb-4">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Voltar à página principal
+              Voltar ao Dicionário
             </Button>
           </Link>
           <LanguageSwitcher 
@@ -37,109 +37,68 @@ export default function PortugueseGlossaryModule() {
             Glossário Jurídico Português
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Glossário abrangente com termos jurídicos importantes e definições claras em português. 
-            Inclui terminologia do direito civil, penal, constitucional, administrativo e outras áreas do direito.
+            Glossário abrangente com terminologia jurídica importante em português. 
+            Inclui termos da Constituição, códigos legais e outros documentos jurídicos relevantes.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <Card>
+        <div className="grid lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            <PortugueseGlossarySearch onEntrySelect={handleEntrySelect} />
+            
+            <Card className="mt-8">
               <CardHeader>
-                <CardTitle className="text-blue-600 dark:text-blue-400">
-                  Pesquisar Termos Jurídicos
-                </CardTitle>
+                <CardTitle>Descrição</CardTitle>
               </CardHeader>
               <CardContent>
-                <PortugueseGlossarySearch onEntrySelect={handleEntrySelect} />
+                <div className="space-y-4">
+                  <p className="text-gray-700 dark:text-gray-300">
+                    Este glossário inclui termos jurídicos importantes amplamente utilizados em 
+                    documentos legais e na constituição de Timor-Leste. Cada termo possui uma 
+                    explicação clara em português para ajudar na compreensão de assuntos legais.
+                  </p>
+                  
+                  <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                    <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">
+                      Como usar:
+                    </h4>
+                    <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
+                      <li>• Digite uma palavra na caixa de pesquisa</li>
+                      <li>• Selecione um termo da lista que aparece</li>
+                      <li>• Leia a explicação detalhada no painel lateral</li>
+                      <li>• Use estes termos para compreender documentos legais</li>
+                    </ul>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
 
-          <div>
+          <div className="lg:col-span-1">
             {selectedEntry ? (
               <TermDetail
                 entry={selectedEntry}
                 onClose={() => setSelectedEntry(null)}
-                userId="user-1"
+                userId="guest"
               />
             ) : (
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-gray-600 dark:text-gray-400">
-                    Selecionar Termo
-                  </CardTitle>
+                  <CardTitle>Detalhes do Termo</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-center py-12">
-                    <div className="text-6xl mb-4">⚖️</div>
+                  <div className="text-center py-8">
+                    <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <ArrowLeft className="w-8 h-8 text-gray-400 transform rotate-180" />
+                    </div>
                     <p className="text-gray-500 dark:text-gray-400">
-                      Selecione um termo jurídico da pesquisa para ver a definição detalhada
+                      Selecione um termo da lista para ver a explicação detalhada
                     </p>
                   </div>
                 </CardContent>
               </Card>
             )}
           </div>
-        </div>
-
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-green-600 dark:text-green-400">
-                Sobre Este Glossário
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                O Glossário Jurídico Português é uma coleção de termos jurídicos importantes com definições claras em português. 
-                Ajuda estudantes de direito, advogados e cidadãos em geral a compreender a terminologia jurídica utilizada no sistema legal.
-              </p>
-              <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
-                <li>1,063+ termos jurídicos com definições detalhadas</li>
-                <li>Terminologia do direito civil e penal</li>
-                <li>Termos do direito constitucional</li>
-                <li>Terminologia do direito administrativo</li>
-                <li>Pesquisa avançada com previsão</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-purple-600 dark:text-purple-400">
-                Como Usar
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3 text-sm text-gray-600 dark:text-gray-300">
-                <div className="flex items-start gap-3">
-                  <div className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
-                    1
-                  </div>
-                  <p>Digite o termo jurídico que procura na caixa de pesquisa</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
-                    2
-                  </div>
-                  <p>Selecione o termo da lista de sugestões que aparecem</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
-                    3
-                  </div>
-                  <p>Leia a definição detalhada no painel da direita</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
-                    4
-                  </div>
-                  <p>Use as informações para estudos ou trabalho</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </div>

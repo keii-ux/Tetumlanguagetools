@@ -23,7 +23,7 @@ export default function TetumGlossaryModule() {
           <Link href="/">
             <Button variant="ghost" className="mb-4">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Fila ba página prinsipal
+              Back to Dictionary
             </Button>
           </Link>
           <LanguageSwitcher 
@@ -42,104 +42,63 @@ export default function TetumGlossaryModule() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <Card>
+        <div className="grid lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            <TetumGlossarySearch onEntrySelect={handleEntrySelect} />
+            
+            <Card className="mt-8">
               <CardHeader>
-                <CardTitle className="text-blue-600 dark:text-blue-400">
-                  Buka Termu Legál
-                </CardTitle>
+                <CardTitle>Deskripsaun</CardTitle>
               </CardHeader>
               <CardContent>
-                <TetumGlossarySearch onEntrySelect={handleEntrySelect} />
+                <div className="space-y-4">
+                  <p className="text-gray-700 dark:text-gray-300">
+                    Glosáriu ida ne'e inklui termu legál importante sira ne'ebé uza barak iha dokumentu 
+                    legál no konstituisaun Timor-Leste nian. Kada termu hetan esplikasaun klaru iha lian Tetum 
+                    atu ajuda ema sira komprende diak liu asuntu legál sira.
+                  </p>
+                  
+                  <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                    <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">
+                      Oinsá atu uza:
+                    </h4>
+                    <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
+                      <li>• Hakerek liafuan ida iha kaixa buka</li>
+                      <li>• Hili termu husi lista ne'ebé mosu</li>
+                      <li>• Lee esplikasaun detalhadu iha sorin loos</li>
+                      <li>• Uza termu sira-ne'e atu komprende dokumentu legál</li>
+                    </ul>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
 
-          <div>
+          <div className="lg:col-span-1">
             {selectedEntry ? (
               <TermDetail
                 entry={selectedEntry}
                 onClose={() => setSelectedEntry(null)}
-                userId="user-1"
+                userId="guest"
               />
             ) : (
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-gray-600 dark:text-gray-400">
-                    Hili Liafuan
-                  </CardTitle>
+                  <CardTitle>Detalhe Termu</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-center py-12">
-                    <div className="text-6xl mb-4">📚</div>
+                  <div className="text-center py-8">
+                    <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <ArrowLeft className="w-8 h-8 text-gray-400 transform rotate-180" />
+                    </div>
                     <p className="text-gray-500 dark:text-gray-400">
-                      Hili termu legál ida husi kaixa buka atu haree esplikasaun detalhadu
+                      Hili termu ida husi lista atu haree esplikasaun detalhadu
                     </p>
                   </div>
                 </CardContent>
               </Card>
             )}
           </div>
-        </div>
-
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-green-600 dark:text-green-400">
-                Kona-ba Glosáriu Ne'e
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Glosáriu Legál Tetum ne'e koleksaun termu legál importante sira ho esplikasaun klaru iha lian Tetum. 
-                Nia ajuda estudante direitu, advogadu, no sidadaun komun atu komprende termu legál ne'ebé uza iha sistema justisa Timor-Leste.
-              </p>
-              <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
-                <li>470+ termu legál ho esplikasaun detalhadu</li>
-                <li>Termu husi Konstituisaun RDTL</li>
-                <li>Termu husi Kódigu Sivíl no Kódigu Penál</li>
-                <li>Termu husi lei administrativu</li>
-                <li>Buka avansadu ho previsaun</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-purple-600 dark:text-purple-400">
-                Oinsá Uza
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3 text-sm text-gray-600 dark:text-gray-300">
-                <div className="flex items-start gap-3">
-                  <div className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
-                    1
-                  </div>
-                  <p>Hakerek termu legál ne'ebé ita buka iha kaixa buka</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
-                    2
-                  </div>
-                  <p>Hili termu husi lista sujestão ne'ebé mosu</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
-                    3
-                  </div>
-                  <p>Lee esplikasaun detalhadu iha sorin loos</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
-                    4
-                  </div>
-                  <p>Uza informasaun sira ba estudu ka trabalhu</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </div>
