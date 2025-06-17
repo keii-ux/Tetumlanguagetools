@@ -24,7 +24,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       // Load medical dictionaries
       const medicalTetumEnPath = path.resolve(process.cwd(), "attached_assets", "medical-dic_tt_en_1750136885930.json");
-      const medicalEnTetumPath = path.resolve(process.cwd(), "attached_assets", "medical_dic_en-tt_fixed.json");
+      const medicalEnTetumPath = path.resolve(process.cwd(), "attached_assets", "medical_dic_en-tt_1750136885932.json");
       
       let medicalTetumEnData = [];
       let medicalEnTetumData = [];
@@ -362,6 +362,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         asean: entries.filter(e => e.dictionaryType === "asean").length,
         "tetum-glossary": entries.filter(e => e.dictionaryType === "tetum-glossary").length,
         "portuguese-glossary": entries.filter(e => e.dictionaryType === "portuguese-glossary").length,
+        "tetum-monolingual": entries.filter(e => e.dictionaryType === "tetum-monolingual").length,
       };
       res.json(stats);
     } catch (error) {

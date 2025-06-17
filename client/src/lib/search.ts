@@ -48,6 +48,9 @@ export function useDictionaryStats() {
     medical: number;
     general: number;
     asean: number;
+    "tetum-glossary": number;
+    "portuguese-glossary": number;
+    "tetum-monolingual": number;
   }>({
     queryKey: ["/api/stats"],
     staleTime: 1000 * 60 * 15, // 15 minutes

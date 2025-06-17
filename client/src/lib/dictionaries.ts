@@ -6,6 +6,7 @@ export const DICTIONARY_TYPES = {
   medical: "Medical Dictionary",
   general: "General Dictionary",
   asean: "ASEAN Glossary",
+  "tetum-monolingual": "Tetum Monolingual Dictionary",
 } as const;
 
 export const LANGUAGES = {
@@ -20,6 +21,7 @@ export const DICTIONARY_ICONS = {
   medical: "fas fa-stethoscope",
   general: "fas fa-book",
   asean: "fas fa-globe-asia",
+  "tetum-monolingual": "fas fa-language",
 } as const;
 
 export const DICTIONARY_COLORS = {
@@ -27,6 +29,7 @@ export const DICTIONARY_COLORS = {
   medical: "bg-red-500",
   general: "bg-purple-500",
   asean: "bg-green-500",
+  "tetum-monolingual": "bg-orange-500",
 } as const;
 
 export function getDictionaryIcon(type: string): string {
