@@ -49,10 +49,10 @@ const DICTIONARY_CONFIG = [
   },
   {
     type: "tetum-monolingual",
-    name: "Tetum Monolingual",
+    name: "Disionáriu Tetum",
     icon: Languages,
     color: "bg-orange-500",
-    description: "Tetum definitions in Tetum",
+    description: "Definisaun Tetum iha lian Tetum",
     route: "/tetum-monolingual"
   },
 ];

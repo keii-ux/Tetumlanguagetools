@@ -125,24 +125,24 @@ export function TetumMonolingualSearch({ onEntrySelect }: TetumMonolingualSearch
       <div className="text-center space-y-2">
         <div className="flex items-center justify-center gap-2">
           <BookOpen className="w-6 h-6 text-orange-600" />
-          <h1 className="text-2xl font-bold text-slate-900">Tetum Monolingual Dictionary</h1>
+          <h1 className="text-2xl font-bold text-slate-900">Disionáriu Tetum Monolíngue</h1>
         </div>
         <p className="text-slate-600">
-          Comprehensive Tetum definitions and explanations in Tetum language
+          Disionáriu kompletu ho definisaun Tetum nian iha lian Tetum rasik
         </p>
       </div>
 
       {/* Search Modes */}
       <Tabs value={searchMode} onValueChange={(value) => setSearchMode(value as "starts-with" | "contains")}>
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="starts-with">Starts with Letter</TabsTrigger>
-          <TabsTrigger value="contains">Contains Text</TabsTrigger>
+          <TabsTrigger value="starts-with">Hahu ho Leta</TabsTrigger>
+          <TabsTrigger value="contains">Iha Liafuan</TabsTrigger>
         </TabsList>
 
         <TabsContent value="starts-with" className="space-y-4">
           <div className="text-center">
             <p className="text-sm text-slate-600 mb-4">
-              Search for Tetum words that start with specific letters
+              Buka liafuan Tetum ne'ebé hahu ho letra ka liafuan espesífiku
             </p>
           </div>
         </TabsContent>
@@ -150,7 +150,7 @@ export function TetumMonolingualSearch({ onEntrySelect }: TetumMonolingualSearch
         <TabsContent value="contains" className="space-y-4">
           <div className="text-center">
             <p className="text-sm text-slate-600 mb-4">
-              Search for Tetum words containing specific text
+              Buka liafuan Tetum ne'ebé iha testu ka lia-fuan ida iha laran
             </p>
           </div>
         </TabsContent>
@@ -164,8 +164,8 @@ export function TetumMonolingualSearch({ onEntrySelect }: TetumMonolingualSearch
             <Input
               placeholder={
                 searchMode === "starts-with" 
-                  ? "Enter letter(s) to find Tetum words starting with..."
-                  : "Enter text to search within Tetum words..."
+                  ? "Hakerek leta atu buka liafuan Tetum sira ne'ebé hahu ho..."
+                  : "Hakerek testu atu buka iha liafuan Tetum sira..."
               }
               value={searchTerm}
               onChange={(e) => handleInputChange(e.target.value)}
@@ -177,7 +177,7 @@ export function TetumMonolingualSearch({ onEntrySelect }: TetumMonolingualSearch
             )}
           </div>
           <Button onClick={handleSearch} disabled={!searchTerm.trim() || isLoading}>
-            Search
+            Buka
           </Button>
         </div>
 
@@ -194,10 +194,10 @@ export function TetumMonolingualSearch({ onEntrySelect }: TetumMonolingualSearch
       {searchTerm && (
         <div className="flex items-center justify-between text-sm text-slate-600">
           <span>
-            {filteredEntries.length} Tetum word{filteredEntries.length !== 1 ? 's' : ''} found
+            Hetan {filteredEntries.length} liafuan Tetum
           </span>
           {searchMode === "starts-with" && (
-            <span>Starting with: "{searchTerm}"</span>
+            <span>Ne'ebé hahu ho: "{searchTerm}"</span>
           )}
         </div>
       )}
@@ -208,12 +208,13 @@ export function TetumMonolingualSearch({ onEntrySelect }: TetumMonolingualSearch
           <div className="flex items-start gap-3">
             <Info className="w-5 h-5 text-orange-600 mt-0.5" />
             <div className="space-y-2">
-              <h3 className="font-semibold text-orange-900">How to use</h3>
+              <h3 className="font-semibold text-orange-900">Oinsá atu uza</h3>
               <ul className="text-sm text-orange-800 space-y-1">
-                <li>• <strong>Starts with:</strong> Type a letter to find all Tetum words beginning with that letter</li>
-                <li>• <strong>Contains:</strong> Type any text to search within Tetum words</li>
-                <li>• Click on any result to view detailed definition and usage</li>
-                <li>• All definitions and explanations are provided in Tetum language</li>
+                <li>• <strong>Hahu ho Leta:</strong> Hakerek leta ida atu buka liafuan Tetum hotu ne'ebé hahu ho leta ne'e</li>
+                <li>• <strong>Iha Liafuan:</strong> Hakerek testu ida atu buka iha liafuan Tetum sira laran</li>
+                <li>• Klik iha rezultadu ruma atu haree definisaun detalladu no ezemplu uza</li>
+                <li>• Definisaun no esplikasaun hotu-hotu fó iha lian Tetum</li>
+                <li>• Disionáriu ne'e iha {filteredEntries.length > 0 ? filteredEntries.length : '7,303'} liafuan Tetum</li>
               </ul>
             </div>
           </div>

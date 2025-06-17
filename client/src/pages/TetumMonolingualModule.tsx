@@ -28,17 +28,17 @@ export default function TetumMonolingualModule() {
             <Link href="/">
               <Button variant="ghost" size="sm">
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Dictionary
+                Fila ba Disionáriu
               </Button>
             </Link>
             <div className="h-6 w-px bg-slate-300" />
             <div className="flex items-center gap-2">
               <BookOpen className="w-6 h-6 text-orange-600" />
-              <h1 className="text-2xl font-bold text-slate-900">Tetum Monolingual Dictionary</h1>
+              <h1 className="text-2xl font-bold text-slate-900">Disionáriu Tetum Monolíngue</h1>
             </div>
           </div>
           <Badge variant="secondary" className="bg-orange-100 text-orange-800">
-            {tetumMonoCount.toLocaleString()} entries
+            {tetumMonoCount.toLocaleString()} liafuan
           </Badge>
         </div>
 
@@ -52,7 +52,7 @@ export default function TetumMonolingualModule() {
                   <div className="text-2xl font-bold text-slate-900">
                     {tetumMonoCount.toLocaleString()}
                   </div>
-                  <div className="text-sm text-slate-600">Tetum Definitions</div>
+                  <div className="text-sm text-slate-600">Definisaun Tetum</div>
                 </div>
               </div>
             </CardContent>
@@ -64,7 +64,7 @@ export default function TetumMonolingualModule() {
                 <FileText className="w-8 h-8 text-orange-600" />
                 <div>
                   <div className="text-2xl font-bold text-slate-900">100%</div>
-                  <div className="text-sm text-slate-600">Tetum Language</div>
+                  <div className="text-sm text-slate-600">Lian Tetum</div>
                 </div>
               </div>
             </CardContent>
@@ -75,8 +75,8 @@ export default function TetumMonolingualModule() {
               <div className="flex items-center gap-3">
                 <BookMarked className="w-8 h-8 text-orange-600" />
                 <div>
-                  <div className="text-2xl font-bold text-slate-900">Native</div>
-                  <div className="text-sm text-slate-600">Definitions</div>
+                  <div className="text-2xl font-bold text-slate-900">Nativu</div>
+                  <div className="text-sm text-slate-600">Definisaun sira</div>
                 </div>
               </div>
             </CardContent>
@@ -109,10 +109,10 @@ export default function TetumMonolingualModule() {
                     <BookOpen className="w-12 h-12 text-orange-400 mx-auto" />
                     <div>
                       <h3 className="text-lg font-semibold text-slate-900 mb-2">
-                        Select a Tetum Word
+                        Hili Liafuan Tetum
                       </h3>
                       <p className="text-slate-600 text-sm">
-                        Search and click on any Tetum word to view its detailed definition and usage examples in Tetum language.
+                        Buka no klik ba liafuan Tetum ruma atu haree nia definisaun detalladu no ezemplu uza iha lian Tetum.
                       </p>
                     </div>
                   </div>
@@ -128,24 +128,25 @@ export default function TetumMonolingualModule() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-lg font-semibold text-slate-900 mb-3">
-                  About Tetum Monolingual Dictionary
+                  Kona-ba Disionáriu Tetum Monolíngue
                 </h3>
                 <p className="text-slate-600 text-sm leading-relaxed">
-                  This comprehensive dictionary provides Tetum word definitions and explanations 
-                  entirely in the Tetum language. It's designed to help native speakers and 
-                  advanced learners understand words within their cultural and linguistic context.
+                  Disionáriu kompletu ne'e fó definisaun no esplikasaun liafuan Tetum nian iha lian Tetum rasik. 
+                  Halo atu ajuda ema Tetum-oan sira no estudante nivel aas sira atu komprende liafuan sira 
+                  iha sira-nia kontestu kultural no linguístiku.
                 </p>
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-slate-900 mb-3">
-                  Features
+                  Karakterístika sira
                 </h3>
                 <ul className="text-slate-600 text-sm space-y-1">
-                  <li>• Native Tetum definitions</li>
-                  <li>• Word class identification</li>
-                  <li>• Usage examples and context</li>
-                  <li>• Cultural and linguistic notes</li>
-                  <li>• Advanced search capabilities</li>
+                  <li>• Definisaun Tetum nativu</li>
+                  <li>• Identifikasaun klase liafuan nian</li>
+                  <li>• Ezemplu uza no kontestu</li>
+                  <li>• Nota kultural no linguístiku</li>
+                  <li>• Kapasidade buka avansadu</li>
+                  <li>• {tetumMonoCount.toLocaleString()} liafuan Tetum auténtiku</li>
                 </ul>
               </div>
             </div>

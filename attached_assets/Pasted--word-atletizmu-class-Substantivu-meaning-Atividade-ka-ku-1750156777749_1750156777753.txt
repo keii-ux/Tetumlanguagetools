@@ -36510,4 +36510,3 @@
     "class": "Adjetivu",
     "meaning": "Neʼebé bele hetan kanek tanba la iha protesaun. Sin. hakanek-belek Ez. Iha funu laran labarik sira hela iha situasaun vulneravel tebes."
   }
-]
