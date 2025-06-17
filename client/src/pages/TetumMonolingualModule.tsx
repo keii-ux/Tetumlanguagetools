@@ -140,9 +140,7 @@ export default function TetumMonolingualModule() {
                 </SelectItem>
               </SelectContent>
             </Select>
-            <Badge variant="secondary" className="bg-orange-100 text-orange-800">
-              {tetumMonoCount.toLocaleString()} {content.entriesLabel}
-            </Badge>
+            
           </div>
         </div>
 
@@ -173,7 +171,7 @@ export default function TetumMonolingualModule() {
                 <div>
                   <div className="text-2xl font-bold text-slate-900">100%</div>
                   <div className="text-sm text-slate-600">
-                    {currentLanguage === "tetum" ? "Lian Tetum" : 
+                    {currentLanguage === "tetum" ? "Lian Tetum Padraun INL" : 
                      currentLanguage === "english" ? "Tetum Language" : 
                      "Língua Tetum"}
                   </div>
@@ -216,28 +214,12 @@ export default function TetumMonolingualModule() {
 
           {/* Term Detail Section */}
           <div className="lg:col-span-1">
-            {selectedEntry ? (
+            {selectedEntry && (
               <TermDetail 
                 entry={selectedEntry} 
                 onClose={() => setSelectedEntry(null)}
                 userId="anonymous"  // You can implement proper user management
               />
-            ) : (
-              <Card className="bg-white border-orange-200">
-                <CardContent className="p-6">
-                  <div className="text-center space-y-4">
-                    <BookOpen className="w-12 h-12 text-orange-400 mx-auto" />
-                    <div>
-                      <h3 className="text-lg font-semibold text-slate-900 mb-2">
-                        {content.selectWord}
-                      </h3>
-                      <p className="text-slate-600 text-sm">
-                        {content.selectDescription}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
             )}
           </div>
         </div>
