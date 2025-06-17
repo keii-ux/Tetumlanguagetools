@@ -28,7 +28,7 @@ function PredictiveDropdown({
   isVisible,
   activeLanguage 
 }: PredictiveDropdownProps) {
-  if (!isVisible || !searchTerm || entries.length === 0) return null;
+  if (!isVisible || !searchTerm || searchTerm.length < 2) return null;
 
   const filteredEntries = entries
     .filter(entry => {
@@ -44,7 +44,7 @@ function PredictiveDropdown({
       // If it starts with the search term, always include it
       if (startsWithMatch) return true;
       
-      // Otherwise, only include if it contains the search term and we have fewer than 3 starts-with matches
+      // Otherwise, only include if it contains the search term
       return tetumField.toLowerCase().includes(searchLower) || 
              englishField.toLowerCase().includes(searchLower);
     })
@@ -75,6 +75,16 @@ function PredictiveDropdown({
       return aDisplay.localeCompare(bDisplay);
     })
     .slice(0, 8);
+
+  if (filteredEntries.length === 0) {
+    return (
+      <Card className="absolute top-full left-0 right-0 z-50 mt-1 border-gray-200 shadow-lg bg-white">
+        <CardContent className="p-4 text-center text-gray-500 text-sm">
+          No medical terms found for "{searchTerm}"
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="absolute top-full left-0 right-0 z-50 mt-1 max-h-64 overflow-auto border-gray-200 shadow-lg bg-white">
@@ -154,10 +164,11 @@ export function MedicalDictionarySearch({ onEntrySelect }: MedicalDictionarySear
 
   const handleWordChange = (value: string) => {
     setWordSearch(value);
-    setShowPredictive(value.length > 0);
-    if (!value) {
+    setShowPredictive(value.length >= 2);
+    if (!value.trim()) {
       setShowResults(false);
       setSelectedEntry(null);
+      setShowPredictive(false);
     }
   };
 
@@ -267,10 +278,10 @@ export function MedicalDictionarySearch({ onEntrySelect }: MedicalDictionarySear
               <div className="text-sm font-medium text-gray-600 w-16">WORD</div>
               <div className="flex-1 relative" ref={searchRef}>
                 <Input
-                  placeholder={activeLanguage === "tetum" ? "Enter Tetum word" : activeLanguage === "english" ? "Enter English word" : "Enter word"}
+                  placeholder={activeLanguage === "tetum" ? "Enter Tetum word (min 2 characters)" : activeLanguage === "english" ? "Enter English word (min 2 characters)" : "Enter word (min 2 characters)"}
                   value={wordSearch}
                   onChange={(e) => handleWordChange(e.target.value)}
-                  onFocus={() => setShowPredictive(wordSearch.length > 0)}
+                  onFocus={() => setShowPredictive(wordSearch.length >= 2)}
                   onKeyPress={handleKeyPress}
                   className="border-0 focus:ring-0 text-gray-600 placeholder-gray-400"
                 />
@@ -306,8 +317,8 @@ export function MedicalDictionarySearch({ onEntrySelect }: MedicalDictionarySear
           <div className="flex justify-center">
             <Button
               onClick={handleSearch}
-              className="bg-teal-500 hover:bg-teal-600 text-white px-8 py-2 rounded-lg"
-              disabled={!wordSearch.trim()}
+              className="bg-teal-500 hover:bg-teal-600 text-white px-8 py-2 rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
+              disabled={!wordSearch.trim() || wordSearch.length < 2}
             >
               <Search className="w-4 h-4 mr-2" />
               Search
