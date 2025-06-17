@@ -52,9 +52,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.warn("INL Tetum dictionary not found");
       }
       
-      // For now, we'll initialize without the legal dictionaries since they were removed
-      const legalDictData: any[] = [];
-      const legalGlossaryData: any[] = [];
+      // Load legal dictionaries
+      let legalDictData: any[] = [];
+      let tetumGlossaryData: any[] = [];
+      let portugueseGlossaryData: any[] = [];
+      
+      try {
+        const legalDictPath = path.resolve(process.cwd(), "attached_assets", "legal dic tt_1750146002336.json");
+        legalDictData = JSON.parse(await fs.readFile(legalDictPath, "utf-8"));
+        console.log(`Legal dictionary loaded successfully with ${legalDictData.length} entries`);
+      } catch (error) {
+        console.warn("Legal dictionary not found:", error);
+      }
+      
+      try {
+        const tetumGlossaryPath = path.resolve(process.cwd(), "attached_assets", "legal tetum glossay_1750146002337.json");
+        tetumGlossaryData = JSON.parse(await fs.readFile(tetumGlossaryPath, "utf-8"));
+        console.log(`Tetum glossary loaded successfully with ${tetumGlossaryData.length} entries`);
+      } catch (error) {
+        console.warn("Tetum glossary not found:", error);
+      }
+      
+      try {
+        const portugueseGlossaryPath = path.resolve(process.cwd(), "attached_assets", "glos juridico pt_1750146026940.json");
+        portugueseGlossaryData = JSON.parse(await fs.readFile(portugueseGlossaryPath, "utf-8"));
+        console.log(`Portuguese glossary loaded successfully with ${portugueseGlossaryData.length} entries`);
+      } catch (error) {
+        console.warn("Portuguese glossary not found:", error);
+      }
+
       const generalDictData: any[] = [];
 
       // Process legal dictionary entries
@@ -74,16 +100,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Process legal glossary entries
-      const glossaryEntries = legalGlossaryData.map((item: any) => ({
+      // Process Tetum glossary entries
+      const tetumGlossaryEntries = tetumGlossaryData.map((item: any) => ({
         tetum: safeStringify(item.tetum_term),
         portuguese: "",
         english: "",
         source: safeStringify(item.source) || "Legal Dictionary",
         category: "legal",
-        dictionaryType: "legal",
+        dictionaryType: "tetum-glossary",
         notes: "",
         explanation: safeStringify(item.tetum_explanation),
+        pronunciation: "",
+        wordClass: "",
+        etymology: "",
+        usageExamples: [],
+        relatedTerms: [],
+      }));
+
+      // Process Portuguese glossary entries
+      const portugueseGlossaryEntries = portugueseGlossaryData.map((item: any) => ({
+        tetum: "",
+        portuguese: safeStringify(item.termo),
+        english: "",
+        source: "Portuguese Legal Dictionary",
+        category: "legal",
+        dictionaryType: "portuguese-glossary",
+        notes: "",
+        explanation: safeStringify(item.significado),
         pronunciation: "",
         wordClass: "",
         etymology: "",
@@ -160,9 +203,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }));
 
       // Bulk insert all entries
-      await storage.bulkCreateEntries([...legalEntries, ...glossaryEntries, ...inlTetumEntries, ...medicalTetumEntries, ...medicalEnEntries, ...generalEntries]);
+      await storage.bulkCreateEntries([...legalEntries, ...tetumGlossaryEntries, ...portugueseGlossaryEntries, ...inlTetumEntries, ...medicalTetumEntries, ...medicalEnEntries, ...generalEntries]);
       
-      console.log(`Loaded ${legalEntries.length + glossaryEntries.length + inlTetumEntries.length + medicalTetumEntries.length + medicalEnEntries.length + generalEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + inlTetumEntries.length + medicalTetumEntries.length + medicalEnEntries.length + generalEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
@@ -317,9 +360,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         medical: entries.filter(e => e.dictionaryType === "medical").length,
         general: entries.filter(e => e.dictionaryType === "general").length,
         asean: entries.filter(e => e.dictionaryType === "asean").length,
+        "tetum-glossary": entries.filter(e => e.dictionaryType === "tetum-glossary").length,
+        "portuguese-glossary": entries.filter(e => e.dictionaryType === "portuguese-glossary").length,
       };
       res.json(stats);
     } catch (error) {
+      console.error("Get statistics error:", error);
       res.status(500).json({ error: "Failed to fetch statistics" });
     }
   });
