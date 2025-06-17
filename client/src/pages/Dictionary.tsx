@@ -168,10 +168,8 @@ export default function Dictionary() {
   const displayResults = searchQuery.query || selectedTool ? searchResults : allEntries;
   const isLoading = searchQuery.query || selectedTool ? searchLoading : allLoading;
 
-  // Route to medical dictionary module
-  if (currentView === 'medical') {
-    return <MedicalDictionary onBack={() => setCurrentView('home')} />;
-  }
+  // Medical dictionary now uses separate routing
+  // Users access it via the "Advanced Medical Dictionary" button
 
   if (selectedTool) {
     return (
