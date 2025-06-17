@@ -72,7 +72,6 @@ export default function LegalDictionaryModule() {
                   <Scale className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-slate-900">Legal Module</h1>
                   <p className="text-sm text-slate-600">Comprehensive Legal Terminology & Glossaries</p>
                 </div>
               </div>
