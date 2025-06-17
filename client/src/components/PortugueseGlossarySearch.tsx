@@ -204,14 +204,7 @@ export function PortugueseGlossarySearch({ onEntrySelect }: PortugueseGlossarySe
                 <h3 className="text-lg font-semibold text-gray-900">
                   {selectedEntry.portuguese}
                 </h3>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={() => speakText(selectedEntry.portuguese || "")}
-                  className="p-1 hover:bg-gray-100"
-                >
-                  <Volume2 className="h-4 w-4 text-gray-600" />
-                </Button>
+                
                 <Button
                   size="sm"
                   variant="ghost"
