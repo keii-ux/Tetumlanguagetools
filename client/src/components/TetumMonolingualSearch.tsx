@@ -74,25 +74,25 @@ const searchContent = {
     placeholder: "Hakerek leta atu buka liafuan Tetum sira ne'ebé hahu ho...",
     resultsFound: "Hetan",
     resultsLabel: "liafuan Tetum",
-    startsWithLabel: "Ne'ebé hahu ho:"
+    startsWithLabel: "ne'ebé hahu ho"
   },
   english: {
     startsWith: "Starts with Letter",
-    contains: "Contains Word",
+    contains: "Contains Word", 
     searchDescription: "Search for Tetum words that start with a letter or contain specific words",
     placeholder: "Type a letter to find Tetum words that start with...",
     resultsFound: "Found",
     resultsLabel: "Tetum words",
-    startsWithLabel: "Starting with:"
+    startsWithLabel: "starting with"
   },
   portuguese: {
     startsWith: "Começa com Letra",
     contains: "Contém Palavra",
-    searchDescription: "Procurar palavras Tetum que começam com uma letra ou contêm palavras específicas",
+    searchDescription: "Procurar palavras Tetum que começam com uma letra ou contêm palavras específicas", 
     placeholder: "Digite uma letra para encontrar palavras Tetum que começam com...",
     resultsFound: "Encontrado",
     resultsLabel: "palavras Tetum",
-    startsWithLabel: "Começando com:"
+    startsWithLabel: "começando com"
   }
 };
 
@@ -101,6 +101,7 @@ export function TetumMonolingualSearch({ onEntrySelect, currentLanguage = "tetum
   const [showDropdown, setShowDropdown] = useState(false);
   const [searchMode, setSearchMode] = useState<"starts-with" | "contains">("starts-with");
   const searchRef = useRef<HTMLDivElement>(null);
+  const content = searchContent[currentLanguage];
 
   const { data: entries = [], isLoading } = useSearchEntries({
     query: searchTerm,
@@ -168,23 +169,29 @@ export function TetumMonolingualSearch({ onEntrySelect, currentLanguage = "tetum
       <div className="text-center space-y-2">
         <div className="flex items-center justify-center gap-2">
           <BookOpen className="w-6 h-6 text-orange-600" />
-          <h1 className="text-2xl font-bold text-slate-900">Disionáriu Tetum (INL)</h1>
+          <h1 className="text-2xl font-bold text-slate-900">
+            {currentLanguage === "tetum" ? "Disionáriu Tetum (INL)" :
+             currentLanguage === "english" ? "Tetum Dictionary (INL)" :
+             "Dicionário Tetum (INL)"}
+          </h1>
         </div>
         <p className="text-slate-600">
-          Disionáriu kompletu ho definisaun Tetum nian iha lian Tetum rasik
+          {currentLanguage === "tetum" ? "Disionáriu kompletu ho definisaun Tetum nian iha lian Tetum rasik" :
+           currentLanguage === "english" ? "Complete dictionary with Tetum definitions in Tetum language" :
+           "Dicionário completo com definições Tetum na língua Tetum"}
         </p>
       </div>
       {/* Search Modes */}
       <Tabs value={searchMode} onValueChange={(value) => setSearchMode(value as "starts-with" | "contains")}>
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="starts-with">Hahu ho Leta</TabsTrigger>
-          <TabsTrigger value="contains">Iha Liafuan</TabsTrigger>
+          <TabsTrigger value="starts-with">{content.startsWith}</TabsTrigger>
+          <TabsTrigger value="contains">{content.contains}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="starts-with" className="space-y-4">
           <div className="text-center">
             <p className="text-sm text-slate-600 mb-4">
-              Buka liafuan Tetum ne'ebé hahu ho letra ka liafuan espesífiku
+              {content.searchDescription}
             </p>
           </div>
         </TabsContent>
@@ -192,7 +199,7 @@ export function TetumMonolingualSearch({ onEntrySelect, currentLanguage = "tetum
         <TabsContent value="contains" className="space-y-4">
           <div className="text-center">
             <p className="text-sm text-slate-600 mb-4">
-              Buka liafuan Tetum ne'ebé iha testu ka lia-fuan ida iha laran
+              {content.searchDescription}
             </p>
           </div>
         </TabsContent>
@@ -203,11 +210,7 @@ export function TetumMonolingualSearch({ onEntrySelect, currentLanguage = "tetum
           <div className="relative flex-1">
             <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
             <Input
-              placeholder={
-                searchMode === "starts-with" 
-                  ? "Hakerek leta atu buka liafuan Tetum sira ne'ebé hahu ho..."
-                  : "Hakerek testu atu buka iha liafuan Tetum sira..."
-              }
+              placeholder={content.placeholder}
               value={searchTerm}
               onChange={(e) => handleInputChange(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
