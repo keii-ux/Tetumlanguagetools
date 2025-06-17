@@ -49,7 +49,7 @@ function PredictiveDropdown({
                   </div>
                 )}
                 {entry.wordClass && (
-                  <Badge variant="outline" className="mt-1 text-xs">
+                  <Badge variant="outline" className="mt-1 text-xs bg-orange-50 text-orange-700 border-orange-200">
                     {entry.wordClass}
                   </Badge>
                 )}
@@ -88,8 +88,20 @@ export function TetumMonolingualSearch({ onEntrySelect }: TetumMonolingualSearch
     if (searchMode === "starts-with") {
       return term.startsWith(search);
     } else {
-      return term.includes(search);
+      return term.includes(search) || (entry.explanation?.toLowerCase() || "").includes(search);
     }
+  }).sort((a, b) => {
+    // Sort by relevance: exact matches first, then starts-with, then contains
+    const aWord = a.tetum?.toLowerCase() || "";
+    const bWord = b.tetum?.toLowerCase() || "";
+    const search = searchTerm.toLowerCase();
+    
+    if (aWord === search && bWord !== search) return -1;
+    if (bWord === search && aWord !== search) return 1;
+    if (aWord.startsWith(search) && !bWord.startsWith(search)) return -1;
+    if (bWord.startsWith(search) && !aWord.startsWith(search)) return 1;
+    
+    return aWord.localeCompare(bWord);
   });
 
   useEffect(() => {

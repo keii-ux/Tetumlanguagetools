@@ -6,7 +6,7 @@ export const DICTIONARY_TYPES = {
   medical: "Medical Dictionary",
   general: "General Dictionary",
   asean: "ASEAN Glossary",
-  "tetum-monolingual": "Tetum Monolingual Dictionary",
+  "tetum-monolingual": "Disionáriu Tetum Monolíngue",
 } as const;
 
 export const LANGUAGES = {
