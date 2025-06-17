@@ -11,8 +11,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   async function initializeDictionaries() {
     try {
       // Load medical dictionaries
-      const medicalTetumEnPath = path.resolve(process.cwd(), "attached_assets", "medical-dic_tt_en_1750124091925.json");
-      const medicalEnTetumPath = path.resolve(process.cwd(), "attached_assets", "medical_dic_en-tt_1750124091926.json");
+      const medicalTetumEnPath = path.resolve(process.cwd(), "attached_assets", "medical_tt_en_corrected.json");
+      const medicalEnTetumPath = path.resolve(process.cwd(), "attached_assets", "medical_en_tt_corrected.json");
       
       let medicalTetumEnData = [];
       let medicalEnTetumData = [];
@@ -24,12 +24,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       try {
-        const rawData = await fs.readFile(medicalEnTetumPath, "utf-8");
-        // Fix malformed JSON by wrapping in array brackets
-        const fixedData = '[' + rawData + ']';
-        medicalEnTetumData = JSON.parse(fixedData);
+        medicalEnTetumData = JSON.parse(await fs.readFile(medicalEnTetumPath, "utf-8"));
       } catch (error) {
-        console.warn("Medical English-Tetum dictionary not found:", error);
+        console.warn("Medical English-Tetum dictionary not found");
+        medicalEnTetumData = [];
       }
       
       // Load legal dictionary
