@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TetumMonolingualSearch } from "@/components/TetumMonolingualSearch";
 import { TermDetail } from "@/components/TermDetail";
 import { useDictionaryStats } from "@/lib/search";
@@ -11,6 +12,7 @@ import { DictionaryEntry } from "@shared/schema";
 
 export default function TetumMonolingualModule() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
+  const [activeSection, setActiveSection] = useState("monolingual");
   const { data: stats } = useDictionaryStats();
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
@@ -37,9 +39,7 @@ export default function TetumMonolingualModule() {
               <h1 className="text-2xl font-bold text-slate-900">Disionáriu Tetum Monolíngue</h1>
             </div>
           </div>
-          <Badge variant="secondary" className="bg-orange-100 text-orange-800">
-            {tetumMonoCount.toLocaleString()} liafuan
-          </Badge>
+          
         </div>
 
         {/* Stats Cards */}
@@ -83,75 +83,154 @@ export default function TetumMonolingualModule() {
           </Card>
         </div>
 
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Search Section */}
-          <div className="lg:col-span-2">
-            <Card className="bg-white border-orange-200">
-              <CardContent className="p-6">
-                <TetumMonolingualSearch onEntrySelect={handleEntrySelect} />
-              </CardContent>
-            </Card>
-          </div>
+        {/* Dictionary Sections */}
+        <Tabs value={activeSection} onValueChange={setActiveSection} className="space-y-6">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="monolingual">Disionáriu Tetum</TabsTrigger>
+            <TabsTrigger value="bilingual">Tetum-English</TabsTrigger>
+            <TabsTrigger value="multilingual">Tetum Multilingual</TabsTrigger>
+          </TabsList>
 
-          {/* Term Detail Section */}
-          <div className="lg:col-span-1">
-            {selectedEntry ? (
-              <TermDetail 
-                entry={selectedEntry} 
-                onClose={() => setSelectedEntry(null)}
-                userId="anonymous"  // You can implement proper user management
-              />
-            ) : (
-              <Card className="bg-white border-orange-200">
-                <CardContent className="p-6">
-                  <div className="text-center space-y-4">
-                    <BookOpen className="w-12 h-12 text-orange-400 mx-auto" />
-                    <div>
-                      <h3 className="text-lg font-semibold text-slate-900 mb-2">
-                        Hili Liafuan Tetum
-                      </h3>
-                      <p className="text-slate-600 text-sm">
-                        Buka no klik ba liafuan Tetum ruma atu haree nia definisaun detalladu no ezemplu uza iha lian Tetum.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-          </div>
-        </div>
-
-        {/* About Section */}
-        <Card className="mt-8 bg-white border-orange-200">
-          <CardContent className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-3">
-                  Kona-ba Disionáriu Tetum Monolíngue
-                </h3>
-                <p className="text-slate-600 text-sm leading-relaxed">
-                  Disionáriu kompletu ne'e fó definisaun no esplikasaun liafuan Tetum nian iha lian Tetum rasik. 
-                  Halo atu ajuda ema Tetum-oan sira no estudante nivel aas sira atu komprende liafuan sira 
-                  iha sira-nia kontestu kultural no linguístiku.
-                </p>
+          <TabsContent value="monolingual" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Search Section */}
+              <div className="lg:col-span-2">
+                <Card className="bg-white border-orange-200">
+                  <CardContent className="p-6">
+                    <TetumMonolingualSearch onEntrySelect={handleEntrySelect} />
+                  </CardContent>
+                </Card>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-3">
-                  Karakterístika sira
-                </h3>
-                <ul className="text-slate-600 text-sm space-y-1">
-                  <li>• Definisaun Tetum nativu</li>
-                  <li>• Identifikasaun klase liafuan nian</li>
-                  <li>• Ezemplu uza no kontestu</li>
-                  <li>• Nota kultural no linguístiku</li>
-                  <li>• Kapasidade buka avansadu</li>
-                  <li>• {tetumMonoCount.toLocaleString()} liafuan Tetum auténtiku</li>
-                </ul>
+
+              {/* Term Detail Section */}
+              <div className="lg:col-span-1">
+                {selectedEntry ? (
+                  <TermDetail 
+                    entry={selectedEntry} 
+                    onClose={() => setSelectedEntry(null)}
+                    userId="anonymous"
+                  />
+                ) : (
+                  <Card className="bg-white border-orange-200">
+                    <CardContent className="p-6">
+                      <div className="text-center space-y-4">
+                        <BookOpen className="w-12 h-12 text-orange-400 mx-auto" />
+                        <div>
+                          <h3 className="text-lg font-semibold text-slate-900 mb-2">
+                            Hili Liafuan Tetum
+                          </h3>
+                          <p className="text-slate-600 text-sm">
+                            Buka no klik ba liafuan Tetum ruma atu haree nia definisaun detalladu no ezemplu uza iha lian Tetum.
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </TabsContent>
+
+          <TabsContent value="bilingual" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2">
+                <Card className="bg-white border-orange-200">
+                  <CardContent className="p-6">
+                    <div className="text-center space-y-4">
+                      <Languages className="w-16 h-16 text-orange-400 mx-auto" />
+                      <div>
+                        <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                          Tetum-English Dictionary
+                        </h3>
+                        <p className="text-slate-600">
+                          Search for Tetum words with English translations and definitions.
+                        </p>
+                      </div>
+                      <div className="bg-orange-50 p-4 rounded-lg">
+                        <p className="text-sm text-orange-800">
+                          This section provides Tetum words with their English equivalents, 
+                          helping bridge language understanding between Tetum and English speakers.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+              <div className="lg:col-span-1">
+                <Card className="bg-white border-orange-200">
+                  <CardContent className="p-6">
+                    <div className="text-center space-y-4">
+                      <FileText className="w-12 h-12 text-orange-400 mx-auto" />
+                      <div>
+                        <h3 className="text-lg font-semibold text-slate-900 mb-2">
+                          Bilingual Support
+                        </h3>
+                        <p className="text-slate-600 text-sm">
+                          Access comprehensive Tetum-English dictionary with cultural context and linguistic notes.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="multilingual" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2">
+                <Card className="bg-white border-orange-200">
+                  <CardContent className="p-6">
+                    <div className="text-center space-y-4">
+                      <Languages className="w-16 h-16 text-orange-400 mx-auto" />
+                      <div>
+                        <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                          Multilingual Tetum Dictionary
+                        </h3>
+                        <p className="text-slate-600">
+                          Comprehensive Tetum dictionary with Portuguese, English, and Indonesian translations.
+                        </p>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                        <div className="bg-blue-50 p-3 rounded-lg">
+                          <h4 className="font-semibold text-blue-900 mb-1">Portuguese</h4>
+                          <p className="text-xs text-blue-700">Colonial heritage translations</p>
+                        </div>
+                        <div className="bg-green-50 p-3 rounded-lg">
+                          <h4 className="font-semibold text-green-900 mb-1">English</h4>
+                          <p className="text-xs text-green-700">International communication</p>
+                        </div>
+                        <div className="bg-purple-50 p-3 rounded-lg">
+                          <h4 className="font-semibold text-purple-900 mb-1">Indonesian</h4>
+                          <p className="text-xs text-purple-700">Regional linguistic ties</p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+              <div className="lg:col-span-1">
+                <Card className="bg-white border-orange-200">
+                  <CardContent className="p-6">
+                    <div className="text-center space-y-4">
+                      <BookMarked className="w-12 h-12 text-orange-400 mx-auto" />
+                      <div>
+                        <h3 className="text-lg font-semibold text-slate-900 mb-2">
+                          Regional Context
+                        </h3>
+                        <p className="text-slate-600 text-sm">
+                          Understanding Tetum through its linguistic relationships with neighboring languages and colonial influences.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </TabsContent>
+        </Tabs>
+
+        
       </div>
     </div>
   );
