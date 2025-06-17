@@ -165,22 +165,7 @@ export function TetumMonolingualSearch({ onEntrySelect, currentLanguage = "tetum
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="text-center space-y-2">
-        <div className="flex items-center justify-center gap-2">
-          <BookOpen className="w-6 h-6 text-orange-600" />
-          <h1 className="text-2xl font-bold text-slate-900">
-            {currentLanguage === "tetum" ? "Disionáriu Tetum (INL)" :
-             currentLanguage === "english" ? "Tetum Dictionary (INL)" :
-             "Dicionário Tetum (INL)"}
-          </h1>
-        </div>
-        <p className="text-slate-600">
-          {currentLanguage === "tetum" ? "Disionáriu kompletu ho definisaun Tetum nian iha lian Tetum rasik" :
-           currentLanguage === "english" ? "Complete dictionary with Tetum definitions in Tetum language" :
-           "Dicionário completo com definições Tetum na língua Tetum"}
-        </p>
-      </div>
+      
       {/* Search Modes */}
       <Tabs value={searchMode} onValueChange={(value) => setSearchMode(value as "starts-with" | "contains")}>
         <TabsList className="grid w-full grid-cols-2">
@@ -189,19 +174,9 @@ export function TetumMonolingualSearch({ onEntrySelect, currentLanguage = "tetum
         </TabsList>
 
         <TabsContent value="starts-with" className="space-y-4">
-          <div className="text-center">
-            <p className="text-sm text-slate-600 mb-4">
-              {content.searchDescription}
-            </p>
-          </div>
         </TabsContent>
 
         <TabsContent value="contains" className="space-y-4">
-          <div className="text-center">
-            <p className="text-sm text-slate-600 mb-4">
-              {content.searchDescription}
-            </p>
-          </div>
         </TabsContent>
       </Tabs>
       {/* Search Interface */}

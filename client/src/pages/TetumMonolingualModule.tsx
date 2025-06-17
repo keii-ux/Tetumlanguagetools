@@ -97,34 +97,7 @@ export default function TetumMonolingualModule() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
       <div className="container mx-auto px-4 py-8">
-        {/* Language Selector */}
-        <div className="flex justify-start mb-4">
-          <Select value={currentLanguage} onValueChange={(value: Language) => setCurrentLanguage(value)}>
-            <SelectTrigger className="w-48 bg-white border-2 border-orange-200 hover:border-orange-300 transition-colors">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="tetum">
-                <div className="flex items-center gap-2">
-                  <span>🇹🇱</span>
-                  <span>Tetum</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="english">
-                <div className="flex items-center gap-2">
-                  <span>🇺🇸</span>
-                  <span>English</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="portuguese">
-                <div className="flex items-center gap-2">
-                  <span>🇵🇹</span>
-                  <span>Português</span>
-                </div>
-              </SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+
 
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -141,9 +114,36 @@ export default function TetumMonolingualModule() {
               <h1 className="text-2xl font-bold text-slate-900">{content.title}</h1>
             </div>
           </div>
-          <Badge variant="secondary" className="bg-orange-100 text-orange-800">
-            {tetumMonoCount.toLocaleString()} {content.entriesLabel}
-          </Badge>
+          <div className="flex items-center gap-4">
+            <Select value={currentLanguage} onValueChange={(value: Language) => setCurrentLanguage(value)}>
+              <SelectTrigger className="w-48 bg-white border-2 border-orange-200 hover:border-orange-300 transition-colors">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="tetum">
+                  <div className="flex items-center gap-2">
+                    <span>🇹🇱</span>
+                    <span>Tetum</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="english">
+                  <div className="flex items-center gap-2">
+                    <span>🇺🇸</span>
+                    <span>English</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="portuguese">
+                  <div className="flex items-center gap-2">
+                    <span>🇵🇹</span>
+                    <span>Português</span>
+                  </div>
+                </SelectItem>
+              </SelectContent>
+            </Select>
+            <Badge variant="secondary" className="bg-orange-100 text-orange-800">
+              {tetumMonoCount.toLocaleString()} {content.entriesLabel}
+            </Badge>
+          </div>
         </div>
 
         {/* Stats Cards */}
@@ -242,32 +242,7 @@ export default function TetumMonolingualModule() {
           </div>
         </div>
 
-        {/* About Section */}
-        <Card className="mt-8 bg-white border-orange-200">
-          <CardContent className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-3">
-                  {content.aboutTitle}
-                </h3>
-                <p className="text-slate-600 text-sm leading-relaxed">
-                  {content.aboutDescription}
-                </p>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-3">
-                  {content.featuresTitle}
-                </h3>
-                <ul className="text-slate-600 text-sm space-y-1">
-                  {content.features.map((feature, index) => (
-                    <li key={index}>• {feature}</li>
-                  ))}
-                  <li>• {tetumMonoCount.toLocaleString()} {currentLanguage === "tetum" ? "liafuan Tetum auténtiku" : currentLanguage === "english" ? "authentic Tetum words" : "palavras Tetum autênticas"}</li>
-                </ul>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        
       </div>
     </div>
   );
