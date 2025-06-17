@@ -10,6 +10,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize dictionary data from JSON files
   async function initializeDictionaries() {
     try {
+      // Load medical dictionaries
+      const medicalTetumEnPath = path.resolve(process.cwd(), "attached_assets", "medical-dic_tt_en.json");
+      const medicalEnTetumPath = path.resolve(process.cwd(), "attached_assets", "medical-dic_en_tt.json");
+      
+      let medicalTetumEnData = [];
+      let medicalEnTetumData = {};
+      
+      try {
+        medicalTetumEnData = JSON.parse(await fs.readFile(medicalTetumEnPath, "utf-8"));
+      } catch (error) {
+        console.warn("Medical Tetum-English dictionary not found");
+      }
+      
+      try {
+        medicalEnTetumData = JSON.parse(await fs.readFile(medicalEnTetumPath, "utf-8"));
+      } catch (error) {
+        console.warn("Medical English-Tetum dictionary not found");
+      }
+      
       // Load legal dictionary
       const legalDictPath = path.resolve(process.cwd(), "attached_assets", "legal dic tt_1750040265133.json");
       const legalDictData = JSON.parse(await fs.readFile(legalDictPath, "utf-8"));
@@ -56,6 +75,67 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
+      // Process medical dictionary entries (Tetum-English)
+      const medicalTetumEntries = medicalTetumEnData.map((item: any) => ({
+        tetum: item.term || "",
+        english: Array.isArray(item.translations) ? item.translations.join("; ") : (item.translation || ""),
+        portuguese: "",
+        source: item.source || "Medical Dictionary",
+        category: "medical",
+        dictionaryType: "medical",
+        notes: item.usage ? `Usage: ${item.usage}` : "",
+        explanation: item.similar ? `Similar: ${Array.isArray(item.similar) ? item.similar.join("; ") : item.similar}` : "",
+        pronunciation: "",
+        wordClass: "",
+        etymology: "",
+        usageExamples: item.action ? (Array.isArray(item.action) ? item.action : [item.action]) : [],
+        relatedTerms: item.synonym ? (Array.isArray(item.synonym) ? item.synonym : [item.synonym]) : [],
+      }));
+
+      // Process medical dictionary entries (English-Tetum) 
+      const medicalEnEntries: any[] = [];
+      const medicalData = medicalEnTetumData as any;
+      
+      if (medicalData?.diseases_and_conditions) {
+        medicalData.diseases_and_conditions.forEach((item: any) => {
+          medicalEnEntries.push({
+            english: item.english || "",
+            tetum: item.tetum || "",
+            portuguese: "",
+            source: "Medical Dictionary",
+            category: "diseases",
+            dictionaryType: "medical",
+            notes: "Disease/Condition",
+            explanation: "",
+            pronunciation: "",
+            wordClass: "",
+            etymology: "",
+            usageExamples: [],
+            relatedTerms: [],
+          });
+        });
+      }
+
+      if (medicalData?.symptoms_and_clinical_signs) {
+        medicalData.symptoms_and_clinical_signs.forEach((item: any) => {
+          medicalEnEntries.push({
+            english: item.english || "",
+            tetum: item.tetum || "",
+            portuguese: "",
+            source: "Medical Dictionary",
+            category: "symptoms",
+            dictionaryType: "medical",
+            notes: "Symptom/Clinical Sign",
+            explanation: "",
+            pronunciation: "",
+            wordClass: "",
+            etymology: "",
+            usageExamples: [],
+            relatedTerms: [],
+          });
+        });
+      }
+
       // Process general dictionary entries
       const generalEntries = generalDictData.map((item: any) => ({
         tetum: item.tetum || "",
@@ -74,9 +154,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }));
 
       // Bulk insert all entries
-      await storage.bulkCreateEntries([...legalEntries, ...glossaryEntries, ...generalEntries]);
+      await storage.bulkCreateEntries([...legalEntries, ...glossaryEntries, ...medicalTetumEntries, ...medicalEnEntries, ...generalEntries]);
       
-      console.log(`Loaded ${legalEntries.length + glossaryEntries.length + generalEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + glossaryEntries.length + medicalTetumEntries.length + medicalEnEntries.length + generalEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
