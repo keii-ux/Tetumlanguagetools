@@ -8,12 +8,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LegalDictionarySearch } from "@/components/LegalDictionarySearch";
 import { TetumGlossarySearch } from "@/components/TetumGlossarySearch";
 import { PortugueseGlossarySearch } from "@/components/PortugueseGlossarySearch";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useDictionaryStats } from "@/lib/search";
 import { DictionaryEntry } from "@shared/schema";
 
 export default function LegalDictionaryModule() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
   const [activeSection, setActiveSection] = useState("dictionary");
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
   const { data: stats } = useDictionaryStats();
 
   const handleEntrySelect = (entry: DictionaryEntry) => {

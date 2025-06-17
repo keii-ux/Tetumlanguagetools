@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { ArrowLeft, BookOpen, Info } from "lucide-react";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { INLTetumDictionarySearch } from "@/components/INLTetumDictionarySearch";
 import { TermDetail } from "@/components/TermDetail";
-import type { DictionaryEntry } from "../../../shared/schema";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import type { DictionaryEntry } from "@shared/schema";
 
 export default function INLTetumDictionaryModule() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState("tet");
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
     setSelectedEntry(entry);
@@ -21,20 +24,27 @@ export default function INLTetumDictionaryModule() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => window.history.back()}
-            className="flex items-center gap-2"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back
-          </Button>
-          <div className="flex items-center gap-2">
-            <BookOpen className="w-6 h-6 text-blue-600" />
-            <h1 className="text-2xl font-bold text-foreground">INL Tetum Dictionary</h1>
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <Link href="/">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex items-center gap-2"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back to Dictionary
+              </Button>
+            </Link>
+            <div className="flex items-center gap-2">
+              <BookOpen className="w-6 h-6 text-blue-600" />
+              <h1 className="text-2xl font-bold text-foreground">INL Tetum Dictionary</h1>
+            </div>
           </div>
+          <LanguageSwitcher 
+            selectedLanguage={selectedLanguage}
+            onLanguageChange={setSelectedLanguage}
+          />
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
