@@ -8,7 +8,12 @@ export function useSearchEntries(searchQuery: SearchQuery) {
   
   Object.entries(searchQuery).forEach(([key, value]) => {
     if (value !== undefined && value !== null && value !== "") {
-      queryParams.append(key, String(value));
+      // Handle boolean values properly
+      if (typeof value === 'boolean') {
+        queryParams.append(key, value.toString());
+      } else {
+        queryParams.append(key, String(value));
+      }
     }
   });
 
