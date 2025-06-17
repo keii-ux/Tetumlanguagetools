@@ -88,13 +88,23 @@ const TOOL_CARDS = [
   },
   {
     id: "legal", 
-    title: "Legal Glossary",
+    title: "Legal Technical Dictionary",
     category: "Legal",
     description: "Legal terminology in Tetum with Portuguese and English equivalents",
     icon: Scale,
     color: "bg-blue-500", 
     bgColor: "bg-blue-50",
     iconColor: "text-blue-500",
+  },
+  {
+    id: "tetum-glossary",
+    title: "Tetum Legal Glossary",
+    category: "Legal Reference",
+    description: "Comprehensive legal terms with detailed explanations in Tetum language",
+    icon: FileText,
+    color: "bg-indigo-500",
+    bgColor: "bg-indigo-50",
+    iconColor: "text-indigo-500",
   },
   {
     id: "general",
@@ -564,6 +574,24 @@ export default function Dictionary() {
                               >
                                 <BookOpen className="w-3 h-3 mr-2" />
                                 Advanced Legal Module
+                              </Button>
+                            </Link>
+                          </div>
+                        )}
+
+                        {tool.id === "tetum-glossary" && (
+                          <div className="mt-4 pt-4 border-t border-gray-100">
+                            <Link href="/tetum-glossary">
+                              <Button 
+                                variant="outline" 
+                                size="sm" 
+                                className="w-full text-xs bg-indigo-50 border-indigo-200 text-indigo-700 hover:bg-indigo-100"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                }}
+                              >
+                                <BookOpen className="w-3 h-3 mr-2" />
+                                Full Tetum Glossary
                               </Button>
                             </Link>
                           </div>
