@@ -44,24 +44,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         medicalEnTetumData = [];
       }
       
-      // Load INL Tetum dictionary (has complex structure with meaning/variant objects)
+      // Load INL Tetum dictionary from the new JSON file
       let inlTetumData: any[] = [];
       try {
-        const inlTetumPath = path.resolve(process.cwd(), "attached_assets", "inl_tt_dic_final_1750040241832.json");
+        const inlTetumPath = path.resolve(process.cwd(), "attached_assets", "inl_tt_dic.json");
         inlTetumData = JSON.parse(await fs.readFile(inlTetumPath, "utf-8"));
+        console.log(`INL Tetum dictionary loaded successfully with ${inlTetumData.length} entries`);
       } catch (error) {
-        console.warn("INL Tetum dictionary not found");
-      }
-
-      // Load INL Tetum Dictionary
-      let inlTetumDictData: any[] = [];
-      try {
-        const inlTetumPath = path.resolve(process.cwd(), "attached_assets", "Pasted--word-atletizmu-class-Substantivu-meaning-Atividade-ka-ku-1750161211628_1750161211632.txt");
-        const fileContent = await fs.readFile(inlTetumPath, "utf-8");
-        inlTetumDictData = JSON.parse(fileContent);
-        console.log(`INL Tetum dictionary loaded successfully with ${inlTetumDictData.length} entries`);
-      } catch (error) {
-        console.warn("INL Tetum dictionary not found or malformed:", error);
+        console.warn("INL Tetum dictionary not found:", error);
       }
 
       // Load additional legal terms in Portuguese
@@ -156,14 +146,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Process old INL Tetum dictionary entries (from previous file)
-      const oldInlTetumEntries = inlTetumData.filter((item: any) => item && item.word).map((item: any) => ({
+      // Process INL Tetum dictionary entries (new structure)
+      const inlTetumEntries = inlTetumData.filter((item: any) => item && item.word).map((item: any) => ({
         tetum: safeStringify(item.word),
         portuguese: "",
-        english: safeStringify(item.meaning),
-        source: "INL Tetum Dictionary (Old)",
-        category: "general",
-        dictionaryType: "general",
+        english: "",
+        source: "INL Tetum Dictionary",
+        category: "inl-tetum",
+        dictionaryType: "inl-tetum",
         notes: "",
         explanation: safeStringify(item.meaning),
         pronunciation: "",
@@ -224,22 +214,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Process new INL Tetum Dictionary entries
-      const newInlTetumEntries = inlTetumDictData.filter(item => item && item.word).map((item: any) => ({
-        tetum: safeStringify(item.word),
-        portuguese: "",
-        english: "",
-        source: "INL Tetum Dictionary",
-        category: "inl-tetum",
-        dictionaryType: "inl-tetum",
-        notes: "",
-        explanation: safeStringify(item.meaning),
-        pronunciation: "",
-        wordClass: safeStringify(item.class),
-        etymology: "",
-        usageExamples: [],
-        relatedTerms: [],
-      }));
+
 
       // Process additional legal terms (Portuguese)
       const additionalLegalEntries = additionalLegalData.filter(item => item && item.termo).map((item: any) => ({
@@ -266,11 +241,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         ...additionalLegalEntries, // Legal module only
         ...medicalTetumEntries,    // Medical module only
         ...medicalEnEntries,       // Medical module only
-        ...newInlTetumEntries,     // INL Tetum dictionary module
-        ...oldInlTetumEntries      // Old INL entries
+        ...inlTetumEntries         // INL Tetum dictionary module
       ]);
       
-      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + additionalLegalEntries.length + medicalTetumEntries.length + medicalEnEntries.length + newInlTetumEntries.length + oldInlTetumEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + additionalLegalEntries.length + medicalTetumEntries.length + medicalEnEntries.length + inlTetumEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
