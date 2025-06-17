@@ -48,10 +48,67 @@ export async function registerRoutes(app: Express): Promise<Server> {
       let inlTetumData: any[] = [];
       try {
         const inlTetumPath = path.resolve(process.cwd(), "attached_assets", "inl_tt_dic.json");
-        inlTetumData = JSON.parse(await fs.readFile(inlTetumPath, "utf-8"));
+        let fileContent = await fs.readFile(inlTetumPath, "utf-8");
+        
+        // Clean up encoding issues in the JSON - handle common encoding artifacts
+        fileContent = fileContent
+          .replace(/M-CM-/g, '')
+          .replace(/M-bM-\^@M-\^Y/g, 'e')
+          .replace(/M-CM-!/g, 'a')
+          .replace(/M-CM-:/g, 'u')
+          .replace(/M-CM-\)/g, 'e')
+          .replace(/M-CM-1/g, 'n')
+          .replace(/M-CM--/g, 'o')
+          .replace(/M-CM-3/g, 'o')
+          .replace(/M-CM-\^/g, '')
+          .replace(/M-CM-\"/g, '')
+          .replace(/M-/g, '')
+          .replace(/\^/g, '')
+          .replace(/[^\x00-\x7F\u00A0-\uFFFF]/g, '');
+        
+        // Try to fix common JSON structure issues
+        fileContent = fileContent.replace(/,(\s*[}\]])/g, '$1'); // Remove trailing commas
+        
+        inlTetumData = JSON.parse(fileContent);
         console.log(`INL Tetum dictionary loaded successfully with ${inlTetumData.length} entries`);
-      } catch (error) {
-        console.warn("INL Tetum dictionary not found:", error);
+      } catch (parseError) {
+        console.warn("INL Tetum dictionary parsing failed, attempting line-by-line recovery:", parseError);
+        
+        // Fallback: Try to extract valid JSON objects from the file
+        try {
+          const inlTetumPath = path.resolve(process.cwd(), "attached_assets", "inl_tt_dic.json");
+          let fileContent = await fs.readFile(inlTetumPath, "utf-8");
+          
+          // Extract individual objects and reconstruct the array
+          const objectMatches = fileContent.match(/\{[^{}]*"word"[^{}]*"class"[^{}]*"meaning"[^{}]*\}/g);
+          if (objectMatches) {
+            const cleanedObjects = objectMatches.map(obj => {
+              // Clean each object individually
+              const cleaned = obj
+                .replace(/M-CM-/g, '')
+                .replace(/M-bM-\^@M-\^Y/g, 'e')
+                .replace(/M-CM-!/g, 'a')
+                .replace(/M-CM-:/g, 'u')
+                .replace(/M-CM-\)/g, 'e')
+                .replace(/M-CM-1/g, 'n')
+                .replace(/M-CM--/g, 'o')
+                .replace(/M-CM-3/g, 'o')
+                .replace(/[^\x00-\x7F\u00A0-\uFFFF]/g, '');
+              
+              try {
+                return JSON.parse(cleaned);
+              } catch {
+                return null;
+              }
+            }).filter(obj => obj !== null);
+            
+            inlTetumData = cleanedObjects;
+            console.log(`INL Tetum dictionary recovered ${inlTetumData.length} entries from corrupted file`);
+          }
+        } catch (recoveryError) {
+          console.error("INL Tetum dictionary recovery failed:", recoveryError);
+          inlTetumData = [];
+        }
       }
 
       // Load additional legal terms in Portuguese
@@ -504,6 +561,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Tetum monolingual entries error:", error);
       res.status(500).json({ error: "Failed to fetch Tetum monolingual entries" });
+    }
+  });
+
+  // INL Tetum Dictionary module endpoints - Only INL Tetum terms
+  app.get("/api/inl-tetum/search", async (req, res) => {
+    try {
+      const searchQuery = searchQuerySchema.parse(req.query);
+      const allResults = await storage.searchEntries(searchQuery);
+      const inlTetumResults = allResults.filter(e => e.dictionaryType === "inl-tetum");
+      res.json(inlTetumResults);
+    } catch (error) {
+      console.error("INL Tetum search error:", error);
+      res.status(400).json({ error: "Invalid search parameters" });
+    }
+  });
+
+  app.get("/api/inl-tetum/entries", async (req, res) => {
+    try {
+      const entries = await storage.getAllEntries();
+      const inlTetumEntries = entries.filter(e => e.dictionaryType === "inl-tetum");
+      res.json(inlTetumEntries);
+    } catch (error) {
+      console.error("INL Tetum entries error:", error);
+      res.status(500).json({ error: "Failed to fetch INL Tetum entries" });
     }
   });
 

@@ -28,6 +28,8 @@ export function useSearchEntries(searchQuery: SearchQuery) {
     endpoint = "/api/legal/search";
   } else if (searchQuery.dictionaryType === "tetum-monolingual") {
     endpoint = "/api/tetum-monolingual/search";
+  } else if (searchQuery.dictionaryType === "inl-tetum") {
+    endpoint = "/api/inl-tetum/search";
   }
 
   return useQuery<DictionaryEntry[]>({
@@ -140,5 +142,33 @@ export function useClearSearchHistory() {
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["/api/history", variables] });
     },
+  });
+}
+
+// INL Tetum Dictionary specific hooks
+export function useINLTetumEntries() {
+  return useQuery<DictionaryEntry[]>({
+    queryKey: ["/api/inl-tetum/entries"],
+    staleTime: 1000 * 60 * 10, // 10 minutes
+  });
+}
+
+export function useINLTetumSearch(searchQuery: SearchQuery) {
+  const queryParams = new URLSearchParams();
+  
+  Object.entries(searchQuery).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== "") {
+      if (typeof value === 'boolean') {
+        queryParams.append(key, value.toString());
+      } else {
+        queryParams.append(key, String(value));
+      }
+    }
+  });
+
+  return useQuery<DictionaryEntry[]>({
+    queryKey: ["/api/inl-tetum/search", queryParams.toString()],
+    enabled: !!searchQuery.query?.trim(),
+    staleTime: 1000 * 60 * 5, // 5 minutes
   });
 }
