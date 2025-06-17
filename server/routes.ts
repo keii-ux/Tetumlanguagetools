@@ -24,9 +24,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       try {
-        medicalEnTetumData = JSON.parse(await fs.readFile(medicalEnTetumPath, "utf-8"));
+        const rawData = await fs.readFile(medicalEnTetumPath, "utf-8");
+        // Fix malformed JSON by wrapping in array brackets
+        const fixedData = '[' + rawData + ']';
+        medicalEnTetumData = JSON.parse(fixedData);
       } catch (error) {
-        console.warn("Medical English-Tetum dictionary not found");
+        console.warn("Medical English-Tetum dictionary not found:", error);
       }
       
       // Load legal dictionary
