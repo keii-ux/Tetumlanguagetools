@@ -37,14 +37,11 @@ export class MemStorage implements IStorage {
   private currentEntryId: number;
   private currentBookmarkId: number;
   private currentHistoryId: number;
-  private searchCache: Map<string, { results: DictionaryEntry[], timestamp: number }>;
-  private readonly CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
   constructor() {
     this.entries = new Map();
     this.bookmarksMap = new Map();
     this.searchHistoryMap = new Map();
-    this.searchCache = new Map();
     this.currentEntryId = 1;
     this.currentBookmarkId = 1;
     this.currentHistoryId = 1;
@@ -59,143 +56,63 @@ export class MemStorage implements IStorage {
   }
 
   async searchEntries(query: SearchQuery): Promise<DictionaryEntry[]> {
-    // Generate cache key
-    const cacheKey = JSON.stringify(query);
-    
-    // Check cache first
-    const cached = this.searchCache.get(cacheKey);
-    if (cached && Date.now() - cached.timestamp < this.CACHE_TTL) {
-      return cached.results;
-    }
-    
     const entries = Array.from(this.entries.values());
     
-    // If no query provided but dictionary type is specified, return filtered results
-    if (!query.query || query.query.trim() === "") {
-      if (query.dictionaryType !== "all") {
-        const results = entries.filter(entry => entry.dictionaryType === query.dictionaryType).slice(0, 20);
-        this.searchCache.set(cacheKey, { results, timestamp: Date.now() });
-        return results;
+    if (!query.query) return entries;
+
+    const searchTerm = query.caseSensitive ? query.query : query.query.toLowerCase();
+    
+    return entries.filter(entry => {
+      // Filter by dictionary type
+      if (query.dictionaryType !== "all" && entry.dictionaryType !== query.dictionaryType) {
+        return false;
       }
-      return [];
-    }
 
-    const searchTerm = query.caseSensitive ? query.query.trim() : query.query.trim().toLowerCase();
-    
-    // Score and filter entries
-    const scoredEntries = entries
-      .map(entry => {
-        // Filter by dictionary type
-        if (query.dictionaryType !== "all" && entry.dictionaryType !== query.dictionaryType) {
-          return null;
-        }
+      // Language-specific search
+      const fields: string[] = [];
+      if (query.language === "all" || query.language === "tetum") {
+        if (entry.tetum) fields.push(entry.tetum);
+      }
+      if (query.language === "all" || query.language === "portuguese") {
+        if (entry.portuguese) fields.push(entry.portuguese);
+      }
+      if (query.language === "all" || query.language === "english") {
+        if (entry.english) fields.push(entry.english);
+      }
 
-        // Language-specific search
-        const fields: string[] = [];
-        if (query.language === "all" || query.language === "tetum") {
-          if (entry.tetum && typeof entry.tetum === 'string') fields.push(entry.tetum);
-        }
-        if (query.language === "all" || query.language === "portuguese") {
-          if (entry.portuguese && typeof entry.portuguese === 'string') fields.push(entry.portuguese);
-        }
-        if (query.language === "all" || query.language === "english") {
-          if (entry.english && typeof entry.english === 'string') fields.push(entry.english);
-        }
+      // Include explanations if requested
+      if (query.includeDefinitions && entry.explanation) {
+        fields.push(entry.explanation);
+      }
 
-        // Include explanations if requested
-        if (query.includeDefinitions && entry.explanation && typeof entry.explanation === 'string') {
-          fields.push(entry.explanation);
-        }
-
-        let bestScore = 0;
-        
-        for (const field of fields) {
-          if (!field) continue;
-          
-          const fieldValue = query.caseSensitive ? field : field.toLowerCase();
-          
-          if (query.exactMatch) {
-            if (fieldValue === searchTerm) {
-              bestScore = Math.max(bestScore, 100);
-            }
-            continue;
-          }
-          
-          const words = fieldValue.split(/\s+/);
-          
-          // Exact full field match (highest priority)
-          if (fieldValue === searchTerm) {
-            bestScore = Math.max(bestScore, 95);
-          }
-          // Exact word match
-          else if (words.some(word => word === searchTerm)) {
-            bestScore = Math.max(bestScore, 90);
-          }
-          // Field starts with search term
-          else if (fieldValue.startsWith(searchTerm)) {
-            bestScore = Math.max(bestScore, 85);
-          }
-          // Word starts with search term
-          else if (words.some(word => word.startsWith(searchTerm))) {
-            bestScore = Math.max(bestScore, 80);
-          }
-          // Field contains search term
-          else if (fieldValue.includes(searchTerm)) {
-            bestScore = Math.max(bestScore, 70);
-          }
-        }
-        
-        return bestScore > 0 ? { entry, score: bestScore } : null;
-      })
-      .filter(item => item !== null)
-      .sort((a, b) => b!.score - a!.score)
-      .slice(0, 10)
-      .map(item => item!.entry);
-
-    // Cache the results
-    this.searchCache.set(cacheKey, { results: scoredEntries, timestamp: Date.now() });
-    
-    // Cleanup old cache entries periodically
-    if (this.searchCache.size > 100) {
-      const cutoff = Date.now() - this.CACHE_TTL;
-      const entriesToDelete: string[] = [];
-      Array.from(this.searchCache.entries()).forEach(([key, value]) => {
-        if (value.timestamp < cutoff) {
-          entriesToDelete.push(key);
-        }
+      // Search in relevant fields
+      return fields.some(field => {
+        const fieldValue = query.caseSensitive ? field : field.toLowerCase();
+        return query.exactMatch 
+          ? fieldValue === searchTerm
+          : fieldValue.includes(searchTerm);
       });
-      entriesToDelete.forEach(key => this.searchCache.delete(key));
-    }
-
-    return scoredEntries;
+    });
   }
 
   async createEntry(entry: InsertDictionaryEntry): Promise<DictionaryEntry> {
     const id = this.currentEntryId++;
-    
-    // Robust data validation and sanitization
     const newEntry: DictionaryEntry = { 
       ...entry, 
       id,
-      source: typeof entry.source === 'string' ? entry.source : null,
-      tetum: typeof entry.tetum === 'string' ? entry.tetum : null,
-      portuguese: typeof entry.portuguese === 'string' ? entry.portuguese : null,
-      english: typeof entry.english === 'string' ? entry.english : null,
-      category: typeof entry.category === 'string' ? entry.category : "general",
-      notes: typeof entry.notes === 'string' ? entry.notes : null,
-      explanation: typeof entry.explanation === 'string' ? entry.explanation : null,
-      pronunciation: typeof entry.pronunciation === 'string' ? entry.pronunciation : null,
-      wordClass: typeof entry.wordClass === 'string' ? entry.wordClass : null,
-      etymology: typeof entry.etymology === 'string' ? entry.etymology : null,
-      usageExamples: Array.isArray(entry.usageExamples) ? entry.usageExamples.filter(item => typeof item === 'string') : [],
-      relatedTerms: Array.isArray(entry.relatedTerms) ? entry.relatedTerms.filter(item => typeof item === 'string') : [],
+      source: entry.source || null,
+      tetum: entry.tetum || null,
+      portuguese: entry.portuguese || null,
+      english: entry.english || null,
+      category: entry.category || null,
+      notes: entry.notes || null,
+      explanation: entry.explanation || null,
+      pronunciation: entry.pronunciation || null,
+      wordClass: entry.wordClass || null,
+      etymology: entry.etymology || null,
+      usageExamples: Array.isArray(entry.usageExamples) ? entry.usageExamples as string[] : null,
+      relatedTerms: Array.isArray(entry.relatedTerms) ? entry.relatedTerms as string[] : null,
     };
-    
-    // Validate required fields
-    if (!newEntry.dictionaryType) {
-      throw new Error('Dictionary type is required');
-    }
-    
     this.entries.set(id, newEntry);
     return newEntry;
   }

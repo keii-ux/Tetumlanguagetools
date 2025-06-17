@@ -15,15 +15,7 @@ export function useSearchEntries(searchQuery: SearchQuery) {
   return useQuery<DictionaryEntry[]>({
     queryKey: ["/api/search", queryParams.toString()],
     enabled: !!searchQuery.query || searchQuery.dictionaryType !== "all",
-    staleTime: 30000, // 30 seconds cache for search results
-    refetchOnMount: false,
-    refetchOnReconnect: true,
-    refetchOnWindowFocus: false,
-    retry: 3,
-    retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000),
-    meta: {
-      errorMessage: "Failed to search dictionary entries. Please try again."
-    }
+    staleTime: 1000 * 60 * 5, // 5 minutes
   });
 }
 
