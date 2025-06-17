@@ -1,0 +1,162 @@
+[
+  {
+    "tetum_word": "buka",
+    "tetum_definition": "Halo eskolla ka hanoin kle'an kona-ba buat ida",
+    "word_class": "verbu",
+    "usage_example": "Nia buka livru iha biblioteka",
+    "etymology": "Husi lian Portuguez 'buscar'",
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "dalan",
+    "tetum_definition": "Fatin ne'ebé ema la'o husi fatin ida ba fatin seluk",
+    "word_class": "naran",
+    "usage_example": "Dalan ba eskola naruk liu",
+    "related_terms": ["estrada", "kampu"],
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "hetan",
+    "tetum_definition": "Simu ka hetan buat ida ne'ebé buka ona",
+    "word_class": "verbu",
+    "usage_example": "Nia hetan servisu foun iha ofisina",
+    "synonym": "simu",
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "escola",
+    "tetum_definition": "Fatin ne'ebé labarik sira aprende materia oioin",
+    "word_class": "naran",
+    "usage_example": "Labarik sira ba escola loron-loron",
+    "related_terms": ["universidade", "koléjiu"],
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "malae",
+    "tetum_definition": "Ema ne'ebé mai husi rai-liur, la'os Timor-oan",
+    "word_class": "naran",
+    "usage_example": "Malae sira ajuda desenvolvimentu iha Timor-Leste",
+    "etymology": "Husi 'malaio' nia lian",
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "uma",
+    "tetum_definition": "Fatin ne'ebé ema hela no toba",
+    "word_class": "naran",
+    "usage_example": "Nia uma boot no bonitu",
+    "related_terms": ["hela-fatin", "residénsia"],
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "han",
+    "tetum_definition": "Tau hahán iha ibun no ko'a ho neon",
+    "word_class": "verbu",
+    "usage_example": "Ami han hahán iha kali lima",
+    "related_terms": ["hemu", "hahán"],
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "diak",
+    "tetum_definition": "Buat ida ne'ebé di'ak, loos, ka apropriadu",
+    "word_class": "adjetivu",
+    "usage_example": "Nia servisu diak tebes",
+    "antonym": "aat",
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "kmanek",
+    "tetum_definition": "Hatene ona kona-ba buat ida",
+    "word_class": "verbu",
+    "usage_example": "Nia kmanek ema hotu-hotu iha suku",
+    "synonym": "hatene",
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "feto",
+    "tetum_definition": "Ema ne'ebé iha jéneru femininu",
+    "word_class": "naran",
+    "usage_example": "Feto ida ne'e servisu iha ospitál",
+    "antonym": "mane",
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "mane",
+    "tetum_definition": "Ema ne'ebé iha jéneru maskulinu",
+    "word_class": "naran",
+    "usage_example": "Mane ida ne'e hanorin iha escola",
+    "antonym": "feto",
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "bee",
+    "tetum_definition": "Líkuidu ne'ebé mamuk no ema presiza atu moris",
+    "word_class": "naran",
+    "usage_example": "Ita presiza hemu bee loron-loron",
+    "related_terms": ["bee-manas", "bee-malirin"],
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "domin",
+    "tetum_definition": "Sentimentu boot kona-ba ema ka buat ida",
+    "word_class": "verbu",
+    "usage_example": "Nia domin família tebes",
+    "related_terms": ["hadomi", "kmanek"],
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "labarik",
+    "tetum_definition": "Ema ki'ik ne'ebé seidauk boot",
+    "word_class": "naran",
+    "usage_example": "Labarik sira halimar iha parke",
+    "related_terms": ["oan", "juventude"],
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "servisu",
+    "tetum_definition": "Atividade ne'ebé ema halo atu hetan osan",
+    "word_class": "naran",
+    "usage_example": "Nia servisu iha banku",
+    "synonym": "traballu",
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "bonitu",
+    "tetum_definition": "Buat ida ne'ebé diak atu haree",
+    "word_class": "adjetivu",
+    "usage_example": "Tasi iha Timor-Leste bonitu tebes",
+    "synonym": "ki'ik",
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "amigo",
+    "tetum_definition": "Ema ida ne'ebé ita domin no konfia",
+    "word_class": "naran",
+    "usage_example": "Nia iha amigo barak iha escola",
+    "synonym": "belun",
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "festa",
+    "tetum_definition": "Okaziaun espesiál ne'ebé ema sira hakotu-kotuk",
+    "word_class": "naran",
+    "usage_example": "Iha festa Independénsia, ema hotu kontente",
+    "related_terms": ["hakotu-kotuk", "serimónia"],
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "tuur",
+    "tetum_definition": "Pozisaun ne'ebé ain tuku no kotuk tun",
+    "word_class": "verbu",
+    "usage_example": "Nia tuur iha kadeira",
+    "antonym": "hamriik",
+    "source": "Tetum Monolingual Dictionary"
+  },
+  {
+    "tetum_word": "liman",
+    "tetum_definition": "Parte husi isin ne'ebé uza atu kaer buat",
+    "word_class": "naran",
+    "usage_example": "Nia kaer livru ho liman karuk",
+    "related_terms": ["ain", "ulun"],
+    "source": "Tetum Monolingual Dictionary"
+  }
+]
