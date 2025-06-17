@@ -51,6 +51,7 @@ export function useDictionaryStats() {
     "tetum-glossary": number;
     "portuguese-glossary": number;
     "tetum-monolingual": number;
+    "portuguese-legal": number;
   }>({
     queryKey: ["/api/stats"],
     staleTime: 1000 * 60 * 15, // 15 minutes

@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { ArrowLeft, BookOpen, Languages, FileText, BookMarked } from "lucide-react";
+import { ArrowLeft, BookOpen, Languages, FileText, BookMarked, Search, Globe } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TetumMonolingualSearch } from "@/components/TetumMonolingualSearch";
 import { TermDetail } from "@/components/TermDetail";
 import { useDictionaryStats } from "@/lib/search";
@@ -11,6 +12,7 @@ import { DictionaryEntry } from "@shared/schema";
 
 export default function TetumMonolingualModule() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
+  const [activeSection, setActiveSection] = useState("tetum-monolingual");
   const { data: stats } = useDictionaryStats();
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
@@ -18,6 +20,7 @@ export default function TetumMonolingualModule() {
   };
 
   const tetumMonoCount = stats?.["tetum-monolingual"] || 0;
+  const portugalLegalCount = stats?.["portuguese-legal"] || 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
@@ -43,7 +46,7 @@ export default function TetumMonolingualModule() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <Card className="bg-white border-orange-200">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
@@ -52,7 +55,7 @@ export default function TetumMonolingualModule() {
                   <div className="text-2xl font-bold text-slate-900">
                     {tetumMonoCount.toLocaleString()}
                   </div>
-                  <div className="text-sm text-slate-600">Definisaun Tetum</div>
+                  <div className="text-sm text-slate-600">Liafuan Tetum</div>
                 </div>
               </div>
             </CardContent>
@@ -63,8 +66,22 @@ export default function TetumMonolingualModule() {
               <div className="flex items-center gap-3">
                 <FileText className="w-8 h-8 text-orange-600" />
                 <div>
-                  <div className="text-2xl font-bold text-slate-900">100%</div>
-                  <div className="text-sm text-slate-600">Lian Tetum</div>
+                  <div className="text-2xl font-bold text-slate-900">
+                    {portugalLegalCount.toLocaleString()}
+                  </div>
+                  <div className="text-sm text-slate-600">Termos Jurídicos</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-white border-orange-200">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <Globe className="w-8 h-8 text-orange-600" />
+                <div>
+                  <div className="text-2xl font-bold text-slate-900">3</div>
+                  <div className="text-sm text-slate-600">Lian sira</div>
                 </div>
               </div>
             </CardContent>
@@ -75,7 +92,7 @@ export default function TetumMonolingualModule() {
               <div className="flex items-center gap-3">
                 <BookMarked className="w-8 h-8 text-orange-600" />
                 <div>
-                  <div className="text-2xl font-bold text-slate-900">Nativu</div>
+                  <div className="text-2xl font-bold text-slate-900">Kompletu</div>
                   <div className="text-sm text-slate-600">Definisaun sira</div>
                 </div>
               </div>
@@ -89,7 +106,54 @@ export default function TetumMonolingualModule() {
           <div className="lg:col-span-2">
             <Card className="bg-white border-orange-200">
               <CardContent className="p-6">
-                <TetumMonolingualSearch onEntrySelect={handleEntrySelect} />
+                <Tabs value={activeSection} onValueChange={setActiveSection}>
+                  <TabsList className="grid w-full grid-cols-2 mb-6">
+                    <TabsTrigger value="tetum-monolingual" className="flex items-center gap-2">
+                      <Languages className="w-4 h-4" />
+                      Disionáriu Tetum
+                    </TabsTrigger>
+                    <TabsTrigger value="portuguese-legal" className="flex items-center gap-2">
+                      <FileText className="w-4 h-4" />
+                      Termos Jurídicos PT
+                    </TabsTrigger>
+                  </TabsList>
+
+                  <TabsContent value="tetum-monolingual">
+                    <TetumMonolingualSearch onEntrySelect={handleEntrySelect} />
+                  </TabsContent>
+
+                  <TabsContent value="portuguese-legal">
+                    <div className="space-y-6">
+                      <div className="text-center space-y-2">
+                        <div className="flex items-center justify-center gap-2">
+                          <FileText className="w-6 h-6 text-orange-600" />
+                          <h2 className="text-2xl font-bold text-slate-900">Termos Jurídicos Portugueses</h2>
+                        </div>
+                        <p className="text-slate-600">
+                          Dicionário completo de termos jurídicos em português
+                        </p>
+                      </div>
+
+                      <div className="flex gap-2">
+                        <div className="relative flex-1">
+                          <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                          <input
+                            type="text"
+                            placeholder="Procurar termos jurídicos..."
+                            className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                          />
+                        </div>
+                        <Button className="bg-orange-600 hover:bg-orange-700">
+                          Procurar
+                        </Button>
+                      </div>
+
+                      <div className="text-center text-slate-600">
+                        {portugalLegalCount.toLocaleString()} termos jurídicos disponíveis
+                      </div>
+                    </div>
+                  </TabsContent>
+                </Tabs>
               </CardContent>
             </Card>
           </div>
