@@ -148,8 +148,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       }
 
-      // Load LEGAL dictionary - Portuguese, Tetum, and English legal terms
+      // Load LEGAL dictionaries - Portuguese/Tetum/English and Tetum Legal Glossary
       let legalDictData: any[] = [];
+      let tetumGlossaryData: any[] = [];
       
       try {
         const legalDictPath = path.resolve(process.cwd(), "attached_assets", "legal dic tt.json");
@@ -158,6 +159,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } catch (error) {
         console.warn("Legal dictionary not found:", error);
         legalDictData = [];
+      }
+      
+      // Load Tetum Legal Glossary
+      try {
+        const tetumGlossaryPath = path.resolve(process.cwd(), "attached_assets", "legal tetum glossay.json");
+        tetumGlossaryData = JSON.parse(await fs.readFile(tetumGlossaryPath, "utf-8"));
+        console.log(`Tetum legal glossary loaded successfully with ${tetumGlossaryData.length} entries`);
+      } catch (error) {
+        console.warn("Tetum legal glossary not found:", error);
+        tetumGlossaryData = [];
       }
 
       const generalDictData: any[] = [];
@@ -179,7 +190,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-
+      // Process Tetum Legal Glossary entries
+      const tetumGlossaryEntries = tetumGlossaryData.map((item: any) => ({
+        tetum: safeStringify(item.tetum_term),
+        portuguese: "",
+        english: "",
+        source: safeStringify(item.source) || "Tetum Legal Glossary",
+        category: "legal",
+        dictionaryType: "tetum-glossary",
+        notes: "",
+        explanation: safeStringify(item.tetum_explanation),
+        pronunciation: "",
+        wordClass: "",
+        etymology: "",
+        usageExamples: [],
+        relatedTerms: [],
+      }));
 
       // Process INL Tetum dictionary entries (new structure)
       const inlTetumEntries = inlTetumData.filter((item: any) => item && item.word).map((item: any) => ({
@@ -256,12 +282,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Bulk insert all entries with proper separation
       await storage.bulkCreateEntries([
         ...legalEntries,           // Legal module only
+        ...tetumGlossaryEntries,   // Tetum Legal Glossary module only
         ...medicalEnTtEntries,     // Medical module - English to Tetum
         ...medicalTtEnEntries,     // Medical module - Tetum to English
         ...inlTetumEntries         // INL Tetum dictionary module
       ]);
       
-      console.log(`Loaded ${legalEntries.length + medicalEnTtEntries.length + medicalTtEnEntries.length + inlTetumEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + medicalEnTtEntries.length + medicalTtEnEntries.length + inlTetumEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
@@ -487,16 +514,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/legal/entries", async (req, res) => {
     try {
       const entries = await storage.getAllEntries();
-      const legalEntries = entries.filter(e => 
-        e.dictionaryType === "legal" || 
-        e.dictionaryType === "tetum-glossary" || 
-        e.dictionaryType === "portuguese-glossary" ||
-        e.dictionaryType === "portuguese-legal"
-      );
+      const legalEntries = entries.filter(e => e.dictionaryType === "legal");
       res.json(legalEntries);
     } catch (error) {
       console.error("Legal entries error:", error);
       res.status(500).json({ error: "Failed to fetch legal entries" });
+    }
+  });
+
+  // Tetum Legal Glossary module endpoints - Only Tetum legal glossary terms
+  app.get("/api/tetum-glossary/search", async (req, res) => {
+    try {
+      const searchQuery = searchQuerySchema.parse(req.query);
+      const allResults = await storage.searchEntries(searchQuery);
+      const tetumGlossaryResults = allResults.filter(e => e.dictionaryType === "tetum-glossary");
+      res.json(tetumGlossaryResults);
+    } catch (error) {
+      console.error("Tetum glossary search error:", error);
+      res.status(400).json({ error: "Invalid search parameters" });
+    }
+  });
+
+  app.get("/api/tetum-glossary/entries", async (req, res) => {
+    try {
+      const entries = await storage.getAllEntries();
+      const tetumGlossaryEntries = entries.filter(e => e.dictionaryType === "tetum-glossary");
+      res.json(tetumGlossaryEntries);
+    } catch (error) {
+      console.error("Tetum glossary entries error:", error);
+      res.status(500).json({ error: "Failed to fetch Tetum glossary entries" });
     }
   });
 
