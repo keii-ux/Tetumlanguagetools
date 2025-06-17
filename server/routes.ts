@@ -237,7 +237,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const bookmark = await storage.createBookmark(bookmarkData);
       res.json(bookmark);
     } catch (error) {
-      res.status(400).json({ error: "Invalid bookmark data" });
+      console.error("Create bookmark error:", error);
+      if (error instanceof Error) {
+        res.status(400).json({ error: error.message });
+      } else {
+        res.status(400).json({ error: "Invalid bookmark data" });
+      }
     }
   });
 
@@ -245,9 +250,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.delete("/api/bookmarks/:userId/:entryId", async (req, res) => {
     try {
       const { userId, entryId } = req.params;
-      await storage.deleteBookmark(userId, parseInt(entryId));
+      const entryIdNum = parseInt(entryId);
+      if (isNaN(entryIdNum)) {
+        return res.status(400).json({ error: "Invalid entry ID" });
+      }
+      await storage.deleteBookmark(userId, entryIdNum);
       res.json({ success: true });
     } catch (error) {
+      console.error("Delete bookmark error:", error);
       res.status(500).json({ error: "Failed to delete bookmark" });
     }
   });
@@ -273,7 +283,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const history = await storage.addSearchHistory(historyData);
       res.json(history);
     } catch (error) {
-      res.status(400).json({ error: "Invalid history data" });
+      console.error("Add search history error:", error);
+      if (error instanceof Error) {
+        res.status(400).json({ error: error.message });
+      } else {
+        res.status(400).json({ error: "Invalid history data" });
+      }
     }
   });
 
@@ -281,9 +296,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.delete("/api/history/:userId", async (req, res) => {
     try {
       const { userId } = req.params;
+      if (!userId || userId.trim() === "") {
+        return res.status(400).json({ error: "Invalid user ID" });
+      }
       await storage.clearSearchHistory(userId);
       res.json({ success: true });
     } catch (error) {
+      console.error("Clear search history error:", error);
       res.status(500).json({ error: "Failed to clear search history" });
     }
   });

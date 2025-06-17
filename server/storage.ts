@@ -56,20 +56,24 @@ export class MemStorage implements IStorage {
   }
 
   async searchEntries(query: SearchQuery): Promise<DictionaryEntry[]> {
-    const entries = Array.from(this.entries.values());
+    const searchTerm = query.caseSensitive ? (query.query || "") : (query.query || "").toLowerCase();
     
-    if (!query.query) return entries;
-
-    const searchTerm = query.caseSensitive ? query.query : query.query.toLowerCase();
+    // Get all entries or filter by dictionary type
+    let filteredEntries = Array.from(this.entries.values());
     
-    return entries.filter(entry => {
-      // Filter by dictionary type
-      if (query.dictionaryType !== "all" && entry.dictionaryType !== query.dictionaryType) {
-        return false;
-      }
+    // Filter by dictionary type first
+    if (query.dictionaryType !== "all") {
+      filteredEntries = filteredEntries.filter(entry => entry.dictionaryType === query.dictionaryType);
+    }
 
-      // Language-specific search
-      const fields: string[] = [];
+    // If no search term, return entries matching the dictionary type filter
+    if (!searchTerm.trim()) {
+      return filteredEntries;
+    }
+
+    return filteredEntries.filter(entry => {
+      // Search in relevant fields based on language preference
+      const fields = [];
       if (query.language === "all" || query.language === "tetum") {
         if (entry.tetum) fields.push(entry.tetum);
       }
@@ -80,9 +84,11 @@ export class MemStorage implements IStorage {
         if (entry.english) fields.push(entry.english);
       }
 
-      // Include explanations if requested
-      if (query.includeDefinitions && entry.explanation) {
-        fields.push(entry.explanation);
+      // Include definitions if requested
+      if (query.includeDefinitions) {
+        if (entry.explanation) fields.push(entry.explanation);
+        if (entry.notes) fields.push(entry.notes);
+        if (entry.category) fields.push(entry.category);
       }
 
       // Search in relevant fields
@@ -92,6 +98,35 @@ export class MemStorage implements IStorage {
           ? fieldValue === searchTerm
           : fieldValue.includes(searchTerm);
       });
+    }).sort((a, b) => {
+      // Sort by relevance: exact matches first, then starts with, then contains
+      const aFields = [a.tetum || "", a.english || "", a.portuguese || ""];
+      const bFields = [b.tetum || "", b.english || "", b.portuguese || ""];
+      
+      const aExact = aFields.some(field => 
+        query.caseSensitive ? field === (query.query || "") : field.toLowerCase() === searchTerm
+      );
+      const bExact = bFields.some(field => 
+        query.caseSensitive ? field === (query.query || "") : field.toLowerCase() === searchTerm
+      );
+      
+      if (aExact && !bExact) return -1;
+      if (!aExact && bExact) return 1;
+      
+      const aStartsWith = aFields.some(field => 
+        query.caseSensitive ? field.startsWith(query.query || "") : field.toLowerCase().startsWith(searchTerm)
+      );
+      const bStartsWith = bFields.some(field => 
+        query.caseSensitive ? field.startsWith(query.query || "") : field.toLowerCase().startsWith(searchTerm)
+      );
+      
+      if (aStartsWith && !bStartsWith) return -1;
+      if (!aStartsWith && bStartsWith) return 1;
+      
+      // Alphabetical sort as fallback
+      return (a.tetum || a.english || a.portuguese || "").localeCompare(
+        b.tetum || b.english || b.portuguese || ""
+      );
     });
   }
 

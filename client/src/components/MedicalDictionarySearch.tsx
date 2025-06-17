@@ -121,7 +121,7 @@ export function MedicalDictionarySearch({ onEntrySelect }: MedicalDictionarySear
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
 
-  const { data: searchResults = [], isLoading } = useSearchEntries({
+  const { data: searchResults = [], isLoading, error } = useSearchEntries({
     query: wordSearch,
     dictionaryType: "medical",
     language: "all",
@@ -480,6 +480,13 @@ export function MedicalDictionarySearch({ onEntrySelect }: MedicalDictionarySear
         {isLoading && showResults && (
           <div className="bg-white rounded-lg border border-gray-200 p-6 text-center">
             <p className="text-gray-500">Searching...</p>
+          </div>
+        )}
+
+        {/* Error */}
+        {error && showResults && (
+          <div className="bg-red-50 rounded-lg border border-red-200 p-6 text-center">
+            <p className="text-red-600">Error searching for medical terms. Please try again.</p>
           </div>
         )}
       </div>

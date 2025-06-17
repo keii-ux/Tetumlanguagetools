@@ -136,13 +136,12 @@ export default function Dictionary() {
   const addSearchHistory = useAddSearchHistory();
 
   const handleToolSelect = (toolId: string) => {
-    if (toolId === "medical") {
-      setCurrentView('medical');
-    } else {
-      setSelectedTool(toolId);
-      const newQuery = { ...searchQuery, dictionaryType: toolId as any };
-      setSearchQuery(newQuery);
-    }
+    setSelectedTool(toolId);
+    const newQuery = buildSearchQuery({ 
+      dictionaryType: toolId as any,
+      query: globalSearch || ""
+    });
+    setSearchQuery(newQuery);
   };
 
   const handleGlobalSearch = (query: string) => {
@@ -532,18 +531,19 @@ export default function Dictionary() {
                         {/* Special button for medical dictionary */}
                         {tool.id === "medical" && (
                           <div className="mt-4 pt-4 border-t border-gray-100">
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="w-full text-xs bg-red-50 border-red-200 text-red-700 hover:bg-red-100"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                window.location.href = '/medical-dictionary';
-                              }}
-                            >
-                              <BookOpen className="w-3 h-3 mr-2" />
-                              Advanced Medical Dictionary
-                            </Button>
+                            <Link href="/medical-dictionary">
+                              <Button 
+                                variant="outline" 
+                                size="sm" 
+                                className="w-full text-xs bg-red-50 border-red-200 text-red-700 hover:bg-red-100"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                }}
+                              >
+                                <BookOpen className="w-3 h-3 mr-2" />
+                                Advanced Medical Dictionary
+                              </Button>
+                            </Link>
                           </div>
                         )}
                       </div>
