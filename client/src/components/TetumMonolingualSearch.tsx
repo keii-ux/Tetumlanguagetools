@@ -137,13 +137,12 @@ export function TetumMonolingualSearch({ onEntrySelect }: TetumMonolingualSearch
       <div className="text-center space-y-2">
         <div className="flex items-center justify-center gap-2">
           <BookOpen className="w-6 h-6 text-orange-600" />
-          <h1 className="text-2xl font-bold text-slate-900">Disionáriu Tetum Monolíngue</h1>
+          <h1 className="text-2xl font-bold text-slate-900">Disionáriu Tetum (INL)</h1>
         </div>
         <p className="text-slate-600">
           Disionáriu kompletu ho definisaun Tetum nian iha lian Tetum rasik
         </p>
       </div>
-
       {/* Search Modes */}
       <Tabs value={searchMode} onValueChange={(value) => setSearchMode(value as "starts-with" | "contains")}>
         <TabsList className="grid w-full grid-cols-2">
@@ -167,7 +166,6 @@ export function TetumMonolingualSearch({ onEntrySelect }: TetumMonolingualSearch
           </div>
         </TabsContent>
       </Tabs>
-
       {/* Search Interface */}
       <div ref={searchRef} className="relative">
         <div className="flex gap-2">
@@ -201,7 +199,6 @@ export function TetumMonolingualSearch({ onEntrySelect }: TetumMonolingualSearch
           isVisible={showDropdown}
         />
       </div>
-
       {/* Search Results Summary */}
       {searchTerm && (
         <div className="flex items-center justify-between text-sm text-slate-600">
@@ -213,25 +210,6 @@ export function TetumMonolingualSearch({ onEntrySelect }: TetumMonolingualSearch
           )}
         </div>
       )}
-
-      {/* Quick Start Guide */}
-      <Card className="bg-orange-50 border-orange-200">
-        <CardContent className="p-4">
-          <div className="flex items-start gap-3">
-            <Info className="w-5 h-5 text-orange-600 mt-0.5" />
-            <div className="space-y-2">
-              <h3 className="font-semibold text-orange-900">Oinsá atu uza</h3>
-              <ul className="text-sm text-orange-800 space-y-1">
-                <li>• <strong>Hahu ho Leta:</strong> Hakerek leta ida atu buka liafuan Tetum hotu ne'ebé hahu ho leta ne'e</li>
-                <li>• <strong>Iha Liafuan:</strong> Hakerek testu ida atu buka iha liafuan Tetum sira laran</li>
-                <li>• Klik iha rezultadu ruma atu haree definisaun detalladu no ezemplu uza</li>
-                <li>• Definisaun no esplikasaun hotu-hotu fó iha lian Tetum</li>
-                <li>• Disionáriu ne'e iha {filteredEntries.length > 0 ? filteredEntries.length : '7,303'} liafuan Tetum</li>
-              </ul>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 }
