@@ -136,12 +136,16 @@ export default function Dictionary() {
   const addSearchHistory = useAddSearchHistory();
 
   const handleToolSelect = (toolId: string) => {
-    setSelectedTool(toolId);
-    const newQuery = buildSearchQuery({ 
-      dictionaryType: toolId as any,
-      query: globalSearch || ""
-    });
-    setSearchQuery(newQuery);
+    if (toolId === "legal") {
+      setCurrentView('legal');
+    } else {
+      setSelectedTool(toolId);
+      const newQuery = buildSearchQuery({ 
+        dictionaryType: toolId as any,
+        query: globalSearch || ""
+      });
+      setSearchQuery(newQuery);
+    }
   };
 
   const handleGlobalSearch = (query: string) => {
@@ -528,7 +532,7 @@ export default function Dictionary() {
                           <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-green-500 group-hover:translate-x-1 transition-all" />
                         </div>
                         
-                        {/* Special button for medical dictionary */}
+                        {/* Special buttons for advanced modules */}
                         {tool.id === "medical" && (
                           <div className="mt-4 pt-4 border-t border-gray-100">
                             <Link href="/medical-dictionary">
@@ -542,6 +546,24 @@ export default function Dictionary() {
                               >
                                 <BookOpen className="w-3 h-3 mr-2" />
                                 Advanced Medical Dictionary
+                              </Button>
+                            </Link>
+                          </div>
+                        )}
+                        
+                        {tool.id === "legal" && (
+                          <div className="mt-4 pt-4 border-t border-gray-100">
+                            <Link href="/legal-dictionary">
+                              <Button 
+                                variant="outline" 
+                                size="sm" 
+                                className="w-full text-xs bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                }}
+                              >
+                                <BookOpen className="w-3 h-3 mr-2" />
+                                Advanced Legal Module
                               </Button>
                             </Link>
                           </div>

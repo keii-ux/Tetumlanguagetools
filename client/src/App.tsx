@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Dictionary from "@/pages/Dictionary";
 import MedicalDictionaryModule from "@/pages/MedicalDictionaryModule";
+import LegalDictionaryModule from "@/pages/LegalDictionaryModule";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -12,6 +13,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Dictionary} />
       <Route path="/medical-dictionary" component={MedicalDictionaryModule} />
+      <Route path="/legal-dictionary" component={LegalDictionaryModule} />
       <Route component={NotFound} />
     </Switch>
   );
