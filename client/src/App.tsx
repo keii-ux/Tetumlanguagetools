@@ -17,6 +17,7 @@ function Router() {
       <Route path="/medical-dictionary" component={MedicalDictionaryModule} />
       <Route path="/legal-dictionary" component={LegalDictionaryModule} />
       <Route path="/tetum-monolingual" component={TetumMonolingualModule} />
+      <Route path="/inl-tetum-dictionary" component={INLTetumDictionaryModule} />
       <Route component={NotFound} />
     </Switch>
   );

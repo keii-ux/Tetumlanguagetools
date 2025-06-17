@@ -7,6 +7,7 @@ export const DICTIONARY_TYPES = {
   general: "General Dictionary",
   asean: "ASEAN Glossary",
   "tetum-monolingual": "Disionáriu Tetum Monolíngue",
+  "inl-tetum": "INL Tetum Dictionary",
 } as const;
 
 export const LANGUAGES = {
@@ -22,6 +23,7 @@ export const DICTIONARY_ICONS = {
   general: "fas fa-book",
   asean: "fas fa-globe-asia",
   "tetum-monolingual": "fas fa-language",
+  "inl-tetum": "fas fa-book-open",
 } as const;
 
 export const DICTIONARY_COLORS = {
@@ -30,6 +32,7 @@ export const DICTIONARY_COLORS = {
   general: "bg-purple-500",
   asean: "bg-green-500",
   "tetum-monolingual": "bg-orange-500",
+  "inl-tetum": "bg-indigo-500",
 } as const;
 
 export function getDictionaryIcon(type: string): string {
