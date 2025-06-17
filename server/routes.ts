@@ -11,11 +11,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   async function initializeDictionaries() {
     try {
       // Load medical dictionaries
-      const medicalTetumEnPath = path.resolve(process.cwd(), "attached_assets", "medical-dic_tt_en.json");
-      const medicalEnTetumPath = path.resolve(process.cwd(), "attached_assets", "medical-dic_en_tt.json");
+      const medicalTetumEnPath = path.resolve(process.cwd(), "attached_assets", "medical-dic_tt_en_1750124091925.json");
+      const medicalEnTetumPath = path.resolve(process.cwd(), "attached_assets", "medical_dic_en-tt_1750124091926.json");
       
       let medicalTetumEnData = [];
-      let medicalEnTetumData = {};
+      let medicalEnTetumData = [];
       
       try {
         medicalTetumEnData = JSON.parse(await fs.readFile(medicalTetumEnPath, "utf-8"));
@@ -92,49 +92,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: item.synonym ? (Array.isArray(item.synonym) ? item.synonym : [item.synonym]) : [],
       }));
 
-      // Process medical dictionary entries (English-Tetum) 
-      const medicalEnEntries: any[] = [];
-      const medicalData = medicalEnTetumData as any;
-      
-      if (medicalData?.diseases_and_conditions) {
-        medicalData.diseases_and_conditions.forEach((item: any) => {
-          medicalEnEntries.push({
-            english: item.english || "",
-            tetum: item.tetum || "",
-            portuguese: "",
-            source: "Medical Dictionary",
-            category: "diseases",
-            dictionaryType: "medical",
-            notes: "Disease/Condition",
-            explanation: "",
-            pronunciation: "",
-            wordClass: "",
-            etymology: "",
-            usageExamples: [],
-            relatedTerms: [],
-          });
-        });
-      }
-
-      if (medicalData?.symptoms_and_clinical_signs) {
-        medicalData.symptoms_and_clinical_signs.forEach((item: any) => {
-          medicalEnEntries.push({
-            english: item.english || "",
-            tetum: item.tetum || "",
-            portuguese: "",
-            source: "Medical Dictionary",
-            category: "symptoms",
-            dictionaryType: "medical",
-            notes: "Symptom/Clinical Sign",
-            explanation: "",
-            pronunciation: "",
-            wordClass: "",
-            etymology: "",
-            usageExamples: [],
-            relatedTerms: [],
-          });
-        });
-      }
+      // Process medical dictionary entries (English-Tetum)
+      const medicalEnEntries = medicalEnTetumData.map((item: any) => ({
+        english: item.english || "",
+        tetum: item.tetum || "",
+        portuguese: "",
+        source: "Medical Dictionary",
+        category: "medical",
+        dictionaryType: "medical",
+        notes: "",
+        explanation: "",
+        pronunciation: "",
+        wordClass: "",
+        etymology: "",
+        usageExamples: [],
+        relatedTerms: [],
+      }));
 
       // Process general dictionary entries
       const generalEntries = generalDictData.map((item: any) => ({
