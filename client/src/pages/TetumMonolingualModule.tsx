@@ -1,20 +1,16 @@
 import { useState } from "react";
-import { ArrowLeft, BookOpen, Languages, FileText, BookMarked, Globe } from "lucide-react";
+import { ArrowLeft, BookOpen, Languages, FileText, BookMarked } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TetumMonolingualSearch } from "@/components/TetumMonolingualSearch";
-import { TetumBilingualSearch } from "@/components/TetumBilingualSearch";
-import { TetumMultilingualSearch } from "@/components/TetumMultilingualSearch";
 import { TermDetail } from "@/components/TermDetail";
 import { useDictionaryStats } from "@/lib/search";
 import { DictionaryEntry } from "@shared/schema";
 
 export default function TetumMonolingualModule() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
-  const [activeSection, setActiveSection] = useState("monolingual");
   const { data: stats } = useDictionaryStats();
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
@@ -41,7 +37,9 @@ export default function TetumMonolingualModule() {
               <h1 className="text-2xl font-bold text-slate-900">Disionáriu Tetum Monolíngue</h1>
             </div>
           </div>
-          
+          <Badge variant="secondary" className="bg-orange-100 text-orange-800">
+            {tetumMonoCount.toLocaleString()} liafuan
+          </Badge>
         </div>
 
         {/* Stats Cards */}
@@ -85,130 +83,75 @@ export default function TetumMonolingualModule() {
           </Card>
         </div>
 
-        {/* Dictionary Sections */}
-        <Tabs value={activeSection} onValueChange={setActiveSection} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="monolingual">Disionáriu Tetum</TabsTrigger>
-            <TabsTrigger value="bilingual">Tetum-English</TabsTrigger>
-            <TabsTrigger value="multilingual">Tetum Multilingual</TabsTrigger>
-          </TabsList>
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Search Section */}
+          <div className="lg:col-span-2">
+            <Card className="bg-white border-orange-200">
+              <CardContent className="p-6">
+                <TetumMonolingualSearch onEntrySelect={handleEntrySelect} />
+              </CardContent>
+            </Card>
+          </div>
 
-          <TabsContent value="monolingual" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Search Section */}
-              <div className="lg:col-span-2">
-                <Card className="bg-white border-orange-200">
-                  <CardContent className="p-6">
-                    <TetumMonolingualSearch onEntrySelect={handleEntrySelect} />
-                  </CardContent>
-                </Card>
+          {/* Term Detail Section */}
+          <div className="lg:col-span-1">
+            {selectedEntry ? (
+              <TermDetail 
+                entry={selectedEntry} 
+                onClose={() => setSelectedEntry(null)}
+                userId="anonymous"  // You can implement proper user management
+              />
+            ) : (
+              <Card className="bg-white border-orange-200">
+                <CardContent className="p-6">
+                  <div className="text-center space-y-4">
+                    <BookOpen className="w-12 h-12 text-orange-400 mx-auto" />
+                    <div>
+                      <h3 className="text-lg font-semibold text-slate-900 mb-2">
+                        Hili Liafuan Tetum
+                      </h3>
+                      <p className="text-slate-600 text-sm">
+                        Buka no klik ba liafuan Tetum ruma atu haree nia definisaun detalladu no ezemplu uza iha lian Tetum.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+
+        {/* About Section */}
+        <Card className="mt-8 bg-white border-orange-200">
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                  Kona-ba Disionáriu Tetum Monolíngue
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  Disionáriu kompletu ne'e fó definisaun no esplikasaun liafuan Tetum nian iha lian Tetum rasik. 
+                  Halo atu ajuda ema Tetum-oan sira no estudante nivel aas sira atu komprende liafuan sira 
+                  iha sira-nia kontestu kultural no linguístiku.
+                </p>
               </div>
-
-              {/* Term Detail Section */}
-              <div className="lg:col-span-1">
-                {selectedEntry ? (
-                  <TermDetail 
-                    entry={selectedEntry} 
-                    onClose={() => setSelectedEntry(null)}
-                    userId="anonymous"
-                  />
-                ) : (
-                  <Card className="bg-white border-orange-200">
-                    <CardContent className="p-6">
-                      <div className="text-center space-y-4">
-                        <BookOpen className="w-12 h-12 text-orange-400 mx-auto" />
-                        <div>
-                          <h3 className="text-lg font-semibold text-slate-900 mb-2">
-                            Hili Liafuan Tetum
-                          </h3>
-                          <p className="text-slate-600 text-sm">
-                            Buka no klik ba liafuan Tetum ruma atu haree nia definisaun detalladu no ezemplu uza iha lian Tetum.
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
+              <div>
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                  Karakterístika sira
+                </h3>
+                <ul className="text-slate-600 text-sm space-y-1">
+                  <li>• Definisaun Tetum nativu</li>
+                  <li>• Identifikasaun klase liafuan nian</li>
+                  <li>• Ezemplu uza no kontestu</li>
+                  <li>• Nota kultural no linguístiku</li>
+                  <li>• Kapasidade buka avansadu</li>
+                  <li>• {tetumMonoCount.toLocaleString()} liafuan Tetum auténtiku</li>
+                </ul>
               </div>
             </div>
-          </TabsContent>
-
-          <TabsContent value="bilingual" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2">
-                <Card className="bg-white border-orange-200">
-                  <CardContent className="p-6">
-                    <TetumBilingualSearch onEntrySelect={handleEntrySelect} />
-                  </CardContent>
-                </Card>
-              </div>
-              <div className="lg:col-span-1">
-                {selectedEntry ? (
-                  <TermDetail 
-                    entry={selectedEntry} 
-                    onClose={() => setSelectedEntry(null)}
-                    userId="anonymous"
-                  />
-                ) : (
-                  <Card className="bg-white border-orange-200">
-                    <CardContent className="p-6">
-                      <div className="text-center space-y-4">
-                        <Languages className="w-12 h-12 text-blue-400 mx-auto" />
-                        <div>
-                          <h3 className="text-lg font-semibold text-slate-900 mb-2">
-                            Select a Term
-                          </h3>
-                          <p className="text-slate-600 text-sm">
-                            Search and click on any Tetum or English word to view bilingual definitions and translations.
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
-              </div>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="multilingual" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2">
-                <Card className="bg-white border-orange-200">
-                  <CardContent className="p-6">
-                    <TetumMultilingualSearch onEntrySelect={handleEntrySelect} />
-                  </CardContent>
-                </Card>
-              </div>
-              <div className="lg:col-span-1">
-                {selectedEntry ? (
-                  <TermDetail 
-                    entry={selectedEntry} 
-                    onClose={() => setSelectedEntry(null)}
-                    userId="anonymous"
-                  />
-                ) : (
-                  <Card className="bg-white border-orange-200">
-                    <CardContent className="p-6">
-                      <div className="text-center space-y-4">
-                        <Globe className="w-12 h-12 text-purple-400 mx-auto" />
-                        <div>
-                          <h3 className="text-lg font-semibold text-slate-900 mb-2">
-                            Multilingual Results
-                          </h3>
-                          <p className="text-slate-600 text-sm">
-                            Search across multiple languages to view comprehensive translations and cross-references.
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
-              </div>
-            </div>
-          </TabsContent>
-        </Tabs>
-
-        
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
