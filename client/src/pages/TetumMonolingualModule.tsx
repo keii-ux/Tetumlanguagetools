@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { ArrowLeft, BookOpen, Languages, FileText, BookMarked } from "lucide-react";
+import { ArrowLeft, BookOpen, Languages, FileText, BookMarked, Globe } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TetumMonolingualSearch } from "@/components/TetumMonolingualSearch";
+import { TetumBilingualSearch } from "@/components/TetumBilingualSearch";
+import { TetumMultilingualSearch } from "@/components/TetumMultilingualSearch";
 import { TermDetail } from "@/components/TermDetail";
 import { useDictionaryStats } from "@/lib/search";
 import { DictionaryEntry } from "@shared/schema";
@@ -136,42 +138,34 @@ export default function TetumMonolingualModule() {
               <div className="lg:col-span-2">
                 <Card className="bg-white border-orange-200">
                   <CardContent className="p-6">
-                    <div className="text-center space-y-4">
-                      <Languages className="w-16 h-16 text-orange-400 mx-auto" />
-                      <div>
-                        <h3 className="text-xl font-semibold text-slate-900 mb-3">
-                          Tetum-English Dictionary
-                        </h3>
-                        <p className="text-slate-600">
-                          Search for Tetum words with English translations and definitions.
-                        </p>
-                      </div>
-                      <div className="bg-orange-50 p-4 rounded-lg">
-                        <p className="text-sm text-orange-800">
-                          This section provides Tetum words with their English equivalents, 
-                          helping bridge language understanding between Tetum and English speakers.
-                        </p>
-                      </div>
-                    </div>
+                    <TetumBilingualSearch onEntrySelect={handleEntrySelect} />
                   </CardContent>
                 </Card>
               </div>
               <div className="lg:col-span-1">
-                <Card className="bg-white border-orange-200">
-                  <CardContent className="p-6">
-                    <div className="text-center space-y-4">
-                      <FileText className="w-12 h-12 text-orange-400 mx-auto" />
-                      <div>
-                        <h3 className="text-lg font-semibold text-slate-900 mb-2">
-                          Bilingual Support
-                        </h3>
-                        <p className="text-slate-600 text-sm">
-                          Access comprehensive Tetum-English dictionary with cultural context and linguistic notes.
-                        </p>
+                {selectedEntry ? (
+                  <TermDetail 
+                    entry={selectedEntry} 
+                    onClose={() => setSelectedEntry(null)}
+                    userId="anonymous"
+                  />
+                ) : (
+                  <Card className="bg-white border-orange-200">
+                    <CardContent className="p-6">
+                      <div className="text-center space-y-4">
+                        <Languages className="w-12 h-12 text-blue-400 mx-auto" />
+                        <div>
+                          <h3 className="text-lg font-semibold text-slate-900 mb-2">
+                            Select a Term
+                          </h3>
+                          <p className="text-slate-600 text-sm">
+                            Search and click on any Tetum or English word to view bilingual definitions and translations.
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                )}
               </div>
             </div>
           </TabsContent>
@@ -181,50 +175,34 @@ export default function TetumMonolingualModule() {
               <div className="lg:col-span-2">
                 <Card className="bg-white border-orange-200">
                   <CardContent className="p-6">
-                    <div className="text-center space-y-4">
-                      <Languages className="w-16 h-16 text-orange-400 mx-auto" />
-                      <div>
-                        <h3 className="text-xl font-semibold text-slate-900 mb-3">
-                          Multilingual Tetum Dictionary
-                        </h3>
-                        <p className="text-slate-600">
-                          Comprehensive Tetum dictionary with Portuguese, English, and Indonesian translations.
-                        </p>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                        <div className="bg-blue-50 p-3 rounded-lg">
-                          <h4 className="font-semibold text-blue-900 mb-1">Portuguese</h4>
-                          <p className="text-xs text-blue-700">Colonial heritage translations</p>
-                        </div>
-                        <div className="bg-green-50 p-3 rounded-lg">
-                          <h4 className="font-semibold text-green-900 mb-1">English</h4>
-                          <p className="text-xs text-green-700">International communication</p>
-                        </div>
-                        <div className="bg-purple-50 p-3 rounded-lg">
-                          <h4 className="font-semibold text-purple-900 mb-1">Indonesian</h4>
-                          <p className="text-xs text-purple-700">Regional linguistic ties</p>
-                        </div>
-                      </div>
-                    </div>
+                    <TetumMultilingualSearch onEntrySelect={handleEntrySelect} />
                   </CardContent>
                 </Card>
               </div>
               <div className="lg:col-span-1">
-                <Card className="bg-white border-orange-200">
-                  <CardContent className="p-6">
-                    <div className="text-center space-y-4">
-                      <BookMarked className="w-12 h-12 text-orange-400 mx-auto" />
-                      <div>
-                        <h3 className="text-lg font-semibold text-slate-900 mb-2">
-                          Regional Context
-                        </h3>
-                        <p className="text-slate-600 text-sm">
-                          Understanding Tetum through its linguistic relationships with neighboring languages and colonial influences.
-                        </p>
+                {selectedEntry ? (
+                  <TermDetail 
+                    entry={selectedEntry} 
+                    onClose={() => setSelectedEntry(null)}
+                    userId="anonymous"
+                  />
+                ) : (
+                  <Card className="bg-white border-orange-200">
+                    <CardContent className="p-6">
+                      <div className="text-center space-y-4">
+                        <Globe className="w-12 h-12 text-purple-400 mx-auto" />
+                        <div>
+                          <h3 className="text-lg font-semibold text-slate-900 mb-2">
+                            Multilingual Results
+                          </h3>
+                          <p className="text-slate-600 text-sm">
+                            Search across multiple languages to view comprehensive translations and cross-references.
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                )}
               </div>
             </div>
           </TabsContent>
