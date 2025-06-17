@@ -1,18 +1,90 @@
 import { useState } from "react";
-import { ArrowLeft, BookOpen, Languages, FileText, BookMarked, Search, Globe } from "lucide-react";
+import { ArrowLeft, BookOpen, Languages, FileText, BookMarked, Globe, ChevronDown } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { TetumMonolingualSearch } from "@/components/TetumMonolingualSearch";
 import { TermDetail } from "@/components/TermDetail";
 import { useDictionaryStats } from "@/lib/search";
 import { DictionaryEntry } from "@shared/schema";
 
+type Language = "tetum" | "english" | "portuguese";
+
+interface LanguageContent {
+  title: string;
+  subtitle: string;
+  backButton: string;
+  entriesLabel: string;
+  selectWord: string;
+  selectDescription: string;
+  aboutTitle: string;
+  aboutDescription: string;
+  featuresTitle: string;
+  features: string[];
+}
+
+const languageContent: Record<Language, LanguageContent> = {
+  tetum: {
+    title: "Disionáriu Tetum Monolíngue",
+    subtitle: "Disionáriu kompletu ho definisaun Tetum nian iha lian Tetum rasik",
+    backButton: "Fila ba Disionáriu",
+    entriesLabel: "liafuan",
+    selectWord: "Hili Liafuan Tetum",
+    selectDescription: "Buka no klik ba liafuan Tetum ruma atu haree nia definisaun detalladu no ezemplu uza iha lian Tetum.",
+    aboutTitle: "Kona-ba Disionáriu Tetum Monolíngue",
+    aboutDescription: "Disionáriu kompletu ne'e fó definisaun no esplikasaun liafuan Tetum nian iha lian Tetum rasik. Halo atu ajuda ema Tetum-oan sira no estudante nivel aas sira atu komprende liafuan sira iha sira-nia kontestu kultural no linguístiku.",
+    featuresTitle: "Karakterístika sira",
+    features: [
+      "Definisaun Tetum nativu",
+      "Identifikasaun klase liafuan nian",
+      "Ezemplu uza no kontestu",
+      "Nota kultural no linguístiku",
+      "Kapasidade buka avansadu"
+    ]
+  },
+  english: {
+    title: "Tetum Monolingual Dictionary",
+    subtitle: "Comprehensive dictionary with Tetum definitions in Tetum language",
+    backButton: "Back to Dictionary",
+    entriesLabel: "entries",
+    selectWord: "Select Tetum Word",
+    selectDescription: "Search and click on any Tetum word to view its detailed definition and usage examples in Tetum language.",
+    aboutTitle: "About Tetum Monolingual Dictionary",
+    aboutDescription: "This comprehensive dictionary provides Tetum word definitions and explanations entirely in the Tetum language. It's designed to help native speakers and advanced learners understand words within their cultural and linguistic context.",
+    featuresTitle: "Features",
+    features: [
+      "Native Tetum definitions",
+      "Word class identification",
+      "Usage examples and context",
+      "Cultural and linguistic notes",
+      "Advanced search capabilities"
+    ]
+  },
+  portuguese: {
+    title: "Dicionário Tetum Monolíngue",
+    subtitle: "Dicionário completo com definições Tetum na língua Tetum",
+    backButton: "Voltar ao Dicionário",
+    entriesLabel: "entradas",
+    selectWord: "Selecionar Palavra Tetum",
+    selectDescription: "Pesquise e clique em qualquer palavra Tetum para ver sua definição detalhada e exemplos de uso na língua Tetum.",
+    aboutTitle: "Sobre o Dicionário Tetum Monolíngue",
+    aboutDescription: "Este dicionário abrangente fornece definições e explicações de palavras Tetum inteiramente na língua Tetum. Foi projetado para ajudar falantes nativos e estudantes avançados a compreender palavras dentro de seu contexto cultural e linguístico.",
+    featuresTitle: "Características",
+    features: [
+      "Definições nativas em Tetum",
+      "Identificação de classe de palavra",
+      "Exemplos de uso e contexto",
+      "Notas culturais e linguísticas",
+      "Capacidades de pesquisa avançada"
+    ]
+  }
+};
+
 export default function TetumMonolingualModule() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
-  const [activeSection, setActiveSection] = useState("tetum-monolingual");
+  const [currentLanguage, setCurrentLanguage] = useState<Language>("tetum");
   const { data: stats } = useDictionaryStats();
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
@@ -20,33 +92,69 @@ export default function TetumMonolingualModule() {
   };
 
   const tetumMonoCount = stats?.["tetum-monolingual"] || 0;
-  const portugalLegalCount = stats?.["portuguese-legal"] || 0;
+  const content = languageContent[currentLanguage];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
       <div className="container mx-auto px-4 py-8">
+        {/* Language Selector */}
+        <div className="flex justify-start mb-4">
+          <Select value={currentLanguage} onValueChange={(value: Language) => setCurrentLanguage(value)}>
+            <SelectTrigger className="w-48 bg-white border-2 border-orange-200 hover:border-orange-300 transition-colors">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">
+                  {currentLanguage === "tetum" && "🇹🇱"}
+                  {currentLanguage === "english" && "🇺🇸"}
+                  {currentLanguage === "portuguese" && "🇵🇹"}
+                </span>
+                <SelectValue />
+              </div>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="tetum">
+                <div className="flex items-center gap-2">
+                  <span>🇹🇱</span>
+                  <span>Tetum</span>
+                </div>
+              </SelectItem>
+              <SelectItem value="english">
+                <div className="flex items-center gap-2">
+                  <span>🇺🇸</span>
+                  <span>English</span>
+                </div>
+              </SelectItem>
+              <SelectItem value="portuguese">
+                <div className="flex items-center gap-2">
+                  <span>🇵🇹</span>
+                  <span>Português</span>
+                </div>
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             <Link href="/">
               <Button variant="ghost" size="sm">
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Fila ba Disionáriu
+                {content.backButton}
               </Button>
             </Link>
             <div className="h-6 w-px bg-slate-300" />
             <div className="flex items-center gap-2">
               <BookOpen className="w-6 h-6 text-orange-600" />
-              <h1 className="text-2xl font-bold text-slate-900">Disionáriu Tetum Monolíngue</h1>
+              <h1 className="text-2xl font-bold text-slate-900">{content.title}</h1>
             </div>
           </div>
           <Badge variant="secondary" className="bg-orange-100 text-orange-800">
-            {tetumMonoCount.toLocaleString()} liafuan
+            {tetumMonoCount.toLocaleString()} {content.entriesLabel}
           </Badge>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <Card className="bg-white border-orange-200">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
@@ -55,21 +163,11 @@ export default function TetumMonolingualModule() {
                   <div className="text-2xl font-bold text-slate-900">
                     {tetumMonoCount.toLocaleString()}
                   </div>
-                  <div className="text-sm text-slate-600">Liafuan Tetum</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-white border-orange-200">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-3">
-                <FileText className="w-8 h-8 text-orange-600" />
-                <div>
-                  <div className="text-2xl font-bold text-slate-900">
-                    {portugalLegalCount.toLocaleString()}
+                  <div className="text-sm text-slate-600">
+                    {currentLanguage === "tetum" ? "Liafuan Tetum" : 
+                     currentLanguage === "english" ? "Tetum Words" : 
+                     "Palavras Tetum"}
                   </div>
-                  <div className="text-sm text-slate-600">Termos Jurídicos</div>
                 </div>
               </div>
             </CardContent>
@@ -80,8 +178,12 @@ export default function TetumMonolingualModule() {
               <div className="flex items-center gap-3">
                 <Globe className="w-8 h-8 text-orange-600" />
                 <div>
-                  <div className="text-2xl font-bold text-slate-900">3</div>
-                  <div className="text-sm text-slate-600">Lian sira</div>
+                  <div className="text-2xl font-bold text-slate-900">100%</div>
+                  <div className="text-sm text-slate-600">
+                    {currentLanguage === "tetum" ? "Lian Tetum" : 
+                     currentLanguage === "english" ? "Tetum Language" : 
+                     "Língua Tetum"}
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -92,8 +194,16 @@ export default function TetumMonolingualModule() {
               <div className="flex items-center gap-3">
                 <BookMarked className="w-8 h-8 text-orange-600" />
                 <div>
-                  <div className="text-2xl font-bold text-slate-900">Kompletu</div>
-                  <div className="text-sm text-slate-600">Definisaun sira</div>
+                  <div className="text-2xl font-bold text-slate-900">
+                    {currentLanguage === "tetum" ? "Nativu" : 
+                     currentLanguage === "english" ? "Native" : 
+                     "Nativo"}
+                  </div>
+                  <div className="text-sm text-slate-600">
+                    {currentLanguage === "tetum" ? "Definisaun sira" : 
+                     currentLanguage === "english" ? "Definitions" : 
+                     "Definições"}
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -106,54 +216,7 @@ export default function TetumMonolingualModule() {
           <div className="lg:col-span-2">
             <Card className="bg-white border-orange-200">
               <CardContent className="p-6">
-                <Tabs value={activeSection} onValueChange={setActiveSection}>
-                  <TabsList className="grid w-full grid-cols-2 mb-6">
-                    <TabsTrigger value="tetum-monolingual" className="flex items-center gap-2">
-                      <Languages className="w-4 h-4" />
-                      Disionáriu Tetum
-                    </TabsTrigger>
-                    <TabsTrigger value="portuguese-legal" className="flex items-center gap-2">
-                      <FileText className="w-4 h-4" />
-                      Termos Jurídicos PT
-                    </TabsTrigger>
-                  </TabsList>
-
-                  <TabsContent value="tetum-monolingual">
-                    <TetumMonolingualSearch onEntrySelect={handleEntrySelect} />
-                  </TabsContent>
-
-                  <TabsContent value="portuguese-legal">
-                    <div className="space-y-6">
-                      <div className="text-center space-y-2">
-                        <div className="flex items-center justify-center gap-2">
-                          <FileText className="w-6 h-6 text-orange-600" />
-                          <h2 className="text-2xl font-bold text-slate-900">Termos Jurídicos Portugueses</h2>
-                        </div>
-                        <p className="text-slate-600">
-                          Dicionário completo de termos jurídicos em português
-                        </p>
-                      </div>
-
-                      <div className="flex gap-2">
-                        <div className="relative flex-1">
-                          <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                          <input
-                            type="text"
-                            placeholder="Procurar termos jurídicos..."
-                            className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                          />
-                        </div>
-                        <Button className="bg-orange-600 hover:bg-orange-700">
-                          Procurar
-                        </Button>
-                      </div>
-
-                      <div className="text-center text-slate-600">
-                        {portugalLegalCount.toLocaleString()} termos jurídicos disponíveis
-                      </div>
-                    </div>
-                  </TabsContent>
-                </Tabs>
+                <TetumMonolingualSearch onEntrySelect={handleEntrySelect} />
               </CardContent>
             </Card>
           </div>
@@ -173,10 +236,10 @@ export default function TetumMonolingualModule() {
                     <BookOpen className="w-12 h-12 text-orange-400 mx-auto" />
                     <div>
                       <h3 className="text-lg font-semibold text-slate-900 mb-2">
-                        Hili Liafuan Tetum
+                        {content.selectWord}
                       </h3>
                       <p className="text-slate-600 text-sm">
-                        Buka no klik ba liafuan Tetum ruma atu haree nia definisaun detalladu no ezemplu uza iha lian Tetum.
+                        {content.selectDescription}
                       </p>
                     </div>
                   </div>
@@ -192,25 +255,21 @@ export default function TetumMonolingualModule() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-lg font-semibold text-slate-900 mb-3">
-                  Kona-ba Disionáriu Tetum Monolíngue
+                  {content.aboutTitle}
                 </h3>
                 <p className="text-slate-600 text-sm leading-relaxed">
-                  Disionáriu kompletu ne'e fó definisaun no esplikasaun liafuan Tetum nian iha lian Tetum rasik. 
-                  Halo atu ajuda ema Tetum-oan sira no estudante nivel aas sira atu komprende liafuan sira 
-                  iha sira-nia kontestu kultural no linguístiku.
+                  {content.aboutDescription}
                 </p>
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-slate-900 mb-3">
-                  Karakterístika sira
+                  {content.featuresTitle}
                 </h3>
                 <ul className="text-slate-600 text-sm space-y-1">
-                  <li>• Definisaun Tetum nativu</li>
-                  <li>• Identifikasaun klase liafuan nian</li>
-                  <li>• Ezemplu uza no kontestu</li>
-                  <li>• Nota kultural no linguístiku</li>
-                  <li>• Kapasidade buka avansadu</li>
-                  <li>• {tetumMonoCount.toLocaleString()} liafuan Tetum auténtiku</li>
+                  {content.features.map((feature, index) => (
+                    <li key={index}>• {feature}</li>
+                  ))}
+                  <li>• {tetumMonoCount.toLocaleString()} {currentLanguage === "tetum" ? "liafuan Tetum auténtiku" : currentLanguage === "english" ? "authentic Tetum words" : "palavras Tetum autênticas"}</li>
                 </ul>
               </div>
             </div>

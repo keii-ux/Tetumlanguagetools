@@ -265,10 +265,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Bulk insert all entries
-      await storage.bulkCreateEntries([...legalEntries, ...tetumGlossaryEntries, ...portugueseGlossaryEntries, ...inlTetumEntries, ...medicalTetumEntries, ...medicalEnEntries, ...generalEntries, ...tetumMonolingualEntries, ...additionalLegalEntries]);
+      // Bulk insert all entries (excluding additional legal terms as requested)
+      await storage.bulkCreateEntries([...legalEntries, ...tetumGlossaryEntries, ...portugueseGlossaryEntries, ...inlTetumEntries, ...medicalTetumEntries, ...medicalEnEntries, ...generalEntries, ...tetumMonolingualEntries]);
       
-      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + inlTetumEntries.length + medicalTetumEntries.length + medicalEnEntries.length + generalEntries.length + tetumMonolingualEntries.length + additionalLegalEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + inlTetumEntries.length + medicalTetumEntries.length + medicalEnEntries.length + generalEntries.length + tetumMonolingualEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
