@@ -1,0 +1,1599 @@
+[{
+    "english": "Acute flaccid paralysis (AFP)",
+    "tetum": "Paralizia Flásida Aguda (PFA)"
+  },
+  {
+    "english": "Anthrax",
+    "tetum": "Antraks"
+  },
+  {
+    "english": "Campylobacteriosis",
+    "tetum": "Kampilobakterioze"
+  },
+  {
+    "english": "Chicken pox (Zoster) - Varisela",
+    "tetum": "Varisela"
+  },
+  {
+    "english": "Chikungunya virus infection",
+    "tetum": "Infeksaun virus Chikungunya"
+  },
+  {
+    "english": "Cholera - Kolera",
+    "tetum": "Kólera"
+  },
+  {
+    "english": "COVID-19 (Coronavirus disease 2019)",
+    "tetum": "COVID-19 (Moras Coronavirus 2019)"
+  },
+  {
+    "english": "Congenital rubella syndrome (CRS)",
+    "tetum": "Síndrome Rubéola Konjénita (SRK)"
+  },
+  {
+    "english": "Congenital rubella infection (CRI)",
+    "tetum": "Infeksaun Rubéola Konjénita (IRK)"
+  },
+  {
+    "english": "Dengue virus infection",
+    "tetum": "Infeksaun virus Denge"
+  },
+  {
+    "english": "Diarrhoea (Bloody) - Diarea ho ran – Te’ben ho ran",
+    "tetum": "Diarrea ho raan / Tebeen ho raan"
+  },
+  {
+    "english": "Diarrhea (simple) - Diarea simples",
+    "tetum": "Diarrea simples / Tebeen baibain"
+  },
+  {
+    "english": "Diphtheria – Difteria",
+    "tetum": "Difteria"
+  },
+  {
+    "english": "Dog bite – Asu tata",
+    "tetum": "Asu tata"
+  },
+  {
+    "english": "Fever with rash - Isin manas ho rash",
+    "tetum": "Isin-manas ho taxidu (rash)"
+  },
+  {
+    "english": "Haemophilus influenzae (invasive) - Haemophilus influenzae (invasivu)",
+    "tetum": "Haemophilus influenzae (invazivu)"
+  },
+  {
+    "english": "Hepatitis – Viral (Acute jaundice syndrome) - Síndroma ikterísia agudu",
+    "tetum": "Epatite Virál (Síndrome Ikterísia Aguda)"
+  },
+  {
+    "english": "Hepatitis A",
+    "tetum": "Epatite A"
+  },
+  {
+    "english": "Hepatitis B",
+    "tetum": "Epatite B"
+  },
+  {
+    "english": "Hepatitis C",
+    "tetum": "Epatite C"
+  },
+  {
+    "english": "Human immunodeficiency virus (HIV)",
+    "tetum": "Virus Imunodefisiénsia Umana (VIU) / HIV"
+  },
+  {
+    "english": "Influenza - Gripe",
+    "tetum": "Gripe"
+  },
+  {
+    "english": "Influenza Like Illness (ILI) - Infesaun Respiratoriu Superior Agudu",
+    "tetum": "Moras hanesan Gripe (ILI) / Infeksaun Respiratória Aguda (IRA)"
+  },
+  {
+    "english": "Japanese encephalitis virus (JEV)",
+    "tetum": "Virus ensefalite Japaun (VEJ)"
+  },
+  {
+    "english": "Leprosy - Lepra",
+    "tetum": "Lepra / Moras-kulit"
+  },
+  {
+    "english": "Malaria",
+    "tetum": "Malária"
+  },
+  {
+    "english": "Measles – Sarampo",
+    "tetum": "Sarampu"
+  },
+  {
+    "english": "Meningitis/encephalitis - Meningitis ka enkefalitis",
+    "tetum": "Meninjite / Ensefalite"
+  },
+  {
+    "english": "Monkeypox virus infection – Infeksaun monkeypox",
+    "tetum": "Infeksaun virus monkeypox"
+  },
+  {
+    "english": "Mumps - Papeira",
+    "tetum": "Papeira"
+  },
+  {
+    "english": "Pertussis - Pertusis",
+    "tetum": "Pertusis / Me'ar bibi"
+  },
+  {
+    "english": "Plague",
+    "tetum": "Peste"
+  },
+  {
+    "english": "Pneumonia (<5 years old) - Pnewmonia",
+    "tetum": "Pneumonia (iha labarik tinan <5)"
+  },
+  {
+    "english": "Polio (Poliomyelitis)",
+    "tetum": "Polio (Poliomielite)"
+  },
+  {
+    "english": "Rabies – Ravies",
+    "tetum": "Raiva"
+  },
+  {
+    "english": "Rheumatic heart disease (RHD) - Moras fuan reumatika",
+    "tetum": "Moras fuan reumátika"
+  },
+  {
+    "english": "Rotavirus",
+    "tetum": "Rotavirus"
+  },
+  {
+    "english": "Rubella",
+    "tetum": "Rubéola"
+  },
+  {
+    "english": "Salmonellosis",
+    "tetum": "Salmoneloze"
+  },
+  {
+    "english": "Scabies",
+    "tetum": "Sarna / Kutu-isir"
+  },
+  {
+    "english": "Severe Acute Respiratory Infection (SARI)",
+    "tetum": "Infeksaun Respiratória Aguda Grave (IRAG)"
+  },
+  {
+    "english": "Severe Acute Respiratory Syndrome (SARS)",
+    "tetum": "Síndrome Respiratória Aguda Grave (SARS)"
+  },
+  {
+    "english": "Sexually Transmitted Infections (STI) (Genital ulcers/urethral discharge)",
+    "tetum": "Infeksaun Transmite husi Relasaun sexuál (ITRS) (Kanek jenitál/líkidu sai husi uretra)"
+  },
+  {
+    "english": "Shigellosis",
+    "tetum": "Xigeloze"
+  },
+  {
+    "english": "Smallpox",
+    "tetum": "Variola"
+  },
+  {
+    "english": "Streptococcus pneumonia (invasive) - Streptococcus pneumoniae (invasivu)",
+    "tetum": "Streptococcus pneumoniae (invazivu)"
+  },
+  {
+    "english": "Tetanus neonatal - Tetanus neonatorum",
+    "tetum": "Tétanu neonatál"
+  },
+  {
+    "english": "Tetanus",
+    "tetum": "Tétanu"
+  },
+  {
+    "english": "Traffic accident - Asidente trafiku",
+    "tetum": "Asidente tráfegu"
+  },
+  {
+    "english": "Tuberculosis (TB)",
+    "tetum": "Tuberkuloze (TB)"
+  },
+  {
+    "english": "Typhoid",
+    "tetum": "Tifoide / Febre tifoide"
+  },
+  {
+    "english": "Viral haemorrhagic fevers (Ebola, Lassa fever, Marburg, Crimean Congo)",
+    "tetum": "Febre emorrájika virál (Ebola, febre Lassa, Marburg, Krimeia-Kongu)"
+  },
+  {
+    "english": "Yaws - Frambuzia",
+    "tetum": "Framboezia"
+  },
+  {
+    "english": "Yellow fever",
+    "tetum": "Febre amarela"
+  },
+  {
+    "english": "Zika virus infection",
+    "tetum": "Infeksaun virus Zika"
+  }
+],
+"symptoms_and_clinical_signs": [
+  {
+    "english": "Acute flaccid paralysis",
+    "tetum": "Paralizia flásida aguda"
+  },
+  {
+    "english": "Weakness of extremities",
+    "tetum": "Liman-ain fraku"
+  },
+  {
+    "english": "Weakness of muscles of respiration and swallowing",
+    "tetum": "Muskulu dada-i'is no tolan nian fraku"
+  },
+  {
+    "english": "Flaccid (absence of spasticity, hyperflexia, clonus, extensor plantar responses)",
+    "tetum": "Flásidu (la iha espastisidade, iperrefleksia, klonus, resposta plantar extensora)"
+  },
+  {
+    "english": "Skin lesion (anthrax)",
+    "tetum": "Kanek kulit (antraks)"
+  },
+  {
+    "english": "Oedema",
+    "tetum": "Inxasu / Edema"
+  },
+  {
+    "english": "Abdominal distress",
+    "tetum": "Deskonfortu iha kabun"
+  },
+  {
+    "english": "Nausea",
+    "tetum": "Laran-sa'e / Nausea"
+  },
+  {
+    "english": "Vomiting",
+    "tetum": "Muta"
+  },
+  {
+    "english": "Anorexia",
+    "tetum": "La iha vontade han / Anoreksia"
+  },
+  {
+    "english": "Fever",
+    "tetum": "Isin-manas"
+  },
+  {
+    "english": "Hypoxia",
+    "tetum": "Ipoksemia (oksijéniu menus iha raan)"
+  },
+  {
+    "english": "Dyspnoea",
+    "tetum": "Susar atu dada iis / Dispneia"
+  },
+  {
+    "english": "Mediastinal widening (on X-ray)",
+    "tetum": "Mediastinu luan (iha Raiu-X)"
+  },
+  {
+    "english": "Convulsions",
+    "tetum": "Kejang / Konvulsaun"
+  },
+  {
+    "english": "Loss of consciousness",
+    "tetum": "Lakon konxiénsia / Dezmaia"
+  },
+  {
+    "english": "Meningeal signs and symptoms",
+    "tetum": "Sinál no sintoma menínjea"
+  },
+  {
+    "english": "Diarrhoea",
+    "tetum": "Diarrea / Tebeen"
+  },
+  {
+    "english": "Acute maculopapular rash",
+    "tetum": "Taxidu makulopapular agudu"
+  },
+  {
+    "english": "Vesicles",
+    "tetum": "Folikula / Bubulak ho bee"
+  },
+  {
+    "english": "Crusts",
+    "tetum": "Kaskar"
+  },
+  {
+    "english": "Acute watery diarrhoea",
+    "tetum": "Diarrea ho bee agudu"
+  },
+  {
+    "english": "Severe dehydration",
+    "tetum": "Dezidratasaun grave"
+  },
+  {
+    "english": "Lethargy",
+    "tetum": "Barukteen / Letárjiku"
+  },
+  {
+    "english": "Sunken eyes",
+    "tetum": "Matan kuak"
+  },
+  {
+    "english": "Cough",
+    "tetum": "Me'ar"
+  },
+  {
+    "english": "Feeling weak/tired (Asthenia)",
+    "tetum": "Sente fraku/kole (Astenia)"
+  },
+  {
+    "english": "Headache",
+    "tetum": "Ulun-moras"
+  },
+  {
+    "english": "Myalgia (muscle pain/body aches)",
+    "tetum": "Isin-ruin moras / Mialjia"
+  },
+  {
+    "english": "Sore throat",
+    "tetum": "Kakorok-moras"
+  },
+  {
+    "english": "Coryza",
+    "tetum": "Inus-been"
+  },
+  {
+    "english": "Altered mental state",
+    "tetum": "Estadu mentál trokadu"
+  },
+  {
+    "english": "Loss of taste or smell",
+    "tetum": "La bele sente gostu ka iis"
+  },
+  {
+    "english": "Retro-orbital pain",
+    "tetum": "Moras iha matan-fukun kotuk"
+  },
+  {
+    "english": "Arthralgia",
+    "tetum": "Ruin-fukun moras / Artraljia"
+  },
+  {
+    "english": "Haemorrhagic manifestations",
+    "tetum": "Manifestasaun emorrájika (raan-sai)"
+  },
+  {
+    "english": "Leucopaenia",
+    "tetum": "Leukopenia (glóbulu branku menus)"
+  },
+  {
+    "english": "Recurrent vomiting",
+    "tetum": "Muta beibeik"
+  },
+  {
+    "english": "Abdominal pain/tenderness",
+    "tetum": "Kabun-moras / Sensibilidade iha kabun"
+  },
+  {
+    "english": "General weakness",
+    "tetum": "Frakeza jerál"
+  },
+  {
+    "english": "Lethargy/restless",
+    "tetum": "Letárjiku / Labele hakmatek"
+  },
+  {
+    "english": "Mild pleural effusion",
+    "tetum": "Efuzaun pleurál kmaan"
+  },
+  {
+    "english": "Ascites",
+    "tetum": "Asite (bee iha kabun)"
+  },
+  {
+    "english": "Hepatomegaly",
+    "tetum": "Epatomegalia (aten boot)"
+  },
+  {
+    "english": "Increased Hct",
+    "tetum": "Hct sa'e"
+  },
+  {
+    "english": "Minor bleeds",
+    "tetum": "Raan-sai uitoan"
+  },
+  {
+    "english": "Compensated shock",
+    "tetum": "Xoke kompensadu"
+  },
+  {
+    "english": "Decompensated shock",
+    "tetum": "Xoke deskompensadu"
+  },
+  {
+    "english": "Significant haemorrhage",
+    "tetum": "Emorrajia signifikante"
+  },
+  {
+    "english": "Severe organ involvement",
+    "tetum": "Órgaun afetadu maka'as"
+  },
+  {
+    "english": "Severe metabolic disorder (acidosis, dyseletrolytemia)",
+    "tetum": "Dezorden metabólika grave (asidoze, diseletrolitemia)"
+  },
+  {
+    "english": "Adherent membrane (diphtheria)",
+    "tetum": "Membrana ne'ebé belit (difteria)"
+  },
+  {
+    "english": "Acute encephalomyelitis",
+    "tetum": "Ensefalomielite aguda"
+  },
+  {
+    "english": "Hydrophobia",
+    "tetum": "Idrofobia (ta'uk bee)"
+  },
+  {
+    "english": "Delirium",
+    "tetum": "Delíriu"
+  },
+  {
+    "english": "Paralysis",
+    "tetum": "Paralizia"
+  },
+  {
+    "english": "Neck stiffness",
+    "tetum": "Kakorok toos"
+  },
+  {
+    "english": "Altered consciousness",
+    "tetum": "Konxiénsia trokadu"
+  },
+  {
+    "english": "Petechial/purpural rash",
+    "tetum": "Taxidu petekiál/purpúriku"
+  },
+  {
+    "english": "Other meningeal signs",
+    "tetum": "Sinál menínjea sira seluk"
+  },
+  {
+    "english": "Lyphadenopathy (swollen lymph nodes)",
+    "tetum": "Limfadenopatia (klanjar limfátika bubu)"
+  },
+  {
+    "english": "Back pain",
+    "tetum": "Kosta-ruin moras"
+  },
+  {
+    "english": "Parotitis",
+    "tetum": "Parotidite (hasan-hun bubu)"
+  },
+  {
+    "english": "Paroxysms of coughing",
+    "tetum": "Atake me'ar maka'as"
+  },
+  {
+    "english": "Inspiratory whoop",
+    "tetum": "Lian me'ar lian maka'as (whoop)"
+  },
+  {
+    "english": "Post-tussive vomiting",
+    "tetum": "Muta hafoin me'ar"
+  },
+  {
+    "english": "Chills",
+    "tetum": "Isin-katar/malirin"
+  },
+  {
+    "english": "Muscle aches",
+    "tetum": "Muskulu moras"
+  },
+  {
+    "english": "Buboes (swelling and inflammation of lymph nodes)",
+    "tetum": "Bubo (klanjar limfátika ne'ebé bubu)"
+  },
+  {
+    "english": "Suppurate",
+    "tetum": "Matan-kanek"
+  },
+  {
+    "english": "Tachycardia",
+    "tetum": "Takikardia (fuan-tuku lalais)"
+  },
+  {
+    "english": "Rapid respiratory rate",
+    "tetum": "Frequénsia respiratória lalais"
+  },
+  {
+    "english": "Chest indrawing",
+    "tetum": "Hirus-matan dada tama"
+  },
+  {
+    "english": "Decreased level of consciousness",
+    "tetum": "Nivel konxiénsia tun"
+  },
+  {
+    "english": "Painful muscle spasms",
+    "tetum": "Espasmu muskulár ho moras"
+  },
+  {
+    "english": "Lock jaw",
+    "tetum": "Keixu tranka / Trismu"
+  },
+  {
+    "english": "Stiff neck",
+    "tetum": "Kakorok toos"
+  },
+  {
+    "english": "Stiff shoulder and back muscles",
+    "tetum": "Muskulu kabaas no kosta-ruin nian toos"
+  },
+  {
+    "english": "Difficulty swallowing",
+    "tetum": "Susar atu tolan"
+  },
+  {
+    "english": "Violent generalized muscle spasms",
+    "tetum": "Espasmu muskulár jerál violenta"
+  },
+  {
+    "english": "Fever (≥38.3°C/101°F)",
+    "tetum": "Isin-manas (≥38.3°C/101°F)"
+  },
+  {
+    "english": "Malaise",
+    "tetum": "Isin la di'ak"
+  },
+  {
+    "english": "Severe prostration",
+    "tetum": "Prostrasaun grave (kole tebes)"
+  },
+  {
+    "english": "Deep-seated, firm/hard and round well-circumscribed vesicles and pustules",
+    "tetum": "Vezíkula no pústula klean, toos, kabuar no define didi'ak"
+  },
+  {
+    "english": "Umbilicated or confluent lesions",
+    "tetum": "Kanek ho kuak iha klaran ka kanek belit ba malu"
+  },
+  {
+    "english": "Genital lesion (ulcer on penis, scrotum, rectum, labia, vagina)",
+    "tetum": "Kanek jenitál (ferida iha lasu, laskarak, te'en-kuak, bibi-boot, vagina)"
+  },
+  {
+    "english": "Urethral discharge (males only)",
+    "tetum": "Líquidu sai husi uretra (mane de'it)"
+  },
+  {
+    "english": "Acute onset of fever (≥ 38 C°)",
+    "tetum": "Isin-manas derepente (≥ 38 C°)"
+  },
+  {
+    "english": "Gastrointestinal symptoms",
+    "tetum": "Sintoma gastrointestinál"
+  },
+  {
+    "english": "Spontaneous bleeding",
+    "tetum": "Raan-sai espontáneu"
+  },
+  {
+    "english": "Hypotension",
+    "tetum": "Ipotensaun (tensaun tun)"
+  },
+  {
+    "english": "Shock",
+    "tetum": "Xoke"
+  },
+  {
+    "english": "Oedema",
+    "tetum": "Edema / Inxasu"
+  },
+  {
+    "english": "Neurologic involvement",
+    "tetum": "Envolvimentu neurolójiku"
+  },
+  {
+    "english": "Skin/bone lesions (yaws)",
+    "tetum": "Kanek kulit/ruin (framboezia)"
+  },
+  {
+    "english": "Papilloma (yaws)",
+    "tetum": "Papiloma (framboezia)"
+  },
+  {
+    "english": "Ulcer (yaws)",
+    "tetum": "Úlsera (framboezia)"
+  },
+  {
+    "english": "Papule (yaws)",
+    "tetum": "Pápula (framboezia)"
+  },
+  {
+    "english": "Macule (yaws)",
+    "tetum": "Mákula (framboezia)"
+  },
+  {
+    "english": "Jaundice",
+    "tetum": "Isin-kinur / Ikterísia"
+  },
+  {
+    "english": "Dark urine",
+    "tetum": "Mii kor metan"
+  },
+  {
+    "english": "Conjunctival injection",
+    "tetum": "Matan-meran / Injesaun konjuntivál"
+  },
+  {
+    "english": "Flushing",
+    "tetum": "Oin-meran"
+  },
+  {
+    "english": "Non-purulent conjunctivitis",
+    "tetum": "Konjuntivite la ho matan-been"
+  },
+  {
+    "english": "Laboratory-based surveillance",
+    "tetum": "Vijilánsia bazeia ba laboratóriu"
+  },
+  {
+    "english": "Laboratory evidence",
+    "tetum": "Evidénsia husi laboratóriu"
+  },
+  {
+    "english": "Detection of virus",
+    "tetum": "Deteksaun virus"
+  },
+  {
+    "english": "Isolation of virus",
+    "tetum": "Izolamentu virus"
+  },
+  {
+    "english": "Nucleic acid testing (PCR)",
+    "tetum": "Teste ácidu nukleiku (PCR)"
+  },
+  {
+    "english": "Rapid antigen test (RAT)",
+    "tetum": "Teste antijéniu ràpidu (RAT)"
+  },
+  {
+    "english": "Detection of antigen",
+    "tetum": "Deteksaun antijéniu"
+  },
+  {
+    "english": "IgM antibody detection",
+    "tetum": "Deteksaun antikorpu IgM"
+  },
+  {
+    "english": "IgG antibody titre (seroconversion, significant increase, fourfold rise)",
+    "tetum": "Títulu antikorpu IgG (serokonversaun, aumentu signifikativu, sa'e dala haat)"
+  },
+  {
+    "english": "Serology",
+    "tetum": "Serolojia"
+  },
+  {
+    "english": "Microscopy",
+    "tetum": "Mikroskopia"
+  },
+  {
+    "english": "Rapid diagnostic test (RDT)",
+    "tetum": "Teste diagnóstiku ràpidu (TDR)"
+  },
+  {
+    "english": "Culture",
+    "tetum": "Kultura"
+  },
+  {
+    "english": "Gram stain",
+    "tetum": "Tinjimentu Gram"
+  },
+  {
+    "english": "CSF (Cerebrospinal fluid) analysis",
+    "tetum": "Análize ba fluídu serebroespinál (CSF)"
+  },
+  {
+    "english": "Elevated aminotransferase (ALT)",
+    "tetum": "Aminotransferase (ALT) sa'e"
+  },
+  {
+    "english": "Elevated aspartate aminotransferase (AST)",
+    "tetum": "Aspartato aminotransferase (AST) sa'e"
+  },
+  {
+    "english": "Bacteriological confirmation",
+    "tetum": "Konfirmasaun bakteriolójika"
+  },
+  {
+    "english": "Smear microscopy",
+    "tetum": "Mikroskopia esfregasu"
+  },
+  {
+    "english": "GeneXpert MTB/RIF",
+    "tetum": "GeneXpert MTB/RIF"
+  },
+  {
+    "english": "X-ray",
+    "tetum": "Raiu-X"
+  },
+  {
+    "english": "Histology",
+    "tetum": "Istolojia"
+  },
+  {
+    "english": "Fite stain",
+    "tetum": "Tinjimentu Fite"
+  },
+  {
+    "english": "Dermatoscopy",
+    "tetum": "Dermatoskopia"
+  },
+  {
+    "english": "Mouse test (tetanospasm)",
+    "tetum": "Teste laho (tetanospasmu)"
+  },
+  {
+    "english": "Dual positive serology (Treponemal and non-treponemal antibodies)",
+    "tetum": "Serolojia dupla pozitiva (antikorpu treponémiku no naun-treponémiku)"
+  },
+  {
+    "english": "Dual path platform (DPP)",
+    "tetum": "Plataforma dalan-rua (DPP)"
+  },
+  {
+    "english": "TPHA (Treponema pallidum haemagglutination assay)",
+    "tetum": "TPHA (Teste emaglutinasaun Treponema pallidum)"
+  },
+  {
+    "english": "TPPA (Treponema pallidum particle agglutination assay)",
+    "tetum": "TPPA (Teste aglutinasaun partíkula Treponema pallidum)"
+  },
+  {
+    "english": "RPR (Rapid plasma regain)",
+    "tetum": "RPR (Teste reajina plasmátika ràpida)"
+  },
+  {
+    "english": "Bacillus anthracis",
+    "tetum": "Bacillus anthracis"
+  },
+  {
+    "english": "Campylobacter",
+    "tetum": "Campylobacter"
+  },
+  {
+    "english": "Varicella-zoster virus",
+    "tetum": "Virus Varicella-zoster"
+  },
+  {
+    "english": "Chikungunya virus",
+    "tetum": "Virus Chikungunya"
+  },
+  {
+    "english": "Vibrio cholerae O1 or O139",
+    "tetum": "Vibrio cholerae O1 ka O139"
+  },
+  {
+    "english": "SARS-CoV-2 (Severe acute respiratory syndrome coronavirus-2)",
+    "tetum": "SARS-CoV-2 (Coronavirus-2 síndrome respiratória aguda grave)"
+  },
+  {
+    "english": "Non-polio enteroviruses",
+    "tetum": "Enterovirus naun-polio"
+  },
+  {
+    "english": "Dengue virus",
+    "tetum": "Virus Denge"
+  },
+  {
+    "english": "Corynebacterium diphtheriae",
+    "tetum": "Corynebacterium diphtheriae"
+  },
+  {
+    "english": "Haemophilus influenzae",
+    "tetum": "Haemophilus influenzae"
+  },
+  {
+    "english": "Haemophilus influenza type B (HiB)",
+    "tetum": "Haemophilus influenza tipu B (HiB)"
+  },
+  {
+    "english": "Hepatitis A virus",
+    "tetum": "Virus Epatite A"
+  },
+  {
+    "english": "Hepatitis B virus",
+    "tetum": "Virus Epatite B"
+  },
+  {
+    "english": "Hepatitis C virus",
+    "tetum": "Virus Epatite C"
+  },
+  {
+    "english": "Human immunodeficiency virus (HIV)",
+    "tetum": "Virus Imunodefisiénsia Umana (VIU)"
+  },
+  {
+    "english": "Influenza virus",
+    "tetum": "Virus Influenza"
+  },
+  {
+    "english": "Respiratory syncytial virus (RSV)",
+    "tetum": "Virus sinsisiál respiratóriu (VSR)"
+  },
+  {
+    "english": "Japanese encephalitis virus (JEV)",
+    "tetum": "Virus ensefalite Japaun (VEJ)"
+  },
+  {
+    "english": "Mycobacterium leprae",
+    "tetum": "Mycobacterium leprae"
+  },
+  {
+    "english": "Plasmodium (Malaria parasite)",
+    "tetum": "Plasmodium (parazita malária)"
+  },
+  {
+    "english": "Measles virus",
+    "tetum": "Virus Sarampu"
+  },
+  {
+    "english": "Pathogen (in CSF or blood)",
+    "tetum": "Patojéniu (iha CSF ka raan)"
+  },
+  {
+    "english": "Neisseria meningitidis (Meningococcal disease)",
+    "tetum": "Neisseria meningitidis (Moras meningokósika)"
+  },
+  {
+    "english": "Monkeypox virus (MPXV)",
+    "tetum": "Virus Monkeypox (MPXV)"
+  },
+  {
+    "english": "Orthopoxvirus (OPXV)",
+    "tetum": "Orthopoxvirus (OPXV)"
+  },
+  {
+    "english": "Mumps virus",
+    "tetum": "Virus Papeira"
+  },
+  {
+    "english": "Bordetella pertussis",
+    "tetum": "Bordetella pertussis"
+  },
+  {
+    "english": "Yersinia pestis (Plague)",
+    "tetum": "Yersinia pestis (Peste)"
+  },
+  {
+    "english": "Respiratory pathogen",
+    "tetum": "Patojéniu respiratóriu"
+  },
+  {
+    "english": "Wild poliovirus",
+    "tetum": "Poliovirus fuik"
+  },
+  {
+    "english": "Sabin-like poliovirus",
+    "tetum": "Poliovirus hanesan Sabin"
+  },
+  {
+    "english": "Vaccine derived poliovirus",
+    "tetum": "Poliovirus derivadu husi vasina"
+  },
+  {
+    "english": "Rabies virus",
+    "tetum": "Virus Raiva"
+  },
+  {
+    "english": "Rotavirus",
+    "tetum": "Rotavirus"
+  },
+  {
+    "english": "Rubella virus",
+    "tetum": "Virus Rubéola"
+  },
+  {
+    "english": "Salmonella",
+    "tetum": "Salmonella"
+  },
+  {
+    "english": "Sarcoptes scabeii",
+    "tetum": "Sarcoptes scabeii"
+  },
+  {
+    "english": "Severe Acute Respiratory Syndrome-coronavirus (SARS-CoV)",
+    "tetum": "Coronavirus-Síndrome Respiratória Aguda Grave (SARS-CoV)"
+  },
+  {
+    "english": "Shigella",
+    "tetum": "Shigella"
+  },
+  {
+    "english": "Shigella dysenteriae type 1",
+    "tetum": "Shigella dysenteriae tipu 1"
+  },
+  {
+    "english": "Variola virus (Smallpox)",
+    "tetum": "Virus Variola (Variola)"
+  },
+  {
+    "english": "Streptococcus pneumoniae",
+    "tetum": "Streptococcus pneumoniae"
+  },
+  {
+    "english": "Clostridium tetani",
+    "tetum": "Clostridium tetani"
+  },
+  {
+    "english": "Salmonella typhi (Typhoid)",
+    "tetum": "Salmonella typhi (Tifoide)"
+  },
+  {
+    "english": "Specific virus (Viral haemorrhagic fevers)",
+    "tetum": "Virus espesífiku (Febre emorrájika virál)"
+  },
+  {
+    "english": "Treponema pallidum",
+    "tetum": "Treponema pallidum"
+  },
+  {
+    "english": "Yellow fever virus",
+    "tetum": "Virus Febre Amarela"
+  },
+  {
+    "english": "Zika virus",
+    "tetum": "Virus Zika"
+   },
+  {
+    "english": "Disease surveillance",
+    "tetum": "Vijilánsia ba moras"
+  },
+  {
+    "english": "Integrated Disease Surveillance and Response (IDSR)",
+    "tetum": "Vijilánsia no Resposta Integradu ba Moras (VRIM)"
+  },
+  {
+    "english": "Detection",
+    "tetum": "Deteksaun"
+  },
+  {
+    "english": "Reporting",
+    "tetum": "Relata / Notifikasaun"
+  },
+  {
+    "english": "Response",
+    "tetum": "Resposta"
+  },
+  {
+    "english": "Indicator-Based Surveillance (IBS)",
+    "tetum": "Vijilánsia Bazeia ba Indikadór"
+  },
+  {
+    "english": "Syndromic surveillance",
+    "tetum": "Vijilánsia sindrómika"
+  },
+  {
+    "english": "Sentinel surveillance",
+    "tetum": "Vijilánsia sentinela"
+  },
+  {
+    "english": "Laboratory-based surveillance",
+    "tetum": "Vijilánsia bazeia ba laboratóriu"
+  },
+  {
+    "english": "Event-based surveillance (EBS)",
+    "tetum": "Vijilánsia bazeia ba eventu"
+  },
+  {
+    "english": "Outbreak reporting and investigation",
+    "tetum": "Relatóriu no investigasaun surtu"
+  },
+  {
+    "english": "Case definitions",
+    "tetum": "Definisaun kazu"
+  },
+  {
+    "english": "Public health responses",
+    "tetum": "Resposta saúde públika"
+  },
+  {
+    "english": "Elimination or eradication (diseases targeted for)",
+    "tetum": "Eliminasaun ka eradikasaun (moras sira ne'ebé sai alvu)"
+  },
+  {
+    "english": "Vaccination (Immunization)",
+    "tetum": "Vasinasaun (Imunizasaun)"
+  },
+  {
+    "english": "Investigation team",
+    "tetum": "Ekipa investigasaun"
+  },
+  {
+    "english": "Case finding",
+    "tetum": "Buka kazu"
+  },
+  {
+    "english": "Interviewing (cases/carers)",
+    "tetum": "Entrevista (kazu/kuidadór)"
+  },
+  {
+    "english": "Environmental studies/inspection/testing",
+    "tetum": "Estudu/insersaun/teste ambientál"
+  },
+  {
+    "english": "Outbreak description (time, place, person, epidemic curve)",
+    "tetum": "Deskrisaun surtu (tempu, fatin, ema, kurva epidémika)"
+  },
+  {
+    "english": "Intervention",
+    "tetum": "Intervensaun"
+  },
+  {
+    "english": "Evaluation and reporting",
+    "tetum": "Evaluasaun no relatóriu"
+  },
+  {
+    "english": "Management of contacts",
+    "tetum": "Jestaun ba kontaktu sira"
+  },
+  {
+    "english": "Contact tracing",
+    "tetum": "Rastreiu kontaktu / Buka tuir kontaktu"
+  },
+  {
+    "english": "Preventative measures",
+    "tetum": "Medida preventiva"
+  },
+  {
+    "english": "Control measure(s)",
+    "tetum": "Medida kontrolu"
+  },
+  {
+    "english": "Isolate the case",
+    "tetum": "Izola kazu"
+  },
+  {
+    "english": "Vector control measures",
+    "tetum": "Medida kontrolu ba vetór"
+  },
+  {
+    "english": "Case follow up",
+    "tetum": "Akonpañamentu kazu"
+  },
+  {
+    "english": "Educate the case/community",
+    "tetum": "Eduka kazu/komunidade"
+  },
+  {
+    "english": "Hygienic practices (hand washing)",
+    "tetum": "Prátika ijiene (fase liman)"
+  },
+  {
+    "english": "Antiviral treatment",
+    "tetum": "Tratamentu antivirál"
+  },
+  {
+    "english": "Risk communication and awareness campaign",
+    "tetum": "Komunikasaun risku no kampaña konsientizasaun"
+  },
+  {
+    "english": "Prophylactic antibiotics",
+    "tetum": "Antibiótiku profilátiku"
+  },
+  {
+    "english": "Post exposure prophylaxis",
+    "tetum": "Profilaxia hafoin espozisaun"
+  },
+  {
+    "english": "Antibiotic regimen",
+    "tetum": "Rejime antibiótiku"
+  },
+  {
+    "english": "Immunization status checking",
+    "tetum": "Verifikasaun estadu imunizasaun"
+  },
+  {
+    "english": "Triage for home isolation vs. hospital isolation/admission",
+    "tetum": "Triajen ba izolamentu uma ka izolamentu/admissaun ospitál"
+  },
+  {
+    "english": "Maintaining adequate hydration – oral or parenteral & nutritional therapy",
+    "tetum": "Mantein idratasaun adekuadu – orál ka parenterál & terapia nutrisaun"
+  },
+  {
+    "english": "Symptomatic treatment",
+    "tetum": "Tratamentu sintomátiku"
+  },
+  {
+    "english": "Monitoring for complications",
+    "tetum": "Monitorizasaun ba komplikasaun"
+  },
+  {
+    "english": "Mental health care",
+    "tetum": "Kuidadu saúde mentál"
+  },
+  {
+    "english": "Antivirals",
+    "tetum": "Antivirál"
+  },
+  {
+    "english": "Exclude from school/work/etc.",
+    "tetum": "La tama eskola/servisu/etc."
+  },
+  {
+    "english": "Supplementation immunization activity",
+    "tetum": "Atividade suplementár imunizasaun"
+  },
+  {
+    "english": "Wound washing",
+    "tetum": "Fase kanek"
+  },
+  {
+    "english": "Referral for follow-up assessment by a cardiologist",
+    "tetum": "Referénsia ba avaliasaun akonpañamentu husi kardiologista"
+  },
+  {
+    "english": "Prophylactic benzathine penicillin",
+    "tetum": "Penisilina benzatina profilátika"
+  },
+  {
+    "english": "Active case finding",
+    "tetum": "Buka kazu ativa"
+  },
+  {
+    "english": "Testing",
+    "tetum": "Testajen"
+  },
+  {
+    "english": "Treatment",
+    "tetum": "Tratamentu"
+  },
+  {
+    "english": "Risk factors",
+    "tetum": "Fatór risku"
+  },
+  {
+    "english": "Faeces sample",
+    "tetum": "Amostra tebeen"
+  },
+  {
+    "english": "Clinical sample",
+    "tetum": "Amostra klínika"
+  },
+  {
+    "english": "Skin swab",
+    "tetum": "Swab kulit"
+  },
+  {
+    "english": "CSF (Cerebrospinal fluid)",
+    "tetum": "CSF (Fluídu serebroespinál)"
+  },
+  {
+    "english": "Respiratory specimen",
+    "tetum": "Amostra respiratória"
+  },
+  {
+    "english": "Nasopharyngeal swab",
+    "tetum": "Swab nazofarinjeál"
+  },
+  {
+    "english": "Blood",
+    "tetum": "Raan"
+  },
+  {
+    "english": "Throat swab",
+    "tetum": "Swab kakorok"
+  },
+  {
+    "english": "Laryngeal swab",
+    "tetum": "Swab larinje"
+  },
+  {
+    "english": "Skin scraping",
+    "tetum": "Raspajen kulit"
+  },
+  {
+    "english": "Stool specimen",
+    "tetum": "Amostra tebeen"
+  },
+  {
+    "english": "Sputum",
+    "tetum": "Me'ar-been / Eskarro"
+  },
+  {
+    "english": "Nasopharyngeal aspirate (NPA)",
+    "tetum": "Aspiradu nazofarinjeál (NPA)"
+  },
+  {
+    "english": "Tissue or site (affected)",
+    "tetum": "Tesidu ka fatin (ne'ebé afetadu)"
+  },
+  {
+    "english": "Wound",
+    "tetum": "Kanek"
+  },
+  {
+    "english": "Biopsy (skin or dermal nerve)",
+    "tetum": "Biopsia (kulit ka nervu dérmiku)"
+  },
+  {
+    "english": "Urine",
+    "tetum": "Mii"
+  },
+  {
+    "english": "Extremities",
+    "tetum": "Membru sira (liman-ain)"
+  },
+  {
+    "english": "Muscles of respiration and swallowing",
+    "tetum": "Muskulu respirasaun no tolan nian"
+  },
+  {
+    "english": "Central nervous system (CNS)",
+    "tetum": "Sistema nervozu sentrál (SNS)"
+  },
+  {
+    "english": "Motor tracts",
+    "tetum": "Vias motoras"
+  },
+  {
+    "english": "Skin",
+    "tetum": "Kulit"
+  },
+  {
+    "english": "Gastro-intestinal tract",
+    "tetum": "Tratu gastrointestinál"
+  },
+  {
+    "english": "Pulmonary/inhalation",
+    "tetum": "Pulmonár/inalasaun"
+  },
+  {
+    "english": "Meningeal",
+    "tetum": "Menínjea"
+  },
+  {
+    "english": "Respiratory system/tract",
+    "tetum": "Sistema/tratu respiratóriu"
+  },
+  {
+    "english": "Mediastinum",
+    "tetum": "Mediastinu"
+  },
+  {
+    "english": "Bloodstream",
+    "tetum": "Korrente sanguínea / Sirkulasaun raan nian"
+  },
+  {
+    "english": "Meninges",
+    "tetum": "Meninjes"
+  },
+  {
+    "english": "Sepsis",
+    "tetum": "Sepse"
+  },
+  {
+    "english": "Disseminated intravascular coagulation",
+    "tetum": "Koagulasaun intravaskulár disseminada"
+  },
+  {
+    "english": "Genital area",
+    "tetum": "Área jenitál"
+  },
+  {
+    "english": "Urethra",
+    "tetum": "Uretra"
+  },
+  {
+    "english": "Larynx",
+    "tetum": "Larinje"
+  },
+  {
+    "english": "Nose",
+    "tetum": "Inus"
+  },
+  {
+    "english": "Pharynx",
+    "tetum": "Farinje"
+  },
+  {
+    "english": "Tonsils",
+    "tetum": "Amígdala"
+  },
+  {
+    "english": "Nasopharyngeal carriage",
+    "tetum": "Portadór nazofarinjeál"
+  },
+  {
+    "english": "Sterile site (e.g., blood, CSF)",
+    "tetum": "Fatin estéril (ez., raan, CSF)"
+  },
+  {
+    "english": "Jaundice syndrome",
+    "tetum": "Síndrome ikterísia"
+  },
+  {
+    "english": "Liver",
+    "tetum": "Aten"
+  },
+  {
+    "english": "Abdomen",
+    "tetum": "Kabun"
+  },
+  {
+    "english": "Peripheral nerves",
+    "tetum": "Nervu perifériku"
+  },
+  {
+    "english": "Upper airway mucosa",
+    "tetum": "Mukoza via respiratória superiór"
+  },
+  {
+    "english": "Skin lesions",
+    "tetum": "Kanek kulit"
+  },
+  {
+    "english": "Lymph nodes",
+    "tetum": "Klanjar limfátika"
+  },
+  {
+    "english": "Parotid gland",
+    "tetum": "Glándula parótida"
+  },
+  {
+    "english": "Salivary gland",
+    "tetum": "Glándula saliva"
+  },
+  {
+    "english": "Chest",
+    "tetum": "Hirus-peitu"
+  },
+  {
+    "english": "Heart",
+    "tetum": "Fuan"
+  },
+  {
+    "english": "Mitral valve",
+    "tetum": "Válvula mitrál"
+  },
+  {
+    "english": "Aortic valve",
+    "tetum": "Válvula aórtika"
+  },
+  {
+    "english": "Pulmonary",
+    "tetum": "Pulmonár"
+  },
+  {
+    "english": "Brain (encephalitis/encephalomyelitis)",
+    "tetum": "Kakutak (ensefalite/ensefalomielite)"
+  },
+  {
+    "english": "Lungs (Pneumonia/ARDS/infiltrates)",
+    "tetum": "Pulmaun (Pneumonia/ARDS/infiltradu)"
+  },
+  {
+    "english": "Bone",
+    "tetum": "Ruin"
+  },
+  {
+    "english": "Kidney (potentially)",
+    "tetum": "Rins (potensialmente)"
+  },
+  {
+    "english": "Mouth (coughing, sore throat, vomiting)",
+    "tetum": "Ibun (me'ar, kakorok-moras, muta)"
+  },
+  {
+    "english": "Epidemic risk",
+    "tetum": "Risku epidemia"
+  },
+  {
+    "english": "Dedicated program or funding",
+    "tetum": "Programa ka fundu dedikadu"
+  },
+  {
+    "english": "Public health burden",
+    "tetum": "Farda saúde públika nian"
+  },
+  {
+    "english": "Notification (within 24 hours, urgent)",
+    "tetum": "Notifikasaun (iha oras 24 nia laran, urjente)"
+  },
+  {
+    "english": "Outbreak (Cluster of cases)",
+    "tetum": "Surtu (Grupu kazu)"
+  },
+  {
+    "english": "Epidemic prone diseases",
+    "tetum": "Moras sira ne'ebé bele sai epidemia"
+  },
+  {
+    "english": "Vaccine preventable disease (VPD)",
+    "tetum": "Moras ne’ebé bele prevene ho vasina (VPD)"
+  },
+  {
+    "english": "Surveillance case definition",
+    "tetum": "Definisaun kazu vijilánsia"
+  },
+  {
+    "english": "Public health response",
+    "tetum": "Resposta saúde públika"
+  },
+  {
+    "english": "Confirmed case",
+    "tetum": "Kazu konfirmadu"
+  },
+  {
+    "english": "Suspected case",
+    "tetum": "Kazu suspeitu"
+  },
+  {
+    "english": "Probable case",
+    "tetum": "Kazu provável"
+  },
+  {
+    "english": "Epidemiological link",
+    "tetum": "Ligasaun epidemiolójika"
+  },
+  {
+    "english": "Epidemiological evidence",
+    "tetum": "Evidénsia epidemiolójika"
+  },
+  {
+    "english": "Endemic number",
+    "tetum": "Númeru endémiku"
+  },
+  {
+    "english": "Post Elimination Sustainability Plan",
+    "tetum": "Planu Sustentabilidade hafoin Eliminasaun"
+  },
+  {
+    "english": "Strategies and operational guidelines",
+    "tetum": "Estratéjia no orientasaun operasionál"
+  },
+  {
+    "english": "Index case",
+    "tetum": "Kazu indise"
+  },
+  {
+    "english": "Intra-household transmission",
+    "tetum": "Transmisaun iha uma-laran"
+  },
+  {
+    "english": "Ministry of Health (Ministério da Saúde - MdS)",
+    "tetum": "Ministériu Saúde (MS)"
+  },
+  {
+    "english": "World Health Organization (WHO)",
+    "tetum": "Organizasaun Mundiál Saúde (OMS)"
+  },
+  {
+    "english": "Menzies School of Health Research",
+    "tetum": "Menzies School of Health Research"
+  },
+  {
+    "english": "STRONG TL project",
+    "tetum": "Projetu STRONG TL"
+  },
+  {
+    "english": "Australian Government",
+    "tetum": "Governu Austrália"
+  },
+  {
+    "english": "Department of Foreign Affairs and Trade (Australia)",
+    "tetum": "Departamentu Negósiu Estranjeiru no Komérsiu (Austrália)"
+  },
+  {
+    "english": "Department of Surveillance and Epidemiology (Departamentu Vijilansia Epidemiolojia - VE)",
+    "tetum": "Departamentu Vijilánsia Epidemiolojia (VE)"
+  },
+  {
+    "english": "Department for Control of Communicable Diseases (Departementu Controla Doencas Contagiosas - CDC)",
+    "tetum": "Departamentu Kontrolu Moras Transmisível (CDC)"
+  },
+  {
+    "english": "Director General of Serbisu Prestações de Saúde",
+    "tetum": "Diretór Jerál Servisu Prestasaun Saúde"
+  },
+  {
+    "english": "Municipal health centres",
+    "tetum": "Sentru saúde munisipál"
+  },
+  {
+    "english": "Health posts",
+    "tetum": "Postu saúde"
+  },
+  {
+    "english": "Hospitals",
+    "tetum": "Ospitál"
+  },
+  {
+    "english": "Private clinics",
+    "tetum": "Klínika privada"
+  },
+  {
+    "english": "International Health Regulations 2005 (IHR)",
+    "tetum": "Regulamentu Sanitáriu Internasionál 2005 (RSI)"
+  },
+  {
+    "english": "SISCa (Servisu Integradu da Saude Communitaria)",
+    "tetum": "SISCa (Servisu Integradu Saúde Komunitária)"
+  },
+  {
+    "english": "Community health center",
+    "tetum": "Sentru saúde komunitária"
+  },
+  {
+    "english": "Municipal health office",
+    "tetum": "Gabinete saúde munisipál"
+  },
+  {
+    "english": "Directorate of Health Services Delivery",
+    "tetum": "Diresaun Prestasaun Servisu Saúde"
+  },
+  {
+    "english": "National Directorate of Disease Control",
+    "tetum": "Diresaun Nasionál Kontrolu Moras"
+  },
+  {
+    "english": "Department of Health Statistics and Information",
+    "tetum": "Departamentu Estatístika no Informasaun Saúde"
+  },
+  {
+    "english": "National Director of Planning, Policy and Cooperation",
+    "tetum": "Diretór Nasionál Planeamentu, Polítika no Kooperasaun"
+  },
+  {
+    "english": "Rapid Response Team (RRT)",
+    "tetum": "Ekipa Resposta Rápida (ERR)"
+  },
+  {
+    "english": "Environmental Health (Saude Ambiental)",
+    "tetum": "Saúde Ambientál"
+  },
+  {
+    "english": "National Health Laboratory (NHL)",
+    "tetum": "Laboratóriu Nasionál Saúde (LNS)"
+  },
+  {
+    "english": "VPD Officer (in the national office)",
+    "tetum": "Ofisiál VPD (iha eskritóriu nasionál)"
+  },
+  {
+    "english": "Zoonotic diseases unit",
+    "tetum": "Unidade moras zoonótika"
+  },
+  {
+    "english": "Malaria Control Program",
+    "tetum": "Programa Kontrolu Malária"
+  },
+  {
+    "english": "EPI (Expanded Program Imunizasaun)",
+    "tetum": "PEI (Programa Alargadu Imunizasaun)"
+  },
+  {
+    "english": "National Tuberculosis Program (NTP)",
+    "tetum": "Programa Nasionál Tuberkuloze (PNT)"
+  },
+  {
+    "english": "Victorian Infectious Diseases Reference Laboratory (VIDRL), Melbourne",
+    "tetum": "Laboratóriu Referénsia Moras Infesiozas Vitória (VIDRL), Melbourne"
+  },
+  {
+    "english": "Special Pathogens Laboratory, CDC, Atlanta",
+    "tetum": "Laboratóriu Patojéniu Espesiál, CDC, Atlanta"
+  },
+  {
+    "english": "Special Pathogens Laboratory, National Institute of Virology (NIV), Johannesburg",
+    "tetum": "Laboratóriu Patojéniu Espesiál, Institutu Nasionál Viroljia (NIV), Joanesburgu"
+  },
+  {
+    "english": "Pan American Health Organization (PAHO)",
+    "tetum": "Organizasaun Pan-Amerikana Saúde (OPAS)"
+  }
+]]
