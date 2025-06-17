@@ -101,14 +101,7 @@ export default function TetumMonolingualModule() {
         <div className="flex justify-start mb-4">
           <Select value={currentLanguage} onValueChange={(value: Language) => setCurrentLanguage(value)}>
             <SelectTrigger className="w-48 bg-white border-2 border-orange-200 hover:border-orange-300 transition-colors">
-              <div className="flex items-center gap-2">
-                <span className="text-xl">
-                  {currentLanguage === "tetum" && "🇹🇱"}
-                  {currentLanguage === "english" && "🇺🇸"}
-                  {currentLanguage === "portuguese" && "🇵🇹"}
-                </span>
-                <SelectValue />
-              </div>
+              <SelectValue />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="tetum">

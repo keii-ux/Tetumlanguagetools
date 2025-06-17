@@ -235,17 +235,7 @@ export function TetumMonolingualSearch({ onEntrySelect, currentLanguage = "tetum
           isVisible={showDropdown}
         />
       </div>
-      {/* Search Results Summary */}
-      {searchTerm && (
-        <div className="flex items-center justify-between text-sm text-slate-600">
-          <span>
-            {content.resultsFound} {filteredEntries.length} {content.resultsLabel}
-          </span>
-          {searchMode === "starts-with" && searchTerm && (
-            <span>{content.startsWithLabel} "{searchTerm}"</span>
-          )}
-        </div>
-      )}
+      
     </div>
   );
 }
