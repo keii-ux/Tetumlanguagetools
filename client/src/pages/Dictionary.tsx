@@ -520,12 +520,12 @@ export default function Dictionary() {
               const termCount = getToolStats(tool.id);
               
               return (
-                <Card 
+                <div 
                   key={tool.id}
-                  className="group p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-green-200 bg-white"
+                  className="group p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-green-200 bg-white rounded-lg"
                   onClick={() => handleToolSelect(tool.id)}
                 >
-                  <CardContent className="p-0">
+                  <div className="p-0">
                     <div className="flex items-start space-x-6">
                       <div className={`w-16 h-16 ${tool.bgColor} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                         <Icon className={`w-8 h-8 ${tool.iconColor}`} />
@@ -644,8 +644,8 @@ export default function Dictionary() {
                         )}
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               );
             })}
           </div>
