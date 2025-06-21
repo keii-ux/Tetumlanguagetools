@@ -30,35 +30,33 @@ function PredictiveDropdown({
   }
 
   return (
-    <Card className="absolute top-full left-0 right-0 z-50 mt-1 max-h-96 overflow-y-auto border shadow-lg">
-      <CardContent className="p-0">
-        {entries.slice(0, 10).map((entry, index) => (
-          <div
-            key={entry.id || index}
-            className="p-3 hover:bg-muted cursor-pointer border-b last:border-b-0"
-            onClick={() => onSelect(entry)}
-          >
-            <div className="flex items-start justify-between gap-2">
-              <div className="flex-1 min-w-0">
-                <div className="font-medium text-foreground truncate">
-                  {entry.tetum}
-                </div>
-                {entry.wordClass && (
-                  <Badge variant="secondary" className="text-xs mt-1">
-                    {entry.wordClass}
-                  </Badge>
-                )}
-                {entry.explanation && (
-                  <div className="text-sm text-muted-foreground mt-1 line-clamp-2">
-                    {entry.explanation}
-                  </div>
-                )}
-              </div>
+    <div className="absolute top-full left-0 right-0 z-50 mt-2 max-h-96 overflow-y-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+      {entries.slice(0, 8).map((entry, index) => (
+        <div
+          key={entry.id || index}
+          className="p-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer border-b border-gray-100 dark:border-gray-600 last:border-b-0 first:rounded-t-xl last:rounded-b-xl"
+          onClick={() => onSelect(entry)}
+        >
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
+                {entry.tetum}
+              </h3>
+              {entry.wordClass && (
+                <span className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
+                  {entry.wordClass}
+                </span>
+              )}
             </div>
+            {entry.explanation && (
+              <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+                {entry.explanation}
+              </p>
+            )}
           </div>
-        ))}
-      </CardContent>
-    </Card>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -128,33 +126,23 @@ export function INLTetumDictionarySearch({ onEntrySelect }: INLTetumDictionarySe
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-6">
-      <div className="text-center space-y-2">
-        <div className="flex items-center justify-center gap-2 text-2xl font-bold text-foreground">
-          <BookOpen className="w-8 h-8 text-blue-600" />
-          <span>INL Tetum Dictionary</span>
-        </div>
-        <p className="text-muted-foreground">
-          Search the comprehensive INL Tetum dictionary
-        </p>
-      </div>
-
+    <div className="w-full space-y-4">
       <div ref={searchRef} className="relative">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           <Input
             type="text"
-            placeholder="Search for Tetum words..."
+            placeholder="Search Tetum words..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-10 h-12 text-lg"
+            className="pl-12 pr-12 h-14 text-lg border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
           {searchTerm && (
             <Button
               variant="ghost"
               size="sm"
               onClick={clearSearch}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 rounded-full"
             >
               <X className="w-4 h-4" />
             </Button>
@@ -162,13 +150,11 @@ export function INLTetumDictionarySearch({ onEntrySelect }: INLTetumDictionarySe
         </div>
 
         {isLoading && (
-          <div className="absolute top-full left-0 right-0 z-50 mt-1">
-            <Card>
-              <CardContent className="p-4 text-center">
-                <div className="animate-spin w-6 h-6 border-2 border-primary border-t-transparent rounded-full mx-auto"></div>
-                <p className="text-sm text-muted-foreground mt-2">Searching...</p>
-              </CardContent>
-            </Card>
+          <div className="absolute top-full left-0 right-0 z-50 mt-2">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
+              <div className="animate-spin w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full mx-auto"></div>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">Searching...</p>
+            </div>
           </div>
         )}
 

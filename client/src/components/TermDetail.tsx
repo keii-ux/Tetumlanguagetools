@@ -62,29 +62,33 @@ export function TermDetail({ entry, onClose, userId }: TermDetailProps) {
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-6">
+      <div className="p-4 space-y-4">
         {/* Main Term */}
         <div>
-          <div className="flex items-center space-x-3 mb-3">
-            <h3 className="text-xl font-bold text-slate-900">{getDisplayTerm()}</h3>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleBookmarkToggle}
-              className="p-1"
-            >
-              {isBookmarked ? (
-                <BookmarkCheck className="h-5 w-5 text-yellow-500" />
-              ) : (
-                <Bookmark className="h-5 w-5 text-slate-400 hover:text-yellow-500" />
-              )}
-            </Button>
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{getDisplayTerm()}</h3>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleBookmarkToggle}
+                className="p-2 rounded-full"
+              >
+                {isBookmarked ? (
+                  <BookmarkCheck className="h-5 w-5 text-yellow-500" />
+                ) : (
+                  <Bookmark className="h-5 w-5 text-gray-400 hover:text-yellow-500" />
+                )}
+              </Button>
+            </div>
           </div>
 
-          {/* Category Badge */}
-          <Badge variant="secondary" className="mb-4">
-            {entry.category || entry.dictionaryType}
-          </Badge>
+          {/* Word Class Badge */}
+          {entry.wordClass && (
+            <span className="inline-block px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full mb-4">
+              {entry.wordClass}
+            </span>
+          )}
 
           {/* Pronunciation Guide */}
           {entry.pronunciation && (
