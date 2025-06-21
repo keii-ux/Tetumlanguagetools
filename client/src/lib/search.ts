@@ -21,11 +21,12 @@ export function useSearchEntries(searchQuery: SearchQuery) {
   let endpoint = "/api/search";
   if (searchQuery.dictionaryType === "medical") {
     endpoint = "/api/medical/search";
-  } else if (searchQuery.dictionaryType === "legal" || 
-             searchQuery.dictionaryType === "tetum-glossary" || 
-             searchQuery.dictionaryType === "portuguese-glossary" ||
-             searchQuery.dictionaryType === "portuguese-legal") {
+  } else if (searchQuery.dictionaryType === "legal") {
     endpoint = "/api/legal/search";
+  } else if (searchQuery.dictionaryType === "tetum-glossary") {
+    endpoint = "/api/tetum-glossary/search";
+  } else if (searchQuery.dictionaryType === "portuguese-glossary") {
+    endpoint = "/api/portuguese-glossary/search";
   } else if (searchQuery.dictionaryType === "tetum-monolingual") {
     endpoint = "/api/tetum-monolingual/search";
   } else if (searchQuery.dictionaryType === "inl-tetum") {

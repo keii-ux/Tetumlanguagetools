@@ -125,7 +125,11 @@ export function PortugueseGlossarySearch({ onEntrySelect }: PortugueseGlossarySe
 
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/portuguese-glossary/search?q=${encodeURIComponent(searchTerm)}`);
+      const queryParams = new URLSearchParams({
+        query: searchTerm,
+        dictionaryType: "portuguese-glossary"
+      });
+      const response = await fetch(`/api/portuguese-glossary/search?${queryParams}`);
       if (response.ok) {
         const results = await response.json();
         if (results.length > 0 && onEntrySelect) {
