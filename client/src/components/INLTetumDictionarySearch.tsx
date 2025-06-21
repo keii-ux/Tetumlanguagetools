@@ -95,7 +95,11 @@ export function INLTetumDictionarySearch({ onEntrySelect }: INLTetumDictionarySe
 
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/inl-tetum/search?q=${encodeURIComponent(query)}`);
+      const queryParams = new URLSearchParams({
+        query: query,
+        dictionaryType: "inl-tetum"
+      });
+      const response = await fetch(`/api/inl-tetum/search?${queryParams}`);
       if (response.ok) {
         const results = await response.json();
         setEntries(results);

@@ -6,11 +6,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { INLTetumDictionarySearch } from "@/components/INLTetumDictionarySearch";
 import { TermDetail } from "@/components/TermDetail";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useINLTetumEntries } from "@/lib/search";
 import type { DictionaryEntry } from "@shared/schema";
 
 export default function INLTetumDictionaryModule() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
   const [selectedLanguage, setSelectedLanguage] = useState("tet");
+  const { data: inlEntries = [] } = useINLTetumEntries();
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
     setSelectedEntry(entry);
@@ -38,7 +40,10 @@ export default function INLTetumDictionaryModule() {
             </Link>
             <div className="flex items-center gap-2">
               <BookOpen className="w-6 h-6 text-blue-600" />
-              <h1 className="text-2xl font-bold text-foreground">INL Tetum Dictionary</h1>
+              <div>
+                <h1 className="text-2xl font-bold text-foreground">Tetum Dictionary (INL)</h1>
+                <p className="text-sm text-muted-foreground">{inlEntries.length.toLocaleString()} entries</p>
+              </div>
             </div>
           </div>
           <LanguageSwitcher 
