@@ -40,10 +40,7 @@ export default function INLTetumDictionaryModule() {
             </Link>
             <div className="flex items-center gap-2">
               <BookOpen className="w-6 h-6 text-blue-600" />
-              <div>
-                <h1 className="text-2xl font-bold text-foreground">Tetum Dictionary (INL)</h1>
-                <p className="text-sm text-muted-foreground">{inlEntries.length.toLocaleString()} entries</p>
-              </div>
+              <h1 className="text-2xl font-bold text-foreground">Tetum Dictionary (INL)</h1>
             </div>
           </div>
           <LanguageSwitcher 
