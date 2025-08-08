@@ -232,18 +232,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       let aseanEntries: any[] = [];
       
       try {
-        const aseanSamplePath = path.resolve(process.cwd(), 'asean_sample_with_tetum.json');
-        const aseanSampleData = await fs.readFile(aseanSamplePath, 'utf8');
-        aseanTerminologyData = JSON.parse(aseanSampleData);
+        const aseanCompletePath = path.resolve(process.cwd(), 'extracted_asean_complete.json');
+        const aseanCompleteData = await fs.readFile(aseanCompletePath, 'utf8');
+        aseanTerminologyData = JSON.parse(aseanCompleteData);
         
         aseanEntries = aseanTerminologyData.map((item: any, index: number) => ({
-          tetum: item.abbreviation_Tetum || item.abbreviation_EN, // Use Tetum translation
-          portuguese: item.full_form_Tetum || "", // Tetum translation serves as bridge
+          tetum: item.abbreviation_Tetum || item.abbreviation_EN, // Use abbreviation (same in both languages)
+          portuguese: item.full_form_Tetum || "", // Tetum translation via Google API
           english: item.full_form,
-          source: "ASEAN Abbreviations List with Google Translate Tetum integration",
+          source: "ASEAN Abbreviations List (738 comprehensive entries) with Google Translate integration",
           category: "asean",
           dictionaryType: "asean",
-          notes: `Abbreviation: ${item.abbreviation_EN} | Tetum: ${item.abbreviation_Tetum}`,
+          notes: `Abbreviation: ${item.abbreviation_EN} | ${item.source}`,
           explanation: item.full_form,
           pronunciation: "",
           wordClass: "abbreviation",
@@ -252,9 +252,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           relatedTerms: [],
         }));
         
-        console.log(`ASEAN sample Tetum glossary loaded successfully with ${aseanEntries.length} entries with authentic Google Translate Tetum support`);
+        console.log(`ASEAN comprehensive glossary loaded successfully with ${aseanEntries.length} entries from authentic ASEAN-Abbreviations-List.pdf`);
       } catch (error) {
-        console.error('Error loading ASEAN sample Tetum glossary:', error);
+        console.error('Error loading ASEAN comprehensive glossary:', error);
         // Load from the previous extracted data as fallback
         try {
           const aseanJsonPath = path.resolve(process.cwd(), 'extracted_asean_data.json');
