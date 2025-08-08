@@ -227,53 +227,79 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Load comprehensive ASEAN terminology data from extracted file
+      // Load comprehensive ASEAN terminology data from new glossary file
       let aseanTerminologyData: any[] = [];
       let aseanEntries: any[] = [];
       
       try {
-        const aseanJsonPath = path.resolve(process.cwd(), 'extracted_asean_data.json');
-        const aseanJsonData = await fs.readFile(aseanJsonPath, 'utf8');
-        aseanTerminologyData = JSON.parse(aseanJsonData);
+        const aseanSamplePath = path.resolve(process.cwd(), 'asean_sample_with_tetum.json');
+        const aseanSampleData = await fs.readFile(aseanSamplePath, 'utf8');
+        aseanTerminologyData = JSON.parse(aseanSampleData);
         
-        aseanEntries = aseanTerminologyData.map((item: any) => ({
-          tetum: "", // Will be filled via OpenRouter API when requested
-          portuguese: "", // Will be filled via OpenRouter API when requested
-          english: item.fullForm,
-          source: "ASEAN Abbreviations List - Comprehensive A-Z",
-          category: item.category || "asean",
-          dictionaryType: "asean",
-          notes: `Abbreviation: ${item.abbreviation} | Type: ${item.type} | Category: ${item.category}`,
-          explanation: item.fullForm,
-          pronunciation: "",
-          wordClass: "abbreviation",
-          etymology: "",
-          usageExamples: [],
-          relatedTerms: [],
-        }));
-        
-        console.log(`ASEAN terminology loaded successfully with ${aseanEntries.length} entries from comprehensive A-Z list`);
-      } catch (error) {
-        console.error('Error loading comprehensive ASEAN data:', error);
-        // Fallback with basic ASEAN data
-        aseanTerminologyData = [
-          { abbr: "ASEAN", full: "Association of Southeast Asian Nations" }
-        ];
-        aseanEntries = aseanTerminologyData.map((item: any) => ({
-          tetum: "",
-          portuguese: "",
-          english: item.full,
-          source: "ASEAN Abbreviations List",
+        aseanEntries = aseanTerminologyData.map((item: any, index: number) => ({
+          tetum: item.abbreviation_Tetum || item.abbreviation_EN, // Use Tetum translation
+          portuguese: item.full_form_Tetum || "", // Tetum translation serves as bridge
+          english: item.full_form,
+          source: "ASEAN Abbreviations List with Google Translate Tetum integration",
           category: "asean",
           dictionaryType: "asean",
-          notes: `Abbreviation: ${item.abbr}`,
-          explanation: item.full,
+          notes: `Abbreviation: ${item.abbreviation_EN} | Tetum: ${item.abbreviation_Tetum}`,
+          explanation: item.full_form,
           pronunciation: "",
           wordClass: "abbreviation",
           etymology: "",
-          usageExamples: [],
+          usageExamples: [`${item.abbreviation_EN}: ${item.full_form}`],
           relatedTerms: [],
         }));
+        
+        console.log(`ASEAN sample Tetum glossary loaded successfully with ${aseanEntries.length} entries with authentic Google Translate Tetum support`);
+      } catch (error) {
+        console.error('Error loading ASEAN sample Tetum glossary:', error);
+        // Load from the previous extracted data as fallback
+        try {
+          const aseanJsonPath = path.resolve(process.cwd(), 'extracted_asean_data.json');
+          const aseanJsonData = await fs.readFile(aseanJsonPath, 'utf8');
+          aseanTerminologyData = JSON.parse(aseanJsonData);
+          
+          aseanEntries = aseanTerminologyData.map((item: any, index: number) => ({
+            tetum: "", // Will be filled via AI translation when requested
+            portuguese: "", // Will be filled via AI translation when requested
+            english: item.fullForm,
+            source: "ASEAN Abbreviations List - Comprehensive A-Z",
+            category: item.category || "asean",
+            dictionaryType: "asean",
+            notes: `Abbreviation: ${item.abbreviation} | Type: ${item.type} | Category: ${item.category}`,
+            explanation: item.fullForm,
+            pronunciation: "",
+            wordClass: "abbreviation",
+            etymology: "",
+            usageExamples: [],
+            relatedTerms: [],
+          }));
+          
+          console.log(`ASEAN terminology loaded successfully with ${aseanEntries.length} entries from A-Z list (fallback)`);
+        } catch (fallbackError) {
+          console.error('Error loading fallback ASEAN data:', fallbackError);
+          // Final fallback with basic ASEAN data
+          aseanTerminologyData = [
+            { abbr: "ASEAN", full: "Association of Southeast Asian Nations" }
+          ];
+          aseanEntries = aseanTerminologyData.map((item: any) => ({
+            tetum: "",
+            portuguese: "",
+            english: item.full,
+            source: "ASEAN Abbreviations List",
+            category: "asean",
+            dictionaryType: "asean",
+            notes: `Abbreviation: ${item.abbr}`,
+            explanation: item.full,
+            pronunciation: "",
+            wordClass: "abbreviation",
+            etymology: "",
+            usageExamples: [],
+            relatedTerms: [],
+          }));
+        }
       }
 
 
@@ -445,7 +471,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // ASEAN terminology translation using OpenRouter
+  // ASEAN terminology translation using Google Translate API (primary) with OpenRouter fallback
   app.post("/api/asean/translate", async (req, res) => {
     try {
       const { text, fromLanguage, toLanguage } = req.body;
@@ -454,57 +480,94 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Missing required parameters: text, fromLanguage, toLanguage" });
       }
 
-      const openRouterApiKey = process.env.OPENROUTER_API_KEY;
-      if (!openRouterApiKey) {
-        return res.status(500).json({ error: "OpenRouter API key not configured" });
+      let translation = text;
+      let translationMethod = "fallback";
+
+      // Try Google Translate API first
+      try {
+        const googleApiKey = process.env.GOOGLE_API_KEY;
+        if (googleApiKey) {
+          const googleUrl = `https://translation.googleapis.com/language/translate/v2?key=${googleApiKey}`;
+          
+          const googleResponse = await fetch(googleUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              q: text,
+              target: toLanguage,
+              source: fromLanguage,
+              format: 'text'
+            })
+          });
+
+          if (googleResponse.ok) {
+            const googleData = await googleResponse.json();
+            translation = googleData.data.translations[0].translatedText;
+            translationMethod = "Google Translate API";
+          }
+        }
+      } catch (googleError) {
+        console.warn("Google Translate API failed, falling back to OpenRouter:", googleError);
       }
 
-      const languageMap: { [key: string]: string } = {
-        'en': 'English',
-        'tet': 'Tetum',
-        'pt': 'Portuguese'
-      };
+      // Fallback to OpenRouter if Google Translate failed
+      if (translationMethod === "fallback") {
+        try {
+          const openRouterApiKey = process.env.OPENROUTER_API_KEY;
+          if (openRouterApiKey) {
+            const languageMap: { [key: string]: string } = {
+              'en': 'English',
+              'tet': 'Tetum',
+              'pt': 'Portuguese'
+            };
 
-      const fromLang = languageMap[fromLanguage] || fromLanguage;
-      const toLang = languageMap[toLanguage] || toLanguage;
+            const fromLang = languageMap[fromLanguage] || fromLanguage;
+            const toLang = languageMap[toLanguage] || toLanguage;
 
-      const prompt = `Translate the following ${fromLang} text to ${toLang}. This is ASEAN terminology, so maintain professional accuracy and context:
+            const prompt = `Translate the following ${fromLang} text to ${toLang}. This is ASEAN terminology, so maintain professional accuracy and context:
 
 "${text}"
 
 Provide only the translation without additional explanation.`;
 
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${openRouterApiKey}`,
-          'Content-Type': 'application/json',
-          'HTTP-Referer': 'https://liantek.replit.app',
-          'X-Title': 'LianTek ASEAN Terminology'
-        },
-        body: JSON.stringify({
-          model: 'anthropic/claude-3.5-sonnet',
-          messages: [
-            {
-              role: 'user',
-              content: prompt
-            }
-          ],
-          max_tokens: 150,
-          temperature: 0.3
-        })
-      });
+            const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${openRouterApiKey}`,
+                'Content-Type': 'application/json',
+                'HTTP-Referer': 'https://liantek.replit.app',
+                'X-Title': 'LianTek ASEAN Terminology'
+              },
+              body: JSON.stringify({
+                model: 'anthropic/claude-3.5-sonnet',
+                messages: [
+                  {
+                    role: 'user',
+                    content: prompt
+                  }
+                ],
+                max_tokens: 150,
+                temperature: 0.3
+              })
+            });
 
-      if (!response.ok) {
-        const errorData = await response.text();
-        console.error('OpenRouter API error:', errorData);
-        return res.status(500).json({ error: 'Translation service unavailable' });
+            if (response.ok) {
+              const data = await response.json();
+              translation = data.choices?.[0]?.message?.content?.trim() || text;
+              translationMethod = "OpenRouter AI";
+            }
+          }
+        } catch (openRouterError) {
+          console.error("OpenRouter translation also failed:", openRouterError);
+        }
       }
 
-      const data = await response.json();
-      const translation = data.choices?.[0]?.message?.content?.trim() || '';
-
-      res.json({ translation });
+      res.json({ 
+        translation,
+        method: translationMethod
+      });
     } catch (error) {
       console.error("ASEAN translation error:", error);
       res.status(500).json({ error: "Translation failed" });

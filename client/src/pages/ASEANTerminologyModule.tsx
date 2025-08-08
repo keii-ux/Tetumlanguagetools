@@ -46,7 +46,7 @@ export default function ASEANTerminologyModule() {
                 </div>
                 <div>
                   <h1 className="text-lg font-semibold text-slate-900">ASEAN Terminology for Tetum↔English</h1>
-                  <p className="text-sm text-slate-600">Professional ASEAN abbreviations with AI translations</p>
+                  <p className="text-sm text-slate-600">ASEAN abbreviations and terminology</p>
                 </div>
               </div>
             </div>
@@ -81,20 +81,20 @@ export default function ASEANTerminologyModule() {
               <CardContent>
                 <div className="space-y-4">
                   <p className="text-gray-700">
-                    This module provides professional ASEAN (Association of Southeast Asian Nations) 
-                    terminology and abbreviations with AI-powered translations to Tetum and other languages.
+                    This module provides comprehensive ASEAN (Association of Southeast Asian Nations) 
+                    abbreviations and terminology with Google Translate integration for authentic Tetum translations.
                   </p>
                   
                   <div className="bg-green-50 p-4 rounded-lg border border-green-100">
                     <h4 className="font-semibold text-green-800 mb-2 flex items-center">
                       <Zap className="h-4 w-4 mr-2" />
-                      AI Translation Features:
+                      Google Translate Features:
                     </h4>
                     <ul className="text-sm text-green-700 space-y-1">
-                      <li>• Real-time translation using OpenRouter AI</li>
-                      <li>• Professional ASEAN context preservation</li>
-                      <li>• Support for Tetum, English, and Portuguese</li>
-                      <li>• Accurate abbreviation explanations</li>
+                      <li>• Authentic Tetum translations using Google Translate API</li>
+                      <li>• Professional ASEAN terminology database</li>
+                      <li>• Support for English, Tetum, and Portuguese</li>
+                      <li>• Comprehensive A-Z abbreviation explanations</li>
                     </ul>
                   </div>
 
@@ -105,7 +105,7 @@ export default function ASEANTerminologyModule() {
                     <ul className="text-sm text-blue-700 space-y-1">
                       <li>• Search for ASEAN abbreviations or terms</li>
                       <li>• Click on terms to see detailed explanations</li>
-                      <li>• Use the AI translation feature for Tetum equivalents</li>
+                      <li>• Use Google Translate for authentic Tetum translations</li>
                       <li>• Access professional diplomatic terminology</li>
                     </ul>
                   </div>
