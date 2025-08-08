@@ -218,14 +218,19 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
                       <h4 className="font-medium text-gray-900">
                         {entry.english || entry.explanation || "Unknown Term"}
                       </h4>
+                      {entry.portuguese && (
+                        <p className="text-sm text-green-600 mt-1">
+                          <span className="font-medium">Tetum:</span> {entry.portuguese}
+                        </p>
+                      )}
+                      {entry.source && (
+                        <p className="text-sm text-gray-500 mt-1">
+                          <span className="font-medium">Source:</span> {entry.source}
+                        </p>
+                      )}
                       {entry.notes && (
                         <p className="text-sm text-blue-600 mt-1">
                           {entry.notes}
-                        </p>
-                      )}
-                      {entry.explanation && entry.explanation !== entry.english && (
-                        <p className="text-sm text-gray-600 mt-2">
-                          {entry.explanation}
                         </p>
                       )}
                     </div>
