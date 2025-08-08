@@ -15,9 +15,8 @@ interface ASEANTerminologySearchProps {
 }
 
 export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearchProps) {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [unifiedInput, setUnifiedInput] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("all");
-  const [translationText, setTranslationText] = useState("");
   const [fromLanguage, setFromLanguage] = useState("en");
   const [toLanguage, setToLanguage] = useState("tet");
   const [translationResult, setTranslationResult] = useState("");
@@ -25,19 +24,19 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
   const { toast } = useToast();
 
   const searchQuery: SearchQuery = buildSearchQuery({
-    query: searchTerm,
+    query: unifiedInput,
     dictionaryType: "asean",
     language: selectedLanguage === "all" ? "all" : selectedLanguage as any
   });
 
   const { data: searchResults = [], isLoading } = useSearchEntries(searchQuery);
 
-  const handleSearch = (query: string) => {
-    setSearchTerm(query);
+  const handleUnifiedInput = (value: string) => {
+    setUnifiedInput(value);
   };
 
   const handleTranslate = async () => {
-    if (!translationText.trim()) {
+    if (!unifiedInput.trim()) {
       toast({
         title: "Translation Error",
         description: "Please enter text to translate",
@@ -56,7 +55,7 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          text: translationText,
+          text: unifiedInput,
           fromLanguage,
           toLanguage
         })
@@ -89,122 +88,102 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
 
   return (
     <div className="space-y-6">
-      {/* Combined Search & Translation Section */}
+      {/* Unified Search & Translation Interface */}
       <Card>
         <CardContent className="p-6">
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Header */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="flex items-center space-x-2">
-                  <Globe className="h-5 w-5 text-green-600" />
-                  <h2 className="text-lg font-semibold">ASEAN Terminology & AI Translation</h2>
-                </div>
+              <div className="flex items-center space-x-2">
+                <Globe className="h-5 w-5 text-green-600" />
+                <h2 className="text-lg font-semibold">ASEAN Terminology & AI Translation</h2>
                 <Badge variant="secondary" className="bg-blue-50 text-blue-700">
-                  Powered by OpenRouter
+                  <Zap className="h-3 w-3 mr-1" />
+                  AI Powered
                 </Badge>
               </div>
             </div>
 
-            {/* Search Bar */}
-            <div className="flex space-x-4">
-              <div className="flex-1">
-                <Input
-                  type="text"
-                  placeholder="Search ASEAN abbreviations and terms..."
-                  value={searchTerm}
-                  onChange={(e) => handleSearch(e.target.value)}
-                  className="w-full"
-                />
-              </div>
-              <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Language" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Languages</SelectItem>
-                  <SelectItem value="english">English</SelectItem>
-                  <SelectItem value="tetum">Tetum</SelectItem>
-                  <SelectItem value="portuguese">Portuguese</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* AI Translation Section */}
-            <div className="border-t pt-6">
-              <div className="flex items-center space-x-2 mb-4">
-                <Zap className="h-5 w-5 text-blue-600" />
-                <h3 className="text-base font-medium">AI Translation</h3>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2 text-gray-700">Text to translate</label>
-                  <textarea
-                    value={translationText}
-                    onChange={(e) => setTranslationText(e.target.value)}
-                    placeholder="Enter ASEAN terminology to translate..."
-                    className="w-full h-20 p-3 border border-gray-300 rounded-md resize-none text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            {/* Unified Search Bar with Translation Controls */}
+            <div className="space-y-4">
+              <div className="flex space-x-2">
+                <div className="flex-1 relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <Input
+                    type="text"
+                    placeholder="Search ASEAN terms or enter text to translate..."
+                    value={unifiedInput}
+                    onChange={(e) => handleUnifiedInput(e.target.value)}
+                    className="pl-10 w-full"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2 text-gray-700">Translation result</label>
-                  <div className="w-full h-20 p-3 border border-gray-200 rounded-md bg-gray-50 overflow-y-auto text-sm">
-                    {isTranslating ? (
-                      <div className="flex items-center space-x-2 text-gray-500">
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        <span>Translating...</span>
-                      </div>
-                    ) : (
-                      <p className="text-gray-700">{translationResult || "Translation will appear here"}</p>
-                    )}
-                  </div>
-                </div>
-              </div>
-              
-              <div className="flex items-center space-x-4">
                 <Select value={fromLanguage} onValueChange={setFromLanguage}>
-                  <SelectTrigger className="w-28">
+                  <SelectTrigger className="w-24">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="en">English</SelectItem>
-                    <SelectItem value="tet">Tetum</SelectItem>
-                    <SelectItem value="pt">Portuguese</SelectItem>
+                    <SelectItem value="en">EN</SelectItem>
+                    <SelectItem value="tet">TET</SelectItem>
+                    <SelectItem value="pt">PT</SelectItem>
                   </SelectContent>
                 </Select>
-                
-                <Languages className="h-4 w-4 text-gray-400" />
-                
+                <Languages className="h-4 w-4 text-gray-400 mt-3" />
                 <Select value={toLanguage} onValueChange={setToLanguage}>
-                  <SelectTrigger className="w-28">
+                  <SelectTrigger className="w-24">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="en">English</SelectItem>
-                    <SelectItem value="tet">Tetum</SelectItem>
-                    <SelectItem value="pt">Portuguese</SelectItem>
+                    <SelectItem value="en">EN</SelectItem>
+                    <SelectItem value="tet">TET</SelectItem>
+                    <SelectItem value="pt">PT</SelectItem>
                   </SelectContent>
                 </Select>
-                
                 <Button 
                   onClick={handleTranslate} 
-                  disabled={isTranslating || !translationText.trim()}
+                  disabled={isTranslating || !unifiedInput.trim()}
                   className="bg-blue-600 hover:bg-blue-700"
                   size="sm"
                 >
                   {isTranslating ? (
-                    <>
-                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                      Translating...
-                    </>
+                    <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
-                    <>
-                      <Zap className="h-4 w-4 mr-2" />
-                      Translate
-                    </>
+                    <Zap className="h-4 w-4" />
                   )}
                 </Button>
+              </div>
+
+              {/* Translation Result */}
+              {(translationResult || isTranslating) && (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <div className="flex items-center space-x-2 mb-2">
+                    <Zap className="h-4 w-4 text-blue-600" />
+                    <span className="text-sm font-medium text-blue-800">AI Translation Result</span>
+                  </div>
+                  {isTranslating ? (
+                    <div className="flex items-center space-x-2 text-blue-600">
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <span className="text-sm">Translating...</span>
+                    </div>
+                  ) : (
+                    <p className="text-blue-700 text-sm">{translationResult}</p>
+                  )}
+                </div>
+              )}
+
+              {/* Language Filter */}
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-gray-600">Filter results:</span>
+                <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                  <SelectTrigger className="w-36">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Languages</SelectItem>
+                    <SelectItem value="english">English</SelectItem>
+                    <SelectItem value="tetum">Tetum</SelectItem>
+                    <SelectItem value="portuguese">Portuguese</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </div>
@@ -257,10 +236,10 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
                 </div>
               ))}
             </div>
-          ) : searchTerm ? (
+          ) : unifiedInput ? (
             <div className="text-center py-8">
               <Search className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-500">No ASEAN terms found for "{searchTerm}"</p>
+              <p className="text-gray-500">No ASEAN terms found for "{unifiedInput}"</p>
               <p className="text-sm text-gray-400 mt-2">
                 Try searching for ASEAN abbreviations like "ASEAN", "AFTA", "AEC", etc.
               </p>
