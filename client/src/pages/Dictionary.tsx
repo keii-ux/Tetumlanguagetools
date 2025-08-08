@@ -98,21 +98,21 @@ const TOOL_CARDS = [
   },
 
   {
-    id: "general",
-    title: "Portuguese-English Dictionary", 
-    category: "Translation",
-    description: "Comprehensive dictionary with translations between Portuguese and English",
-    icon: Book,
+    id: "asean",
+    title: "ASEAN Terminology for Tetum<>English", 
+    category: "International",
+    description: "Professional ASEAN abbreviations and terminology with Tetum translations via AI",
+    icon: Globe,
     color: "bg-green-500",
     bgColor: "bg-green-50", 
     iconColor: "text-green-500",
   },
   {
-    id: "asean",
+    id: "inl-tetum",
     title: "Tetum Dictionary (INL)",
     category: "Reference", 
     description: "Instituto Nacional de Linguística Tetum dictionary with comprehensive entries",
-    icon: Globe,
+    icon: Languages,
     color: "bg-orange-500",
     bgColor: "bg-orange-50",
     iconColor: "text-orange-500",
@@ -129,7 +129,7 @@ export default function Dictionary() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'medical' | 'legal' | 'general' | 'asean'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'medical' | 'legal' | 'asean' | 'inl-tetum'>('home');
   
   const { data: stats } = useDictionaryStats();
   const { data: searchResults = [], isLoading: searchLoading } = useSearchEntries(searchQuery);
@@ -139,6 +139,10 @@ export default function Dictionary() {
   const handleToolSelect = (toolId: string) => {
     if (toolId === "legal") {
       setCurrentView('legal');
+    } else if (toolId === "asean") {
+      // Navigate to ASEAN terminology module
+      window.location.href = "/asean-terminology";
+      return;
     } else {
       setSelectedTool(toolId);
       const newQuery = buildSearchQuery({ 
@@ -574,11 +578,29 @@ export default function Dictionary() {
 
                         {tool.id === "asean" && (
                           <div className="mt-4 pt-4 border-t border-gray-100">
+                            <Link href="/asean-terminology">
+                              <Button 
+                                variant="outline" 
+                                size="sm" 
+                                className="w-full text-xs bg-green-50 border-green-200 text-green-700 hover:bg-green-100"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                }}
+                              >
+                                <Globe className="w-3 h-3 mr-2" />
+                                ASEAN Terminology Center
+                              </Button>
+                            </Link>
+                          </div>
+                        )}
+
+                        {tool.id === "inl-tetum" && (
+                          <div className="mt-4 pt-4 border-t border-gray-100">
                             <Link href="/inl-tetum-dictionary">
                               <Button 
                                 variant="outline" 
                                 size="sm" 
-                                className="w-full text-xs bg-indigo-50 border-indigo-200 text-indigo-700 hover:bg-indigo-100"
+                                className="w-full text-xs bg-orange-50 border-orange-200 text-orange-700 hover:bg-orange-100"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                 }}

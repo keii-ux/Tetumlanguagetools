@@ -227,18 +227,84 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Process general dictionary entries
-      const generalEntries = generalDictData.map((item: any) => ({
-        tetum: safeStringify(item.tetum),
-        portuguese: safeStringify(item.portuguese),
-        english: safeStringify(item.english),
-        source: safeStringify(item.source),
-        category: "general",
-        dictionaryType: "general",
-        notes: safeStringify(item.notes),
-        explanation: "",
+      // ASEAN Terminology entries (from abbreviations PDF)
+      const aseanTerminologyData = [
+        { abbr: "AADCP", full: "ASEAN-Australia Development Cooperation Programme" },
+        { abbr: "AAECP", full: "ASEAN-Australia Economic Cooperation Programme" },
+        { abbr: "AAF", full: "ASEAN Automotive Federation" },
+        { abbr: "AAPSIP", full: "ASEAN-Australia Postharvest System Improvement Programme" },
+        { abbr: "AATHP", full: "ASEAN Agreement on Transboundary Haze Pollution" },
+        { abbr: "ABAC", full: "ASEAN Business Advisory Council" },
+        { abbr: "ACB", full: "ASEAN Centre for Biodiversity" },
+        { abbr: "ACBC", full: "ASEAN China Business Council" },
+        { abbr: "ACBF", full: "ASEAN Central Bank Forum" },
+        { abbr: "ACC", full: "ASEAN Coordinating Council" },
+        { abbr: "ACCSQ", full: "ASEAN Consultative Committee on Standards and Quality" },
+        { abbr: "ACCT", full: "ASEAN Convention on Counter-Terrorism" },
+        { abbr: "ACDM", full: "ASEAN Committee on Disaster Management" },
+        { abbr: "ACE", full: "ASEAN Centre for Energy" },
+        { abbr: "ACECA", full: "ASEAN-Canada Economic Cooperation Agreement" },
+        { abbr: "ACFTA", full: "ASEAN-China Free Trade Area" },
+        { abbr: "ACMF", full: "ASEAN Capital Markets Forum" },
+        { abbr: "ACP", full: "ASEAN Cooperation Plan" },
+        { abbr: "ACTC", full: "ASEAN Center for Combating Transnational Crime" },
+        { abbr: "ACW", full: "ASEAN Committee on Women" },
+        { abbr: "ADB", full: "Asian Development Bank" },
+        { abbr: "ADMM", full: "ASEAN Defence Ministers' Meeting" },
+        { abbr: "AEC", full: "ASEAN Economic Community" },
+        { abbr: "AEM", full: "ASEAN Economic Ministers' Meeting" },
+        { abbr: "AF", full: "ASEAN Foundation" },
+        { abbr: "AFAS", full: "ASEAN Framework Agreement on Services" },
+        { abbr: "AFMM", full: "ASEAN Finance Ministers Meeting" },
+        { abbr: "AFTA", full: "ASEAN Free Trade Area" },
+        { abbr: "AHMM", full: "ASEAN Health Ministers Meeting" },
+        { abbr: "AHTN", full: "ASEAN Harmonised Tariff Nomenclature" },
+        { abbr: "AIA", full: "ASEAN Investment Area" },
+        { abbr: "AICHR", full: "ASEAN Intergovernmental Commission on Human Rights" },
+        { abbr: "AICO", full: "ASEAN Industrial Cooperation" },
+        { abbr: "AIPO", full: "ASEAN Inter-Parliamentary Organization" },
+        { abbr: "AJC", full: "ASEAN-Japan Centre" },
+        { abbr: "AJCEP", full: "ASEAN-Japan Closer Economic Partnership" },
+        { abbr: "AKFTA", full: "ASEAN-ROK Free Trade Area" },
+        { abbr: "ALF", full: "ASEAN Leadership Forum" },
+        { abbr: "AMAF", full: "ASEAN Ministers on Agriculture and Forestry" },
+        { abbr: "AMM", full: "ASEAN Ministerial Meeting" },
+        { abbr: "APEC", full: "Asia Pacific Economic Cooperation" },
+        { abbr: "APG", full: "ASEAN Power Grid" },
+        { abbr: "APSC", full: "ASEAN Political Security Community" },
+        { abbr: "ARF", full: "ASEAN Regional Forum" },
+        { abbr: "ASA", full: "ASEAN Swap Arrangement" },
+        { abbr: "ASC", full: "ASEAN Security Community" },
+        { abbr: "ASCC", full: "ASEAN Socio-Cultural Community" },
+        { abbr: "ASEAN", full: "Association of Southeast Asian Nations" },
+        { abbr: "ASEM", full: "ASEAN Europe Meeting" },
+        { abbr: "ASPEN", full: "ASEAN Strategic Plan of Action on the Environment" },
+        { abbr: "BIMP-EAGA", full: "Brunei Darussalam-Indonesia-Malaysia-Philippines East ASEAN Growth Area" },
+        { abbr: "CBMs", full: "Confidence Building Measures" },
+        { abbr: "CEPT", full: "Common Effective Preferential Tariff" },
+        { abbr: "CER", full: "Closer Economic Relations" },
+        { abbr: "CLMV", full: "Cambodia, Laos, Myanmar, VietNam" },
+        { abbr: "CMI", full: "Chiang Mai Initiative" },
+        { abbr: "COC", full: "Code of Conduct" },
+        { abbr: "CPR", full: "The Committee of Permanent Representatives to ASEAN" },
+        { abbr: "CTI", full: "Committee of Trade and Investment" },
+        { abbr: "EAEC", full: "East Asia Economic Caucus" },
+        { abbr: "TAC", full: "Treaty of Amity and Cooperation" },
+        { abbr: "VAP", full: "Vientiane Action Programme" },
+        { abbr: "WTO", full: "World Trade Organization" }
+      ];
+
+      const aseanEntries = aseanTerminologyData.map((item) => ({
+        tetum: "", // Will be filled via OpenRouter API
+        portuguese: "",
+        english: item.full,
+        source: "ASEAN Abbreviations List",
+        category: "asean",
+        dictionaryType: "asean",
+        notes: `Abbreviation: ${item.abbr}`,
+        explanation: item.full,
         pronunciation: "",
-        wordClass: "",
+        wordClass: "abbreviation",
         etymology: "",
         usageExamples: [],
         relatedTerms: [],
@@ -254,10 +320,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         ...tetumGlossaryEntries,     // Tetum Legal Glossary module only
         ...portugueseGlossaryEntries, // Portuguese Legal Glossary module only
         ...medicalTtEnEntries,       // Medical module - Tetum to English
-        ...inlTetumEntries           // INL Tetum dictionary module
+        ...inlTetumEntries,          // INL Tetum dictionary module
+        ...aseanEntries              // ASEAN terminology module
       ]);
       
-      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + medicalTtEnEntries.length + inlTetumEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + medicalTtEnEntries.length + inlTetumEntries.length + aseanEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
@@ -394,6 +461,90 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // ASEAN terminology search
+  app.get("/api/asean/search", async (req, res) => {
+    try {
+      const searchQuery = searchQuerySchema.parse(req.query);
+      // Force ASEAN dictionary type
+      searchQuery.dictionaryType = "asean";
+      const results = await storage.searchEntries(searchQuery);
+      res.json(results);
+    } catch (error) {
+      console.error("ASEAN search error:", error);
+      if (error instanceof Error) {
+        res.status(400).json({ error: error.message });
+      } else {
+        res.status(400).json({ error: "Invalid search parameters" });
+      }
+    }
+  });
+
+  // ASEAN terminology translation using OpenRouter
+  app.post("/api/asean/translate", async (req, res) => {
+    try {
+      const { text, fromLanguage, toLanguage } = req.body;
+      
+      if (!text || !fromLanguage || !toLanguage) {
+        return res.status(400).json({ error: "Missing required parameters: text, fromLanguage, toLanguage" });
+      }
+
+      const openRouterApiKey = process.env.OPENROUTER_API_KEY;
+      if (!openRouterApiKey) {
+        return res.status(500).json({ error: "OpenRouter API key not configured" });
+      }
+
+      const languageMap: { [key: string]: string } = {
+        'en': 'English',
+        'tet': 'Tetum',
+        'pt': 'Portuguese'
+      };
+
+      const fromLang = languageMap[fromLanguage] || fromLanguage;
+      const toLang = languageMap[toLanguage] || toLanguage;
+
+      const prompt = `Translate the following ${fromLang} text to ${toLang}. This is ASEAN terminology, so maintain professional accuracy and context:
+
+"${text}"
+
+Provide only the translation without additional explanation.`;
+
+      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${openRouterApiKey}`,
+          'Content-Type': 'application/json',
+          'HTTP-Referer': 'https://liantek.replit.app',
+          'X-Title': 'LianTek ASEAN Terminology'
+        },
+        body: JSON.stringify({
+          model: 'anthropic/claude-3.5-sonnet',
+          messages: [
+            {
+              role: 'user',
+              content: prompt
+            }
+          ],
+          max_tokens: 150,
+          temperature: 0.3
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.text();
+        console.error('OpenRouter API error:', errorData);
+        return res.status(500).json({ error: 'Translation service unavailable' });
+      }
+
+      const data = await response.json();
+      const translation = data.choices?.[0]?.message?.content?.trim() || '';
+
+      res.json({ translation });
+    } catch (error) {
+      console.error("ASEAN translation error:", error);
+      res.status(500).json({ error: "Translation failed" });
+    }
+  });
+
   // Get all entries
   app.get("/api/entries", async (req, res) => {
     try {
@@ -469,6 +620,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Get tetum monolingual entries error:", error);
       res.status(500).json({ error: "Failed to fetch tetum monolingual entries" });
+    }
+  });
+
+  app.get("/api/asean/entries", async (req, res) => {
+    try {
+      const entries = await storage.getAllEntries();
+      const aseanEntries = entries.filter(entry => entry.dictionaryType === "asean");
+      res.json(aseanEntries);
+    } catch (error) {
+      console.error("Get ASEAN entries error:", error);
+      res.status(500).json({ error: "Failed to fetch ASEAN entries" });
     }
   });
 
