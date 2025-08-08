@@ -22,62 +22,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize dictionary data from JSON files
   async function initializeDictionaries() {
     try {
-      // Load MEDICAL dictionaries - English to Tetum and Tetum to English medical terms
-      const medicalEnTetumPath = path.resolve(process.cwd(), "attached_assets", "medical_dic_en-tt_1750163422276.json");
+      // Load MEDICAL dictionary - Use the correct medical-dic_tt_en.json file
       const medicalTetumEnPath = path.resolve(process.cwd(), "attached_assets", "medical-dic_tt_en.json");
       
-      let medicalEnTetumData = [];
       let medicalTetumEnData = [];
       
       try {
-        let fileContent = await fs.readFile(medicalEnTetumPath, "utf-8");
-        
-        // Fix JSON structure - the file appears to be missing array brackets
-        if (!fileContent.trim().startsWith('[')) {
-          fileContent = '[' + fileContent;
-        }
-        if (!fileContent.trim().endsWith(']')) {
-          fileContent = fileContent + ']';
-        }
-        
-        // Clean up any trailing commas and fix structural issues
-        fileContent = fileContent.replace(/,(\s*[}\]])/g, '$1');
-        
-        medicalEnTetumData = JSON.parse(fileContent);
-        console.log(`Medical English-Tetum dictionary loaded successfully with ${medicalEnTetumData.length} entries`);
-      } catch (parseError) {
-        console.warn("Medical dictionary parsing failed, attempting recovery:", parseError);
-        
-        // Fallback: Extract individual JSON objects and reconstruct array
-        try {
-          let fileContent = await fs.readFile(medicalEnTetumPath, "utf-8");
-          
-          // Extract individual medical term objects
-          const objectMatches = fileContent.match(/\{[^{}]*"english"[^{}]*"tetum"[^{}]*\}/g);
-          if (objectMatches) {
-            const cleanedObjects = objectMatches.map(obj => {
-              try {
-                return JSON.parse(obj);
-              } catch {
-                return null;
-              }
-            }).filter(obj => obj !== null);
-            
-            medicalEnTetumData = cleanedObjects;
-            console.log(`Medical dictionary recovered ${medicalEnTetumData.length} entries from malformed file`);
-          }
-        } catch (recoveryError) {
-          console.error("Medical dictionary recovery failed:", recoveryError);
-          medicalEnTetumData = [];
-        }
-      }
-      
-      // Load Tetum to English medical dictionary
-      try {
-        medicalTetumEnData = JSON.parse(await fs.readFile(medicalTetumEnPath, "utf-8"));
+        const fileContent = await fs.readFile(medicalTetumEnPath, "utf-8");
+        medicalTetumEnData = JSON.parse(fileContent);
         console.log(`Medical Tetum-English dictionary loaded successfully with ${medicalTetumEnData.length} entries`);
-      } catch (error) {
-        console.warn("Medical Tetum-English dictionary not found or malformed:", error);
+      } catch (parseError) {
+        console.warn("Medical dictionary loading failed:", parseError);
         medicalTetumEnData = [];
       }
       
@@ -252,22 +207,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Process medical dictionary entries (English-Tetum) - New comprehensive medical terms
-      const medicalEnTtEntries = medicalEnTetumData.map((item: any) => ({
-        english: safeStringify(item.english),
-        tetum: safeStringify(item.tetum),
-        portuguese: "",
-        source: "Medical Technical Dictionary (EN-TT)",
-        category: "medical",
-        dictionaryType: "medical",
-        notes: "",
-        explanation: "",
-        pronunciation: "",
-        wordClass: "",
-        etymology: "",
-        usageExamples: [],
-        relatedTerms: [],
-      }));
+      // Process medical dictionary entries (removed - using only TT-EN file)
+      const medicalEnTtEntries: any[] = [];
 
       // Process medical dictionary entries (Tetum-English) - Bidirectional search capability
       const medicalTtEnEntries = medicalTetumEnData.map((item: any) => ({
@@ -312,12 +253,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         ...legalEntries,             // Legal module only
         ...tetumGlossaryEntries,     // Tetum Legal Glossary module only
         ...portugueseGlossaryEntries, // Portuguese Legal Glossary module only
-        ...medicalEnTtEntries,       // Medical module - English to Tetum
         ...medicalTtEnEntries,       // Medical module - Tetum to English
         ...inlTetumEntries           // INL Tetum dictionary module
       ]);
       
-      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + medicalEnTtEntries.length + medicalTtEnEntries.length + inlTetumEntries.length} dictionary entries`);
+      console.log(`Loaded ${legalEntries.length + tetumGlossaryEntries.length + portugueseGlossaryEntries.length + medicalTtEnEntries.length + inlTetumEntries.length} dictionary entries`);
     } catch (error) {
       console.error("Error initializing dictionaries:", error);
     }
