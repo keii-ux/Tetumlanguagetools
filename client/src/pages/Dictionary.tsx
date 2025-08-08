@@ -101,7 +101,7 @@ const TOOL_CARDS = [
     id: "asean",
     title: "ASEAN Terminology for Tetum<>English", 
     category: "International",
-    description: "Professional ASEAN abbreviations and terminology with Tetum translations via AI",
+    description: "ASEAN abbreviations and terminology",
     icon: Globe,
     color: "bg-green-500",
     bgColor: "bg-green-50", 
