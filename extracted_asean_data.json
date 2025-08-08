@@ -1,0 +1,702 @@
+[
+  {
+    "id": 1,
+    "abbreviation": "AADCP",
+    "fullForm": "ASEAN-Australia Development Cooperation Programme",
+    "category": "Development Cooperation",
+    "type": "Program"
+  },
+  {
+    "id": 2,
+    "abbreviation": "AADCP",
+    "fullForm": "ASEAN Aquaculture Development and Coordinating Programme",
+    "category": "Aquaculture",
+    "type": "Program"
+  },
+  {
+    "id": 3,
+    "abbreviation": "AADCP-RPS",
+    "fullForm": "ASEAN-Australia Development Cooperation Programme Regional Partnership Scheme",
+    "category": "Development Cooperation",
+    "type": "Scheme"
+  },
+  {
+    "id": 4,
+    "abbreviation": "AAECP",
+    "fullForm": "ASEAN-Australia Economic Cooperation Programme",
+    "category": "Economic Cooperation",
+    "type": "Program"
+  },
+  {
+    "id": 5,
+    "abbreviation": "AAF",
+    "fullForm": "ASEAN Automotive Federation",
+    "category": "Automotive",
+    "type": "Federation"
+  },
+  {
+    "id": 6,
+    "abbreviation": "AAPSIP",
+    "fullForm": "ASEAN-Australia Postharvest System Improvement Programme",
+    "category": "Agriculture",
+    "type": "Program"
+  },
+  {
+    "id": 7,
+    "abbreviation": "AARNET",
+    "fullForm": "ASEAN-AVRDC Regional Network for Vegetable Research and Development",
+    "category": "Agriculture Research",
+    "type": "Network"
+  },
+  {
+    "id": 8,
+    "abbreviation": "AASROC",
+    "fullForm": "Asian-African Sub-Regional Organisation Conference",
+    "category": "Regional Organization",
+    "type": "Conference"
+  },
+  {
+    "id": 9,
+    "abbreviation": "AATHP",
+    "fullForm": "ASEAN Agreement on Transboundary Haze Pollution",
+    "category": "Environment",
+    "type": "Agreement"
+  },
+  {
+    "id": 10,
+    "abbreviation": "ABAC",
+    "fullForm": "ASEAN Business Advisory Council",
+    "category": "Business",
+    "type": "Council"
+  },
+  {
+    "id": 11,
+    "abbreviation": "ABAPAST",
+    "fullForm": "Advisory Body on ASEAN Plan of Action on Science and Technology",
+    "category": "Science and Technology",
+    "type": "Advisory Body"
+  },
+  {
+    "id": 12,
+    "abbreviation": "ABASF",
+    "fullForm": "Advisory Body of the ASEAN Science Fund",
+    "category": "Science and Technology",
+    "type": "Advisory Body"
+  },
+  {
+    "id": 13,
+    "abbreviation": "ACB",
+    "fullForm": "ASEAN Centre for Biodiversity",
+    "category": "Environment",
+    "type": "Centre"
+  },
+  {
+    "id": 14,
+    "abbreviation": "ACB",
+    "fullForm": "ASEAN Compliance Body",
+    "category": "Compliance",
+    "type": "Body"
+  },
+  {
+    "id": 15,
+    "abbreviation": "ACBC",
+    "fullForm": "ASEAN China Business Council",
+    "category": "Business",
+    "type": "Council"
+  },
+  {
+    "id": 16,
+    "abbreviation": "ACBC",
+    "fullForm": "AFTA-CER Business Council",
+    "category": "Business",
+    "type": "Council"
+  },
+  {
+    "id": 17,
+    "abbreviation": "ACBF",
+    "fullForm": "ASEAN Central Bank Forum",
+    "category": "Finance",
+    "type": "Forum"
+  },
+  {
+    "id": 18,
+    "abbreviation": "ACC",
+    "fullForm": "ASEAN Coordinating Council",
+    "category": "Coordination",
+    "type": "Council"
+  },
+  {
+    "id": 19,
+    "abbreviation": "ACCCP",
+    "fullForm": "ASEAN Common Competencies Program",
+    "category": "Education",
+    "type": "Program"
+  },
+  {
+    "id": 20,
+    "abbreviation": "ACCICG",
+    "fullForm": "AFTA-CER CEP Implementation and Coordination Group",
+    "category": "Implementation",
+    "type": "Group"
+  },
+  {
+    "id": 21,
+    "abbreviation": "ACCORD",
+    "fullForm": "ASEAN-China Cooperative Operations in Response to Dangerous Drugs",
+    "category": "Security",
+    "type": "Operation"
+  },
+  {
+    "id": 22,
+    "abbreviation": "ACCSM",
+    "fullForm": "ASEAN Conference on Civil Service Matters",
+    "category": "Civil Service",
+    "type": "Conference"
+  },
+  {
+    "id": 23,
+    "abbreviation": "ACCSQ",
+    "fullForm": "ASEAN Consultative Committee on Standards and Quality",
+    "category": "Standards",
+    "type": "Committee"
+  },
+  {
+    "id": 24,
+    "abbreviation": "ACCSQ-CER",
+    "fullForm": "ASEAN Consultative Committee on Standards and Quality-Closer Economic Relation",
+    "category": "Standards",
+    "type": "Committee"
+  },
+  {
+    "id": 25,
+    "abbreviation": "ACCT",
+    "fullForm": "ASEAN Convention on Counter-Terrorism",
+    "category": "Security",
+    "type": "Convention"
+  },
+  {
+    "id": 26,
+    "abbreviation": "ACCTC",
+    "fullForm": "ASEAN Coordinators of Customs Training Centre",
+    "category": "Customs",
+    "type": "Centre"
+  },
+  {
+    "id": 27,
+    "abbreviation": "ACDICT",
+    "fullForm": "ASEAN Customs Directors on Information and Communication Technology",
+    "category": "Customs",
+    "type": "Committee"
+  },
+  {
+    "id": 28,
+    "abbreviation": "ACDEMA",
+    "fullForm": "ASEAN Customs Directors on Enforcement and Mutual Assistance",
+    "category": "Customs",
+    "type": "Committee"
+  },
+  {
+    "id": 29,
+    "abbreviation": "ACDM",
+    "fullForm": "ASEAN Committee on Disaster Management",
+    "category": "Disaster Management",
+    "type": "Committee"
+  },
+  {
+    "id": 30,
+    "abbreviation": "ACE",
+    "fullForm": "ASEAN Centre for Energy",
+    "category": "Energy",
+    "type": "Centre"
+  },
+  {
+    "id": 31,
+    "abbreviation": "ACE",
+    "fullForm": "ASEAN Committee on Education",
+    "category": "Education",
+    "type": "Committee"
+  },
+  {
+    "id": 32,
+    "abbreviation": "ACECA",
+    "fullForm": "ASEAN-Canada Economic Cooperation Agreement",
+    "category": "Economic Cooperation",
+    "type": "Agreement"
+  },
+  {
+    "id": 33,
+    "abbreviation": "ACEDAC",
+    "fullForm": "ASEAN Centre for the Development of Agricultural Cooperatives",
+    "category": "Agriculture",
+    "type": "Centre"
+  },
+  {
+    "id": 34,
+    "abbreviation": "ACF",
+    "fullForm": "ASEAN Cultural Fund",
+    "category": "Culture",
+    "type": "Fund"
+  },
+  {
+    "id": 35,
+    "abbreviation": "ACFC",
+    "fullForm": "ASEAN Consultative Forum for Competition",
+    "category": "Competition",
+    "type": "Forum"
+  },
+  {
+    "id": 36,
+    "abbreviation": "ACFTA",
+    "fullForm": "ASEAN-China Free Trade Area",
+    "category": "Trade",
+    "type": "Agreement"
+  },
+  {
+    "id": 37,
+    "abbreviation": "ACJCC",
+    "fullForm": "ASEAN-China Joint Cooperation Committee",
+    "category": "Cooperation",
+    "type": "Committee"
+  },
+  {
+    "id": 38,
+    "abbreviation": "ACMF",
+    "fullForm": "ASEAN Capital Markets Forum",
+    "category": "Finance",
+    "type": "Forum"
+  },
+  {
+    "id": 39,
+    "abbreviation": "ACP",
+    "fullForm": "ASEAN Cooperation Plan",
+    "category": "Cooperation",
+    "type": "Plan"
+  },
+  {
+    "id": 40,
+    "abbreviation": "ACSOC",
+    "fullForm": "ASEAN-China Senior Officials Consultation",
+    "category": "Consultation",
+    "type": "Meeting"
+  },
+  {
+    "id": 41,
+    "abbreviation": "ACT",
+    "fullForm": "ASEAN Consultation to Solve Trade and Investment Issues",
+    "category": "Trade",
+    "type": "Consultation"
+  },
+  {
+    "id": 42,
+    "abbreviation": "ACTC",
+    "fullForm": "ASEAN Center for Combating Transnational Crime",
+    "category": "Security",
+    "type": "Centre"
+  },
+  {
+    "id": 43,
+    "abbreviation": "ACTD",
+    "fullForm": "ASEAN Common Technical Dossiers",
+    "category": "Technical",
+    "type": "Document"
+  },
+  {
+    "id": 44,
+    "abbreviation": "ACTR",
+    "fullForm": "ASEAN Common Technical Requirements",
+    "category": "Technical",
+    "type": "Requirements"
+  },
+  {
+    "id": 45,
+    "abbreviation": "ACTT",
+    "fullForm": "ASEAN Communication Team for Tourism",
+    "category": "Tourism",
+    "type": "Team"
+  },
+  {
+    "id": 46,
+    "abbreviation": "ACVG",
+    "fullForm": "ASEAN Customs Valuation Guide",
+    "category": "Customs",
+    "type": "Guide"
+  },
+  {
+    "id": 47,
+    "abbreviation": "ACW",
+    "fullForm": "ASEAN Committee on Women",
+    "category": "Women",
+    "type": "Committee"
+  },
+  {
+    "id": 48,
+    "abbreviation": "ACWGDC",
+    "fullForm": "ASEAN-China Working Group on Development Cooperation",
+    "category": "Development Cooperation",
+    "type": "Working Group"
+  },
+  {
+    "id": 49,
+    "abbreviation": "ADB",
+    "fullForm": "Asian Development Bank",
+    "category": "Finance",
+    "type": "Bank"
+  },
+  {
+    "id": 50,
+    "abbreviation": "ADCG",
+    "fullForm": "ASEAN Datacom Coordinating Group",
+    "category": "Communication",
+    "type": "Group"
+  },
+  {
+    "id": 51,
+    "abbreviation": "ADCF",
+    "fullForm": "ASEAN Development Cooperation Forum",
+    "category": "Development Cooperation",
+    "type": "Forum"
+  },
+  {
+    "id": 52,
+    "abbreviation": "ADGICM",
+    "fullForm": "ASEAN Directors-General of Immigration Departments and Consular Affairs Division",
+    "category": "Immigration",
+    "type": "Committee"
+  },
+  {
+    "id": 53,
+    "abbreviation": "ADMM",
+    "fullForm": "ASEAN Defence Ministers' Meeting",
+    "category": "Defence",
+    "type": "Meeting"
+  },
+  {
+    "id": 54,
+    "abbreviation": "ADPC",
+    "fullForm": "ASEAN Agricultural Development Planning Centre",
+    "category": "Agriculture",
+    "type": "Centre"
+  },
+  {
+    "id": 55,
+    "abbreviation": "ADPC",
+    "fullForm": "ASIAN Disaster Preparedness Centre",
+    "category": "Disaster Preparedness",
+    "type": "Centre"
+  },
+  {
+    "id": 56,
+    "abbreviation": "ADSOM",
+    "fullForm": "ASEAN Defence Senior Officials' Meeting",
+    "category": "Defence",
+    "type": "Meeting"
+  },
+  {
+    "id": 57,
+    "abbreviation": "AEBF",
+    "fullForm": "ASEAN Energy Business Forum",
+    "category": "Energy",
+    "type": "Forum"
+  },
+  {
+    "id": 58,
+    "abbreviation": "AEC",
+    "fullForm": "ASEAN Economic Community",
+    "category": "Economic",
+    "type": "Community"
+  },
+  {
+    "id": 59,
+    "abbreviation": "AEEAP",
+    "fullForm": "ASEAN Environmental Education Action Plan",
+    "category": "Environment",
+    "type": "Plan"
+  },
+  {
+    "id": 60,
+    "abbreviation": "AEEID",
+    "fullForm": "ASEAN Environmental Education Inventory Database",
+    "category": "Environment",
+    "type": "Database"
+  },
+  {
+    "id": 61,
+    "abbreviation": "AEEMTRC",
+    "fullForm": "ASEAN-EC Energy Management, Training and Research Centre",
+    "category": "Energy",
+    "type": "Centre"
+  },
+  {
+    "id": 62,
+    "abbreviation": "AEG",
+    "fullForm": "ASEAN Experts Group",
+    "category": "Expert",
+    "type": "Group"
+  },
+  {
+    "id": 63,
+    "abbreviation": "AEGC",
+    "fullForm": "ASEAN Experts Group on Competition",
+    "category": "Competition",
+    "type": "Group"
+  },
+  {
+    "id": 64,
+    "abbreviation": "AEGCD",
+    "fullForm": "ASEAN Expert Group on Communicable Diseases",
+    "category": "Health",
+    "type": "Group"
+  },
+  {
+    "id": 65,
+    "abbreviation": "AEGDM",
+    "fullForm": "ASEAN Expert Group Meeting on Disaster Management",
+    "category": "Disaster Management",
+    "type": "Group"
+  },
+  {
+    "id": 66,
+    "abbreviation": "AEGFS",
+    "fullForm": "ASEAN Expert Group on Food Safety",
+    "category": "Food Safety",
+    "type": "Group"
+  },
+  {
+    "id": 67,
+    "abbreviation": "AEG-IFPP",
+    "fullForm": "ASEAN Ad-hoc Experts Working Group on International Forest Policy Process",
+    "category": "Forest Policy",
+    "type": "Working Group"
+  },
+  {
+    "id": 68,
+    "abbreviation": "AEIC",
+    "fullForm": "ASEAN Earthquake Information Centre",
+    "category": "Disaster Management",
+    "type": "Centre"
+  },
+  {
+    "id": 69,
+    "abbreviation": "AEM",
+    "fullForm": "ASEAN Economic Ministers' Meeting",
+    "category": "Economic",
+    "type": "Meeting"
+  },
+  {
+    "id": 70,
+    "abbreviation": "AEMAS",
+    "fullForm": "ASEAN Energy Manager Accreditation Scheme",
+    "category": "Energy",
+    "type": "Scheme"
+  },
+  {
+    "id": 71,
+    "abbreviation": "AEMC",
+    "fullForm": "ASEAN-European Community Management Centre",
+    "category": "Management",
+    "type": "Centre"
+  },
+  {
+    "id": 72,
+    "abbreviation": "AEMEC",
+    "fullForm": "ASEAN Ministers' Meeting on Energy Cooperation",
+    "category": "Energy",
+    "type": "Meeting"
+  },
+  {
+    "id": 73,
+    "abbreviation": "AEMM",
+    "fullForm": "ASEAN-EU Ministerial Meeting",
+    "category": "International Relations",
+    "type": "Meeting"
+  },
+  {
+    "id": 74,
+    "abbreviation": "AEP",
+    "fullForm": "ASEAN Environmental Partnership",
+    "category": "Environment",
+    "type": "Partnership"
+  },
+  {
+    "id": 75,
+    "abbreviation": "AERISRP",
+    "fullForm": "ASEAN Plus Three Emerging and Resurging Infections Surveillance and Response Programme",
+    "category": "Health",
+    "type": "Program"
+  },
+  {
+    "id": 76,
+    "abbreviation": "AERR",
+    "fullForm": "ASEAN Emergency Rice Reserve",
+    "category": "Food Security",
+    "type": "Reserve"
+  },
+  {
+    "id": 77,
+    "abbreviation": "AEY",
+    "fullForm": "ASEAN Environment Year",
+    "category": "Environment",
+    "type": "Year"
+  },
+  {
+    "id": 78,
+    "abbreviation": "AF",
+    "fullForm": "ASEAN Foundation",
+    "category": "Foundation",
+    "type": "Foundation"
+  },
+  {
+    "id": 79,
+    "abbreviation": "AFAS",
+    "fullForm": "ASEAN Framework Agreement on Services",
+    "category": "Services",
+    "type": "Agreement"
+  },
+  {
+    "id": 80,
+    "abbreviation": "AFC",
+    "fullForm": "ASEAN Food Conference",
+    "category": "Food",
+    "type": "Conference"
+  },
+  {
+    "id": 81,
+    "abbreviation": "AFDM",
+    "fullForm": "ASEAN Finance and Central Bank Deputies",
+    "category": "Finance",
+    "type": "Committee"
+  },
+  {
+    "id": 82,
+    "abbreviation": "AFEEC",
+    "fullForm": "ASEAN Forum on Energy Efficiency and Conservation",
+    "category": "Energy",
+    "type": "Forum"
+  },
+  {
+    "id": 83,
+    "abbreviation": "AFFA",
+    "fullForm": "ASEAN Federation of Forwarders Association",
+    "category": "Logistics",
+    "type": "Federation"
+  },
+  {
+    "id": 84,
+    "abbreviation": "AFHB",
+    "fullForm": "ASEAN Food Handling Bureau",
+    "category": "Food",
+    "type": "Bureau"
+  },
+  {
+    "id": 85,
+    "abbreviation": "AFMM",
+    "fullForm": "ASEAN Finance Ministers Meeting",
+    "category": "Finance",
+    "type": "Meeting"
+  },
+  {
+    "id": 86,
+    "abbreviation": "AFOC",
+    "fullForm": "ASEAN Forum on Coal",
+    "category": "Energy",
+    "type": "Forum"
+  },
+  {
+    "id": 87,
+    "abbreviation": "AFPIC",
+    "fullForm": "ASEAN Forest Product Industry Club",
+    "category": "Forest Industry",
+    "type": "Club"
+  },
+  {
+    "id": 88,
+    "abbreviation": "AFPHTC",
+    "fullForm": "ASEAN Fisheries Postharvest Technology Centres",
+    "category": "Fisheries",
+    "type": "Centre"
+  },
+  {
+    "id": 89,
+    "abbreviation": "AFPTC",
+    "fullForm": "ASEAN Focal Points on Tobacco Control",
+    "category": "Health",
+    "type": "Committee"
+  },
+  {
+    "id": 90,
+    "abbreviation": "AFSIS",
+    "fullForm": "ASEAN Food Security Information System",
+    "category": "Food Security",
+    "type": "System"
+  },
+  {
+    "id": 91,
+    "abbreviation": "AFSIT",
+    "fullForm": "ASEAN Food Security Information and Training",
+    "category": "Food Security",
+    "type": "Training"
+  },
+  {
+    "id": 92,
+    "abbreviation": "AFSRB",
+    "fullForm": "ASEAN Food Security Reserve Board",
+    "category": "Food Security",
+    "type": "Board"
+  },
+  {
+    "id": 93,
+    "abbreviation": "AFTA",
+    "fullForm": "ASEAN Free Trade Area",
+    "category": "Trade",
+    "type": "Agreement"
+  },
+  {
+    "id": 94,
+    "abbreviation": "AGLOP",
+    "fullForm": "ASEAN Government Officials Meetings",
+    "category": "Government",
+    "type": "Meeting"
+  },
+  {
+    "id": 95,
+    "abbreviation": "AHA Center",
+    "fullForm": "The ASEAN Co-ordinating Centre for Humanitarian Assistance on disaster management",
+    "category": "Humanitarian",
+    "type": "Centre"
+  },
+  {
+    "id": 96,
+    "abbreviation": "AHEWS",
+    "fullForm": "ASEAN Agricultural Hazards Early Warning System",
+    "category": "Agriculture",
+    "type": "System"
+  },
+  {
+    "id": 97,
+    "abbreviation": "AHIA",
+    "fullForm": "ASEAN Heads of Investment Agencies",
+    "category": "Investment",
+    "type": "Committee"
+  },
+  {
+    "id": 98,
+    "abbreviation": "AHMM",
+    "fullForm": "ASEAN Health Ministers Meeting",
+    "category": "Health",
+    "type": "Meeting"
+  },
+  {
+    "id": 99,
+    "abbreviation": "AHRN",
+    "fullForm": "Asian Harm Reduction Network",
+    "category": "Health",
+    "type": "Network"
+  },
+  {
+    "id": 100,
+    "abbreviation": "AHPs",
+    "fullForm": "ASEAN Heritage Parks",
+    "category": "Heritage",
+    "type": "Parks"
+  }
+]

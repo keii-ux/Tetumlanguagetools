@@ -227,88 +227,54 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // ASEAN Terminology entries (from abbreviations PDF)
-      const aseanTerminologyData = [
-        { abbr: "AADCP", full: "ASEAN-Australia Development Cooperation Programme" },
-        { abbr: "AAECP", full: "ASEAN-Australia Economic Cooperation Programme" },
-        { abbr: "AAF", full: "ASEAN Automotive Federation" },
-        { abbr: "AAPSIP", full: "ASEAN-Australia Postharvest System Improvement Programme" },
-        { abbr: "AATHP", full: "ASEAN Agreement on Transboundary Haze Pollution" },
-        { abbr: "ABAC", full: "ASEAN Business Advisory Council" },
-        { abbr: "ACB", full: "ASEAN Centre for Biodiversity" },
-        { abbr: "ACBC", full: "ASEAN China Business Council" },
-        { abbr: "ACBF", full: "ASEAN Central Bank Forum" },
-        { abbr: "ACC", full: "ASEAN Coordinating Council" },
-        { abbr: "ACCSQ", full: "ASEAN Consultative Committee on Standards and Quality" },
-        { abbr: "ACCT", full: "ASEAN Convention on Counter-Terrorism" },
-        { abbr: "ACDM", full: "ASEAN Committee on Disaster Management" },
-        { abbr: "ACE", full: "ASEAN Centre for Energy" },
-        { abbr: "ACECA", full: "ASEAN-Canada Economic Cooperation Agreement" },
-        { abbr: "ACFTA", full: "ASEAN-China Free Trade Area" },
-        { abbr: "ACMF", full: "ASEAN Capital Markets Forum" },
-        { abbr: "ACP", full: "ASEAN Cooperation Plan" },
-        { abbr: "ACTC", full: "ASEAN Center for Combating Transnational Crime" },
-        { abbr: "ACW", full: "ASEAN Committee on Women" },
-        { abbr: "ADB", full: "Asian Development Bank" },
-        { abbr: "ADMM", full: "ASEAN Defence Ministers' Meeting" },
-        { abbr: "AEC", full: "ASEAN Economic Community" },
-        { abbr: "AEM", full: "ASEAN Economic Ministers' Meeting" },
-        { abbr: "AF", full: "ASEAN Foundation" },
-        { abbr: "AFAS", full: "ASEAN Framework Agreement on Services" },
-        { abbr: "AFMM", full: "ASEAN Finance Ministers Meeting" },
-        { abbr: "AFTA", full: "ASEAN Free Trade Area" },
-        { abbr: "AHMM", full: "ASEAN Health Ministers Meeting" },
-        { abbr: "AHTN", full: "ASEAN Harmonised Tariff Nomenclature" },
-        { abbr: "AIA", full: "ASEAN Investment Area" },
-        { abbr: "AICHR", full: "ASEAN Intergovernmental Commission on Human Rights" },
-        { abbr: "AICO", full: "ASEAN Industrial Cooperation" },
-        { abbr: "AIPO", full: "ASEAN Inter-Parliamentary Organization" },
-        { abbr: "AJC", full: "ASEAN-Japan Centre" },
-        { abbr: "AJCEP", full: "ASEAN-Japan Closer Economic Partnership" },
-        { abbr: "AKFTA", full: "ASEAN-ROK Free Trade Area" },
-        { abbr: "ALF", full: "ASEAN Leadership Forum" },
-        { abbr: "AMAF", full: "ASEAN Ministers on Agriculture and Forestry" },
-        { abbr: "AMM", full: "ASEAN Ministerial Meeting" },
-        { abbr: "APEC", full: "Asia Pacific Economic Cooperation" },
-        { abbr: "APG", full: "ASEAN Power Grid" },
-        { abbr: "APSC", full: "ASEAN Political Security Community" },
-        { abbr: "ARF", full: "ASEAN Regional Forum" },
-        { abbr: "ASA", full: "ASEAN Swap Arrangement" },
-        { abbr: "ASC", full: "ASEAN Security Community" },
-        { abbr: "ASCC", full: "ASEAN Socio-Cultural Community" },
-        { abbr: "ASEAN", full: "Association of Southeast Asian Nations" },
-        { abbr: "ASEM", full: "ASEAN Europe Meeting" },
-        { abbr: "ASPEN", full: "ASEAN Strategic Plan of Action on the Environment" },
-        { abbr: "BIMP-EAGA", full: "Brunei Darussalam-Indonesia-Malaysia-Philippines East ASEAN Growth Area" },
-        { abbr: "CBMs", full: "Confidence Building Measures" },
-        { abbr: "CEPT", full: "Common Effective Preferential Tariff" },
-        { abbr: "CER", full: "Closer Economic Relations" },
-        { abbr: "CLMV", full: "Cambodia, Laos, Myanmar, VietNam" },
-        { abbr: "CMI", full: "Chiang Mai Initiative" },
-        { abbr: "COC", full: "Code of Conduct" },
-        { abbr: "CPR", full: "The Committee of Permanent Representatives to ASEAN" },
-        { abbr: "CTI", full: "Committee of Trade and Investment" },
-        { abbr: "EAEC", full: "East Asia Economic Caucus" },
-        { abbr: "TAC", full: "Treaty of Amity and Cooperation" },
-        { abbr: "VAP", full: "Vientiane Action Programme" },
-        { abbr: "WTO", full: "World Trade Organization" }
-      ];
-
-      const aseanEntries = aseanTerminologyData.map((item) => ({
-        tetum: "", // Will be filled via OpenRouter API
-        portuguese: "",
-        english: item.full,
-        source: "ASEAN Abbreviations List",
-        category: "asean",
-        dictionaryType: "asean",
-        notes: `Abbreviation: ${item.abbr}`,
-        explanation: item.full,
-        pronunciation: "",
-        wordClass: "abbreviation",
-        etymology: "",
-        usageExamples: [],
-        relatedTerms: [],
-      }));
+      // Load comprehensive ASEAN terminology data from extracted file
+      let aseanTerminologyData: any[] = [];
+      let aseanEntries: any[] = [];
+      
+      try {
+        const aseanJsonPath = path.resolve(process.cwd(), 'extracted_asean_data.json');
+        const aseanJsonData = await fs.readFile(aseanJsonPath, 'utf8');
+        aseanTerminologyData = JSON.parse(aseanJsonData);
+        
+        aseanEntries = aseanTerminologyData.map((item: any) => ({
+          tetum: "", // Will be filled via OpenRouter API when requested
+          portuguese: "", // Will be filled via OpenRouter API when requested
+          english: item.fullForm,
+          source: "ASEAN Abbreviations List - Comprehensive A-Z",
+          category: item.category || "asean",
+          dictionaryType: "asean",
+          notes: `Abbreviation: ${item.abbreviation} | Type: ${item.type} | Category: ${item.category}`,
+          explanation: item.fullForm,
+          pronunciation: "",
+          wordClass: "abbreviation",
+          etymology: "",
+          usageExamples: [],
+          relatedTerms: [],
+        }));
+        
+        console.log(`ASEAN terminology loaded successfully with ${aseanEntries.length} entries from comprehensive A-Z list`);
+      } catch (error) {
+        console.error('Error loading comprehensive ASEAN data:', error);
+        // Fallback with basic ASEAN data
+        aseanTerminologyData = [
+          { abbr: "ASEAN", full: "Association of Southeast Asian Nations" }
+        ];
+        aseanEntries = aseanTerminologyData.map((item: any) => ({
+          tetum: "",
+          portuguese: "",
+          english: item.full,
+          source: "ASEAN Abbreviations List",
+          category: "asean",
+          dictionaryType: "asean",
+          notes: `Abbreviation: ${item.abbr}`,
+          explanation: item.full,
+          pronunciation: "",
+          wordClass: "abbreviation",
+          etymology: "",
+          usageExamples: [],
+          relatedTerms: [],
+        }));
+      }
 
 
 

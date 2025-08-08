@@ -42,8 +42,8 @@ A comprehensive multilingual dictionary application focusing on Tetum language r
 ### 5. ASEAN Terminology Module
 - **Route**: `/asean-terminology`
 - **API Endpoint**: `/api/asean/search` and `/api/asean/translate`
-- **Data Source**: `attached_assets/ASEAN-Abbreviations-List_1754669256686.pdf` (extracted)
-- **Content**: 63 professional ASEAN abbreviations and terms
+- **Data Source**: `attached_assets/ASEAN-Abbreviations-List_1754669256686.pdf` (extracted to `extracted_asean_data.json`)
+- **Content**: 100+ comprehensive ASEAN abbreviations and terms from A-Z
 - **Features**: AI-powered translation using OpenRouter API for English↔Tetum↔Portuguese
 
 ### 6. INL Tetum Dictionary Module  
@@ -78,7 +78,7 @@ A comprehensive multilingual dictionary application focusing on Tetum language r
 - ✅ **OpenRouter AI Integration**: Added AI-powered translation services for English, Tetum, and Portuguese
 - ✅ **ASEAN Data Integration**: Extracted and integrated 63 professional ASEAN abbreviations from provided PDF
 - ✅ **AI Translation Center**: Built dedicated ASEAN module with real-time AI translation capabilities
-- ✅ **Dictionary Statistics**: Medical: 1,543, Legal: 1,040, Tetum Legal: 470, Portuguese Legal: 1,063, INL Tetum: 9,974, ASEAN: 63
+- ✅ **Dictionary Statistics**: Medical: 1,543, Legal: 1,040, Tetum Legal: 470, Portuguese Legal: 1,063, INL Tetum: 9,974, ASEAN: 100+
 
 ## User Preferences
 - Clean, modern, app-compatible interfaces preferred
@@ -101,4 +101,4 @@ A comprehensive multilingual dictionary application focusing on Tetum language r
 - ✅ ASEAN Terminology module integrated with AI translation capabilities
 - ✅ OpenRouter API integration for real-time language translation
 - ✅ Complete module isolation implemented
-- ✅ Total entries: 14,153 authentic terms across all modules (including 63 ASEAN terms)
+- ✅ Total entries: 14,190+ authentic terms across all modules (including 100+ comprehensive ASEAN terms)
