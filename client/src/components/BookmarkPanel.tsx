@@ -115,7 +115,7 @@ export function BookmarkPanel({ userId, onClose, onEntrySelect }: BookmarkPanelP
 
   const handleDeleteBookmark = async (bookmarkId: number) => {
     const bookmark = bookmarks.find(b => b.id === bookmarkId);
-    if (bookmark) {
+    if (bookmark && bookmark.entryId !== null) {
       await deleteBookmark.mutateAsync({ userId, entryId: bookmark.entryId });
     }
   };
@@ -203,14 +203,16 @@ export function BookmarkPanel({ userId, onClose, onEntrySelect }: BookmarkPanelP
         ) : (
           <div className="space-y-3">
             {filteredBookmarks.map((bookmark) => (
-              <BookmarkItem
-                key={bookmark.id}
-                bookmarkId={bookmark.id}
-                entryId={bookmark.entryId}
-                userId={userId}
-                onEntrySelect={onEntrySelect}
-                onDelete={handleDeleteBookmark}
-              />
+              bookmark.entryId !== null && (
+                <BookmarkItem
+                  key={bookmark.id}
+                  bookmarkId={bookmark.id}
+                  entryId={bookmark.entryId}
+                  userId={userId}
+                  onEntrySelect={onEntrySelect}
+                  onDelete={handleDeleteBookmark}
+                />
+              )
             ))}
           </div>
         )}
