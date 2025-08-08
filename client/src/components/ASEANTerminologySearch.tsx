@@ -89,15 +89,24 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
 
   return (
     <div className="space-y-6">
-      {/* Search Section */}
+      {/* Combined Search & Translation Section */}
       <Card>
         <CardContent className="p-6">
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2 mb-4">
-              <Globe className="h-5 w-5 text-green-600" />
-              <h2 className="text-lg font-semibold">ASEAN Terminology Search</h2>
+          <div className="space-y-6">
+            {/* Header */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2">
+                  <Globe className="h-5 w-5 text-green-600" />
+                  <h2 className="text-lg font-semibold">ASEAN Terminology & AI Translation</h2>
+                </div>
+                <Badge variant="secondary" className="bg-blue-50 text-blue-700">
+                  Powered by OpenRouter
+                </Badge>
+              </div>
             </div>
-            
+
+            {/* Search Bar */}
             <div className="flex space-x-4">
               <div className="flex-1">
                 <Input
@@ -120,89 +129,83 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
                 </SelectContent>
               </Select>
             </div>
-          </div>
-        </CardContent>
-      </Card>
 
-      {/* AI Translation Section */}
-      <Card>
-        <CardContent className="p-6">
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2 mb-4">
-              <Zap className="h-5 w-5 text-blue-600" />
-              <h2 className="text-lg font-semibold">AI Translation</h2>
-              <Badge variant="secondary" className="bg-blue-50 text-blue-700">
-                Powered by OpenRouter
-              </Badge>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">Text to translate</label>
-                <textarea
-                  value={translationText}
-                  onChange={(e) => setTranslationText(e.target.value)}
-                  placeholder="Enter ASEAN terminology to translate..."
-                  className="w-full h-24 p-3 border border-gray-300 rounded-md resize-none"
-                />
+            {/* AI Translation Section */}
+            <div className="border-t pt-6">
+              <div className="flex items-center space-x-2 mb-4">
+                <Zap className="h-5 w-5 text-blue-600" />
+                <h3 className="text-base font-medium">AI Translation</h3>
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">Translation result</label>
-                <div className="w-full h-24 p-3 border border-gray-200 rounded-md bg-gray-50 overflow-y-auto">
-                  {isTranslating ? (
-                    <div className="flex items-center space-x-2 text-gray-500">
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      <span>Translating...</span>
-                    </div>
-                  ) : (
-                    <p className="text-gray-700">{translationResult || "Translation will appear here"}</p>
-                  )}
+              
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-gray-700">Text to translate</label>
+                  <textarea
+                    value={translationText}
+                    onChange={(e) => setTranslationText(e.target.value)}
+                    placeholder="Enter ASEAN terminology to translate..."
+                    className="w-full h-20 p-3 border border-gray-300 rounded-md resize-none text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-gray-700">Translation result</label>
+                  <div className="w-full h-20 p-3 border border-gray-200 rounded-md bg-gray-50 overflow-y-auto text-sm">
+                    {isTranslating ? (
+                      <div className="flex items-center space-x-2 text-gray-500">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <span>Translating...</span>
+                      </div>
+                    ) : (
+                      <p className="text-gray-700">{translationResult || "Translation will appear here"}</p>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <Select value={fromLanguage} onValueChange={setFromLanguage}>
-                <SelectTrigger className="w-32">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="en">English</SelectItem>
-                  <SelectItem value="tet">Tetum</SelectItem>
-                  <SelectItem value="pt">Portuguese</SelectItem>
-                </SelectContent>
-              </Select>
               
-              <Languages className="h-4 w-4 text-gray-400" />
-              
-              <Select value={toLanguage} onValueChange={setToLanguage}>
-                <SelectTrigger className="w-32">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="en">English</SelectItem>
-                  <SelectItem value="tet">Tetum</SelectItem>
-                  <SelectItem value="pt">Portuguese</SelectItem>
-                </SelectContent>
-              </Select>
-              
-              <Button 
-                onClick={handleTranslate} 
-                disabled={isTranslating || !translationText.trim()}
-                className="bg-blue-600 hover:bg-blue-700"
-              >
-                {isTranslating ? (
-                  <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Translating...
-                  </>
-                ) : (
-                  <>
-                    <Zap className="h-4 w-4 mr-2" />
-                    Translate
-                  </>
-                )}
-              </Button>
+              <div className="flex items-center space-x-4">
+                <Select value={fromLanguage} onValueChange={setFromLanguage}>
+                  <SelectTrigger className="w-28">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="en">English</SelectItem>
+                    <SelectItem value="tet">Tetum</SelectItem>
+                    <SelectItem value="pt">Portuguese</SelectItem>
+                  </SelectContent>
+                </Select>
+                
+                <Languages className="h-4 w-4 text-gray-400" />
+                
+                <Select value={toLanguage} onValueChange={setToLanguage}>
+                  <SelectTrigger className="w-28">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="en">English</SelectItem>
+                    <SelectItem value="tet">Tetum</SelectItem>
+                    <SelectItem value="pt">Portuguese</SelectItem>
+                  </SelectContent>
+                </Select>
+                
+                <Button 
+                  onClick={handleTranslate} 
+                  disabled={isTranslating || !translationText.trim()}
+                  className="bg-blue-600 hover:bg-blue-700"
+                  size="sm"
+                >
+                  {isTranslating ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Translating...
+                    </>
+                  ) : (
+                    <>
+                      <Zap className="h-4 w-4 mr-2" />
+                      Translate
+                    </>
+                  )}
+                </Button>
+              </div>
             </div>
           </div>
         </CardContent>
