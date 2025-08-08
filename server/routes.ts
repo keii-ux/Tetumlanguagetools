@@ -240,10 +240,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
           tetum: item.abbreviation_Tetum || item.abbreviation_EN, // Use abbreviation (same in both languages)
           portuguese: item.full_form_Tetum || "", // Tetum translation via Google API
           english: item.full_form,
-          source: "ASEAN Abbreviations List (738 comprehensive entries) with Google Translate integration",
+          source: "ASEAN Abbreviations List with Google API Tetum translations",
           category: "asean",
           dictionaryType: "asean",
-          notes: `Abbreviation: ${item.abbreviation_EN} | ${item.source}`,
+          notes: `Tetum Translation: ${item.abbreviation_EN} | Source: Google API online`,
           explanation: item.full_form,
           pronunciation: "",
           wordClass: "abbreviation",
