@@ -75,10 +75,12 @@ A comprehensive multilingual dictionary application focusing on Tetum language r
 - ✅ **INL Tetum Interface**: Modernized with clean, app-like design and mobile-first responsive layout
 - ✅ **API Endpoints**: Fixed module-specific search endpoints for proper data isolation
 - ✅ **ASEAN Terminology Module**: Replaced Portuguese-English Dictionary with "ASEAN Terminology for Tetum<>English"
-- ✅ **OpenRouter AI Integration**: Added AI-powered translation services for English, Tetum, and Portuguese
-- ✅ **ASEAN Data Integration**: Extracted and integrated 63 professional ASEAN abbreviations from provided PDF
-- ✅ **AI Translation Center**: Built dedicated ASEAN module with real-time AI translation capabilities
+- ✅ **Google Translate API Integration**: Switched from OpenRouter to Google Translate API for authentic Tetum translations
+- ✅ **ASEAN Data Integration**: Extracted and integrated 738 comprehensive ASEAN abbreviations from provided PDF
+- ✅ **Translation Framework**: Built complete translation infrastructure for Google API integration
+- ✅ **Display Updates**: Updated ASEAN module to show "Tetum Translation" and "Source: Google API online"
 - ✅ **Dictionary Statistics**: Medical: 1,543, Legal: 1,040, Tetum Legal: 470, Portuguese Legal: 1,063, INL Tetum: 9,974, ASEAN: 738
+- ⏳ **Pending**: Google API key validation needed to complete authentic Tetum translations for all 738 ASEAN abbreviations
 
 ## User Preferences
 - Clean, modern, app-compatible interfaces preferred
