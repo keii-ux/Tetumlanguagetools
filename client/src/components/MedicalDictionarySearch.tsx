@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { useSearchEntries } from "@/lib/search";
+import { useSearchEntries, useMedicalEntries } from "@/lib/search";
 import { DictionaryEntry } from "@shared/schema";
 
 interface MedicalDictionarySearchProps {
@@ -28,53 +28,51 @@ function PredictiveDropdown({
   isVisible,
   activeLanguage 
 }: PredictiveDropdownProps) {
-  if (!isVisible || !searchTerm || searchTerm.length < 2) return null;
+  if (!isVisible || !searchTerm || searchTerm.length < 1) return null;
 
   const filteredEntries = entries
     .filter(entry => {
-      // Search in both English and Tetum fields, but prioritize starts-with matches
+      // Enhanced cross-language search in Tetum, English, and Portuguese fields
       const tetumField = entry.tetum || "";
       const englishField = entry.english || "";
+      const portugueseField = entry.portuguese || "";
       const searchLower = searchTerm.toLowerCase();
       
-      // First check if any field starts with the search term
-      const startsWithMatch = tetumField.toLowerCase().startsWith(searchLower) || 
-                             englishField.toLowerCase().startsWith(searchLower);
+      // Search in all language fields
+      const tetumMatch = tetumField.toLowerCase().includes(searchLower);
+      const englishMatch = englishField.toLowerCase().includes(searchLower);
+      const portugueseMatch = portugueseField.toLowerCase().includes(searchLower);
       
-      // If it starts with the search term, always include it
-      if (startsWithMatch) return true;
-      
-      // Otherwise, only include if it contains the search term
-      return tetumField.toLowerCase().includes(searchLower) || 
-             englishField.toLowerCase().includes(searchLower);
+      return tetumMatch || englishMatch || portugueseMatch;
     })
     .sort((a, b) => {
-      // Prioritize words that start with the search term
+      // Enhanced sorting with cross-language prioritization
       const searchLower = searchTerm.toLowerCase();
       
-      const aFields = [a.english || "", a.tetum || ""];
-      const bFields = [b.english || "", b.tetum || ""];
+      const aFields = [a.tetum || "", a.english || "", a.portuguese || ""];
+      const bFields = [b.tetum || "", b.english || "", b.portuguese || ""];
       
+      // Check if any field starts with the search term
       const aStartsWith = aFields.some(field => field.toLowerCase().startsWith(searchLower));
       const bStartsWith = bFields.some(field => field.toLowerCase().startsWith(searchLower));
       
-      // Always put starts-with matches first
+      // Prioritize starts-with matches
       if (aStartsWith && !bStartsWith) return -1;
       if (!aStartsWith && bStartsWith) return 1;
       
-      // Among starts-with matches, sort alphabetically
-      if (aStartsWith && bStartsWith) {
-        const aDisplay = activeLanguage === "english" ? (a.english || a.tetum || "") : (a.tetum || a.english || "");
-        const bDisplay = activeLanguage === "english" ? (b.english || b.tetum || "") : (b.tetum || b.english || "");
-        return aDisplay.localeCompare(bDisplay);
-      }
+      // Get primary display field based on active language
+      const getPrimaryField = (entry: DictionaryEntry) => {
+        if (activeLanguage === "english") return entry.english || entry.tetum || entry.portuguese || "";
+        if (activeLanguage === "tetum") return entry.tetum || entry.english || entry.portuguese || "";
+        return entry.tetum || entry.english || entry.portuguese || "";
+      };
       
-      // Among contains matches, sort alphabetically
-      const aDisplay = activeLanguage === "english" ? (a.english || a.tetum || "") : (a.tetum || a.english || "");
-      const bDisplay = activeLanguage === "english" ? (b.english || b.tetum || "") : (b.tetum || b.english || "");
+      // Sort alphabetically within priority groups
+      const aDisplay = getPrimaryField(a);
+      const bDisplay = getPrimaryField(b);
       return aDisplay.localeCompare(bDisplay);
     })
-    .slice(0, 8);
+    .slice(0, 12);
 
   if (filteredEntries.length === 0) {
     return (
@@ -90,15 +88,35 @@ function PredictiveDropdown({
     <Card className="absolute top-full left-0 right-0 z-50 mt-1 max-h-64 overflow-auto border-gray-200 shadow-lg bg-white">
       <CardContent className="p-0">
         {filteredEntries.map((entry, index) => {
-          // Display term based on active language
-          const displayTerm = activeLanguage === "english" 
-            ? (entry.english || entry.tetum)
-            : (entry.tetum || entry.english);
+          // Enhanced display term logic for cross-language support
+          const getDisplayTerm = () => {
+            if (activeLanguage === "english") {
+              return entry.english || entry.tetum || entry.portuguese || "";
+            } else if (activeLanguage === "tetum") {
+              return entry.tetum || entry.english || entry.portuguese || "";
+            } else {
+              return entry.tetum || entry.english || entry.portuguese || "";
+            }
+          };
           
-          // Translation based on active language
-          const translation = activeLanguage === "english"
-            ? (entry.tetum || "No translation available")
-            : (entry.english || entry.portuguese || "No translation available");
+          // Enhanced translation logic with all language support
+          const getTranslations = () => {
+            const translations = [];
+            if (activeLanguage === "tetum") {
+              if (entry.english) translations.push(`EN: ${entry.english}`);
+              if (entry.portuguese) translations.push(`PT: ${entry.portuguese}`);
+            } else if (activeLanguage === "english") {
+              if (entry.tetum) translations.push(`TET: ${entry.tetum}`);
+              if (entry.portuguese) translations.push(`PT: ${entry.portuguese}`);
+            } else {
+              if (entry.english) translations.push(`EN: ${entry.english}`);
+              if (entry.tetum) translations.push(`TET: ${entry.tetum}`);
+            }
+            return translations.length > 0 ? translations.join(" | ") : "No translation available";
+          };
+          
+          const displayTerm = getDisplayTerm();
+          const translation = getTranslations();
           
           return (
             <div
@@ -131,6 +149,9 @@ export function MedicalDictionarySearch({ onEntrySelect }: MedicalDictionarySear
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
 
+  // Get all medical entries for comprehensive suggestions
+  const { data: allMedicalEntries = [] } = useMedicalEntries();
+  
   const { data: searchResults = [], isLoading, error } = useSearchEntries({
     query: wordSearch,
     dictionaryType: "medical",
@@ -164,7 +185,7 @@ export function MedicalDictionarySearch({ onEntrySelect }: MedicalDictionarySear
 
   const handleWordChange = (value: string) => {
     setWordSearch(value);
-    setShowPredictive(value.length >= 2);
+    setShowPredictive(value.length >= 1); // Show suggestions from 1 character
     if (!value.trim()) {
       setShowResults(false);
       setSelectedEntry(null);
@@ -278,16 +299,16 @@ export function MedicalDictionarySearch({ onEntrySelect }: MedicalDictionarySear
               <div className="text-sm font-medium text-gray-600 w-16">WORD</div>
               <div className="flex-1 relative" ref={searchRef}>
                 <Input
-                  placeholder={activeLanguage === "tetum" ? "Enter Tetum word (min 2 characters)" : activeLanguage === "english" ? "Enter English word (min 2 characters)" : "Enter word (min 2 characters)"}
+                  placeholder={activeLanguage === "tetum" ? "Enter Tetum word..." : activeLanguage === "english" ? "Enter English word..." : "Enter word..."}
                   value={wordSearch}
                   onChange={(e) => handleWordChange(e.target.value)}
-                  onFocus={() => setShowPredictive(wordSearch.length >= 2)}
+                  onFocus={() => setShowPredictive(wordSearch.length >= 1)}
                   onKeyPress={handleKeyPress}
                   className="border-0 focus:ring-0 text-gray-600 placeholder-gray-400"
                 />
                 <PredictiveDropdown
                   searchTerm={wordSearch}
-                  entries={searchResults}
+                  entries={allMedicalEntries}
                   onSelect={handleEntrySelect}
                   onClose={() => setShowPredictive(false)}
                   isVisible={showPredictive}
@@ -318,7 +339,7 @@ export function MedicalDictionarySearch({ onEntrySelect }: MedicalDictionarySear
             <Button
               onClick={handleSearch}
               className="bg-teal-500 hover:bg-teal-600 text-white px-8 py-2 rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
-              disabled={!wordSearch.trim() || wordSearch.length < 2}
+              disabled={!wordSearch.trim()}
             >
               <Search className="w-4 h-4 mr-2" />
               Search

@@ -50,6 +50,14 @@ export function useAllEntries() {
   });
 }
 
+// Get medical entries
+export function useMedicalEntries() {
+  return useQuery<DictionaryEntry[]>({
+    queryKey: ["/api/medical/entries"],
+    staleTime: 1000 * 60 * 10, // 10 minutes
+  });
+}
+
 // Get single entry
 export function useEntry(id: number | null) {
   return useQuery<DictionaryEntry>({
