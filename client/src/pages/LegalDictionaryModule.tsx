@@ -139,24 +139,6 @@ export default function LegalDictionaryModule() {
         {/* Content Sections */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200">
           <Tabs value={activeSection} onValueChange={setActiveSection} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-gray-50 rounded-t-lg">
-              <TabsTrigger value="dictionary" className="flex items-center space-x-2">
-                <Scale className="w-4 h-4" />
-                <span className="hidden sm:inline">Legal Dictionary</span>
-                <span className="sm:hidden">Dictionary</span>
-              </TabsTrigger>
-              <TabsTrigger value="tetum-glossary" className="flex items-center space-x-2">
-                <BookOpen className="w-4 h-4" />
-                <span className="hidden sm:inline">Tetum Glossary</span>
-                <span className="sm:hidden">Tetum</span>
-              </TabsTrigger>
-              <TabsTrigger value="portuguese-glossary" className="flex items-center space-x-2">
-                <FileText className="w-4 h-4" />
-                <span className="hidden sm:inline">Portuguese Glossary</span>
-                <span className="sm:hidden">Portuguese</span>
-              </TabsTrigger>
-            </TabsList>
-
             <TabsContent value="dictionary" className="p-0">
               <LegalDictionarySearch onEntrySelect={handleEntrySelect} />
             </TabsContent>
