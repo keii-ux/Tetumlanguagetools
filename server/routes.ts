@@ -237,13 +237,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         aseanTerminologyData = JSON.parse(aseanCompleteData);
         
         aseanEntries = aseanTerminologyData.map((item: any, index: number) => ({
-          tetum: item.abbreviation_Tetum || item.abbreviation_EN, // Use abbreviation (same in both languages)
-          portuguese: item.full_form_Tetum || "", // Tetum translation via Google API
+          tetum: item.full_form_Tetum || item.abbreviation_EN, // Show Tetum translation as the primary term
+          portuguese: "", // Keep empty as we're using tetum field for Tetum
           english: `${item.abbreviation_EN}: ${item.full_form}`, // Show abbreviation prominently with full form
-          source: "ASEAN Abbreviations List with Google API Tetum translations",
+          source: "ASEAN Abbreviations List with authentic Tetum translations",
           category: "asean",
           dictionaryType: "asean",
-          notes: `Tetum Translation: ${item.abbreviation_EN} | Source: Google API online`,
+          notes: item.full_form_Tetum ? `Tetum: ${item.full_form_Tetum}` : `Abbreviation: ${item.abbreviation_EN}`,
           explanation: item.full_form,
           pronunciation: "",
           wordClass: "abbreviation",
