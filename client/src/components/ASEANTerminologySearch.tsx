@@ -205,7 +205,7 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
               <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
               <span className="ml-2 text-gray-500">Searching...</span>
             </div>
-          ) : filteredResults.length > 0 ? (
+          ) : unifiedInput && filteredResults.length > 0 ? (
             <div className="space-y-3">
               {filteredResults.map((entry, index) => (
                 <div
