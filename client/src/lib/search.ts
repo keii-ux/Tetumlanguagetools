@@ -31,6 +31,8 @@ export function useSearchEntries(searchQuery: SearchQuery) {
     endpoint = "/api/tetum-monolingual/search";
   } else if (searchQuery.dictionaryType === "inl-tetum") {
     endpoint = "/api/inl-tetum/search";
+  } else if (searchQuery.dictionaryType === "asean") {
+    endpoint = "/api/asean/search";
   }
 
   return useQuery<DictionaryEntry[]>({

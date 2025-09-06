@@ -146,14 +146,40 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
     }
   };
 
-  // Only show results when user has typed something and filter by input
+  // Show results when user has typed something - improved search logic
   const filteredResults = unifiedInput.trim().length > 0 
     ? searchResults.filter(entry => 
-        entry.dictionaryType === "asean" && 
-        (entry.english?.toLowerCase().includes(unifiedInput.toLowerCase()) ||
-         entry.tetum?.toLowerCase().includes(unifiedInput.toLowerCase()) ||
-         entry.explanation?.toLowerCase().includes(unifiedInput.toLowerCase()))
-      )
+        entry.dictionaryType === "asean" && (
+          // Search in English terms
+          entry.english?.toLowerCase().includes(unifiedInput.toLowerCase()) ||
+          // Search in Tetum translations
+          entry.tetum?.toLowerCase().includes(unifiedInput.toLowerCase()) ||
+          // Search in explanations and notes
+          entry.explanation?.toLowerCase().includes(unifiedInput.toLowerCase()) ||
+          entry.notes?.toLowerCase().includes(unifiedInput.toLowerCase()) ||
+          // Search in sources for better context
+          entry.source?.toLowerCase().includes(unifiedInput.toLowerCase())
+        )
+      ).sort((a, b) => {
+        // Prioritize exact matches, then starts-with matches
+        const aExact = a.english?.toLowerCase() === unifiedInput.toLowerCase() ||
+                      a.tetum?.toLowerCase() === unifiedInput.toLowerCase();
+        const bExact = b.english?.toLowerCase() === unifiedInput.toLowerCase() ||
+                      b.tetum?.toLowerCase() === unifiedInput.toLowerCase();
+        
+        if (aExact && !bExact) return -1;
+        if (!aExact && bExact) return 1;
+        
+        const aStartsWith = a.english?.toLowerCase().startsWith(unifiedInput.toLowerCase()) ||
+                           a.tetum?.toLowerCase().startsWith(unifiedInput.toLowerCase());
+        const bStartsWith = b.english?.toLowerCase().startsWith(unifiedInput.toLowerCase()) ||
+                           b.tetum?.toLowerCase().startsWith(unifiedInput.toLowerCase());
+        
+        if (aStartsWith && !bStartsWith) return -1;
+        if (!aStartsWith && bStartsWith) return 1;
+        
+        return 0;
+      })
     : [];
 
   return (
@@ -316,14 +342,46 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <h4 className="font-medium text-gray-900">
-                        {entry.english || entry.explanation || "Unknown Term"}
-                      </h4>
-                      {entry.notes && (
-                        <p className="text-sm text-blue-600 mt-1">
-                          {entry.notes}
-                        </p>
-                      )}
+                      <div className="space-y-2">
+                        {/* English Term */}
+                        <h4 className="font-medium text-gray-900">
+                          {entry.english || entry.explanation || "Unknown Term"}
+                        </h4>
+                        
+                        {/* Tetum Translation */}
+                        {entry.tetum && (
+                          <p className="text-sm text-green-700 font-medium">
+                            <span className="text-xs text-gray-500 uppercase tracking-wide">Tetum:</span> {entry.tetum}
+                          </p>
+                        )}
+                        
+                        {/* Word Class / Notes */}
+                        {entry.notes && (
+                          <p className="text-xs text-blue-600">
+                            {entry.notes}
+                          </p>
+                        )}
+                        
+                        {/* Source Link */}
+                        {entry.source && entry.source.startsWith('http') && (
+                          <a 
+                            href={entry.source} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center text-xs text-blue-500 hover:text-blue-700 underline"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            View Source →
+                          </a>
+                        )}
+                        
+                        {/* Non-link source info */}
+                        {entry.source && !entry.source.startsWith('http') && (
+                          <p className="text-xs text-gray-500">
+                            <span className="font-medium">Source:</span> {entry.source}
+                          </p>
+                        )}
+                      </div>
                     </div>
                     <Badge variant="secondary" className="ml-4 bg-green-100 text-green-700">
                       ASEAN
