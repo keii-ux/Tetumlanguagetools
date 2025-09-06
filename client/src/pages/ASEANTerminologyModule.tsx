@@ -122,21 +122,7 @@ export default function ASEANTerminologyModule() {
                 onClose={handleCloseDetail}
                 userId={DEFAULT_USER_ID}
               />
-            ) : (
-              <Card>
-                <CardContent className="p-8 text-center">
-                  <Globe className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                  <div>
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">
-                      Select an ASEAN term
-                    </h3>
-                    <p className="text-gray-500">
-                      Choose a term from the search results to see detailed information and AI translations
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
