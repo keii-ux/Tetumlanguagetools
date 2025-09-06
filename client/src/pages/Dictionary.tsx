@@ -111,7 +111,7 @@ const TOOL_CARDS = [
     id: "inl-tetum",
     title: "Tetum Monolingual Dictionary",
     category: "Reference", 
-    description: "Dictionary of tetum language with comprehensive entries",
+    description: "The final INL Tétum monolingual dictionary with comprehensive entries",
     icon: Languages,
     color: "bg-orange-500",
     bgColor: "bg-orange-50",
