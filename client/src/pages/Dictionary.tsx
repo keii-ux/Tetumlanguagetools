@@ -507,7 +507,7 @@ export default function Dictionary() {
               return (
                 <div 
                   key={tool.id}
-                  className="group p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-green-200 bg-white rounded-lg"
+                  className="group p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-green-200 bg-white rounded-lg text-[14px] font-normal pl-[30px] pr-[30px]"
                   onClick={() => handleToolSelect(tool.id)}
                 >
                   <div className="p-0">
