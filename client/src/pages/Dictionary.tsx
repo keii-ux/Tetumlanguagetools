@@ -520,9 +520,6 @@ export default function Dictionary() {
                           <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-600 transition-colors">
                             {tool.title}
                           </h3>
-                          <Badge variant="secondary" className="text-xs bg-gray-100">
-                            {tool.category}
-                          </Badge>
                         </div>
                         <p className="text-gray-600 mb-6 text-[19px]">
                           {tool.description}
