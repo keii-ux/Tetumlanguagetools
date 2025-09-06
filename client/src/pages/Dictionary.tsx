@@ -88,7 +88,7 @@ const TOOL_CARDS = [
   },
   {
     id: "legal", 
-    title: "Legal Technical Dictionary",
+    title: "Tetum Legal Dictionary",
     category: "Legal",
     description: "Legal terminology in Tetum with Portuguese and English equivalents",
     icon: Scale,
