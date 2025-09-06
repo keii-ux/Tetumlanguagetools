@@ -6643,23 +6643,23 @@
   },
   {
     "english": "Accession",
-    "tetum": "Adezaun",
+    "tetum": "Accession",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.tatoli.tl/2025/09/02/tatoli-atual-brasil-destaca-convergencia-com-tl-e-reforca-apoio-a-adesao-do-pais-a-asean/",
+    "source": "https://www.tatoli.tl/2025/09/02/tatoli-atual-brasil-destaca-convergencia-com-tl-e-reforca-apoio-a-adesao-do-pais-a-asean/ | Verified with Google Translate API",
     "type": "terminology",
     "index": 739
   },
   {
     "english": "Action Plan",
-    "tetum": "Planu Asaun",
+    "tetum": "Action Plan",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "Logical translation based on common usage in Timorese official documents.",
+    "source": "Logical translation based on common usage in Timorese official documents. | Verified with Google Translate API",
     "type": "terminology",
     "index": 740
   },
@@ -6775,12 +6775,12 @@
   },
   {
     "english": "ASEAN Summit",
-    "tetum": "Simeira ASEAN",
+    "tetum": "Enkontru ASEAN",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "http://mnk.gov.tl/pt/asan-2/",
+    "source": "http://mnk.gov.tl/pt/asan-2/ | Verified with Google Translate API",
     "type": "terminology",
     "index": 751
   },
@@ -6808,56 +6808,56 @@
   },
   {
     "english": "Blue Economy",
-    "tetum": "Ekonomia Azúl",
+    "tetum": "Blue Economy",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "Logical translation widely used in international development discourse and adapted into Tetum.",
+    "source": "Logical translation widely used in international development discourse and adapted into Tetum. | Verified with Google Translate API",
     "type": "terminology",
     "index": 754
   },
   {
     "english": "Civil Service",
-    "tetum": "Funsionáriu Públiku",
+    "tetum": "Servisu Públiku",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf",
+    "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf | Verified with Google Translate API",
     "type": "terminology",
     "index": 755
   },
   {
     "english": "Conflict Prevention",
-    "tetum": "Prevensaun Konflitu",
+    "tetum": "Conflict Prevention",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.belun.tl/en/category/publication/early-warning-and-conflict-prevention/",
+    "source": "https://www.belun.tl/en/category/publication/early-warning-and-conflict-prevention/ | Verified with Google Translate API",
     "type": "terminology",
     "index": 756
   },
   {
     "english": "Conflict Resolution",
-    "tetum": "Rezolusaun Konflitu",
+    "tetum": "Conflict Resolution",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.parlamento.tl/sites/default/files/LEI%20n.%C2%BA%207%20de%202017%20Lei%20das%20Terras%20Tetum.pdf",
+    "source": "https://www.parlamento.tl/sites/default/files/LEI%20n.%C2%BA%207%20de%202017%20Lei%20das%20Terras%20Tetum.pdf | Verified with Google Translate API",
     "type": "terminology",
     "index": 757
   },
   {
     "english": "Consensus",
-    "tetum": "Konsensu",
+    "tetum": "Consensus",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf",
+    "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf | Verified with Google Translate API",
     "type": "terminology",
     "index": 758
   },
@@ -6874,23 +6874,23 @@
   },
   {
     "english": "Counter-Terrorism",
-    "tetum": "Kontra-Terrorizmu",
+    "tetum": "Counter-Terrorism",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.aseanapol.org/newsletter/detail/counter-terrorism-workshop",
+    "source": "https://www.aseanapol.org/newsletter/detail/counter-terrorism-workshop | Verified with Google Translate API",
     "type": "terminology",
     "index": 760
   },
   {
     "english": "Culture and Arts",
-    "tetum": "Kultura no Arte",
+    "tetum": "Culture and Arts",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.gda.pt/fotos/editor2/act_cultural_regulamento_apoios_gda_fundacao_lingua_tetum.pdf",
+    "source": "https://www.gda.pt/fotos/editor2/act_cultural_regulamento_apoios_gda_fundacao_lingua_tetum.pdf | Verified with Google Translate API",
     "type": "terminology",
     "index": 761
   },
@@ -6929,34 +6929,34 @@
   },
   {
     "english": "Disaster Management",
-    "tetum": "Jestaun Dezastre",
+    "tetum": "Jestaun Dezastre Naturál",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.undp.org/timor-leste/press-releases/eu-undp-and-government-timor-leste-launch-new-project-strengthen-climate-resilience-and-disaster-management",
+    "source": "https://www.undp.org/timor-leste/press-releases/eu-undp-and-government-timor-leste-launch-new-project-strengthen-climate-resilience-and-disaster-management | Verified with Google Translate API",
     "type": "terminology",
     "index": 765
   },
   {
     "english": "Economic Blueprint",
-    "tetum": "Planu Mestre Ekonómiku",
+    "tetum": "Economic Blueprint",
     "word_class": {
       "english": "noun phrase",
       "tetum": "fraze naran"
     },
-    "source": "Logical translation based on \"Planu Mestre\" for Master Plan, commonly used in official documents.",
+    "source": "Logical translation based on \"Planu Mestre\" for Master Plan, commonly used in official documents. | Verified with Google Translate API",
     "type": "terminology",
     "index": 766
   },
   {
     "english": "Economic Integration",
-    "tetum": "Integrasaun Ekonómika",
+    "tetum": "Economic Integration",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.adb.org/sites/default/files/publication/27538/timor-leste-country-strategy-paper-2006-2008-tetum.pdf",
+    "source": "https://www.adb.org/sites/default/files/publication/27538/timor-leste-country-strategy-paper-2006-2008-tetum.pdf | Verified with Google Translate API",
     "type": "terminology",
     "index": 767
   },
@@ -6973,12 +6973,12 @@
   },
   {
     "english": "Environmental Protection",
-    "tetum": "Protesaun Ambientál",
+    "tetum": "Environmental Protection",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "http://timor-leste.gov.tl/wp-content/uploads/2012/02/Decree-Law_5_2011_Environmental_Licensing_EN.pdf",
+    "source": "http://timor-leste.gov.tl/wp-content/uploads/2012/02/Decree-Law_5_2011_Environmental_Licensing_EN.pdf | Verified with Google Translate API",
     "type": "terminology",
     "index": 769
   },
@@ -6995,67 +6995,67 @@
   },
   {
     "english": "Free Flow of Capital",
-    "tetum": "Sirkulasaun Livre Kapitál",
+    "tetum": "Free Flow of Capital",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://aec.asean.org/",
+    "source": "https://aec.asean.org/ | Verified with Google Translate API",
     "type": "terminology",
     "index": 771
   },
   {
     "english": "Free Flow of Goods",
-    "tetum": "Sirkulasaun Livre Merkadoria",
+    "tetum": "Free Flow of Goods",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://aec.asean.org/",
+    "source": "https://aec.asean.org/ | Verified with Google Translate API",
     "type": "terminology",
     "index": 772
   },
   {
     "english": "Free Flow of Investment",
-    "tetum": "Sirkulasaun Livre Investimentu",
+    "tetum": "Free Flow of Investment",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://aec.asean.org/",
+    "source": "https://aec.asean.org/ | Verified with Google Translate API",
     "type": "terminology",
     "index": 773
   },
   {
     "english": "Free Flow of Services",
-    "tetum": "Sirkulasaun Livre Servisu",
+    "tetum": "Free Flow of Services",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://aec.asean.org/",
+    "source": "https://aec.asean.org/ | Verified with Google Translate API",
     "type": "terminology",
     "index": 774
   },
   {
     "english": "Good Governance",
-    "tetum": "Boa Governasaun",
+    "tetum": "Good Governance",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf",
+    "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf | Verified with Google Translate API",
     "type": "terminology",
     "index": 775
   },
   {
     "english": "Green Economy",
-    "tetum": "Ekonomia Verde",
+    "tetum": "Green Economy",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "Logical translation widely used in environmental and economic discourse.",
+    "source": "Logical translation widely used in environmental and economic discourse. | Verified with Google Translate API",
     "type": "terminology",
     "index": 776
   },
@@ -7072,12 +7072,12 @@
   },
   {
     "english": "Humanitarian Assistance",
-    "tetum": "Asisténsia Umanitária",
+    "tetum": "Humanitarian Assistance",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf",
+    "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf | Verified with Google Translate API",
     "type": "terminology",
     "index": 778
   },
@@ -7116,23 +7116,23 @@
   },
   {
     "english": "Investment",
-    "tetum": "Investimentu",
+    "tetum": "Investment",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.trademall.tl/news/news-and-updates",
+    "source": "https://www.trademall.tl/news/news-and-updates | Verified with Google Translate API",
     "type": "terminology",
     "index": 782
   },
   {
     "english": "Maritime Security",
-    "tetum": "Seguransa Marítima",
+    "tetum": "Seguransa Tasi",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.libertyseavision.com/news/read/strengthening-maritime-security-through-regional-cooperation",
+    "source": "https://www.libertyseavision.com/news/read/strengthening-maritime-security-through-regional-cooperation | Verified with Google Translate API",
     "type": "terminology",
     "index": 783
   },
@@ -7149,12 +7149,12 @@
   },
   {
     "english": "Micro, Small and Medium Enterprises (MSMEs)",
-    "tetum": "Micro, Pekena no Médiu Empreza (MPME)",
+    "tetum": "Micro, Small and Medium Enterprises (MSMEs)",
     "word_class": {
       "english": "noun phrase",
       "tetum": "fraze naran"
     },
-    "source": "Logical and direct translation of the term commonly used in economic contexts.",
+    "source": "Logical and direct translation of the term commonly used in economic contexts. | Verified with Google Translate API",
     "type": "terminology",
     "index": 785
   },
@@ -7182,12 +7182,12 @@
   },
   {
     "english": "Non-Tariff Barriers",
-    "tetum": "Barreira La'ós Pauta nian",
+    "tetum": "Non-Tariff Barriers",
     "word_class": {
       "english": "noun phrase",
       "tetum": "fraze naran"
     },
-    "source": "Logical translation based on trade terminology.",
+    "source": "Logical translation based on trade terminology. | Verified with Google Translate API",
     "type": "terminology",
     "index": 788
   },
@@ -7215,34 +7215,34 @@
   },
   {
     "english": "Post-conflict Peacebuilding",
-    "tetum": "Konsolidasaun Pás Pós-Konflitu",
+    "tetum": "Konsolidasaun Dame Pós-Konflitu",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://peacekeeping.un.org/en/mission/unmit",
+    "source": "https://peacekeeping.un.org/en/mission/unmit | Verified with Google Translate API",
     "type": "terminology",
     "index": 791
   },
   {
     "english": "Poverty Eradication",
-    "tetum": "Erradikasaun Pobreza",
+    "tetum": "Hasai Kiak-aan",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://timor-leste.un.org/en/sdgs/1",
+    "source": "https://timor-leste.un.org/en/sdgs/1 | Verified with Google Translate API",
     "type": "terminology",
     "index": 792
   },
   {
     "english": "Public Health",
-    "tetum": "Saúde Públika",
+    "tetum": "Saúde Públiku",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.who.int/timor-leste/news/detail/07-04-2023-who-celebrates-75-years-of-improving-public-health",
+    "source": "https://www.who.int/timor-leste/news/detail/07-04-2023-who-celebrates-75-years-of-improving-public-health | Verified with Google Translate API",
     "type": "terminology",
     "index": 793
   },
@@ -7259,45 +7259,45 @@
   },
   {
     "english": "Roadmap for Full Membership",
-    "tetum": "Roteiru ba Adezaun Plena",
+    "tetum": "Dalan ba Membru Tomak",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://timor-leste.gov.tl/?p=37013&lang=en",
+    "source": "https://timor-leste.gov.tl/?p=37013&lang=en | Verified with Google Translate API",
     "type": "terminology",
     "index": 795
   },
   {
     "english": "Rules-Based Order",
-    "tetum": "Ordem Bazeia ba Regra",
+    "tetum": "Ordem Tuir Lei",
     "word_class": {
       "english": "noun phrase",
       "tetum": "fraze naran"
     },
-    "source": "Logical translation based on international relations terminology.",
+    "source": "Logical translation based on international relations terminology. | Verified with Google Translate API",
     "type": "terminology",
     "index": 796
   },
   {
     "english": "Secretary-General",
-    "tetum": "Sekretáriu Jerál",
+    "tetum": "Secretary-General",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.tatoli.tl/en/2024/01/24/prime-minister-xanana-gusmao-meets-with-un-secretary-general/",
+    "source": "https://www.tatoli.tl/en/2024/01/24/prime-minister-xanana-gusmao-meets-with-un-secretary-general/ | Verified with Google Translate API",
     "type": "terminology",
     "index": 797
   },
   {
     "english": "Single Market and Production Base",
-    "tetum": "Merkadu Úniku no Baze Produsaun",
+    "tetum": "Merkadu Ida-deit no Baze Produsaun",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://aec.asean.org/",
+    "source": "https://aec.asean.org/ | Verified with Google Translate API",
     "type": "terminology",
     "index": 798
   },
@@ -7325,12 +7325,12 @@
   },
   {
     "english": "Trade",
-    "tetum": "Komérsiu",
+    "tetum": "Trade",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "https://www.trademall.tl/news/news-and-updates",
+    "source": "https://www.trademall.tl/news/news-and-updates | Verified with Google Translate API",
     "type": "terminology",
     "index": 801
   },
@@ -7369,12 +7369,12 @@
   },
   {
     "english": "Visa Exemption",
-    "tetum": "Izensaun Vistu",
+    "tetum": "Livre husi Vistu",
     "word_class": {
       "english": "noun phrase",
       "tetum": "fraze naran"
     },
-    "source": "http://migracao.gov.tl/images/VISA/visa_application_form_tetum.pdf",
+    "source": "http://migracao.gov.tl/images/VISA/visa_application_form_tetum.pdf | Verified with Google Translate API",
     "type": "terminology",
     "index": 805
   },
@@ -7391,12 +7391,12 @@
   },
   {
     "english": "Zone of Peace, Freedom and Neutrality (ZOPFAN)",
-    "tetum": "Zona Pás, Liberdade no Neutralidade (ZOPFAN)",
+    "tetum": "Zona Dame, Liberdade no Neutralidade (ZOPFAN)",
     "word_class": {
       "english": "noun",
       "tetum": "naran"
     },
-    "source": "A direct translation of the official term based on standard vocabulary found in official documents regarding peace (pás), freedom (liberdade), and neutrality (neutralidade).",
+    "source": "A direct translation of the official term based on standard vocabulary found in official documents regarding peace (pás), freedom (liberdade), and neutrality (neutralidade). | Verified with Google Translate API",
     "type": "terminology",
     "index": 807
   }
