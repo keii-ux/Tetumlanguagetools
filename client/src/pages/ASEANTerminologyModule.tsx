@@ -46,7 +46,6 @@ export default function ASEANTerminologyModule() {
                 </div>
                 <div>
                   <h1 className="text-xl font-semibold text-gray-900">ASEAN Terminology</h1>
-                  <p className="text-sm text-gray-500">English ↔ Tetum Dictionary</p>
                 </div>
               </div>
             </div>
