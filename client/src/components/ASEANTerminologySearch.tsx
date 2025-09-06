@@ -319,11 +319,6 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
                       <h4 className="font-medium text-gray-900">
                         {entry.english || entry.explanation || "Unknown Term"}
                       </h4>
-                      {entry.portuguese && entry.portuguese !== entry.english?.split(':')[0] && (
-                        <p className="text-sm text-blue-600 mt-1">
-                          <span className="font-medium">Português:</span> {entry.portuguese}
-                        </p>
-                      )}
                       {entry.notes && (
                         <p className="text-sm text-blue-600 mt-1">
                           {entry.notes}
