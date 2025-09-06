@@ -28,13 +28,16 @@ export function SearchBar({ onSearch, initialQuery }: SearchBarProps) {
   );
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
 
-  // Handle simple search
+  // Handle simple search with improved debouncing
   const handleSimpleSearch = (value: string) => {
     setSearchTerm(value);
-    onSearch({
-      ...advancedQuery,
-      query: value,
-    });
+    // Only trigger search if there's meaningful content or if clearing search
+    if (value.trim().length >= 2 || value.trim().length === 0) {
+      onSearch({
+        ...advancedQuery,
+        query: value,
+      });
+    }
   };
 
   // Handle advanced search
