@@ -524,7 +524,7 @@ export default function Dictionary() {
                             {tool.category}
                           </Badge>
                         </div>
-                        <p className="text-gray-600 mb-6 leading-relaxed">
+                        <p className="text-gray-600 mb-6 text-[19px]">
                           {tool.description}
                         </p>
                         <div className="flex items-center justify-between">
