@@ -80,7 +80,7 @@ const TOOL_CARDS = [
     id: "medical",
     title: "Tetum Medical Dictionary",
     category: "Healthcare",
-    description: "Comprehensive Tetum medical terminology with Portuguese and English translations",
+    description: "Tetum medical terminology with Portuguese and English translations based on INL standard",
     icon: Stethoscope,
     color: "bg-red-500",
     bgColor: "bg-red-50",
