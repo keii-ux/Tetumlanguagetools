@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,10 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
   const [toLanguage, setToLanguage] = useState("tet");
   const [translationResult, setTranslationResult] = useState("");
   const [isTranslating, setIsTranslating] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [dropdownSuggestions, setDropdownSuggestions] = useState<string[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
   const searchQuery: SearchQuery = buildSearchQuery({
@@ -31,9 +35,67 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
 
   const { data: searchResults = [], isLoading } = useSearchEntries(searchQuery);
 
+  // Get all ASEAN entries for dropdown suggestions
+  const allAseanQuery: SearchQuery = buildSearchQuery({
+    query: "",
+    dictionaryType: "asean",
+    language: "all"
+  });
+  const { data: allAseanEntries = [] } = useSearchEntries(allAseanQuery);
+
+  // Extract unique abbreviations from ASEAN entries
+  const getAbbreviationsFromEntries = (entries: DictionaryEntry[]): string[] => {
+    const abbreviations = entries
+      .filter(entry => entry.dictionaryType === "asean")
+      .map(entry => entry.english?.split(':')[0]?.trim())
+      .filter(abbr => abbr && abbr.length > 0)
+      .filter((abbr, index, arr) => arr.indexOf(abbr) === index) // Remove duplicates
+      .sort();
+    
+    return abbreviations as string[];
+  };
+
   const handleUnifiedInput = (value: string) => {
     setUnifiedInput(value);
+    
+    // Generate dropdown suggestions
+    if (value.trim().length > 0) {
+      const allAbbreviations = getAbbreviationsFromEntries(allAseanEntries);
+      const suggestions = allAbbreviations
+        .filter(abbr => abbr.toLowerCase().startsWith(value.toLowerCase()))
+        .slice(0, 10); // Limit to 10 suggestions
+      
+      setDropdownSuggestions(suggestions);
+      setShowDropdown(suggestions.length > 0);
+    } else {
+      setShowDropdown(false);
+      setDropdownSuggestions([]);
+    }
   };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setUnifiedInput(suggestion);
+    setShowDropdown(false);
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleTranslate = async () => {
     if (!unifiedInput.trim()) {
@@ -110,12 +172,51 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
                 <div className="flex-1 relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <Input
+                    ref={inputRef}
                     type="text"
                     placeholder="Search ASEAN terms or enter text to translate..."
                     value={unifiedInput}
                     onChange={(e) => handleUnifiedInput(e.target.value)}
+                    onFocus={() => {
+                      if (unifiedInput.trim().length > 0 && dropdownSuggestions.length > 0) {
+                        setShowDropdown(true);
+                      }
+                    }}
                     className="pl-10 w-full"
                   />
+                  
+                  {/* Dropdown Suggestions */}
+                  {showDropdown && dropdownSuggestions.length > 0 && (
+                    <div
+                      ref={dropdownRef}
+                      className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto mt-1"
+                    >
+                      {dropdownSuggestions.map((suggestion, index) => (
+                        <div
+                          key={suggestion + index}
+                          onClick={() => handleSuggestionClick(suggestion)}
+                          className="px-3 py-2 hover:bg-green-50 cursor-pointer flex items-center space-x-2 border-b border-gray-100 last:border-b-0"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <Badge variant="outline" className="text-xs bg-green-50 text-green-700">
+                              {suggestion}
+                            </Badge>
+                            <span className="text-sm text-gray-600">
+                              {allAseanEntries
+                                .find(entry => entry.english?.startsWith(suggestion + ':'))
+                                ?.explanation?.substring(0, 50) || 'ASEAN Terminology'}
+                              {allAseanEntries
+                                .find(entry => entry.english?.startsWith(suggestion + ':'))
+                                ?.explanation && 
+                                allAseanEntries
+                                  .find(entry => entry.english?.startsWith(suggestion + ':'))
+                                  ?.explanation!.length > 50 ? '...' : ''}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <Select value={fromLanguage} onValueChange={setFromLanguage}>
                   <SelectTrigger className="w-24">
