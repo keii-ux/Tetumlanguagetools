@@ -26,15 +26,15 @@ A comprehensive multilingual dictionary application focusing on Tetum language r
 - **Features**: Legal terminology lookup
 
 ### 3. Tetum Legal Glossary Module
-- **Route**: `/tetum-legal-glossary`  
-- **API Endpoint**: `/api/tetum-legal/search`
+- **Route**: `/tetum-glossary`  
+- **API Endpoint**: `/api/tetum-glossary/search`
 - **Data Source**: `attached_assets/legal tetum glossay.json`
 - **Content**: 470 Tetum legal glossary entries
 - **Features**: Tetum-specific legal terminology
 
 ### 4. Portuguese Legal Glossary Module
-- **Route**: `/portuguese-legal-glossary`
-- **API Endpoint**: `/api/portuguese-legal/search` 
+- **Route**: `/portuguese-glossary`
+- **API Endpoint**: `/api/portuguese-glossary/search` 
 - **Data Source**: `attached_assets/glos juridico pt.json`
 - **Content**: 1,063 Portuguese legal glossary entries
 - **Features**: Portuguese legal terminology
