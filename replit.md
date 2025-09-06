@@ -22,7 +22,7 @@ A comprehensive multilingual dictionary application focusing on Tetum language r
 - **Route**: `/legal-dictionary`
 - **API Endpoint**: `/api/legal/search`
 - **Data Source**: `attached_assets/legal dic tt.json`
-- **Content**: 1,040 legal terms
+- **Content**: 1,060 legal terms
 - **Features**: Legal terminology lookup
 
 ### 3. Tetum Legal Glossary Module
@@ -79,7 +79,7 @@ A comprehensive multilingual dictionary application focusing on Tetum language r
 - ✅ **ASEAN Data Integration**: Extracted and integrated 738 comprehensive ASEAN abbreviations from provided PDF
 - ✅ **Translation Framework**: Built complete translation infrastructure for Google API integration
 - ✅ **Display Updates**: Updated ASEAN module to show "Tetum Translation" and "Source: Google API online"
-- ✅ **Dictionary Statistics**: Medical: 1,543, Legal: 1,040, Tetum Legal: 470, Portuguese Legal: 1,063, INL Tetum: 9,974, ASEAN: 738
+- ✅ **Dictionary Statistics**: Medical: 1,543, Legal: 1,060, Tetum Legal: 470, Portuguese Legal: 1,063, INL Tetum: 9,974, ASEAN: 807
 - ⏳ **Pending**: Google API key validation needed to complete authentic Tetum translations for all 738 ASEAN abbreviations
 
 ## User Preferences
@@ -104,4 +104,4 @@ A comprehensive multilingual dictionary application focusing on Tetum language r
 - ✅ Google Translate API integration for authentic Tetum translations
 - ✅ Complete module isolation implemented
 - ✅ Comprehensive ASEAN data: 738 authentic abbreviations from ASEAN-Abbreviations-List.pdf
-- ✅ Total entries: 14,828 authentic terms across all modules (including 738 comprehensive ASEAN terms)
+- ✅ Total entries: 14,917 authentic terms across all modules (including 807 comprehensive ASEAN terms and 20 new legal land/housing terms)
