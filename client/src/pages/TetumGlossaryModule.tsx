@@ -23,7 +23,7 @@ export default function TetumGlossaryModule() {
           <Link href="/">
             <Button variant="ghost" className="mb-4">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Dictionary
+              Dictionary
             </Button>
           </Link>
           <LanguageSwitcher 

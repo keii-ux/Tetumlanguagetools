@@ -33,7 +33,7 @@ export default function MedicalDictionaryModule() {
                   className="flex items-center space-x-2 hover:bg-slate-100"
                 >
                   <ArrowLeft className="h-4 w-4" />
-                  <span>Back to Dictionary</span>
+                  <span>Dictionary</span>
                 </Button>
               </Link>
               <div className="flex items-center space-x-3">
@@ -41,6 +41,7 @@ export default function MedicalDictionaryModule() {
                   <Stethoscope className="h-6 w-6 text-red-600" />
                 </div>
                 <div>
+                  <h1 className="text-xl font-semibold text-slate-900">Medical Dictionary</h1>
                   <p className="text-sm text-slate-600">Tetum-English Medical Terminology</p>
                 </div>
               </div>
