@@ -319,9 +319,9 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
                       <h4 className="font-medium text-gray-900">
                         {entry.english || entry.explanation || "Unknown Term"}
                       </h4>
-                      {entry.tetum && entry.tetum !== entry.english?.split(':')[0] && (
-                        <p className="text-sm text-green-600 mt-1">
-                          <span className="font-medium">Tetum:</span> {entry.tetum}
+                      {entry.portuguese && entry.portuguese !== entry.english?.split(':')[0] && (
+                        <p className="text-sm text-blue-600 mt-1">
+                          <span className="font-medium">Português:</span> {entry.portuguese}
                         </p>
                       )}
                       {entry.notes && (

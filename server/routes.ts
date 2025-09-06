@@ -238,9 +238,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         
         aseanEntries = aseanTerminologyData.map((item: any, index: number) => ({
           tetum: item.full_form_Tetum || item.abbreviation_EN, // Show Tetum translation as the primary term
-          portuguese: "", // Keep empty as we're using tetum field for Tetum
+          portuguese: item.full_form_Portuguese || "", // Show Portuguese translation
           english: `${item.abbreviation_EN}: ${item.full_form}`, // Show abbreviation prominently with full form
-          source: "ASEAN Abbreviations List with authentic Tetum translations",
+          source: "ASEAN Abbreviations List with authentic translations",
           category: "asean",
           dictionaryType: "asean",
           notes: item.full_form_Tetum ? `Tetum: ${item.full_form_Tetum}` : `Abbreviation: ${item.abbreviation_EN}`,
