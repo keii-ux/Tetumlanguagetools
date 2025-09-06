@@ -223,11 +223,6 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
                           <span className="font-medium">Tetum:</span> {entry.tetum}
                         </p>
                       )}
-                      {entry.source && (
-                        <p className="text-sm text-gray-500 mt-1">
-                          <span className="font-medium">Source:</span> {entry.source}
-                        </p>
-                      )}
                       {entry.notes && (
                         <p className="text-sm text-blue-600 mt-1">
                           {entry.notes}
