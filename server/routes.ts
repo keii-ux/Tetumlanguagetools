@@ -236,21 +236,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const aseanCompleteData = await fs.readFile(aseanCompletePath, 'utf8');
         aseanTerminologyData = JSON.parse(aseanCompleteData);
         
-        aseanEntries = aseanTerminologyData.map((item: any, index: number) => ({
-          tetum: item.full_form_Tetum || item.abbreviation_EN, // Show Tetum translation as the primary term
-          portuguese: item.full_form_Portuguese || "", // Show Portuguese translation
-          english: `${item.abbreviation_EN}: ${item.full_form}`, // Show abbreviation prominently with full form
-          source: "ASEAN Abbreviations List with authentic translations",
-          category: "asean",
-          dictionaryType: "asean",
-          notes: item.full_form_Tetum ? `Tetum: ${item.full_form_Tetum}` : `Abbreviation: ${item.abbreviation_EN}`,
-          explanation: item.full_form,
-          pronunciation: "",
-          wordClass: "abbreviation",
-          etymology: "",
-          usageExamples: [`${item.abbreviation_EN}: ${item.full_form}`],
-          relatedTerms: [],
-        }));
+        aseanEntries = aseanTerminologyData.map((item: any, index: number) => {
+          // Handle both old format (abbreviations) and new format (terminology)
+          if (item.type === "terminology") {
+            // New format: direct English-Tetum terminology
+            return {
+              tetum: item.tetum || "",
+              portuguese: item.portuguese || "",
+              english: item.english || "",
+              source: item.source || "ASEAN Terminology Collection",
+              category: "asean",
+              dictionaryType: "asean",
+              notes: item.word_class ? `${item.word_class.english} (${item.word_class.tetum})` : "",
+              explanation: item.english || "",
+              pronunciation: "",
+              wordClass: item.word_class?.english || "term",
+              etymology: "",
+              usageExamples: [],
+              relatedTerms: [],
+            };
+          } else {
+            // Original format: abbreviations with translations
+            return {
+              tetum: item.full_form_Tetum || item.abbreviation_EN,
+              portuguese: item.full_form_Portuguese || "",
+              english: `${item.abbreviation_EN}: ${item.full_form}`,
+              source: "ASEAN Abbreviations List with authentic translations",
+              category: "asean",
+              dictionaryType: "asean",
+              notes: item.full_form_Tetum ? `Tetum: ${item.full_form_Tetum}` : `Abbreviation: ${item.abbreviation_EN}`,
+              explanation: item.full_form,
+              pronunciation: "",
+              wordClass: "abbreviation",
+              etymology: "",
+              usageExamples: [`${item.abbreviation_EN}: ${item.full_form}`],
+              relatedTerms: [],
+            };
+          }
+        });
         
         console.log(`ASEAN comprehensive glossary loaded successfully with ${aseanEntries.length} entries from authentic ASEAN-Abbreviations-List.pdf`);
       } catch (error) {
