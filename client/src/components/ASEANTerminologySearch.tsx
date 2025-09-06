@@ -35,10 +35,10 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
 
   const { data: searchResults = [], isLoading } = useSearchEntries(searchQuery);
 
-  // Get all ASEAN entries for dropdown suggestions
+  // Get all ASEAN entries for dropdown suggestions (only when needed)
   const allAseanQuery: SearchQuery = buildSearchQuery({
-    query: "",
-    dictionaryType: "asean",
+    query: unifiedInput.trim().length > 0 ? "" : "DISABLE_SEARCH",
+    dictionaryType: "asean", 
     language: "all"
   });
   const { data: allAseanEntries = [] } = useSearchEntries(allAseanQuery);
@@ -146,7 +146,15 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
     }
   };
 
-  const filteredResults = searchResults.filter(entry => entry.dictionaryType === "asean");
+  // Only show results when user has typed something and filter by input
+  const filteredResults = unifiedInput.trim().length > 0 
+    ? searchResults.filter(entry => 
+        entry.dictionaryType === "asean" && 
+        (entry.english?.toLowerCase().includes(unifiedInput.toLowerCase()) ||
+         entry.tetum?.toLowerCase().includes(unifiedInput.toLowerCase()) ||
+         entry.explanation?.toLowerCase().includes(unifiedInput.toLowerCase()))
+      )
+    : [];
 
   return (
     <div className="space-y-6">
@@ -202,15 +210,11 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
                               {suggestion}
                             </Badge>
                             <span className="text-sm text-gray-600">
-                              {allAseanEntries
-                                .find(entry => entry.english?.startsWith(suggestion + ':'))
-                                ?.explanation?.substring(0, 50) || 'ASEAN Terminology'}
-                              {allAseanEntries
-                                .find(entry => entry.english?.startsWith(suggestion + ':'))
-                                ?.explanation && 
-                                allAseanEntries
-                                  .find(entry => entry.english?.startsWith(suggestion + ':'))
-                                  ?.explanation!.length > 50 ? '...' : ''}
+                              {(() => {
+                                const entry = allAseanEntries.find(e => e.english?.startsWith(suggestion + ':'));
+                                const explanation = entry?.explanation || 'ASEAN Terminology';
+                                return explanation.length > 50 ? explanation.substring(0, 50) + '...' : explanation;
+                              })()}
                             </span>
                           </div>
                         </div>
