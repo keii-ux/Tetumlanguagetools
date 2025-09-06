@@ -6641,4 +6641,628 @@
     "index": 738,
     "full_form_Portuguese": "Zona of Paz Liberdade and Neutrality"
   }
-]
+]{
+  "asean_terminology": [
+    {
+      "english": "Accession",
+      "tetum": "Adezaun",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.tatoli.tl/2025/09/02/tatoli-atual-brasil-destaca-convergencia-com-tl-e-reforca-apoio-a-adesao-do-pais-a-asean/"
+    },
+    {
+      "english": "Action Plan",
+      "tetum": "Planu Asaun",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "Logical translation based on common usage in Timorese official documents."
+    },
+    {
+      "english": "ASEAN (Association of Southeast Asian Nations)",
+      "tetum": "ASEAN (Asosiasaun Nasaun Sudeste Aziátiku)",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://timor-leste.gov.tl/?p=36199&lang=en&n=1"
+    },
+    {
+      "english": "ASEAN Charter",
+      "tetum": "Karta ASEAN",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://asean.org/the-asean-charter/"
+    },
+    {
+      "english": "ASEAN Community",
+      "tetum": "Komunidade ASEAN",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://asean.org/asean-community/"
+    },
+    {
+      "english": "ASEAN Community Pillars",
+      "tetum": "Pilár Komunidade ASEAN",
+      "word_class": {
+        "english": "noun phrase",
+        "tetum": "fraze naran"
+      },
+      "source": "https://timor-leste.gov.tl/?p=37013&lang=en"
+    },
+    {
+      "english": "ASEAN Economic Community (AEC)",
+      "tetum": "Komunidade Ekonómika ASEAN (KEA)",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://asean.org/asean-economic-community/"
+    },
+    {
+      "english": "ASEAN Free Trade Area (AFTA)",
+      "tetum": "Área Komérsiu Livre ASEAN (AFTA)",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://investmentpolicy.unctad.org/international-investment-agreements/treaty-files/2584/download"
+    },
+    {
+      "english": "ASEAN Political-Security Community (APSC)",
+      "tetum": "Komunidade Polítika-Seguransa ASEAN (KPSA)",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://asean.org/asean-political-security-community/"
+    },
+    {
+      "english": "ASEAN Regional Forum (ARF)",
+      "tetum": "Fórum Rejionál ASEAN (ARF)",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://aseanregionalforum.asean.org/"
+    },
+    {
+      "english": "ASEAN Secretariat",
+      "tetum": "Sekretariadu ASEAN",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://asean.org/the-asean-secretariat/"
+    },
+    {
+      "english": "ASEAN Socio-Cultural Community (ASCC)",
+      "tetum": "Komunidade Sosiál-Kulturál ASEAN (KSKA)",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://asean.org/asean-socio-cultural-community/"
+    },
+    {
+      "english": "ASEAN Summit",
+      "tetum": "Simeira ASEAN",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "http://mnk.gov.tl/pt/asan-2/"
+    },
+    {
+      "english": "ASEAN Way",
+      "tetum": "Dalan ASEAN (Prinsípiu ASEAN nian)",
+      "word_class": {
+        "english": "noun phrase",
+        "tetum": "fraze naran"
+      },
+      "source": "A descriptive translation based on the principles of non-interference and consensus. The term is often used in English directly."
+    },
+    {
+      "english": "Bilateral",
+      "tetum": "Bilateral",
+      "word_class": {
+        "english": "adjective",
+        "tetum": "adjetivu"
+      },
+      "source": "https://www.mfac.gov.tl/en/minister-of-foreign-affairs-and-cooperation-holds-bilateral-meeting-with-minister-of-foreign-affairs-of-new-zealand/"
+    },
+    {
+      "english": "Blue Economy",
+      "tetum": "Ekonomia Azúl",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "Logical translation widely used in international development discourse and adapted into Tetum."
+    },
+    {
+      "english": "Civil Service",
+      "tetum": "Funsionáriu Públiku",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf"
+    },
+    {
+      "english": "Conflict Prevention",
+      "tetum": "Prevensaun Konflitu",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.belun.tl/en/category/publication/early-warning-and-conflict-prevention/"
+    },
+    {
+      "english": "Conflict Resolution",
+      "tetum": "Rezolusaun Konflitu",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.parlamento.tl/sites/default/files/LEI%20n.%C2%BA%207%20de%202017%20Lei%20das%20Terras%20Tetum.pdf"
+    },
+    {
+      "english": "Consensus",
+      "tetum": "Konsensu",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf"
+    },
+    {
+      "english": "Cooperation",
+      "tetum": "Kooperasaun",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.tatoli.tl/2025/09/04/timor-leste-and-saudi-arabia-strengthen-digital-and-technology-cooperation/"
+    },
+    {
+      "english": "Counter-Terrorism",
+      "tetum": "Kontra-Terrorizmu",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.aseanapol.org/newsletter/detail/counter-terrorism-workshop"
+    },
+    {
+      "english": "Culture and Arts",
+      "tetum": "Kultura no Arte",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.gda.pt/fotos/editor2/act_cultural_regulamento_apoios_gda_fundacao_lingua_tetum.pdf"
+    },
+    {
+      "english": "Development Gap",
+      "tetum": "Disparidade Dezenvolvimentu",
+      "word_class": {
+        "english": "noun phrase",
+        "tetum": "fraze naran"
+      },
+      "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf"
+    },
+    {
+      "english": "Dialogue Partner",
+      "tetum": "Parseiru Diálogu",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://asean.org/dialogue-cooperation-relations/"
+    },
+    {
+      "english": "Digital Economy",
+      "tetum": "Ekonomia Dijitál",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "Logical translation based on established patterns for similar terms."
+    },
+    {
+      "english": "Disaster Management",
+      "tetum": "Jestaun Dezastre",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.undp.org/timor-leste/press-releases/eu-undp-and-government-timor-leste-launch-new-project-strengthen-climate-resilience-and-disaster-management"
+    },
+    {
+      "english": "Economic Blueprint",
+      "tetum": "Planu Mestre Ekonómiku",
+      "word_class": {
+        "english": "noun phrase",
+        "tetum": "fraze naran"
+      },
+      "source": "Logical translation based on 'Planu Mestre' for Master Plan, commonly used in official documents."
+    },
+    {
+      "english": "Economic Integration",
+      "tetum": "Integrasaun Ekonómika",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.adb.org/sites/default/files/publication/27538/timor-leste-country-strategy-paper-2006-2008-tetum.pdf"
+    },
+    {
+      "english": "Education",
+      "tetum": "Edukasaun",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "http://timor-leste.gov.tl/?cat=17&lang=en"
+    },
+    {
+      "english": "Environmental Protection",
+      "tetum": "Protesaun Ambientál",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "http://timor-leste.gov.tl/wp-content/uploads/2012/02/Decree-Law_5_2011_Environmental_Licensing_EN.pdf"
+    },
+    {
+      "english": "Food Security",
+      "tetum": "Seguransa Alimentár",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "Commonly used term in development and government documents in Timor-Leste."
+    },
+    {
+      "english": "Free Flow of Capital",
+      "tetum": "Sirkulasaun Livre Kapitál",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://aec.asean.org/"
+    },
+    {
+      "english": "Free Flow of Goods",
+      "tetum": "Sirkulasaun Livre Merkadoria",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://aec.asean.org/"
+    },
+    {
+      "english": "Free Flow of Investment",
+      "tetum": "Sirkulasaun Livre Investimentu",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://aec.asean.org/"
+    },
+    {
+      "english": "Free Flow of Services",
+      "tetum": "Sirkulasaun Livre Servisu",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://aec.asean.org/"
+    },
+    {
+      "english": "Good Governance",
+      "tetum": "Boa Governasaun",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf"
+    },
+    {
+      "english": "Green Economy",
+      "tetum": "Ekonomia Verde",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "Logical translation widely used in environmental and economic discourse."
+    },
+    {
+      "english": "Human Rights",
+      "tetum": "Direitus Umanus",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.ohchr.org/en/countries/asia-pacific/timor-leste"
+    },
+    {
+      "english": "Humanitarian Assistance",
+      "tetum": "Asisténsia Umanitária",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf"
+    },
+    {
+      "english": "Inclusive Growth",
+      "tetum": "Kresimentu Inkluzivu",
+      "word_class": {
+        "english": "noun phrase",
+        "tetum": "fraze naran"
+      },
+      "source": "Logical translation based on common development terminology."
+    },
+    {
+      "english": "Initiative for ASEAN Integration (IAI)",
+      "tetum": "Inisiativa ba Integrasaun ASEAN (IAI)",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://iai.asean.org/"
+    },
+    {
+      "english": "Intellectual Property",
+      "tetum": "Propriedade Intelektuál",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.wipo.int/wipolex/en/legislation/profile/TL"
+    },
+    {
+      "english": "Investment",
+      "tetum": "Investimentu",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.trademall.tl/news/news-and-updates"
+    },
+    {
+      "english": "Maritime Security",
+      "tetum": "Seguransa Marítima",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.libertyseavision.com/news/read/strengthening-maritime-security-through-regional-cooperation"
+    },
+    {
+      "english": "Member State",
+      "tetum": "Estadu Membru",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.tatoli.tl/en/2025/05/27/timor-lestes-asean-membership-a-transformative-opportunity-demanding-strategic-leadership/"
+    },
+    {
+      "english": "Micro, Small and Medium Enterprises (MSMEs)",
+      "tetum": "Micro, Pekena no Médiu Empreza (MPME)",
+      "word_class": {
+        "english": "noun phrase",
+        "tetum": "fraze naran"
+      },
+      "source": "Logical and direct translation of the term commonly used in economic contexts."
+    },
+    {
+      "english": "National Interest",
+      "tetum": "Interese Nasionál",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "http://timor-leste.gov.tl/?p=108&lang=pt"
+    },
+    {
+      "english": "Non-interference",
+      "tetum": "La-interferénsia",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "A core principle of ASEAN, this term is translated based on standard vocabulary."
+    },
+    {
+      "english": "Non-Tariff Barriers",
+      "tetum": "Barreira La'ós Pauta nian",
+      "word_class": {
+        "english": "noun phrase",
+        "tetum": "fraze naran"
+      },
+      "source": "Logical translation based on trade terminology."
+    },
+    {
+      "english": "Observer Status",
+      "tetum": "Estatutu Observadór",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://presidenciarepublica.tl/2022/11/timor-leste-to-be-admitted-to-asean/"
+    },
+    {
+      "english": "Political Development",
+      "tetum": "Dezenvolvimentu Polítiku",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.iri.org/resource/timor-leste-political-update/"
+    },
+    {
+      "english": "Post-conflict Peacebuilding",
+      "tetum": "Konsolidasaun Pás Pós-Konflitu",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://peacekeeping.un.org/en/mission/unmit"
+    },
+    {
+      "english": "Poverty Eradication",
+      "tetum": "Erradikasaun Pobreza",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://timor-leste.un.org/en/sdgs/1"
+    },
+    {
+      "english": "Public Health",
+      "tetum": "Saúde Públika",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.who.int/timor-leste/news/detail/07-04-2023-who-celebrates-75-years-of-improving-public-health"
+    },
+    {
+      "english": "Regional Integration",
+      "tetum": "Integrasaun Rejionál",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.tatoli.tl/en/2025/05/27/timor-lestes-asean-membership-a-transformative-opportunity-demanding-strategic-leadership/"
+    },
+    {
+      "english": "Roadmap for Full Membership",
+      "tetum": "Roteiru ba Adezaun Plena",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://timor-leste.gov.tl/?p=37013&lang=en"
+    },
+    {
+      "english": "Rules-Based Order",
+      "tetum": "Ordem Bazeia ba Regra",
+      "word_class": {
+        "english": "noun phrase",
+        "tetum": "fraze naran"
+      },
+      "source": "Logical translation based on international relations terminology."
+    },
+    {
+      "english": "Secretary-General",
+      "tetum": "Sekretáriu Jerál",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.tatoli.tl/en/2024/01/24/prime-minister-xanana-gusmao-meets-with-un-secretary-general/"
+    },
+    {
+      "english": "Single Market and Production Base",
+      "tetum": "Merkadu Úniku no Baze Produsaun",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://aec.asean.org/"
+    },
+    {
+      "english": "Social Welfare and Development",
+      "tetum": "Bem-estar Sosiál no Dezenvolvimentu",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf"
+    },
+    {
+      "english": "Sustainable Development",
+      "tetum": "Dezenvolvimentu Sustentável",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.laohamutuk.org/econ/12develop/SDPEn.pdf"
+    },
+    {
+      "english": "Trade",
+      "tetum": "Komérsiu",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.trademall.tl/news/news-and-updates"
+    },
+    {
+      "english": "Transnational Crime",
+      "tetum": "Krime Transnasionál",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.gfd.tl/wp-content/uploads/2021/02/PNTL-Annual-Report-2012-Tetum.pdf"
+    },
+    {
+      "english": "Treaty",
+      "tetum": "Tratadu",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://www.laohamutuk.org/Oil/Boundary/2018/CMATSgone/18CMATSgoneTet.pdf"
+    },
+    {
+      "english": "Treaty of Amity and Cooperation in Southeast Asia (TAC)",
+      "tetum": "Tratadu Amizade no Kooperasaun iha Sudeste Aziátiku (TAC)",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "https://asean.org/treaty-of-amity-and-cooperation-in-southeast-asia-indonesia-24-february-1976/"
+    },
+    {
+      "english": "Visa Exemption",
+      "tetum": "Izensaun Vistu",
+      "word_class": {
+        "english": "noun phrase",
+        "tetum": "fraze naran"
+      },
+      "source": "http://migracao.gov.tl/images/VISA/visa_application_form_tetum.pdf"
+    },
+    {
+      "english": "Youth",
+      "tetum": "Juventude",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "http://timor-leste.gov.tl/?cat=24&lang=en"
+    },
+    {
+      "english": "Zone of Peace, Freedom and Neutrality (ZOPFAN)",
+      "tetum": "Zona Pás, Liberdade no Neutralidade (ZOPFAN)",
+      "word_class": {
+        "english": "noun",
+        "tetum": "naran"
+      },
+      "source": "A direct translation of the official term based on standard vocabulary found in official documents regarding peace (pás), freedom (liberdade), and neutrality (neutralidade)."
+    }
+  ]
+}
