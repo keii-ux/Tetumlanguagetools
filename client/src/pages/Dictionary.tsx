@@ -78,7 +78,7 @@ const NAVIGATION_ITEMS = [
 const TOOL_CARDS = [
   {
     id: "medical",
-    title: "Medical Glossary",
+    title: "Tetum Medical Dictionary",
     category: "Healthcare",
     description: "Comprehensive Tetum medical terminology with Portuguese and English translations",
     icon: Stethoscope,
