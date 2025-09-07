@@ -74,7 +74,7 @@ export default function LegalDictionaryModule() {
                   <Scale className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
-                  <p className="text-sm text-slate-600">Tetum Legal Terminology</p>
+                  <h1 className="text-xl font-semibold text-slate-900">Tetum Legal Terminology</h1>
                 </div>
               </div>
             </div>
