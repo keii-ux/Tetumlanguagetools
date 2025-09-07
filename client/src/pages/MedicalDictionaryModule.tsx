@@ -41,7 +41,7 @@ export default function MedicalDictionaryModule() {
                   <Stethoscope className="h-6 w-6 text-red-600" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-semibold text-slate-900">Medical Dictionary</h1>
+                  <h1 className="text-xl font-semibold text-slate-900">Tetum Medical Dictionary</h1>
                   <p className="text-sm text-slate-600">Tetum-English Medical Terminology</p>
                 </div>
               </div>
@@ -58,7 +58,6 @@ export default function MedicalDictionaryModule() {
           </div>
         </div>
       </div>
-
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <MedicalDictionarySearch onEntrySelect={handleEntrySelect} />
