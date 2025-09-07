@@ -1,0 +1,534 @@
+{
+  "timestamp": "2025-09-07T07:27:07.351Z",
+  "total_entries_processed": 807,
+  "entries_corrected": 49,
+  "corrections_applied": [
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN-Australia Dezenvolvimentu Kooperasaun Programaa",
+      "new": "ASEAN-Australia Dezenvolvimentu Kooperasaun Programa",
+      "entry": "AADCP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN-Australia Desenvolvimento Cooperação Programaa",
+      "new": "ASEAN-Australia Desenvolvimento Cooperação Programa",
+      "entry": "AADCP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN Aquaculture Dezenvolvimentu no Coordihaatihag Programaa",
+      "new": "ASEAN Aquaculture Dezenvolvimentu no Coordihaatihag Programa",
+      "entry": "AADCP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN Aquaculture Desenvolvimento and Coordenação Programaa",
+      "new": "ASEAN Aquaculture Desenvolvimento and Coordenação Programa",
+      "entry": "AADCP"
+    },
+    {
+      "type": "Tetum coordination term correction",
+      "old": "ASEAN Aquaculture Dezenvolvimentu no Coordihaatihag Programa",
+      "new": "ASEAN Aquaculture Dezenvolvimentu no Koordinasaun Programa",
+      "entry": "AADCP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN-Australia Dezenvolvimentu Kooperasaun Programaa Rejional Parseiru Eskema",
+      "new": "ASEAN-Australia Dezenvolvimentu Kooperasaun Programa Rejional Parseiru Eskema",
+      "entry": "AADCP-RPS"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN-Australia Desenvolvimento Cooperação Programaa Regional Parceria Esquema",
+      "new": "ASEAN-Australia Desenvolvimento Cooperação Programa Regional Parceria Esquema",
+      "entry": "AADCP-RPS"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN-Australia Ekonomiku Kooperasaun Programaa",
+      "new": "ASEAN-Australia Ekonomiku Kooperasaun Programa",
+      "entry": "AAECP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN-Australia Económico Cooperação Programaa",
+      "new": "ASEAN-Australia Económico Cooperação Programa",
+      "entry": "AAECP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN-Australia Pós-kolheita Sistema Melloria Programaa",
+      "new": "ASEAN-Australia Pós-kolheita Sistema Melloria Programa",
+      "entry": "AAPSIP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN-Australia Pós-colheita System Melhoria Programaa",
+      "new": "ASEAN-Australia Pós-colheita System Melhoria Programa",
+      "entry": "AAPSIP"
+    },
+    {
+      "type": "Tetum coordination term correction",
+      "old": "ASEAN Coordihaatihag Kkona-basellu",
+      "new": "ASEAN Koordinasaun Kkona-basellu",
+      "entry": "ACC"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN Commkona-ba Competencies Programaa",
+      "new": "ASEAN Commkona-ba Competencies Programa",
+      "entry": "ACCCP"
+    },
+    {
+      "type": "Tetum coordination term correction",
+      "old": "ASEAN Datacom Coordihaatihag Group",
+      "new": "ASEAN Datacom Koordinasaun Group",
+      "entry": "ADCG"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN Plus Three Emergihag no Resurgihag Infectikona-bas Surveillance no Respkona-base Programaa",
+      "new": "ASEAN Plus Three Emergihag no Resurgihag Infectikona-bas Surveillance no Respkona-base Programa",
+      "entry": "AERISRP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN Plus Three Emerging and Resurging Infections Surveillance and Response Programaa",
+      "new": "ASEAN Plus Three Emerging and Resurging Infections Surveillance and Response Programa",
+      "entry": "AERISRP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN Journalist Vizita Programaa",
+      "new": "ASEAN Journalist Vizita Programa",
+      "entry": "AJPV"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN Journalist Visit Programaa",
+      "new": "ASEAN Journalist Visit Programa",
+      "entry": "AJPV"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN-New Zealno Ekonomiku Kooperasaun Programaa",
+      "new": "ASEAN-New Zealno Ekonomiku Kooperasaun Programa",
+      "entry": "ANZEC"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN-New Zealand Económico Cooperação Programaa",
+      "new": "ASEAN-New Zealand Económico Cooperação Programa",
+      "entry": "ANZEC"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN Programaa kona-ba Industrial Relatikona-bas",
+      "new": "ASEAN Programa kona-ba Industrial Relatikona-bas",
+      "entry": "APfR"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN Programaa on Industrial Relations",
+      "new": "ASEAN Programa on Industrial Relations",
+      "entry": "APfR"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN-EU Programaa ba Rejional Integratikona-ba Support",
+      "new": "ASEAN-EU Programa ba Rejional Integratikona-ba Support",
+      "entry": "APRIS"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN-EU Programaa for Regional Integration Support",
+      "new": "ASEAN-EU Programa for Regional Integration Support",
+      "entry": "APRIS"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN Rejional Programaa kona-ba Dezastre Jestaun",
+      "new": "ASEAN Rejional Programa kona-ba Dezastre Jestaun",
+      "entry": "ARPDM"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN Regional Programaa on Disaster Management",
+      "new": "ASEAN Regional Programa on Disaster Management",
+      "entry": "ARPDM"
+    },
+    {
+      "type": "Tetum coordination term correction",
+      "old": "ASEAN Surveillance Coordihaatihag Unit",
+      "new": "ASEAN Surveillance Koordinasaun Unit",
+      "entry": "ASCU"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN Subregikona-baal Ambiente Programaa",
+      "new": "ASEAN Subregikona-baal Ambiente Programa",
+      "entry": "ASEP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN Subregional Environment Programaa",
+      "new": "ASEAN Subregional Environment Programa",
+      "entry": "ASEP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN-UNDP Sub-Rejional Programaa Cycle Five",
+      "new": "ASEAN-UNDP Sub-Rejional Programa Cycle Five",
+      "entry": "ASP-S"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN-UNDP Sub-Regional Programaa Cycle Five",
+      "new": "ASEAN-UNDP Sub-Regional Programa Cycle Five",
+      "entry": "ASP-S"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN-EU University Rede Programaa",
+      "new": "ASEAN-EU University Rede Programa",
+      "entry": "AUNP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN-EU University Network Programaa",
+      "new": "ASEAN-EU University Network Programa",
+      "entry": "AUNP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN Volunteers Programaa",
+      "new": "ASEAN Volunteers Programa",
+      "entry": "AVP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN Volunteers Programaa",
+      "new": "ASEAN Volunteers Programa",
+      "entry": "AVP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN Feto's Programaa",
+      "new": "ASEAN Feto's Programa",
+      "entry": "AWP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN Women's Programaa",
+      "new": "ASEAN Women's Programa",
+      "entry": "AWP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "ASEAN Work Programaa kona-ba HIV/AIDS II",
+      "new": "ASEAN Work Programa kona-ba HIV/AIDS II",
+      "entry": "AWPU"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "ASEAN Work Programaa on HIV/AIDS II",
+      "new": "ASEAN Work Programa on HIV/AIDS II",
+      "entry": "AWPU"
+    },
+    {
+      "type": "Tetum coordination term correction",
+      "old": "Coordihaatihag Komite kona-ba the Implementatikona-ba husi the CEPT Eskema ba AFTA",
+      "new": "Koordinasaun Komite kona-ba the Implementatikona-ba husi the CEPT Eskema ba AFTA",
+      "entry": "CCCA"
+    },
+    {
+      "type": "Tetum coordination term correction",
+      "old": "Coordihaatihag Komite kona-ba Electrkona-baic Commerce",
+      "new": "Koordinasaun Komite kona-ba Electrkona-baic Commerce",
+      "entry": "CCEC"
+    },
+    {
+      "type": "Tetum coordination term correction",
+      "old": "Coordihaatihag Komite kona-ba Investimentu",
+      "new": "Koordinasaun Komite kona-ba Investimentu",
+      "entry": "CCI"
+    },
+    {
+      "type": "Tetum coordination term correction",
+      "old": "Coordihaatihag Komite kona-ba Servisu",
+      "new": "Koordinasaun Komite kona-ba Servisu",
+      "entry": "CCS"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Cooperative Programaa kona-ba Tasi Siénsia",
+      "new": "Cooperative Programa kona-ba Tasi Siénsia",
+      "entry": "COTT"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "Cooperative Programaa on Marine Science",
+      "new": "Cooperative Programa on Marine Science",
+      "entry": "COTT"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Cooperative Programaa kona-ba Tasi Siénsia",
+      "new": "Cooperative Programa kona-ba Tasi Siénsia",
+      "entry": "CPMS"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "Cooperative Programaa on Marine Science",
+      "new": "Cooperative Programa on Marine Science",
+      "entry": "CPMS"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "EC-ASEAN Intellectual Property Rights Kooperasaun Programaa Especialistas Komite kona-ba Customs Matters",
+      "new": "EC-ASEAN Intellectual Property Rights Kooperasaun Programa Especialistas Komite kona-ba Customs Matters",
+      "entry": "ECAP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "EC-ASEAN Intellectual Property Rights Cooperação Programaa Experts Comité on Customs Matters",
+      "new": "EC-ASEAN Intellectual Property Rights Cooperação Programa Experts Comité on Customs Matters",
+      "entry": "ECAP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Executive Dezenvolvimentu Programaa",
+      "new": "Executive Dezenvolvimentu Programa",
+      "entry": "EDP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "Executive Desenvolvimento Programaa",
+      "new": "Executive Desenvolvimento Programa",
+      "entry": "EDP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "European Institute husi Publiku Admihaistratikona-ba Programaa",
+      "new": "European Institute husi Publiku Admihaistratikona-ba Programa",
+      "entry": "ELPA"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "European Institute of Public Administration Programaa",
+      "new": "European Institute of Public Administration Programa",
+      "entry": "ELPA"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Inter-ASEAN Tekniku Troka Programaa",
+      "new": "Inter-ASEAN Tekniku Troka Programa",
+      "entry": "IATEP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "Inter-ASEAN Technical Exchange Programaa",
+      "new": "Inter-ASEAN Technical Exchange Programa",
+      "entry": "IATEP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Internatikona-baal Compariskona-ba Programaa",
+      "new": "Internatikona-baal Compariskona-ba Programa",
+      "entry": "ICP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "International Comparison Programaa",
+      "new": "International Comparison Programa",
+      "entry": "ICP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Inter-Institutikona-baal Lihakages Programaa",
+      "new": "Inter-Institutikona-baal Lihakages Programa",
+      "entry": "ILP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "Inter-Institutional Linkages Programaa",
+      "new": "Inter-Institutional Linkages Programa",
+      "entry": "ILP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Industrial Stnoards no Kualidade Assurance Programaa (ASEAN-EC Programaa)",
+      "new": "Industrial Stnoards no Kualidade Assurance Programa (ASEAN-EC Programa)",
+      "entry": "ISQAP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "Industrial Standards and Quality Assurance Programaa (ASEAN-EC Programaa)",
+      "new": "Industrial Standards and Quality Assurance Programa (ASEAN-EC Programa)",
+      "entry": "ISQAP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Japan-ASEAN Kooperasaun Promotikona-ba Programaa",
+      "new": "Japan-ASEAN Kooperasaun Promotikona-ba Programa",
+      "entry": "JACPP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "Japan-ASEAN Cooperação Promotion Programaa",
+      "new": "Japan-ASEAN Cooperação Promotion Programa",
+      "entry": "JACPP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Natikona-baal Ai-laran Programaa",
+      "new": "Natikona-baal Ai-laran Programa",
+      "entry": "NFP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "National Forest Programaa",
+      "new": "National Forest Programa",
+      "entry": "NFP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Natural Gas Utilizatikona-ba iha Transporte Programaa",
+      "new": "Natural Gas Utilizatikona-ba iha Transporte Programa",
+      "entry": "NGUT"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "Natural Gas Utilization in Transport Programaa",
+      "new": "Natural Gas Utilization in Transport Programa",
+      "entry": "NGUT"
+    },
+    {
+      "type": "Tetum coordination term correction",
+      "old": "Natikona-baal Transit Transporte Coordihaatihag Komites",
+      "new": "Natikona-baal Transit Transporte Koordinasaun Komites",
+      "entry": "NTTCCs"
+    },
+    {
+      "type": "Tetum coordination term correction",
+      "old": "Projetu Coordihaatihag Komite",
+      "new": "Projetu Koordinasaun Komite",
+      "entry": "PCC"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Politika Implementatikona-ba no Workihag Programaa",
+      "new": "Politika Implementatikona-ba no Workihag Programa",
+      "entry": "PIWP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "Policy Implementation and Working Programaa",
+      "new": "Policy Implementation and Working Programa",
+      "entry": "PIWP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Programaa husi Actikona-ba iha Transporteatikona-ba no Communicatikona-bas",
+      "new": "Programa husi Actikona-ba iha Transporteatikona-ba no Communicatikona-bas",
+      "entry": "POATC"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Rejional Ai-laran Programaa",
+      "new": "Rejional Ai-laran Programa",
+      "entry": "ReFOP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "Regional Forest Programaa",
+      "new": "Regional Forest Programa",
+      "entry": "ReFOP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Rejional Indicative Programaa",
+      "new": "Rejional Indicative Programa",
+      "entry": "RIP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "Regional Indicative Programaa",
+      "new": "Regional Indicative Programa",
+      "entry": "RIP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Rejional Formasaun Programaa",
+      "new": "Rejional Formasaun Programa",
+      "entry": "RTP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "Regional Training Programaa",
+      "new": "Regional Training Programa",
+      "entry": "RTP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Komersu no Investimentu Promotikona-ba Programaa",
+      "new": "Komersu no Investimentu Promotikona-ba Programa",
+      "entry": "TIPP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "Trade and Investment Promotion Programaa",
+      "new": "Trade and Investment Promotion Programa",
+      "entry": "TIPP"
+    },
+    {
+      "type": "Tetum coordination term correction",
+      "old": "Transit Transporte Coordihaatihag Board",
+      "new": "Transit Transporte Koordinasaun Board",
+      "entry": "TTCB"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "United Natikona-bas Internatikona-baal Drug Ckona-batrol Programaa",
+      "new": "United Natikona-bas Internatikona-baal Drug Ckona-batrol Programa",
+      "entry": "UNDCP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "United Nations International Drug Control Programaa",
+      "new": "United Nations International Drug Control Programa",
+      "entry": "UNDCP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "United Natikona-bas Ambiente Programaa",
+      "new": "United Natikona-bas Ambiente Programa",
+      "entry": "UNEP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "United Nations Environment Programaa",
+      "new": "United Nations Environment Programa",
+      "entry": "UNEP"
+    },
+    {
+      "type": "Tetum spelling correction",
+      "old": "Vientiane Actikona-ba Programaa",
+      "new": "Vientiane Actikona-ba Programa",
+      "entry": "VAP"
+    },
+    {
+      "type": "Portuguese spelling correction",
+      "old": "Vientiane Action Programaa",
+      "new": "Vientiane Action Programa",
+      "entry": "VAP"
+    }
+  ],
+  "corrections_summary": {
+    "Programaa_to_Programa": 76,
+    "Coordihaatihag_to_Koordinasaun": 12,
+    "improved_translations": 0
+  }
+}
