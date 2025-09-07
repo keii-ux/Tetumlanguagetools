@@ -48,7 +48,6 @@ export default function INLTetumDictionaryModule() {
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-gray-900 dark:text-white">INL Tetum Dictionary</h1>
-                  <p className="text-sm text-purple-600 dark:text-purple-400 font-medium">Disionáriu Tetum Monolíngue</p>
                 </div>
               </div>
             </div>
