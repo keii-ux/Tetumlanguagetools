@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, X } from "lucide-react";
+import { Search, X, Volume2, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 import { useSearchEntries, useLegalEntries } from "@/lib/search";
 import type { DictionaryEntry } from "@shared/schema";
 
@@ -181,6 +182,8 @@ function getTranslation(entry: DictionaryEntry, activeLanguage: string) {
 export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: LegalDictionarySearchProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+  const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
   
   // Map selectedLanguage to activeLanguage
@@ -230,15 +233,19 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
   }, []);
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
+    setSelectedEntry(entry);
     setSearchTerm(getDisplayTerm(entry, activeLanguage));
     setShowDropdown(false);
+    setShowResults(true);
     onEntrySelect?.(entry);
   };
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
       setShowDropdown(false);
+      setShowResults(true);
       if (searchResults.length > 0) {
+        setSelectedEntry(searchResults[0]);
         onEntrySelect?.(searchResults[0]);
       }
     }
@@ -252,6 +259,47 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
   const clearSearch = () => {
     setSearchTerm("");
     setShowDropdown(false);
+    setShowResults(false);
+    setSelectedEntry(null);
+  };
+  
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (err) {
+      console.error('Failed to copy text:', err);
+    }
+  };
+
+  const speakText = (text: string) => {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      speechSynthesis.speak(utterance);
+    }
+  };
+
+  const getEntryTranslation = (entry: DictionaryEntry) => {
+    if (activeLanguage === "tetum") {
+      return entry.portuguese || entry.english || "No translation available";
+    } else if (activeLanguage === "portuguese") {
+      return entry.tetum || entry.english || "No translation available";
+    } else if (activeLanguage === "english") {
+      return entry.tetum || entry.portuguese || "No translation available";
+    } else {
+      return `${entry.portuguese || ""} | ${entry.tetum || ""} | ${entry.english || ""}`;
+    }
+  };
+
+  const getEntryDisplayTerm = (entry: DictionaryEntry) => {
+    if (activeLanguage === "tetum") {
+      return entry.tetum || entry.portuguese || entry.english;
+    } else if (activeLanguage === "portuguese") {
+      return entry.portuguese || entry.tetum || entry.english;
+    } else if (activeLanguage === "english") {
+      return entry.english || entry.tetum || entry.portuguese;
+    } else {
+      return entry.tetum || entry.portuguese || entry.english;
+    }
   };
 
   return (
@@ -326,6 +374,197 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
           {isLoading ? "Searching..." : "Search"}
         </Button>
       </div>
+
+      {/* Results Section */}
+      {showResults && selectedEntry && (
+        <div className="space-y-6">
+          {/* Main Entry Display */}
+          <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="mb-4">
+              <div className="flex items-center gap-3 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  {getEntryDisplayTerm(selectedEntry)}
+                </h3>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => speakText(getEntryDisplayTerm(selectedEntry) || "")}
+                  className="p-1 hover:bg-gray-100"
+                >
+                  <Volume2 className="h-4 w-4 text-gray-600" />
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => copyToClipboard(getEntryDisplayTerm(selectedEntry) || "")}
+                  className="p-1 hover:bg-gray-100"
+                >
+                  <Copy className="h-4 w-4 text-gray-600" />
+                </Button>
+              </div>
+              <p className="text-gray-600 text-sm mb-4">
+                Legal terminology from Timor-Leste legal documents
+              </p>
+              
+              <div className="flex items-center gap-2 mb-4">
+                <Button
+                  size="sm"
+                  className="bg-blue-100 text-blue-700 hover:bg-blue-200 text-xs px-3 py-1"
+                >
+                  Legal Term
+                </Button>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <span className="text-gray-500 font-medium">1.</span>
+                <div className="flex-1">
+                  <p className="text-gray-700">
+                    {getEntryTranslation(selectedEntry)}
+                  </p>
+                  {selectedEntry.explanation && (
+                    <p className="text-gray-600 text-sm mt-2 italic">
+                      {selectedEntry.explanation}
+                    </p>
+                  )}
+                  {selectedEntry.source && (
+                    <p className="text-xs text-gray-400 mt-1">
+                      Source: {selectedEntry.source}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {selectedEntry.notes && (
+                <div className="flex items-start gap-3">
+                  <span className="text-gray-500 font-medium">2.</span>
+                  <div className="flex-1">
+                    <p className="text-gray-700">
+                      {selectedEntry.notes}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              <div className="flex items-start gap-3">
+                <span className="text-gray-500 font-medium">3.</span>
+                <div className="flex-1">
+                  <p className="text-gray-700">
+                    <em>Legal terminology.</em> Used in legal contexts and official documents 
+                    of the Democratic Republic of Timor-Leste, including constitutional, civil, and penal law.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Additional Translation Section */}
+          <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <Separator className="mb-6" />
+            <div className="mb-4">
+              <div className="flex items-center gap-3 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  {activeLanguage === "tetum" ? selectedEntry.portuguese || selectedEntry.english :
+                   activeLanguage === "portuguese" ? selectedEntry.tetum || selectedEntry.english :
+                   activeLanguage === "english" ? selectedEntry.tetum || selectedEntry.portuguese :
+                   selectedEntry.portuguese || selectedEntry.english}
+                </h3>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => {
+                    const altTerm = activeLanguage === "tetum" ? selectedEntry.portuguese || selectedEntry.english :
+                                   activeLanguage === "portuguese" ? selectedEntry.tetum || selectedEntry.english :
+                                   activeLanguage === "english" ? selectedEntry.tetum || selectedEntry.portuguese :
+                                   selectedEntry.portuguese || selectedEntry.english;
+                    speakText(altTerm || "");
+                  }}
+                  className="p-1 hover:bg-gray-100"
+                >
+                  <Volume2 className="h-4 w-4 text-gray-600" />
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => {
+                    const altTerm = activeLanguage === "tetum" ? selectedEntry.portuguese || selectedEntry.english :
+                                   activeLanguage === "portuguese" ? selectedEntry.tetum || selectedEntry.english :
+                                   activeLanguage === "english" ? selectedEntry.tetum || selectedEntry.portuguese :
+                                   selectedEntry.portuguese || selectedEntry.english;
+                    copyToClipboard(altTerm || "");
+                  }}
+                  className="p-1 hover:bg-gray-100"
+                >
+                  <Copy className="h-4 w-4 text-gray-600" />
+                </Button>
+              </div>
+              <p className="text-gray-600 text-sm mb-4">
+                Alternative language definition and context
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <span className="text-gray-500 font-medium">1.</span>
+                <div className="flex-1">
+                  <p className="text-gray-700">
+                    {activeLanguage === "tetum" 
+                      ? (selectedEntry.portuguese || selectedEntry.english || "Translation not available")
+                      : activeLanguage === "portuguese"
+                      ? (selectedEntry.tetum || selectedEntry.english || "Translation not available")
+                      : activeLanguage === "english"
+                      ? (selectedEntry.tetum || selectedEntry.portuguese || "Translation not available")
+                      : (selectedEntry.tetum || selectedEntry.portuguese || "Translation not available")}
+                  </p>
+                </div>
+              </div>
+
+              {selectedEntry.usageExamples && selectedEntry.usageExamples.length > 0 && (
+                <div className="flex items-start gap-3">
+                  <span className="text-gray-500 font-medium">2.</span>
+                  <div className="flex-1">
+                    <p className="text-gray-700">
+                      <em>Usage examples:</em> {selectedEntry.usageExamples.join("; ")}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              <div className="flex items-start gap-3">
+                <span className="text-gray-500 font-medium">3.</span>
+                <div className="flex-1">
+                  <p className="text-gray-700">
+                    Cross-reference term used in multilingual legal contexts and jurisprudence 
+                    across Tetum, Portuguese, and English legal systems in Timor-Leste.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* No Results */}
+      {showResults && searchResults.length === 0 && !isLoading && (
+        <div className="bg-white rounded-lg border border-gray-200 p-6 text-center">
+          <p className="text-gray-500">No legal terms found for "{searchTerm}"</p>
+        </div>
+      )}
+
+      {/* Loading */}
+      {isLoading && showResults && (
+        <div className="bg-white rounded-lg border border-gray-200 p-6 text-center">
+          <p className="text-gray-500">Searching legal terms...</p>
+        </div>
+      )}
+
+      {/* Error */}
+      {error && showResults && (
+        <div className="bg-red-50 rounded-lg border border-red-200 p-6 text-center">
+          <p className="text-red-600">Error searching for legal terms. Please try again.</p>
+        </div>
+      )}
 
       <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
         <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
