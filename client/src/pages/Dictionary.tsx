@@ -101,7 +101,7 @@ const TOOL_CARDS = [
     id: "asean",
     title: "ASEAN terminology", 
     category: "International",
-    description: "ASEAN English abbreviations and other terminology, localization into tetum and portuguese, AI-powered for more content. 807 verified terms",
+    description: "ASEAN English abbreviations and other terminology, localization into tetum and portuguese, AI-powered for more content",
     icon: Globe,
     color: "bg-green-500",
     bgColor: "bg-green-50", 
