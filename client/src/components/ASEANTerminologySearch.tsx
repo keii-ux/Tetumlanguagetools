@@ -375,12 +375,34 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
                           </a>
                         )}
                         
-                        {/* Non-link source info */}
-                        {entry.source && !entry.source.startsWith('http') && (
-                          <p className="text-xs text-gray-500">
-                            <span className="font-medium">Source:</span> {entry.source}
-                          </p>
-                        )}
+                        {/* Content Type and Source Distinction */}
+                        <div className="flex items-center gap-2 mt-2">
+                          {entry.source?.includes('ASEAN-Abbreviations-List.pdf') || entry.source?.includes('verified') ? (
+                            <Badge variant="outline" className="bg-green-50 border-green-200 text-green-700 text-xs">
+                              📄 Verified Content
+                            </Badge>
+                          ) : entry.source?.includes('Gemini') || entry.source?.includes('AI') || entry.source?.includes('Google API') ? (
+                            <Badge variant="outline" className="bg-blue-50 border-blue-200 text-blue-700 text-xs">
+                              🤖 AI-Enhanced
+                            </Badge>
+                          ) : (
+                            <Badge variant="outline" className="bg-gray-50 border-gray-200 text-gray-700 text-xs">
+                              📚 Reference
+                            </Badge>
+                          )}
+                          
+                          {/* Source info */}
+                          {entry.source && !entry.source.startsWith('http') && (
+                            <span className="text-xs text-gray-500">
+                              {entry.source.includes('ASEAN-Abbreviations-List.pdf') ? 
+                                'Official ASEAN Document' : 
+                                entry.source.includes('Gemini') || entry.source.includes('AI') ? 
+                                'AI-Generated Translation' : 
+                                entry.source
+                              }
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
                     <Badge variant="secondary" className="ml-4 bg-green-100 text-green-700">
