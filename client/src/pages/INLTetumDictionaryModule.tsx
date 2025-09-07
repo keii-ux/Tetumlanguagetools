@@ -127,7 +127,7 @@ export default function INLTetumDictionaryModule() {
       {/* Main Content */}
       <div className="flex-1 max-w-6xl mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8 bg-white shadow-sm">
+          <TabsList className="grid w-full grid-cols-2 mb-8 bg-white shadow-sm">
             <TabsTrigger value="search" className="flex items-center gap-2">
               <Search className="w-4 h-4" />
               Search Dictionary
@@ -135,10 +135,6 @@ export default function INLTetumDictionaryModule() {
             <TabsTrigger value="about" className="flex items-center gap-2">
               <Info className="w-4 h-4" />
               About Dictionary
-            </TabsTrigger>
-            <TabsTrigger value="statistics" className="flex items-center gap-2">
-              <Target className="w-4 h-4" />
-              Statistics
             </TabsTrigger>
           </TabsList>
 
@@ -294,110 +290,6 @@ export default function INLTetumDictionaryModule() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="statistics" className="space-y-6">
-            {/* Statistics Section */}
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card className="border-purple-200 shadow-sm">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                      <FileText className="w-6 h-6 text-purple-600" />
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-purple-900">{totalEntries.toLocaleString()}</div>
-                      <div className="text-sm text-gray-600">Total Dictionary Entries</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="border-purple-200 shadow-sm">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
-                      <Globe className="w-6 h-6 text-indigo-600" />
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-indigo-900">{uniqueWords.toLocaleString()}</div>
-                      <div className="text-sm text-gray-600">Unique Tetum Words</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="border-purple-200 shadow-sm">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                      <BookOpen className="w-6 h-6 text-green-600" />
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-green-900">{wordsWithDefinitions.toLocaleString()}</div>
-                      <div className="text-sm text-gray-600">Words with Definitions</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Quality Metrics */}
-            <Card className="border-purple-200 shadow-sm">
-              <CardHeader>
-                <div className="flex items-center gap-2">
-                  <Target className="w-5 h-5 text-purple-600" />
-                  <CardTitle className="text-purple-900">Dictionary Quality Metrics</CardTitle>
-                </div>
-                <CardDescription>
-                  Comprehensive analysis of the dictionary content and coverage
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Definition Coverage</span>
-                      <span className="font-semibold text-purple-700">
-                        {Math.round((wordsWithDefinitions / totalEntries) * 100)}%
-                      </span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-gradient-to-r from-purple-500 to-indigo-500 h-2 rounded-full" 
-                        style={{ width: `${(wordsWithDefinitions / totalEntries) * 100}%` }}
-                      ></div>
-                    </div>
-                    
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Content Authenticity</span>
-                      <span className="font-semibold text-green-700">100%</span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div className="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full w-full"></div>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                      <span className="text-gray-700 text-sm">All definitions in native Tetum language</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
-                      <span className="text-gray-700 text-sm">Sourced from official INL documentation</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                      <span className="text-gray-700 text-sm">Includes grammatical and cultural context</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
-                      <span className="text-gray-700 text-sm">Verified spelling and consistency</span>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
         </Tabs>
       </div>
       
