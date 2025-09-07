@@ -9,6 +9,7 @@ import { useSearchEntries } from "@/lib/search";
 import { DictionaryEntry, SearchQuery } from "@shared/schema";
 import { buildSearchQuery } from "@/lib/dictionaries";
 import { useToast } from "@/hooks/use-toast";
+import { AITranslation } from "@/components/AITranslation";
 
 interface ASEANTerminologySearchProps {
   onEntrySelect: (entry: DictionaryEntry) => void;
@@ -342,24 +343,49 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <div className="space-y-2">
-                        {/* English Term */}
-                        <h4 className="font-medium text-gray-900">
-                          {entry.english || entry.explanation || "Unknown Term"}
-                        </h4>
-                        
-                        {/* Tetum Translation */}
-                        {entry.tetum && (
-                          <p className="text-sm text-green-700 font-medium">
-                            <span className="text-xs text-gray-500 uppercase tracking-wide">Tetum:</span> {entry.tetum}
+                      <div className="space-y-3">
+                        {/* Original English Term from JSON */}
+                        <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-3 border-l-4 border-blue-500">
+                          <h4 className="text-sm font-bold text-blue-700 dark:text-blue-300 mb-1 flex items-center">
+                            🇺🇸 English (Original)
+                          </h4>
+                          <p className="font-medium text-blue-900 dark:text-blue-200">
+                            {entry.english || entry.explanation || "Unknown Term"}
                           </p>
-                        )}
+                        </div>
+                        
+                        {/* AI-Powered Tetum Translation */}
+                        <AITranslation 
+                          text={entry.english || entry.explanation || ""}
+                          fromLang="en"
+                          toLang="tet"
+                          label="🇹🇱 Tetum (AI-Enhanced)"
+                          bgColor="bg-orange-50 dark:bg-orange-900/30"
+                          textColor="text-orange-700 dark:text-orange-300"
+                          contentColor="text-orange-900 dark:text-orange-200"
+                          borderColor="border-orange-500"
+                        />
+                        
+                        {/* AI-Powered Portuguese Translation */}
+                        <AITranslation 
+                          text={entry.english || entry.explanation || ""}
+                          fromLang="en"
+                          toLang="pt"
+                          label="🇵🇹 Portuguese (AI-Enhanced)"
+                          bgColor="bg-green-50 dark:bg-green-900/30"
+                          textColor="text-green-700 dark:text-green-300"
+                          contentColor="text-green-900 dark:text-green-200"
+                          borderColor="border-green-500"
+                        />
                         
                         {/* Word Class / Notes */}
                         {entry.notes && (
-                          <p className="text-xs text-blue-600">
-                            {entry.notes}
-                          </p>
+                          <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-2">
+                            <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Notes:</p>
+                            <p className="text-xs text-gray-800 dark:text-gray-300">
+                              {entry.notes}
+                            </p>
+                          </div>
                         )}
                         
                         
