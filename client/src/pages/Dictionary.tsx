@@ -527,7 +527,7 @@ export default function Dictionary() {
                             <span className="text-2xl font-bold text-green-600">
                               {termCount.toLocaleString()}
                             </span>
-                            <span className="text-gray-500">terms</span>
+                            <span className="text-gray-500">Verified Terms</span>
                           </div>
                           <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-green-500 group-hover:translate-x-1 transition-all" />
                         </div>
