@@ -526,9 +526,7 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
         </div>
       )}
       <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
-        <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
-          About Tetum Legal Dictionary
-        </h3>
+        
         <p className="text-sm text-blue-800 dark:text-blue-200">
           This dictionary contains comprehensive legal terminology in Tetum, Portuguese, and English. Only authentic sources were used, adjusting to INL standard.
         </p>
