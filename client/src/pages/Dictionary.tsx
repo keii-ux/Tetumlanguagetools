@@ -99,7 +99,7 @@ const TOOL_CARDS = [
 
   {
     id: "asean",
-    title: "ASEAN-related Terminology", 
+    title: "ASEAN Professional Terminology", 
     category: "International",
     description: "ASEAN-related English abbreviations and terminology, translated into Tetum and Portuguese. AI-powered for further content",
     icon: Globe,
