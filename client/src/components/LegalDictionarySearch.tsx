@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, X, Volume2, Copy } from "lucide-react";
+import { Search, X, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -271,12 +271,6 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
     }
   };
 
-  const speakText = (text: string) => {
-    if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      speechSynthesis.speak(utterance);
-    }
-  };
 
   const getEntryTranslation = (entry: DictionaryEntry) => {
     if (activeLanguage === "tetum") {
@@ -388,14 +382,6 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
                 <Button
                   size="sm"
                   variant="ghost"
-                  onClick={() => speakText(getEntryDisplayTerm(selectedEntry) || "")}
-                  className="p-1 hover:bg-gray-100"
-                >
-                  <Volume2 className="h-4 w-4 text-gray-600" />
-                </Button>
-                <Button
-                  size="sm"
-                  variant="ghost"
                   onClick={() => copyToClipboard(getEntryDisplayTerm(selectedEntry) || "")}
                   className="p-1 hover:bg-gray-100"
                 >
@@ -470,20 +456,6 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
                    activeLanguage === "english" ? selectedEntry.tetum || selectedEntry.portuguese :
                    selectedEntry.portuguese || selectedEntry.english}
                 </h3>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={() => {
-                    const altTerm = activeLanguage === "tetum" ? selectedEntry.portuguese || selectedEntry.english :
-                                   activeLanguage === "portuguese" ? selectedEntry.tetum || selectedEntry.english :
-                                   activeLanguage === "english" ? selectedEntry.tetum || selectedEntry.portuguese :
-                                   selectedEntry.portuguese || selectedEntry.english;
-                    speakText(altTerm || "");
-                  }}
-                  className="p-1 hover:bg-gray-100"
-                >
-                  <Volume2 className="h-4 w-4 text-gray-600" />
-                </Button>
                 <Button
                   size="sm"
                   variant="ghost"
@@ -571,8 +543,7 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
           About Legal Technical Dictionary
         </h3>
         <p className="text-sm text-blue-800 dark:text-blue-200">
-          This dictionary contains comprehensive legal terminology with translations in Tetum, Portuguese, and English. 
-          Includes terms from the Constitution of RDTL, Civil Code, Penal Code, and other legal documents.
+          This dictionary contains comprehensive legal terminology in Tetum, Portuguese, and English. Only authentic sources were used, adjusting to INL standard.
         </p>
       </div>
     </div>
