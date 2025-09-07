@@ -99,7 +99,7 @@ const TOOL_CARDS = [
 
   {
     id: "asean",
-    title: "ASEAN Terminology for Tetum<>English", 
+    title: "ASEAN terminology", 
     category: "International",
     description: "ASEAN abbreviations and terminology",
     icon: Globe,
