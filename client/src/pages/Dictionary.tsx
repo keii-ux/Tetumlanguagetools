@@ -640,10 +640,9 @@ export default function Dictionary() {
           </div>
         </DialogContent>
       </Dialog>
-      
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-4 text-center">
-        <p className="text-sm">All Rights Reserved©Liantek, 2025, Timor-Leste</p>
+        <p className="text-sm">2024-2025©   Liantek   All Rights Reserved</p>
       </footer>
     </div>
   );
