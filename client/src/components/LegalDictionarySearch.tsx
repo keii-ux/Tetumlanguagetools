@@ -300,11 +300,8 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
     <div className="space-y-6">
       <div className="text-center">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-          Legal Technical Dictionary
+          Tetum Legal Glossary and Dictionary
         </h2>
-        <p className="text-gray-600 dark:text-gray-300">
-          Search trilingual legal terminology (Tetum, Portuguese, English)
-        </p>
       </div>
 
       <div className="flex gap-2 justify-center">
@@ -540,7 +537,7 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
 
       <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
         <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
-          About Legal Technical Dictionary
+          About Tetum Legal Dictionary
         </h3>
         <p className="text-sm text-blue-800 dark:text-blue-200">
           This dictionary contains comprehensive legal terminology in Tetum, Portuguese, and English. Only authentic sources were used, adjusting to INL standard.

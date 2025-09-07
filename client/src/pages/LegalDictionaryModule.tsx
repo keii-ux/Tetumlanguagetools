@@ -25,8 +25,8 @@ export default function LegalDictionaryModule() {
   const sections = [
     {
       id: "dictionary",
-      title: "Legal Dictionary",
-      subtitle: "Tetum-English-Portuguese Legal Terms",
+      title: "Tetum Legal Glossary and Dictionary",
+      subtitle: "Tetum Legal Terms and Definitions",
       description: "Comprehensive legal terminology from the Constitution and legal codes",
       icon: Scale,
       color: "blue",
@@ -74,14 +74,11 @@ export default function LegalDictionaryModule() {
                   <Scale className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
-                  <p className="text-sm text-slate-600">Comprehensive Legal Terminology & Glossaries</p>
+                  <p className="text-sm text-slate-600">Tetum Legal Terminology</p>
                 </div>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                Trilingual
-              </Badge>
               <LanguageSwitcher 
                 selectedLanguage={selectedLanguage}
                 onLanguageChange={setSelectedLanguage}
