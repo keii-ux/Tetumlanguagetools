@@ -9,6 +9,7 @@ import { DictionaryEntry } from "@shared/schema";
 
 interface MedicalDictionarySearchProps {
   onEntrySelect?: (entry: DictionaryEntry) => void;
+  selectedLanguage?: string;
 }
 
 interface PredictiveDropdownProps {
@@ -32,45 +33,66 @@ function PredictiveDropdown({
 
   const filteredEntries = entries
     .filter(entry => {
-      // Enhanced cross-language search in Tetum, English, and Portuguese fields
+      // Enhanced cross-language search with language-specific prioritization
       const tetumField = entry.tetum || "";
       const englishField = entry.english || "";
       const portugueseField = entry.portuguese || "";
       const searchLower = searchTerm.toLowerCase();
       
-      // Search in all language fields
-      const tetumMatch = tetumField.toLowerCase().includes(searchLower);
-      const englishMatch = englishField.toLowerCase().includes(searchLower);
-      const portugueseMatch = portugueseField.toLowerCase().includes(searchLower);
-      
-      return tetumMatch || englishMatch || portugueseMatch;
+      // Language-specific search based on activeLanguage
+      if (activeLanguage === "tetum") {
+        // Prioritize Tetum matches, but also include others
+        const tetumMatch = tetumField.toLowerCase().includes(searchLower);
+        const englishMatch = englishField.toLowerCase().includes(searchLower);
+        const portugueseMatch = portugueseField.toLowerCase().includes(searchLower);
+        return tetumMatch || englishMatch || portugueseMatch;
+      } else if (activeLanguage === "english") {
+        // Prioritize English matches, but also include others
+        const englishMatch = englishField.toLowerCase().includes(searchLower);
+        const tetumMatch = tetumField.toLowerCase().includes(searchLower);
+        const portugueseMatch = portugueseField.toLowerCase().includes(searchLower);
+        return englishMatch || tetumMatch || portugueseMatch;
+      } else {
+        // Search in all languages for "both" mode
+        const tetumMatch = tetumField.toLowerCase().includes(searchLower);
+        const englishMatch = englishField.toLowerCase().includes(searchLower);
+        const portugueseMatch = portugueseField.toLowerCase().includes(searchLower);
+        return tetumMatch || englishMatch || portugueseMatch;
+      }
     })
     .sort((a, b) => {
-      // Enhanced sorting with cross-language prioritization
+      // Enhanced sorting with language-specific prioritization
       const searchLower = searchTerm.toLowerCase();
       
+      // Get primary field based on active language
+      const getPrimaryField = (entry: DictionaryEntry) => {
+        if (activeLanguage === "english") return entry.english || "";
+        if (activeLanguage === "tetum") return entry.tetum || "";
+        return entry.tetum || entry.english || "";
+      };
+      
+      // Check if primary field starts with search term
+      const aPrimary = getPrimaryField(a);
+      const bPrimary = getPrimaryField(b);
+      const aStartsWithPrimary = aPrimary.toLowerCase().startsWith(searchLower);
+      const bStartsWithPrimary = bPrimary.toLowerCase().startsWith(searchLower);
+      
+      // Prioritize primary language matches that start with search term
+      if (aStartsWithPrimary && !bStartsWithPrimary) return -1;
+      if (!aStartsWithPrimary && bStartsWithPrimary) return 1;
+      
+      // If both or neither start with search term, check all fields
       const aFields = [a.tetum || "", a.english || "", a.portuguese || ""];
       const bFields = [b.tetum || "", b.english || "", b.portuguese || ""];
       
-      // Check if any field starts with the search term
       const aStartsWith = aFields.some(field => field.toLowerCase().startsWith(searchLower));
       const bStartsWith = bFields.some(field => field.toLowerCase().startsWith(searchLower));
       
-      // Prioritize starts-with matches
       if (aStartsWith && !bStartsWith) return -1;
       if (!aStartsWith && bStartsWith) return 1;
       
-      // Get primary display field based on active language
-      const getPrimaryField = (entry: DictionaryEntry) => {
-        if (activeLanguage === "english") return entry.english || entry.tetum || entry.portuguese || "";
-        if (activeLanguage === "tetum") return entry.tetum || entry.english || entry.portuguese || "";
-        return entry.tetum || entry.english || entry.portuguese || "";
-      };
-      
-      // Sort alphabetically within priority groups
-      const aDisplay = getPrimaryField(a);
-      const bDisplay = getPrimaryField(b);
-      return aDisplay.localeCompare(bDisplay);
+      // Sort alphabetically by primary field
+      return aPrimary.localeCompare(bPrimary);
     })
     .slice(0, 12);
 
@@ -140,10 +162,18 @@ function PredictiveDropdown({
   );
 }
 
-export function MedicalDictionarySearch({ onEntrySelect }: MedicalDictionarySearchProps) {
+export function MedicalDictionarySearch({ onEntrySelect, selectedLanguage }: MedicalDictionarySearchProps) {
   const [wordSearch, setWordSearch] = useState("");
   const [sentenceSearch, setSentenceSearch] = useState("");
-  const [activeLanguage, setActiveLanguage] = useState<"tetum" | "english" | "both">("tetum");
+  // Map selectedLanguage to activeLanguage
+  const getActiveLanguage = (): "tetum" | "english" | "both" => {
+    if (selectedLanguage === "tet") return "tetum";
+    if (selectedLanguage === "en") return "english";
+    if (selectedLanguage === "pt") return "both"; // Portuguese uses both for now
+    return "tetum"; // default
+  };
+  
+  const [activeLanguage, setActiveLanguage] = useState<"tetum" | "english" | "both">(getActiveLanguage());
   const [showResults, setShowResults] = useState(false);
   const [showPredictive, setShowPredictive] = useState(false);
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
@@ -152,10 +182,22 @@ export function MedicalDictionarySearch({ onEntrySelect }: MedicalDictionarySear
   // Get all medical entries for comprehensive suggestions
   const { data: allMedicalEntries = [] } = useMedicalEntries();
   
+  // Update activeLanguage when selectedLanguage changes
+  useEffect(() => {
+    setActiveLanguage(getActiveLanguage());
+  }, [selectedLanguage]);
+  
+  // Map activeLanguage to search language parameter
+  const getSearchLanguage = () => {
+    if (activeLanguage === "tetum") return "tetum";
+    if (activeLanguage === "english") return "english";
+    return "all"; // for "both"
+  };
+  
   const { data: searchResults = [], isLoading, error } = useSearchEntries({
     query: wordSearch,
     dictionaryType: "medical",
-    language: "all",
+    language: getSearchLanguage(),
     exactMatch: false,
     includeDefinitions: true,
     caseSensitive: false,
