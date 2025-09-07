@@ -256,8 +256,25 @@
   {
     "portuguese": "Bens",
     "tetum": "Rikusoin",
-    "english": "Assets / Goods",
-    "source": "Código Civil de Timor-Leste"
+    "english": "Assets",
+    "source": "Código Civil de Timor-Leste, Cambridge Dictionary, Collins Dictionary, Linguee, La'o Hamutuk Land Law Glossary",
+    "explanation": "**asset** *(n.)*\n\n**Portuguese:** *bem* (pl. *bens*), *ativo*\n\n• *bem/bens* — propriedade, coisa de valor que alguém possui.\n• *ativo* — bem em contexto financeiro ou contabilístico.\n\n**Tetum:** *rikusoin*, *aset*\n\n• buat ida ne'ebé ema posui no iha valór (rai, ekipamentu, osan, nst.).\n\n**English definition:**\n\n• Something valuable owned by a person or institution (e.g., property, equipment, money, rights).\n\n**Examples:**\n\n• *land, equipment, money* → PT: *bens* / TT: *rikusoin*\n• *fixed asset* → PT: *ativo fixo* / TT: *rikusoin permanente*",
+    "category": "legal-financial",
+    "wordClass": "noun",
+    "usageExamples": [
+      "Rai, ekipamentu, no osan hotu-hotu rikusoin importante sira ba kompañia ida.",
+      "Os bens da empresa incluem propriedades, equipamentos e ativos financeiros.",
+      "The company's assets include real estate, machinery, and financial investments."
+    ],
+    "relatedTerms": [
+      "rikusoin permanente (fixed assets)",
+      "ativo fixo (fixed assets)", 
+      "propriedade (property)",
+      "sasán (possessions)",
+      "patrimóniu (patrimony)",
+      "bens móveis (movable assets)",
+      "bens imóveis (immovable assets)"
+    ]
    },
   {
     "portuguese": "Concessão",
