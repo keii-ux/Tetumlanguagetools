@@ -62,6 +62,11 @@ export default function INLTetumDictionaryModule() {
           </div>
         )}
       </div>
+      
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-4 text-center">
+        <p className="text-sm">All Rights Reserved©Liantek, 2025, Timor-Leste</p>
+      </footer>
     </div>
   );
 }
