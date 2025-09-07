@@ -484,7 +484,7 @@ export default function Dictionary() {
         </div>
       </section>
       {/* Main Content Section */}
-      <section className="py-20">
+      <section className="py-20 bg-[#f5f6ff]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-16">
