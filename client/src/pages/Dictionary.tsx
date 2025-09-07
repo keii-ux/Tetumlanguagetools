@@ -113,9 +113,9 @@ const TOOL_CARDS = [
     category: "Reference", 
     description: "The final INL Tétum monolingual dictionary with comprehensive entries",
     icon: Languages,
-    color: "bg-orange-500",
-    bgColor: "bg-orange-50",
-    iconColor: "text-orange-500",
+    color: "bg-purple-500",
+    bgColor: "bg-purple-50",
+    iconColor: "text-purple-500",
   },
 ];
 
@@ -505,7 +505,7 @@ export default function Dictionary() {
               return (
                 <div 
                   key={tool.id}
-                  className="group p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-green-200 bg-white rounded-lg text-[14px] font-normal pl-[30px] pr-[30px]"
+                  className={`group p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-green-200 ${tool.bgColor} rounded-lg text-[14px] font-normal pl-[30px] pr-[30px]`}
                   onClick={() => handleToolSelect(tool.id)}
                 >
                   <div className="p-0">
@@ -595,7 +595,7 @@ export default function Dictionary() {
                               <Button 
                                 variant="outline" 
                                 size="sm" 
-                                className="w-full text-xs bg-orange-50 border-orange-200 text-orange-700 hover:bg-orange-100"
+                                className="w-full text-xs bg-purple-50 border-purple-200 text-purple-700 hover:bg-purple-100"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                 }}
