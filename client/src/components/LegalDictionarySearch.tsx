@@ -11,6 +11,7 @@ import type { DictionaryEntry } from "@shared/schema";
 interface LegalDictionarySearchProps {
   onEntrySelect?: (entry: DictionaryEntry) => void;
   selectedLanguage?: string;
+  onEnhancedAnalysis?: (entry: DictionaryEntry) => void;
 }
 
 interface PredictiveDropdownProps {
@@ -179,7 +180,7 @@ function getTranslation(entry: DictionaryEntry, activeLanguage: string) {
   return translations.length > 0 ? translations.join(" | ") : "No translation available";
 }
 
-export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: LegalDictionarySearchProps) {
+export function LegalDictionarySearch({ onEntrySelect, selectedLanguage, onEnhancedAnalysis }: LegalDictionarySearchProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [showResults, setShowResults] = useState(false);
@@ -390,6 +391,15 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
                 >
                   Legal Term
                 </Button>
+                {onEnhancedAnalysis && (
+                  <Button
+                    size="sm"
+                    onClick={() => onEnhancedAnalysis(selectedEntry)}
+                    className="bg-purple-100 text-purple-700 hover:bg-purple-200 text-xs px-3 py-1"
+                  >
+                    🧠 AI Analysis
+                  </Button>
+                )}
               </div>
             </div>
 

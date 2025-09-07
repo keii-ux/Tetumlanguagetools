@@ -9,17 +9,24 @@ import { LegalDictionarySearch } from "@/components/LegalDictionarySearch";
 import { TetumGlossarySearch } from "@/components/TetumGlossarySearch";
 import { PortugueseGlossarySearch } from "@/components/PortugueseGlossarySearch";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { EnhancedTermDetail } from "@/components/EnhancedTermDetail";
 import { useDictionaryStats } from "@/lib/search";
 import { DictionaryEntry } from "@shared/schema";
 
 export default function LegalDictionaryModule() {
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
+  const [showEnhancedDetail, setShowEnhancedDetail] = useState(false);
   const [activeSection, setActiveSection] = useState("dictionary");
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const { data: stats } = useDictionaryStats();
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
     setSelectedEntry(entry);
+  };
+
+  const handleEnhancedAnalysis = (entry: DictionaryEntry) => {
+    setSelectedEntry(entry);
+    setShowEnhancedDetail(true);
   };
 
   const sections = [
@@ -133,6 +140,7 @@ export default function LegalDictionaryModule() {
               <LegalDictionarySearch 
                 onEntrySelect={handleEntrySelect}
                 selectedLanguage={selectedLanguage}
+                onEnhancedAnalysis={handleEnhancedAnalysis}
               />
             </TabsContent>
 
@@ -145,6 +153,19 @@ export default function LegalDictionaryModule() {
             </TabsContent>
           </Tabs>
         </div>
+
+        {/* Enhanced Term Detail Modal */}
+        {showEnhancedDetail && selectedEntry && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="w-full max-w-6xl max-h-[90vh] overflow-y-auto">
+              <EnhancedTermDetail
+                entry={selectedEntry}
+                onClose={() => setShowEnhancedDetail(false)}
+                userId="guest"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
