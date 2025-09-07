@@ -25,7 +25,7 @@ export default function LegalDictionaryModule() {
   const sections = [
     {
       id: "dictionary",
-      title: "Tetum Legal Glossary and Dictionary",
+      title: "Tetum Legal Dictionary",
       subtitle: "Tetum Legal Terms and Definitions",
       description: "Comprehensive legal terminology from the Constitution and legal codes",
       icon: Scale,
