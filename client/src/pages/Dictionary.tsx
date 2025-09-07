@@ -521,7 +521,7 @@ export default function Dictionary() {
                         </p>
                         <div className="flex flex-col items-center space-y-2">
                           <div className="flex items-center space-x-2">
-                            <span className="text-2xl font-bold text-green-600">
+                            <span className="text-2xl font-bold text-[#a35f16]">
                               {termCount.toLocaleString()}
                             </span>
                             <span className="text-gray-500">Verified Terms</span>
