@@ -507,12 +507,12 @@ export default function Dictionary() {
                   onClick={() => handleToolSelect(tool.id)}
                 >
                   <div className="p-0">
-                    <div className="flex items-start space-x-6">
+                    <div className="flex flex-col items-center text-center space-y-6">
                       <div className={`w-16 h-16 ${tool.bgColor} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                         <Icon className={`w-8 h-8 ${tool.iconColor}`} />
                       </div>
                       <div className="flex-1">
-                        <div className="flex items-center space-x-3 mb-3">
+                        <div className="flex flex-col items-center space-y-3 mb-3">
                           <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-600 transition-colors">
                             {tool.title}
                           </h3>
@@ -520,7 +520,7 @@ export default function Dictionary() {
                         <p className="text-gray-600 mb-6 text-[19px]">
                           {tool.description}
                         </p>
-                        <div className="flex items-center justify-between">
+                        <div className="flex flex-col items-center space-y-2">
                           <div className="flex items-center space-x-2">
                             <span className="text-2xl font-bold text-green-600">
                               {termCount.toLocaleString()}
