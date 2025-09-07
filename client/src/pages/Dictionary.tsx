@@ -90,7 +90,7 @@ const TOOL_CARDS = [
     id: "legal", 
     title: "Tetum Legal Dictionary",
     category: "Legal",
-    description: "Legal terminology in Tetum with Portuguese and English equivalents",
+    description: "Legal terminology in Tetum with Portuguese and English equivalents. AI-powered for extra information",
     icon: Scale,
     color: "bg-blue-500", 
     bgColor: "bg-blue-50",
