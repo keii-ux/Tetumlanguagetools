@@ -545,7 +545,7 @@ export default function Dictionary() {
                                 }}
                               >
                                 <BookOpen className="w-3 h-3 mr-2" />
-                                Advanced Medical Dictionary
+                                Advanced Search
                               </Button>
                             </Link>
                           </div>
@@ -563,7 +563,7 @@ export default function Dictionary() {
                                 }}
                               >
                                 <BookOpen className="w-3 h-3 mr-2" />
-                                Advanced Legal Module
+                                Advanced Search
                               </Button>
                             </Link>
                           </div>
@@ -583,7 +583,7 @@ export default function Dictionary() {
                                 }}
                               >
                                 <Globe className="w-3 h-3 mr-2" />
-                                ASEAN Terminology Center
+                                Advanced Search
                               </Button>
                             </Link>
                           </div>
@@ -601,7 +601,7 @@ export default function Dictionary() {
                                 }}
                               >
                                 <BookOpen className="w-3 h-3 mr-2" />
-                                Full INL Tetum Dictionary
+                                Advanced Search
                               </Button>
                             </Link>
                           </div>
