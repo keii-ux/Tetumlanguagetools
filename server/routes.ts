@@ -980,6 +980,28 @@ Provide only the translation without additional explanation.`;
     }
   });
 
+  // Enhanced term explanation endpoint
+  app.get("/api/enhanced-explanation/:term", async (req, res) => {
+    try {
+      const { term } = req.params;
+      const { sourceLanguage = "english" } = req.query;
+      
+      const { getEnhancedTermExplanation } = await import("./gemini");
+      const explanation = await getEnhancedTermExplanation(
+        term, 
+        sourceLanguage as "tetum" | "portuguese" | "english"
+      );
+      
+      res.json(explanation);
+    } catch (error) {
+      console.error("Enhanced explanation error:", error);
+      res.status(500).json({ 
+        error: "Failed to fetch enhanced explanation",
+        fallback: true 
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
