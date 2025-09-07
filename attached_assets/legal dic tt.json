@@ -305,14 +305,44 @@
     "portuguese": "Contrato",
     "tetum": "Kontratu",
     "english": "Contract",
-    "source": "Código Civil de Timor-Leste"   
-},
+    "source": "Código Civil de Timor-Leste, Collins Dictionary, Cambridge Dictionary",
+    "explanation": "**contract** *(n.)*\n\n**Portuguese:** *contrato*, *pacto*, *acordo*\n\n• *contrato* — acordo legal escrito entre duas ou mais partes.\n• *pacto* — acordo ou aliança, geralmente menos formal.\n• *acordo* — entendimento mútuo, pode ser oral ou escrito.\n\n**Tetum:** *kontratu*, *akordu*, *komprometimentu*\n\n• akordu legál ida ne'ebé fahe responsabilidade no direitu entre ema rua ka liu tan.\n\n**English definition:**\n\n• A legally binding agreement between two or more parties that creates mutual obligations enforceable by law.\n\n**Examples:**\n\n• *employment contract* → PT: *contrato de trabalho* / TT: *kontratu servisu nian*\n• *sales contract* → PT: *contrato de compra e venda* / TT: *kontratu faan-sosa nian*\n• *verbal agreement* → PT: *acordo verbal* / TT: *akordu oral*\n\n**Sources:** Código Civil de Timor-Leste, Collins Dictionary, Cambridge Dictionary.",
+    "category": "civil-law",
+    "wordClass": "noun",
+    "usageExamples": [
+      "Kontratu servisu nian tenke iha kondisaun klaru kona-ba pagamentu no tempu servisu.",
+      "O contrato de arrendamento deve especificar o valor da renda e a duração do aluguel.",
+      "All employment contracts must include terms regarding salary, working hours, and benefits."
+    ],
+    "relatedTerms": [
+      "akordu (agreement)",
+      "komprometimentu (commitment)",
+      "klausula (clause)",
+      "obrigasaun (obligation)",
+      "responsabilidade (responsibility)"
+    ]
+   },
   {
     "portuguese": "Tribunal",
     "tetum": "Tribunál",
     "english": "Court",
-    "source": "Lei de Organização Judiciária"   
-},
+    "source": "Lei de Organização Judiciária, Collins Dictionary, Cambridge Dictionary",
+    "explanation": "**court** *(n.)*\n\n**Portuguese:** *tribunal*, *corte*, *juízo*\n\n• *tribunal* — órgão do poder judiciário que julga processos.\n• *corte* — tribunal superior, especialmente de apelação.\n• *juízo* — instância judicial de primeira instância.\n\n**Tetum:** *tribunál*, *mahkamah*, *juízu*\n\n• instituisaun judisiál ne'ebé julga kazu legál sira no fó desizaun kona-ba justisa.\n\n**English definition:**\n\n• A judicial institution with authority to hear and decide legal cases and disputes.\n\n**Examples:**\n\n• *supreme court* → PT: *tribunal supremo* / TT: *tribunál supremu*\n• *district court* → PT: *tribunal distrital* / TT: *tribunál distritál*\n• *appeal court* → PT: *tribunal de recurso* / TT: *tribunál rekursu*\n• *family court* → PT: *tribunal de família* / TT: *tribunál família nian*\n\n**Sources:** Lei de Organização Judiciária, Collins Dictionary, Cambridge Dictionary.",
+    "category": "judicial-system",
+    "wordClass": "noun", 
+    "usageExamples": [
+      "Tribunál Supremu mak tribunál aas liu iha Timor-Leste.",
+      "O tribunal deve garantir um julgamento justo e imparcial para todas as partes.",
+      "Courts must ensure due process and equal treatment under the law."
+    ],
+    "relatedTerms": [
+      "juíz (judge)",
+      "justisa (justice)",
+      "julgamentu (judgment)", 
+      "rekursu (appeal)",
+      "prosesu (process)"
+    ]
+   },
   {
     "portuguese": "Crime",
     "tetum": "Krime",
@@ -945,8 +975,23 @@
     "portuguese": "Lei",
     "tetum": "Lei",
     "english": "Law",
-    "source": "Vocabulário Jurídico Geral"   
-},
+    "source": "Vocabulário Jurídico Geral, Constituição RDTL, Collins Dictionary",
+    "explanation": "**law** *(n.)*\n\n**Portuguese:** *lei*, *norma*, *regulamento*\n\n• *lei* — norma jurídica escrita, promulgada pelo poder legislativo.\n• *norma* — regra geral de conduta, pode ser legal ou social.\n• *regulamento* — conjunto de regras específicas para aplicar uma lei.\n\n**Tetum:** *lei*, *regulamentu*, *regra*\n\n• regra legál ne'ebé estabelese husi governu atu kontrola no organiza sosiedade.\n\n**English definition:**\n\n• A system of rules created and enforced by governmental institutions to regulate behavior and maintain order.\n\n**Examples:**\n\n• *constitutional law* → PT: *lei constitucional* / TT: *lei konstituisionál*\n• *criminal law* → PT: *lei penal* / TT: *lei krime nian*\n• *civil law* → PT: *lei civil* / TT: *lei sivíl*\n• *by-law/regulation* → PT: *regulamento* / TT: *regulamentu*\n\n**Sources:** Vocabulário Jurídico Geral, Constituição RDTL, Collins Dictionary.",
+    "category": "constitutional-law", 
+    "wordClass": "noun",
+    "usageExamples": [
+      "Lei Konstituisaun nian mak lei boot liu hotu iha nasaun ida.",
+      "A lei deve ser cumprida por todos os cidadãos sem exceção.",
+      "Laws must be clear, accessible, and applied equally to all citizens."
+    ],
+    "relatedTerms": [
+      "regulamentu (regulation)",
+      "regra (rule)", 
+      "justisa (justice)",
+      "konstituisaun (constitution)",
+      "tribunál (court)"
+    ]
+   },
   {
     "portuguese": "Sistema jurídico",
     "tetum": "Sistema jurídiku",
@@ -1467,8 +1512,23 @@
   {
     "portuguese": "Direito",
     "tetum": "Direitu",
-    "english": "",
-    "source": "Lei N.º 13/2017, de 5 de Junho, p. 2"
+    "english": "Right / Law",
+    "source": "Lei N.º 13/2017, Collins Dictionary, Cambridge Dictionary, Constituição RDTL",
+    "explanation": "**right/law** *(n.)*\n\n**Portuguese:** *direito*, *lei*, *norma*\n\n• *direito* (como faculdade) — poder ou prerrogativa que alguém tem.\n• *direito* (como ciência) — conjunto de normas jurídicas.\n• *lei* — norma jurídica escrita e promulgada.\n• *norma* — regra ou princípio que regula comportamento.\n\n**Tetum:** *direitu*, *lei*, *regra*\n\n• podér ka prerrogativa ne'ebé ema ida iha (direitu umanu, direitu propriedade).\n• koñesimentu kona-ba lei no regulamentu sira (estudu direitu).\n\n**English definition:**\n\n• A moral or legal entitlement to have or do something (as in human rights).\n• The system of rules and regulations enforced by institutions (as in law).\n\n**Examples:**\n\n• *human rights* → PT: *direitos humanos* / TT: *direitu umanu*\n• *property rights* → PT: *direitos de propriedade* / TT: *direitu propriedade nian*\n• *civil law* → PT: *direito civil* / TT: *lei sivíl*\n• *criminal law* → PT: *direito penal* / TT: *lei krime nian*\n\n**Sources:** Lei N.º 13/2017, Collins Dictionary, Cambridge Dictionary, Constituição RDTL.",
+    "category": "constitutional-law",
+    "wordClass": "noun",
+    "usageExamples": [
+      "Ema hotu-hotu iha direitu ba moris ho dignidade no seguransa.",
+      "O direito à educação é garantido pela Constituição a todos os cidadãos.",
+      "Every person has the right to freedom of expression and peaceful assembly."
+    ],
+    "relatedTerms": [
+      "lei (law)",
+      "regra (rule)",
+      "justisa (justice)",
+      "liberdade (freedom)",
+      "responsabilidade (responsibility)"
+    ]
   },
   {
     "portuguese": "Diretiva",
@@ -3348,9 +3408,25 @@
 },
   {
     "portuguese": "Recurso",
-    "tetum": "rekursu",
-    "english": "appeal / remedy"
-},
+    "tetum": "Rekursu",
+    "english": "Appeal / Remedy / Resource",
+    "source": "Código de Processo Civil, Collins Dictionary, Cambridge Dictionary",
+    "explanation": "**appeal/remedy/resource** *(n.)*\n\n**Portuguese:** *recurso*, *apelação*, *remédio jurídico*\n\n• *recurso* (judicial) — meio de impugnar uma decisão judicial.\n• *recurso* (financeiro) — meio econômico ou financeiro disponível.\n• *apelação* — recurso específico contra sentença de primeiro grau.\n• *remédio jurídico* — instrumento legal para proteger direitos.\n\n**Tetum:** *rekursu*, *apelasaun*, *meiu legál*\n\n• meiu legál atu kontesta desizaun tribunál nian ka atu proteje direitu.\n• rekursu sira ne'ebé disponível ba ema ida (osan, propriedade, nst.).\n\n**English definition:**\n\n• A legal proceeding to challenge a court decision (judicial appeal).\n• Available means or assets for achieving something (resources).\n• A legal remedy to protect or enforce rights.\n\n**Examples:**\n\n• *judicial appeal* → PT: *recurso judicial* / TT: *rekursu judisiál*\n• *legal remedy* → PT: *remédio jurídico* / TT: *meiu legál*\n• *financial resources* → PT: *recursos financeiros* / TT: *rekursu finanseiru*\n• *natural resources* → PT: *recursos naturais* / TT: *rekursu naturál*\n\n**Sources:** Código de Processo Civil, Collins Dictionary, Cambridge Dictionary.",
+    "category": "procedural-law",
+    "wordClass": "noun",
+    "usageExamples": [
+      "Litigante ida bele aprezenta rekursu kontra desizaun tribunál nian.",
+      "O recurso deve ser interposto dentro do prazo legal estabelecido.",
+      "Legal remedies must be available to protect citizens' fundamental rights."
+    ],
+    "relatedTerms": [
+      "apelasaun (appeal)",
+      "desizaun (decision)",
+      "tribunál (court)",
+      "remédiu legál (legal remedy)",
+      "protesaun (protection)"
+    ]
+   },
   {
     "portuguese": "Reintegração de posse",
     "tetum": "reintegrasaun pose",
