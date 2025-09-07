@@ -84,6 +84,8 @@ export function TetumGlossarySearch({ onEntrySelect }: TetumGlossarySearchProps)
   const [isLoading, setIsLoading] = useState(false);
   const [entries, setEntries] = useState<DictionaryEntry[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
+  const [showResults, setShowResults] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
   // Load Tetum glossary entries
@@ -117,6 +119,8 @@ export function TetumGlossarySearch({ onEntrySelect }: TetumGlossarySearchProps)
   const handleEntrySelect = (entry: DictionaryEntry) => {
     setSearchTerm(entry.tetum || "");
     setShowDropdown(false);
+    setSelectedEntry(entry);
+    setShowResults(true);
     onEntrySelect?.(entry);
   };
 
@@ -132,8 +136,10 @@ export function TetumGlossarySearch({ onEntrySelect }: TetumGlossarySearchProps)
       const response = await fetch(`/api/tetum-glossary/search?${queryParams}`);
       if (response.ok) {
         const results = await response.json();
-        if (results.length > 0 && onEntrySelect) {
-          onEntrySelect(results[0]);
+        if (results.length > 0) {
+          setSelectedEntry(results[0]);
+          setShowResults(true);
+          onEntrySelect?.(results[0]);
         }
       }
     } catch (error) {
@@ -151,6 +157,8 @@ export function TetumGlossarySearch({ onEntrySelect }: TetumGlossarySearchProps)
   const clearSearch = () => {
     setSearchTerm("");
     setShowDropdown(false);
+    setShowResults(false);
+    setSelectedEntry(null);
   };
 
   return (
@@ -209,6 +217,71 @@ export function TetumGlossarySearch({ onEntrySelect }: TetumGlossarySearchProps)
           {isLoading ? "Buka hela..." : "Buka"}
         </Button>
       </div>
+
+      {/* Results Section */}
+      {showResults && selectedEntry && (
+        <div className="space-y-6">
+          {/* Main Entry Display */}
+          <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="mb-4">
+              <div className="flex items-center gap-3 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  {selectedEntry.tetum}
+                </h3>
+              </div>
+              <p className="text-gray-600 text-sm mb-4">
+                Termu legál husi dokumentu ofisiál Timor-Leste nian
+              </p>
+              
+              <div className="flex items-center gap-2 mb-4">
+                <button className="bg-green-100 text-green-700 hover:bg-green-200 text-xs px-3 py-1 rounded">
+                  Termu Tetum
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <span className="text-gray-500 font-medium">1.</span>
+                <div className="flex-1">
+                  <p className="text-gray-700">
+                    {selectedEntry.explanation || "Esplikasaun la iha"}
+                  </p>
+                  {selectedEntry.source && (
+                    <p className="text-xs text-gray-400 mt-1">
+                      Fonte: {selectedEntry.source}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <span className="text-gray-500 font-medium">2.</span>
+                <div className="flex-1">
+                  <p className="text-gray-700">
+                    <em>Terminolojia legál.</em> Uza iha kontestu legál no dokumentu ofisiál 
+                    República Demokrátika Timor-Leste nian, inklui lei konstituisionál, sivíl, no penál.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* No Results */}
+      {showResults && !selectedEntry && !isLoading && (
+        <div className="bg-white rounded-lg border border-gray-200 p-6 text-center">
+          <p className="text-gray-500">La hetan termu legál ba "{searchTerm}"</p>
+        </div>
+      )}
+
+      {/* Loading */}
+      {isLoading && showResults && (
+        <div className="bg-white rounded-lg border border-gray-200 p-6 text-center">
+          <p className="text-gray-500">Buka termu legál...</p>
+        </div>
+      )}
 
       <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
         <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
