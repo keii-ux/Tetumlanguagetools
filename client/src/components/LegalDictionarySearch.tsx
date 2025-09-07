@@ -299,11 +299,8 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-          Tetum Legal Glossary and Dictionary
-        </h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Legal Terminology</h2>
       </div>
-
       <div className="flex gap-2 justify-center">
         <Select value={activeLanguage} onValueChange={(value: "tetum" | "portuguese" | "english" | "all") => setActiveLanguage(value)}>
           <SelectTrigger className="w-40">
@@ -317,7 +314,6 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
           </SelectContent>
         </Select>
       </div>
-
       <div ref={searchRef} className="relative">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
@@ -355,7 +351,6 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
           activeLanguage={activeLanguage}
         />
       </div>
-
       <div className="flex gap-2 justify-center">
         <Button 
           onClick={handleSearch}
@@ -365,7 +360,6 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
           {isLoading ? "Searching..." : "Search"}
         </Button>
       </div>
-
       {/* Results Section */}
       {showResults && selectedEntry && (
         <div className="space-y-6">
@@ -513,28 +507,24 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage }: Legal
           </div>
         </div>
       )}
-
       {/* No Results */}
       {showResults && searchResults.length === 0 && !isLoading && (
         <div className="bg-white rounded-lg border border-gray-200 p-6 text-center">
           <p className="text-gray-500">No legal terms found for "{searchTerm}"</p>
         </div>
       )}
-
       {/* Loading */}
       {isLoading && showResults && (
         <div className="bg-white rounded-lg border border-gray-200 p-6 text-center">
           <p className="text-gray-500">Searching legal terms...</p>
         </div>
       )}
-
       {/* Error */}
       {error && showResults && (
         <div className="bg-red-50 rounded-lg border border-red-200 p-6 text-center">
           <p className="text-red-600">Error searching for legal terms. Please try again.</p>
         </div>
       )}
-
       <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
         <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
           About Tetum Legal Dictionary
