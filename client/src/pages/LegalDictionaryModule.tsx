@@ -140,7 +140,10 @@ export default function LegalDictionaryModule() {
         <div className="bg-white rounded-lg shadow-sm border border-gray-200">
           <Tabs value={activeSection} onValueChange={setActiveSection} className="w-full">
             <TabsContent value="dictionary" className="p-0">
-              <LegalDictionarySearch onEntrySelect={handleEntrySelect} />
+              <LegalDictionarySearch 
+                onEntrySelect={handleEntrySelect}
+                selectedLanguage={selectedLanguage}
+              />
             </TabsContent>
 
             <TabsContent value="tetum-glossary" className="p-0">

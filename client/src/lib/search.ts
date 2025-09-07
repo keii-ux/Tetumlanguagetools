@@ -58,6 +58,14 @@ export function useMedicalEntries() {
   });
 }
 
+// Get legal entries
+export function useLegalEntries() {
+  return useQuery<DictionaryEntry[]>({
+    queryKey: ["/api/legal/entries"],
+    staleTime: 1000 * 60 * 10, // 10 minutes
+  });
+}
+
 // Get single entry
 export function useEntry(id: number | null) {
   return useQuery<DictionaryEntry>({
