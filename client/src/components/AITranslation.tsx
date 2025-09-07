@@ -24,78 +24,44 @@ export function AITranslation({
 }: AITranslationProps) {
   const [translation, setTranslation] = useState("");
   const [isTranslating, setIsTranslating] = useState(false);
-  const [error, setError] = useState("");
 
   useEffect(() => {
-    let isCancelled = false;
+    let mounted = true;
+    let timeoutId: NodeJS.Timeout;
 
-    const translateText = async () => {
-      if (!text || text.trim().length === 0) {
-        setTranslation("");
-        return;
-      }
+    const translateText = () => {
+      if (!text?.trim() || !mounted) return;
 
       setIsTranslating(true);
-      setError("");
 
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-
-        const response = await fetch('/api/asean/translate', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            text: text.trim(),
-            fromLanguage: fromLang,
-            toLanguage: toLang
-          }),
-          signal: controller.signal
-        });
-
-        clearTimeout(timeoutId);
-
-        if (isCancelled) return;
-
-        if (!response.ok) {
-          const errorText = await response.text().catch(() => 'Network error');
-          throw new Error(`HTTP ${response.status}: ${errorText}`);
-        }
-
-        const data = await response.json();
-        
-        if (!isCancelled) {
+      fetch('/api/asean/translate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: text.trim(),
+          fromLanguage: fromLang,
+          toLanguage: toLang
+        })
+      })
+      .then(res => res.ok ? res.json() : Promise.reject())
+      .then(data => {
+        if (mounted) {
           setTranslation(data.translation || text);
-        }
-      } catch (err: any) {
-        if (isCancelled) return;
-        
-        console.warn('Translation error:', err.message || err);
-        
-        if (err.name === 'AbortError') {
-          setError("Translation timeout");
-        } else {
-          setError("Translation unavailable");
-        }
-        setTranslation(text); // Fallback to original text
-      } finally {
-        if (!isCancelled) {
           setIsTranslating(false);
         }
-      }
+      })
+      .catch(() => {
+        if (mounted) {
+          setTranslation(text);
+          setIsTranslating(false);
+        }
+      });
     };
 
-    // Debounce translation requests
-    const timeoutId = setTimeout(() => {
-      translateText().catch(err => {
-        console.warn('Async translation error:', err);
-      });
-    }, 500);
+    timeoutId = setTimeout(translateText, 300);
 
     return () => {
-      isCancelled = true;
+      mounted = false;
       clearTimeout(timeoutId);
     };
   }, [text, fromLang, toLang]);
