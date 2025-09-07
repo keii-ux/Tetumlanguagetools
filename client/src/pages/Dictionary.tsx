@@ -534,12 +534,12 @@ export default function Dictionary() {
                         
                         {/* Special buttons for advanced modules */}
                         {tool.id === "medical" && (
-                          <div className="mt-4 pt-4 border-t border-gray-100">
+                          <div className="mt-4 pt-4 border-t border-gray-100 flex justify-center">
                             <Link href="/medical-dictionary">
                               <Button 
                                 variant="outline" 
                                 size="sm" 
-                                className="w-full text-xs bg-red-50 border-red-200 text-red-700 hover:bg-red-100"
+                                className="text-xs bg-red-50 border-red-200 text-red-700 hover:bg-red-100"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                 }}
@@ -552,12 +552,12 @@ export default function Dictionary() {
                         )}
                         
                         {tool.id === "legal" && (
-                          <div className="mt-4 pt-4 border-t border-gray-100">
+                          <div className="mt-4 pt-4 border-t border-gray-100 flex justify-center">
                             <Link href="/legal-dictionary">
                               <Button 
                                 variant="outline" 
                                 size="sm" 
-                                className="w-full text-xs bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100"
+                                className="text-xs bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                 }}
@@ -572,12 +572,12 @@ export default function Dictionary() {
 
 
                         {tool.id === "asean" && (
-                          <div className="mt-4 pt-4 border-t border-gray-100">
+                          <div className="mt-4 pt-4 border-t border-gray-100 flex justify-center">
                             <Link href="/asean-terminology">
                               <Button 
                                 variant="outline" 
                                 size="sm" 
-                                className="w-full text-xs bg-green-50 border-green-200 text-green-700 hover:bg-green-100"
+                                className="text-xs bg-green-50 border-green-200 text-green-700 hover:bg-green-100"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                 }}
@@ -590,12 +590,12 @@ export default function Dictionary() {
                         )}
 
                         {tool.id === "inl-tetum" && (
-                          <div className="mt-4 pt-4 border-t border-gray-100">
+                          <div className="mt-4 pt-4 border-t border-gray-100 flex justify-center">
                             <Link href="/inl-tetum-dictionary">
                               <Button 
                                 variant="outline" 
                                 size="sm" 
-                                className="w-full text-xs bg-purple-50 border-purple-200 text-purple-700 hover:bg-purple-100"
+                                className="text-xs bg-purple-50 border-purple-200 text-purple-700 hover:bg-purple-100"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                 }}
