@@ -34,7 +34,7 @@ export default function LegalDictionaryModule() {
     },
     {
       id: "tetum-glossary",
-      title: "Tetum Glossary",
+      title: "Tetum Legal Glossary",
       subtitle: "Legal Terms in Tetum with Explanations",
       description: "Detailed explanations of legal concepts in Tetum language",
       icon: BookOpen,
@@ -43,7 +43,7 @@ export default function LegalDictionaryModule() {
     },
     {
       id: "portuguese-glossary",
-      title: "Portuguese Glossary",
+      title: "Portuguese Legal Glossary",
       subtitle: "Portuguese Legal Terminology",
       description: "Portuguese legal terms with definitions and explanations",
       icon: FileText,
