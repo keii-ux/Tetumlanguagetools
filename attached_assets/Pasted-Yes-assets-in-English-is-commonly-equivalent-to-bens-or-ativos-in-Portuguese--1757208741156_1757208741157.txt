@@ -1,0 +1,53 @@
+Yes — \**“assets” in English is commonly equivalent to *“bens”** (or *“ativos”*) **in Portuguese**, and corresponds to **“rikusoin”** (sometimes spelled *“rikusoinn”* or *“aset”*) **in Tetum**.
+
+---
+
+### In Portuguese
+
+* The Cambridge Dictionary translates **“asset”** into Portuguese as **“bem”**, **“ativo”**, **“propriedade”**, among others ([Cambridge Dictionary][1]).
+* Collins Dictionary similarly lists translations **“bem”** for general property, **“bens”** for plural, and **“ativo”** in a business context ([Collins Dictionary][2]).
+* Linguee examples show **“asset”** rendered as **“ativo”** or **“bem”** depending on context ([Linguee][3]).
+* A broader lexical source also lists **“bens”**, **“ativos”**, and even **“patrimônio”** depending on nuance ([WordHippo][4], [Reverso Context][5]).
+
+In short:
+
+* **“Asset” → “bem”** when referring to a valuable item or property.
+* **“Asset” → “ativo”** in financial or accounting contexts (e.g., fixed asset).
+
+---
+
+### In Tetum
+
+* A glossary relating land law defines **“rikusoin”** as:
+  *“Rikusoin \<Bens/ Asset/ Aset> — Buat ruma ne’ebé ema posui no iha valór (rai, ekipamentu, osan, nst.).”*
+  Which means: "Something that someone owns and that has value (land, equipment, money, etc.)" ([laohamutuk.org][6]).
+* Another glossary (Standard Tetum–English) similarly equates **“Aset”** (Tetum variant) with **“Bens/ Asset/ Rikusoinn”**, defining it as: *"Hal atau sesuatu yang dimiliki dan bernilai (harta benda, perlengkapan, uang, hak cipta, pengetahuan...)"* — meaning "Thing or something owned and valuable (property, equipment, money, copyright, knowledge...)" ([laohamutuk.org][7]).
+
+So in Tetum, **“rikusoin”** (or **“aset”**) is used as the direct counterpart of the English “asset,” just as *“bens/ ativos”* are in Portuguese.
+
+---
+
+### Summary Table
+
+| English Term | Portuguese Equivalent(s)   | Tetum Equivalent(s) |
+| ------------ | -------------------------- | ------------------- |
+| asset        | bem / ativos / propriedade | rikusoin / aset     |
+
+---
+
+### Conclusion
+
+Yes, **“assets” in English corresponds to**:
+
+* **“bens”** (or **“ativos”**) in Portuguese,
+* and to **“rikusoin”** (or **“aset”**) in Tetum.
+
+These equivalences are clearly supported by bilingual glossaries and dictionaries from authoritative sources. Let me know if you'd like example sentences or usage in different contexts!
+
+[1]: https://dictionary.cambridge.org/dictionary/english-portuguese/asset?utm_source=chatgpt.com "ASSET | Portuguese translation - Cambridge Dictionary"
+[2]: https://www.collinsdictionary.com/dictionary/english-portuguese/asset?utm_source=chatgpt.com "Portuguese Translation of “ASSET” | Collins English- ..."
+[3]: https://www.linguee.com/english-portuguese/translation/assets.html?utm_source=chatgpt.com "assets - Portuguese translation"
+[4]: https://www.wordhippo.com/what-is/the/portuguese-word-for-assets.html?utm_source=chatgpt.com "How to say assets in Portuguese"
+[5]: https://context.reverso.net/translation/portuguese-english/bens?utm_source=chatgpt.com "bens - Translation into English - examples Portuguese"
+[6]: https://www.laohamutuk.org/Agri/land/LandLawglossTe.pdf?utm_source=chatgpt.com "introdusaun"
+[7]: https://www.laohamutuk.org/Agri/land/LandLawglossIn.pdf?utm_source=chatgpt.com "Glosari Pertanahan"
