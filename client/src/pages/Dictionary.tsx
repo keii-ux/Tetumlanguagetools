@@ -503,8 +503,7 @@ export default function Dictionary() {
               return (
                 <div 
                   key={tool.id}
-                  className={`group p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-green-200 ${tool.bgColor} rounded-lg text-[14px] font-normal pl-[30px] pr-[30px]`}
-                  onClick={() => handleToolSelect(tool.id)}
+                  className={`group p-8 hover:shadow-2xl transition-all duration-300 border-2 hover:border-green-200 ${tool.bgColor} rounded-lg text-[14px] font-normal pl-[30px] pr-[30px]`}
                 >
                   <div className="p-0">
                     <div className="flex flex-col items-center text-center space-y-6">
@@ -527,7 +526,6 @@ export default function Dictionary() {
                             </span>
                             <span className="text-gray-500">Verified Terms</span>
                           </div>
-                          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-green-500 group-hover:translate-x-1 transition-all" />
                         </div>
                         
                         {/* Special buttons for advanced modules */}
