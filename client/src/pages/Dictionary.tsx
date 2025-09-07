@@ -351,7 +351,7 @@ export default function Dictionary() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Top Navigation Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -484,7 +484,7 @@ export default function Dictionary() {
         </div>
       </section>
       {/* Main Content Section */}
-      <section className="py-20 bg-[#f5f6ff]">
+      <section className="flex-1 py-20 bg-[#f5f6ff]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-16">
@@ -642,7 +642,7 @@ export default function Dictionary() {
       </Dialog>
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-4 text-center">
-        <p className="text-sm">2024-2025©   Liantek   All Rights Reserved</p>
+        <p className="text-sm">All Rights Reserved©Liantek, 2025, Timor-Leste</p>
       </footer>
     </div>
   );

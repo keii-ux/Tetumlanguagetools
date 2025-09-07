@@ -96,8 +96,8 @@ export default function TetumMonolingualModule() {
   const content = languageContent[currentLanguage];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex flex-col">
+      <div className="flex-1 container mx-auto px-4 py-8">
 
 
         {/* Header */}

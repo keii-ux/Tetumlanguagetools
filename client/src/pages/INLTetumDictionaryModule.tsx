@@ -23,7 +23,7 @@ export default function INLTetumDictionaryModule() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
       {/* Clean Header */}
       <div className="sticky top-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 z-10">
         <div className="max-w-4xl mx-auto px-4 py-4">
@@ -45,7 +45,7 @@ export default function INLTetumDictionaryModule() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4">
+      <div className="flex-1 max-w-4xl mx-auto px-4">
         {/* Search Section */}
         <div className="py-8">
           <INLTetumDictionarySearch onEntrySelect={handleEntrySelect} />
