@@ -87,7 +87,6 @@ export default function LegalDictionaryModule() {
           </div>
         </div>
       </div>
-
       {/* Section Navigation */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="grid md:grid-cols-3 gap-6 mb-8">
@@ -97,11 +96,7 @@ export default function LegalDictionaryModule() {
             return (
               <Card
                 key={section.id}
-                className={`cursor-pointer transition-all duration-200 ${
-                  isActive
-                    ? "ring-2 ring-blue-500 bg-blue-50"
-                    : "hover:shadow-lg border-gray-200"
-                }`}
+                className="rounded-lg border text-card-foreground shadow-sm cursor-pointer transition-all duration-200 hover:shadow-lg border-gray-200 bg-[#e6eff2]"
                 onClick={() => setActiveSection(section.id)}
               >
                 <CardContent className="p-6">
