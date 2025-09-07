@@ -362,18 +362,7 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
                           </p>
                         )}
                         
-                        {/* Source Link */}
-                        {entry.source && entry.source.startsWith('http') && (
-                          <a 
-                            href={entry.source} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center text-xs text-blue-500 hover:text-blue-700 underline"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            View Source →
-                          </a>
-                        )}
+                        
                         
                         {/* Content Type and Source Distinction */}
                         <div className="flex items-center gap-2 mt-2">
