@@ -513,7 +513,7 @@ export default function Dictionary() {
                       </div>
                       <div className="flex-1">
                         <div className="flex flex-col items-center space-y-3 mb-3">
-                          <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-600 transition-colors">
+                          <h3 className="text-xl font-bold group-hover:text-green-600 transition-colors text-[#000803]">
                             {tool.title}
                           </h3>
                         </div>
