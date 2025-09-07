@@ -516,7 +516,7 @@ export default function Dictionary() {
                             {tool.title}
                           </h3>
                         </div>
-                        <p className="text-gray-600 mb-6 text-[19px]">
+                        <p className="text-gray-600 mb-6 text-[17px]">
                           {tool.description}
                         </p>
                         <div className="flex flex-col items-center space-y-2">
