@@ -155,14 +155,7 @@ export default function MedicalDictionaryModule() {
               </CardContent>
             </Card>
 
-            {/* Selected Word Detail */}
-            {selectedEntry && (
-              <TermDetail
-                entry={selectedEntry}
-                onClose={handleCloseDetail}
-                userId="guest"
-              />
-            )}
+            
           </TabsContent>
 
           <TabsContent value="about" className="space-y-6">
