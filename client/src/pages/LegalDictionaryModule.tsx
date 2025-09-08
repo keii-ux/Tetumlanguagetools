@@ -81,9 +81,9 @@ export default function LegalDictionaryModule() {
                 Legal Terminology
               </div>
               <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                Disionáriu Jurídiku
+                Legal Tetum
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-indigo-300 block">
-                  Tetum Legal Terms
+                  Dictionary
                 </span>
               </h1>
               <p className="text-xl text-blue-100 mb-8 leading-relaxed">
