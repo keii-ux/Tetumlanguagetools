@@ -19,6 +19,67 @@ export async function registerRoutes(app: Express): Promise<Server> {
     return String(value);
   };
 
+  // Parse INL Tetum meaning field to extract definition, synonyms, notes, and examples
+  function parseINLMeaning(meaning: string): {
+    definition: string;
+    synonyms: string[];
+    notes: string;
+    examples: string[];
+  } {
+    let definition = meaning;
+    let synonyms: string[] = [];
+    let notes = "";
+    let examples: string[] = [];
+
+    // Extract synonyms (Sin.)
+    const synRegex = /Sin\.\s*([^.]*?)(?:\s*(?:Nota:|Ez\.|$))/g;
+    let synMatch;
+    while ((synMatch = synRegex.exec(meaning)) !== null) {
+      const synPart = synMatch[1].trim();
+      if (synPart) {
+        synonyms.push(...synPart.split(/[,;]/).map(s => s.trim()).filter(s => s.length > 0));
+      }
+      definition = definition.replace(synMatch[0], '');
+    }
+
+    // Extract notes (Nota:)
+    const noteRegex = /Nota:\s*([^.]*?)(?:\s*(?:Sin\.|Ez\.|$))/g;
+    let noteMatch;
+    while ((noteMatch = noteRegex.exec(meaning)) !== null) {
+      const notePart = noteMatch[1].trim();
+      if (notePart) {
+        notes += (notes ? '; ' : '') + notePart;
+      }
+      definition = definition.replace(noteMatch[0], '');
+    }
+
+    // Extract examples (Ez.)
+    const exRegex = /Ez\.\s*([^.]*?)(?:\s*(?:Sin\.|Nota\.|$))/g;
+    let exMatch;
+    while ((exMatch = exRegex.exec(meaning)) !== null) {
+      const exPart = exMatch[1].trim();
+      if (exPart) {
+        examples.push(exPart);
+      }
+      definition = definition.replace(exMatch[0], '');
+    }
+
+    // Clean up the definition
+    definition = definition
+      .replace(/\s*Sin\.\s*$/g, '')
+      .replace(/\s*Nota:\s*$/g, '')
+      .replace(/\s*Ez\.\s*$/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    return {
+      definition,
+      synonyms,
+      notes,
+      examples
+    };
+  }
+
   // Initialize dictionary data from JSON files
   async function initializeDictionaries() {
     try {
@@ -236,6 +297,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const cleanMeaning = safeStringify(item.meaning).trim();
           const cleanClass = item.class ? safeStringify(item.class).trim() : "";
           
+          // Parse the meaning field to extract definition, synonyms, notes, and examples
+          const parsedMeaning = parseINLMeaning(cleanMeaning);
+          
+          // Combine word class with any parsed notes
+          const allNotes = [
+            cleanClass ? `Word class: ${cleanClass}` : "",
+            parsedMeaning.notes || ""
+          ].filter(n => n.trim().length > 0).join('; ');
+          
           return {
             tetum: cleanWord,
             portuguese: "",
@@ -243,13 +313,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
             source: "INL Tetum Dictionary",
             category: "inl-tetum",
             dictionaryType: "inl-tetum",
-            notes: cleanClass ? `Word class: ${cleanClass}` : "",
-            explanation: cleanMeaning,
+            notes: allNotes,
+            explanation: parsedMeaning.definition,
             pronunciation: "",
             wordClass: cleanClass,
             etymology: "",
-            usageExamples: [],
-            relatedTerms: [],
+            usageExamples: parsedMeaning.examples,
+            relatedTerms: parsedMeaning.synonyms,
           };
         });
 
