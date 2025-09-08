@@ -11,6 +11,7 @@ import PortugueseGlossaryModule from "@/pages/PortugueseGlossaryModule";
 import TetumMonolingualModule from "@/pages/TetumMonolingualModule";
 import INLTetumDictionaryModule from "@/pages/INLTetumDictionaryModule";
 import ASEANTerminologyModule from "@/pages/ASEANTerminologyModule";
+import EtymologyDictionaryModule from "@/pages/EtymologyDictionaryModule";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -24,6 +25,7 @@ function Router() {
       <Route path="/tetum-monolingual" component={TetumMonolingualModule} />
       <Route path="/inl-tetum-dictionary" component={INLTetumDictionaryModule} />
       <Route path="/asean-terminology" component={ASEANTerminologyModule} />
+      <Route path="/etymology-dictionary" component={EtymologyDictionaryModule} />
       <Route component={NotFound} />
     </Switch>
   );

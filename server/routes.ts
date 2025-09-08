@@ -1130,6 +1130,88 @@ Provide only the translation without additional explanation.`;
     }
   });
 
+  // Etymology search endpoint
+  app.get("/api/etymology/search", async (req, res) => {
+    try {
+      const { word } = req.query;
+      
+      if (!word || typeof word !== 'string') {
+        return res.status(400).json({ error: "Word parameter is required" });
+      }
+
+      if (!process.env.OPENAI_API_KEY) {
+        return res.status(500).json({ 
+          error: "OpenAI API key not configured. Etymology research requires API access."
+        });
+      }
+
+      // Dynamic import of OpenAI
+      const { default: OpenAI } = await import("openai");
+      const openai = new OpenAI({ 
+        apiKey: process.env.OPENAI_API_KEY 
+      });
+
+      const prompt = `Research the etymology of the Tetum word "${word.trim()}". Provide a comprehensive analysis including:
+
+1. Etymology and origin of the word
+2. Historical forms and variations if known
+3. How the meaning has evolved over time
+4. Related words in Tetum or connected languages (Portuguese, Malay, indigenous Timorese languages)
+5. Cultural or linguistic context
+
+Please provide detailed, scholarly information in a clear, accessible format. Focus on authentic linguistic research and avoid speculation. If the word has influences from Portuguese, Malay, or other languages, explain those connections.
+
+Respond in JSON format with the following structure:
+{
+  "word": "the original word",
+  "language": "Tetum",
+  "etymology": "detailed etymology explanation",
+  "historical_forms": ["array of historical forms if known"],
+  "meaning_evolution": "how the meaning has changed over time",
+  "related_words": ["array of related words"],
+  "source": "AI Etymology Research via OpenAI"
+}`;
+
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o", // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
+        messages: [
+          {
+            role: "system",
+            content: "You are a linguistic expert specializing in Tetum language etymology and historical linguistics. Provide accurate, scholarly information about word origins and development."
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        response_format: { type: "json_object" },
+        max_tokens: 1500,
+        temperature: 0.3
+      });
+
+      const result = JSON.parse(response.choices[0].message.content || "{}");
+      
+      // Ensure all required fields are present
+      const etymologyResult = {
+        word: result.word || word.trim(),
+        language: result.language || "Tetum",
+        etymology: result.etymology || "Etymology information not available",
+        historical_forms: Array.isArray(result.historical_forms) ? result.historical_forms : [],
+        meaning_evolution: result.meaning_evolution || "Meaning evolution information not available",
+        related_words: Array.isArray(result.related_words) ? result.related_words : [],
+        source: result.source || "AI Etymology Research via OpenAI"
+      };
+
+      res.json(etymologyResult);
+    } catch (error) {
+      console.error("Etymology search error:", error);
+      res.status(500).json({ 
+        error: "Failed to research etymology. Please try again.",
+        details: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
