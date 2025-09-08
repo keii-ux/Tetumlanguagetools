@@ -283,15 +283,6 @@ export function TetumGlossarySearch({ onEntrySelect }: TetumGlossarySearchProps)
         </div>
       )}
 
-      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
-        <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
-          Kona-ba Glosáriu Legál Tetum
-        </h3>
-        <p className="text-sm text-blue-800 dark:text-blue-200">
-          Glosáriu ne'e inklui termu legál importante sira ho esplikasaun detalladu iha lian Tetum. 
-          Nia inklui termu husi Constituisaun RDTL, Kódigu Sivíl, Kódigu Penál, no dokumentu legál seluk.
-        </p>
-      </div>
     </div>
   );
 }
