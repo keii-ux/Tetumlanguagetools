@@ -45,33 +45,6 @@ export default function TetumGlossaryModule() {
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <TetumGlossarySearch onEntrySelect={handleEntrySelect} />
-            
-            <Card className="mt-8">
-              <CardHeader>
-                <CardTitle>Deskripsaun</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <p className="text-gray-700 dark:text-gray-300">
-                    Glosáriu ida ne'e inklui termu legál importante sira ne'ebé uza barak iha dokumentu 
-                    legál no konstituisaun Timor-Leste nian. Kada termu hetan esplikasaun klaru iha lian Tetum 
-                    atu ajuda ema sira komprende diak liu asuntu legál sira.
-                  </p>
-                  
-                  <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                    <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">
-                      Oinsá atu uza:
-                    </h4>
-                    <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
-                      <li>• Hakerek liafuan ida iha kaixa buka</li>
-                      <li>• Hili termu husi lista ne'ebé mosu</li>
-                      <li>• Lee esplikasaun detalhadu iha sorin loos</li>
-                      <li>• Uza termu sira-ne'e atu komprende dokumentu legál</li>
-                    </ul>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
 
           <div className="lg:col-span-1">
@@ -99,6 +72,34 @@ export default function TetumGlossaryModule() {
               </Card>
             )}
           </div>
+        </div>
+        
+        {/* About Section */}
+        <div className="mt-12 max-w-4xl mx-auto">
+          <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur">
+            <CardHeader>
+              <CardTitle className="text-center text-blue-900 dark:text-blue-100">Kona-ba Glosáriu Legal Tetum</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <p className="text-gray-700 dark:text-gray-300 text-center">
+                  Glosáriu ne'e inklui termu legál importante sira ho esplikasaun detalhadu iha lian Tetum. Nia inklui termu husi Konstituisaun RDTL, Kódigu Sivíl, Kódigu Penál, no dokumentu legál seluk.
+                </p>
+                
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                  <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">
+                    Oinsá atu uza:
+                  </h4>
+                  <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
+                    <li>• Hakerek liafuan ida iha kaixa buka</li>
+                    <li>• Hili termu husi lista ne'ebé mosu</li>
+                    <li>• Lee esplikasaun detalhadu iha sorin loos</li>
+                    <li>• Uza termu sira-ne'e atu komprende dokumentu legál</li>
+                  </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
       
