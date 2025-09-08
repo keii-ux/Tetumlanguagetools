@@ -23,7 +23,6 @@ export default function INLTetumDictionaryModule() {
   const wordsWithDefinitions = inlEntries.filter(entry => entry.explanation && entry.explanation.trim().length > 0).length;
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
-    console.log("Entry selected in INLTetumDictionaryModule:", entry);
     setSelectedEntry(entry);
   };
 
@@ -75,9 +74,9 @@ export default function INLTetumDictionaryModule() {
                 Official INL Dictionary
               </div>
               <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                Disionáriu Tetum
+                Tetum Monolingual
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-indigo-300 block">
-                  Monolíngue
+                  Dictionary
                 </span>
               </h1>
               <p className="text-xl text-purple-100 mb-8 leading-relaxed">
