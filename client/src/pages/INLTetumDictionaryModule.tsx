@@ -63,7 +63,6 @@ export default function INLTetumDictionaryModule() {
           </div>
         </div>
       </div>
-
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-700 text-white py-16">
         <div className="max-w-6xl mx-auto px-4">
@@ -123,7 +122,6 @@ export default function INLTetumDictionaryModule() {
           </div>
         </div>
       </div>
-
       {/* Main Content */}
       <div className="flex-1 max-w-6xl mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -292,10 +290,9 @@ export default function INLTetumDictionaryModule() {
 
         </Tabs>
       </div>
-      
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-4 text-center">
-        <p className="text-sm">All Rights Reserved©Liantek, 2025, Timor-Leste</p>
+        <p className="text-sm">©2024-2025   All Rights Reserved     </p>
       </footer>
     </div>
   );
