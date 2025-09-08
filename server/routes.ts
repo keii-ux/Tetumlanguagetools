@@ -46,7 +46,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         try {
           inlTetumData = JSON.parse(fileContent);
           console.log(`INL Tetum dictionary loaded successfully with ${inlTetumData.length} entries`);
-        } catch (directParseError) {
+        } catch (directParseError: any) {
           console.warn("Direct parsing failed, trying with cleanup:", directParseError.message);
           
           // Clean up encoding issues and malformed JSON
@@ -74,7 +74,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           try {
             inlTetumData = JSON.parse(fileContent);
             console.log(`INL Tetum dictionary loaded with cleanup: ${inlTetumData.length} entries`);
-          } catch (cleanupParseError) {
+          } catch (cleanupParseError: any) {
             console.warn("Cleanup parsing failed, attempting advanced recovery:", cleanupParseError.message);
             throw cleanupParseError; // Let the main catch block handle advanced recovery
           }
@@ -111,7 +111,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 if (parsed && parsed.word && parsed.meaning) {
                   cleanedObjects.push(parsed);
                 }
-              } catch (objError) {
+              } catch (objError: any) {
                 // Skip malformed objects but log for debugging
                 if (i < 10) { // Only log first few errors to avoid spam
                   console.warn(`Skipping malformed object at index ${i}:`, objError.message);

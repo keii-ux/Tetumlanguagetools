@@ -66,12 +66,13 @@ export class MemStorage implements IStorage {
       filteredEntries = filteredEntries.filter(entry => entry.dictionaryType === query.dictionaryType);
     }
 
-    // If no search term, return entries matching the dictionary type filter
+    // If no search term, return first 100 entries matching the dictionary type filter
     if (!searchTerm.trim()) {
-      return filteredEntries;
+      return filteredEntries.slice(0, 100);
     }
 
-    return filteredEntries.filter(entry => {
+    // Enhanced search with better matching for monolingual dictionaries
+    const results = filteredEntries.filter(entry => {
       // Search in relevant fields based on language preference
       const fields = [];
       if (query.language === "all" || query.language === "tetum") {
@@ -84,25 +85,72 @@ export class MemStorage implements IStorage {
         if (entry.english) fields.push(entry.english);
       }
 
-      // Include definitions if requested
-      if (query.includeDefinitions) {
+      // For INL Tetum dictionary, always search in word class and explanation
+      if (entry.dictionaryType === "inl-tetum") {
+        if (entry.wordClass) fields.push(entry.wordClass);
+        // Always include definitions for monolingual dictionaries
         if (entry.explanation) fields.push(entry.explanation);
         if (entry.notes) fields.push(entry.notes);
-        if (entry.category) fields.push(entry.category);
+      } else {
+        // Include definitions if requested for other dictionaries
+        if (query.includeDefinitions) {
+          if (entry.explanation) fields.push(entry.explanation);
+          if (entry.notes) fields.push(entry.notes);
+          if (entry.category) fields.push(entry.category);
+        }
       }
 
-      // Search in relevant fields
+      // Search in relevant fields with improved partial matching
       return fields.some(field => {
+        if (!field) return false;
         const fieldValue = query.caseSensitive ? field : field.toLowerCase();
-        return query.exactMatch 
-          ? fieldValue === searchTerm
-          : fieldValue.includes(searchTerm);
+        
+        if (query.exactMatch) {
+          return fieldValue === searchTerm;
+        } else {
+          // Better partial matching: word boundaries, starts with, contains
+          const normalizedField = fieldValue.trim();
+          const normalizedSearch = searchTerm.trim();
+          
+          // Check for exact word match
+          const wordMatch = new RegExp(`\\b${normalizedSearch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+          if (wordMatch.test(normalizedField)) return true;
+          
+          // Check if field starts with search term
+          if (normalizedField.startsWith(normalizedSearch)) return true;
+          
+          // Check if any word in the field starts with search term
+          const words = normalizedField.split(/\s+/);
+          if (words.some(word => word.startsWith(normalizedSearch))) return true;
+          
+          // Finally check for contains
+          return normalizedField.includes(normalizedSearch);
+        }
       });
-    }).sort((a, b) => {
-      // Sort by relevance: exact matches first, then starts with, then contains
-      const aFields = [a.tetum || "", a.english || "", a.portuguese || ""];
-      const bFields = [b.tetum || "", b.english || "", b.portuguese || ""];
+    });
+
+    // Enhanced sorting for better search results
+    return results.sort((a, b) => {
+      const aFields = [(a.tetum || "").trim(), (a.english || "").trim(), (a.portuguese || "").trim()];
+      const bFields = [(b.tetum || "").trim(), (b.english || "").trim(), (b.portuguese || "").trim()];
+      const searchTermLower = searchTerm.toLowerCase();
       
+      // Priority 1: Exact word match
+      const aExactWord = aFields.some(field => {
+        const fieldLower = field.toLowerCase();
+        const wordMatch = new RegExp(`\\b${searchTermLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`);
+        return wordMatch.test(fieldLower);
+      });
+      const bExactWord = bFields.some(field => {
+        const fieldLower = field.toLowerCase();
+        const wordMatch = new RegExp(`\\b${searchTermLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`);
+        return wordMatch.test(fieldLower);
+      });
+      
+      if (aExactWord && !bExactWord) return -1;
+      if (!aExactWord && bExactWord) return 1;
+      
+      // Priority 2: Exact string match
       const aExact = aFields.some(field => 
         query.caseSensitive ? field === (query.query || "") : field.toLowerCase() === searchTerm
       );
@@ -113,6 +161,7 @@ export class MemStorage implements IStorage {
       if (aExact && !bExact) return -1;
       if (!aExact && bExact) return 1;
       
+      // Priority 3: Starts with search term
       const aStartsWith = aFields.some(field => 
         query.caseSensitive ? field.startsWith(query.query || "") : field.toLowerCase().startsWith(searchTerm)
       );
@@ -123,11 +172,24 @@ export class MemStorage implements IStorage {
       if (aStartsWith && !bStartsWith) return -1;
       if (!aStartsWith && bStartsWith) return 1;
       
+      // Priority 4: Any word starts with search term
+      const aWordStarts = aFields.some(field => {
+        const words = field.toLowerCase().split(/\s+/);
+        return words.some(word => word.startsWith(searchTermLower));
+      });
+      const bWordStarts = bFields.some(field => {
+        const words = field.toLowerCase().split(/\s+/);
+        return words.some(word => word.startsWith(searchTermLower));
+      });
+      
+      if (aWordStarts && !bWordStarts) return -1;
+      if (!aWordStarts && bWordStarts) return 1;
+      
       // Alphabetical sort as fallback
-      return (a.tetum || a.english || a.portuguese || "").localeCompare(
-        b.tetum || b.english || b.portuguese || ""
-      );
-    });
+      const aSort = a.tetum || a.english || a.portuguese || "";
+      const bSort = b.tetum || b.english || b.portuguese || "";
+      return aSort.localeCompare(bSort);
+    }).slice(0, 50); // Limit results for performance
   }
 
   async createEntry(entry: InsertDictionaryEntry): Promise<DictionaryEntry> {
