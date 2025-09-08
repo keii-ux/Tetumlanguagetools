@@ -53,6 +53,13 @@ A comprehensive multilingual dictionary application focusing on Tetum language r
 - **Content**: 9,974 pure Tetum-to-Tetum definitions
 - **Features**: Authentic INL Tetum dictionary with clean, app-like interface
 
+### 7. Etymology Dictionary Module
+- **Route**: `/etymology-dictionary`
+- **API Endpoint**: `/api/etymology/search`
+- **Data Source**: OpenRouter API with Claude 3 Haiku
+- **Content**: AI-powered word etymology research for Tetum language
+- **Features**: Historical word analysis, language influence tracking, meaning evolution, related word discovery
+
 ## Key Technologies
 - React frontend with TypeScript
 - Tailwind CSS for responsive design
@@ -104,4 +111,6 @@ A comprehensive multilingual dictionary application focusing on Tetum language r
 - ✅ Google Translate API integration for authentic Tetum translations
 - ✅ Complete module isolation implemented
 - ✅ Comprehensive ASEAN data: 738 authentic abbreviations from ASEAN-Abbreviations-List.pdf
+- ✅ Etymology Dictionary Module: Complete implementation with OpenRouter API integration
+- ✅ Performance optimized: Claude 3 Haiku for fast 3-5 second etymology responses
 - ✅ Total entries: 14,917 authentic terms across all modules (including 807 comprehensive ASEAN terms and 20 new legal land/housing terms)

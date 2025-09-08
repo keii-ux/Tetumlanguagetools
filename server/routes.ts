@@ -1145,51 +1145,54 @@ Provide only the translation without additional explanation.`;
         });
       }
 
-      const prompt = `Research the etymology of the Tetum word "${word.trim()}". Provide a comprehensive analysis including:
+      const prompt = `Analyze the etymology of the Tetum word "${word.trim()}". Provide concise information about:
+1. Word origin and etymology
+2. Historical forms (if known)  
+3. Meaning evolution
+4. Related words
+5. Language influences (Portuguese, Malay, indigenous)
 
-1. Etymology and origin of the word
-2. Historical forms and variations if known
-3. How the meaning has evolved over time
-4. Related words in Tetum or connected languages (Portuguese, Malay, indigenous Timorese languages)
-5. Cultural or linguistic context
-
-Please provide detailed, scholarly information in a clear, accessible format. Focus on authentic linguistic research and avoid speculation. If the word has influences from Portuguese, Malay, or other languages, explain those connections.
-
-Respond in JSON format with the following structure:
+Respond in this exact JSON format:
 {
-  "word": "the original word",
+  "word": "${word.trim()}",
   "language": "Tetum",
-  "etymology": "detailed etymology explanation",
-  "historical_forms": ["array of historical forms if known"],
-  "meaning_evolution": "how the meaning has changed over time",
-  "related_words": ["array of related words"],
+  "etymology": "concise etymology explanation",
+  "historical_forms": ["form1", "form2"],
+  "meaning_evolution": "brief meaning evolution",
+  "related_words": ["word1", "word2"],
   "source": "AI Etymology Research via OpenRouter"
 }`;
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
       const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json",
-          "HTTP-Referer": "https://replit.com", // Optional: identify your app
-          "X-Title": "Tetum Etymology Dictionary" // Optional: show app name in logs
+          "HTTP-Referer": "https://replit.com",
+          "X-Title": "Tetum Etymology Dictionary"
         },
         body: JSON.stringify({
-          model: "anthropic/claude-3.5-sonnet", // Use a capable model for linguistic research
+          model: "anthropic/claude-3-haiku", // Faster model for quicker responses
           messages: [
             {
               role: "system",
-              content: "You are a linguistic expert specializing in Tetum language etymology and historical linguistics. Provide accurate, scholarly information about word origins and development. Always respond in valid JSON format."
+              content: "You are a Tetum linguistics expert. Provide concise, accurate etymology information in valid JSON format only."
             },
             {
               role: "user", 
               content: prompt
             }
           ],
-          max_tokens: 1500,
-          temperature: 0.3
-        })
+          max_tokens: 800, // Reduced for faster responses
+          temperature: 0.2
+        }),
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         throw new Error(`OpenRouter API request failed: ${response.status} ${response.statusText}`);
@@ -1197,21 +1200,29 @@ Respond in JSON format with the following structure:
 
       const apiResult = await response.json();
       
-      if (!apiResult.choices || !apiResult.choices[0] || !apiResult.choices[0].message) {
-        throw new Error("Invalid response format from OpenRouter API");
+      if (!apiResult?.choices?.[0]?.message?.content) {
+        throw new Error("Invalid API response structure");
       }
 
       let result;
+      const content = apiResult.choices[0].message.content.trim();
+      
       try {
-        result = JSON.parse(apiResult.choices[0].message.content);
+        // Try to extract JSON from response
+        const jsonMatch = content.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          result = JSON.parse(jsonMatch[0]);
+        } else {
+          throw new Error("No JSON found in response");
+        }
       } catch (parseError) {
-        // If JSON parsing fails, create a basic structure with the content
+        // Quick fallback for parsing errors
         result = {
           word: word.trim(),
           language: "Tetum",
-          etymology: apiResult.choices[0].message.content || "Etymology information not available",
+          etymology: content.substring(0, 300) + "...", // Truncate long responses
           historical_forms: [],
-          meaning_evolution: "Information not available in structured format",
+          meaning_evolution: "Detailed analysis available in etymology section",
           related_words: [],
           source: "AI Etymology Research via OpenRouter"
         };
