@@ -1176,6 +1176,9 @@ Provide only the translation without additional explanation.`;
 3. Meaning evolution
 4. Related words (use INL spelling)
 5. Language influences (Portuguese, Malay, indigenous)
+6. Tetum expressions and compound words using this word
+
+TETUM EXPRESSIONS: Tetum is rich in word combinations. Find common expressions, compound words, and metaphorical phrases that use "${word.trim()}" as a component. Examples: if the word is "fuan" (heart), include "ai-fuan" (fruit), "fuan-kanek" (heart/mind), "fuan-boot" (generous), etc.
 
 SPELLING STANDARDS: Follow the official INL Tetum dictionary spelling conventions. Use proper Tetum orthography as established by the Instituto Nacional de Linguística.${spellingContext}
 
@@ -1187,6 +1190,10 @@ Respond in this exact JSON format:
   "historical_forms": ["form1", "form2"],
   "meaning_evolution": "brief meaning evolution",
   "related_words": ["word1", "word2"],
+  "expressions": [
+    {"expression": "compound1", "meaning": "meaning of compound1"},
+    {"expression": "compound2", "meaning": "meaning of compound2"}
+  ],
   "source": "AI Etymology Research via OpenRouter (INL spelling standards)"
 }`;
 
@@ -1263,6 +1270,7 @@ Respond in this exact JSON format:
         historical_forms: Array.isArray(result.historical_forms) ? result.historical_forms : [],
         meaning_evolution: result.meaning_evolution || "Meaning evolution information not available",
         related_words: Array.isArray(result.related_words) ? result.related_words : [],
+        expressions: Array.isArray(result.expressions) ? result.expressions : [],
         source: result.source || "AI Etymology Research via OpenRouter"
       };
 

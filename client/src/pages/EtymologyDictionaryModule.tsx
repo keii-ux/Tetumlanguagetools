@@ -17,6 +17,7 @@ interface EtymologyResult {
   historical_forms: string[];
   meaning_evolution: string;
   related_words: string[];
+  expressions: Array<{expression: string; meaning: string}>;
   source: string;
 }
 
@@ -282,6 +283,37 @@ export default function EtymologyDictionaryModule() {
                     </div>
                   )}
 
+                  {/* Tetum Expressions */}
+                  {etymologyResult.expressions && etymologyResult.expressions.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                        <Languages className="w-4 h-4 text-orange-600" />
+                        Tetum Expressions & Compounds
+                      </h4>
+                      <div className="space-y-3 bg-amber-50 p-4 rounded-lg">
+                        {etymologyResult.expressions.map((expr, index) => (
+                          <div key={index} className="border-l-4 border-amber-300 pl-4">
+                            <div className="flex items-start gap-3">
+                              <Badge 
+                                variant="outline" 
+                                className="bg-amber-100 border-amber-300 text-amber-800 cursor-pointer hover:bg-amber-200 font-medium"
+                                onClick={() => {
+                                  setSearchTerm(expr.expression);
+                                  handleSearch();
+                                }}
+                              >
+                                {expr.expression}
+                              </Badge>
+                              <span className="text-gray-700 text-sm leading-relaxed flex-1">
+                                {expr.meaning}
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Related Words */}
                   {etymologyResult.related_words && etymologyResult.related_words.length > 0 && (
                     <div>
@@ -382,14 +414,18 @@ export default function EtymologyDictionaryModule() {
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
-                      <span className="text-gray-700">Related word connections</span>
+                      <span className="text-gray-700">Tetum expressions and compounds</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                      <span className="text-gray-700">Historical form variations</span>
+                      <span className="text-gray-700">Related word connections</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
+                      <span className="text-gray-700">Historical form variations</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                       <span className="text-gray-700">Cultural context analysis</span>
                     </div>
                   </div>
