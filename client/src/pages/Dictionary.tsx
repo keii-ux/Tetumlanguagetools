@@ -422,7 +422,7 @@ export default function Dictionary() {
                 & Dictionaries
               </h1>
               
-              <p className="text-xl text-blue-100 mb-10 leading-relaxed max-w-lg">Specialized dictionaries and glossaries designed for professional use across multiple languages, with focus on Tetum, and technical domains, such as medical and legal, following the INL standard.</p>
+              <p className="text-blue-100 mb-10 max-w-lg text-[18px]">Specialized dictionaries and glossaries designed for professional use across multiple languages, with focus on Tetum, and technical domains, such as medical and legal, following the INL standard.</p>
 
               
 
