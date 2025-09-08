@@ -31,45 +31,57 @@ export async function registerRoutes(app: Express): Promise<Server> {
     let notes = "";
     let examples: string[] = [];
 
-    // Extract synonyms (Sin.)
-    const synRegex = /Sin\.\s*([^.]*?)(?:\s*(?:Nota:|Ez\.|$))/g;
+    // Extract synonyms (Sin.) - improved regex to handle sentence ending
+    const synRegex = /Sin\.\s+([^.]+)\.?/g;
     let synMatch;
     while ((synMatch = synRegex.exec(meaning)) !== null) {
       const synPart = synMatch[1].trim();
       if (synPart) {
         synonyms.push(...synPart.split(/[,;]/).map(s => s.trim()).filter(s => s.length > 0));
+        definition = definition.replace(synMatch[0], '').trim();
       }
-      definition = definition.replace(synMatch[0], '');
     }
 
-    // Extract notes (Nota:)
-    const noteRegex = /Nota:\s*([^.]*?)(?:\s*(?:Sin\.|Ez\.|$))/g;
+    // Extract notes (Nota:) - improved regex to capture until end or next marker
+    const noteRegex = /Nota:\s+(.+?)(?=\s+(?:Sin\.|Ez\.|$))/g;
     let noteMatch;
     while ((noteMatch = noteRegex.exec(meaning)) !== null) {
       const notePart = noteMatch[1].trim();
       if (notePart) {
         notes += (notes ? '; ' : '') + notePart;
+        definition = definition.replace(noteMatch[0], '').trim();
       }
-      definition = definition.replace(noteMatch[0], '');
+    }
+
+    // Handle notes that go to the end of the string
+    const noteEndRegex = /Nota:\s+(.+)$/g;
+    let noteEndMatch;
+    while ((noteEndMatch = noteEndRegex.exec(meaning)) !== null) {
+      const notePart = noteEndMatch[1].trim();
+      if (notePart && !notes.includes(notePart)) {
+        notes += (notes ? '; ' : '') + notePart;
+        definition = definition.replace(noteEndMatch[0], '').trim();
+      }
     }
 
     // Extract examples (Ez.)
-    const exRegex = /Ez\.\s*([^.]*?)(?:\s*(?:Sin\.|Nota\.|$))/g;
+    const exRegex = /Ez\.\s+([^.]+)\.?/g;
     let exMatch;
     while ((exMatch = exRegex.exec(meaning)) !== null) {
       const exPart = exMatch[1].trim();
       if (exPart) {
         examples.push(exPart);
+        definition = definition.replace(exMatch[0], '').trim();
       }
-      definition = definition.replace(exMatch[0], '');
     }
 
-    // Clean up the definition
+    // Clean up the definition - remove any remaining patterns and extra spaces
     definition = definition
-      .replace(/\s*Sin\.\s*$/g, '')
-      .replace(/\s*Nota:\s*$/g, '')
-      .replace(/\s*Ez\.\s*$/g, '')
+      .replace(/\s*Sin\.\s*.*$/g, '')
+      .replace(/\s*Nota:\s*.*$/g, '')
+      .replace(/\s*Ez\.\s*.*$/g, '')
       .replace(/\s+/g, ' ')
+      .replace(/\s*\.\s*$/, '.')
       .trim();
 
     return {
