@@ -24,6 +24,7 @@ export function AITranslation({
 }: AITranslationProps) {
   const [translation, setTranslation] = useState("");
   const [isTranslating, setIsTranslating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let mounted = true;
@@ -43,15 +44,17 @@ export function AITranslation({
           toLanguage: toLang
         })
       })
-      .then(res => res.ok ? res.json() : Promise.reject())
+      .then(res => res.ok ? res.json() : Promise.reject(`HTTP ${res.status}`))
       .then(data => {
         if (mounted) {
           setTranslation(data.translation || text);
+          setError(null);
           setIsTranslating(false);
         }
       })
-      .catch(() => {
+      .catch((err) => {
         if (mounted) {
+          setError(err instanceof Error ? err.message : String(err));
           setTranslation(text);
           setIsTranslating(false);
         }
