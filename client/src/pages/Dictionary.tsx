@@ -530,20 +530,22 @@ export default function Dictionary() {
                         <p className="text-gray-600 mb-6 text-[17px]">
                           {tool.description}
                         </p>
-                        <div className="flex flex-col items-center space-y-2">
-                          <div className="flex items-center space-x-2">
-                            <span className={`text-2xl font-bold ${
-                              tool.id === 'medical' ? 'text-red-700' :
-                              tool.id === 'legal' ? 'text-blue-700' :
-                              tool.id === 'asean' ? 'text-green-700' :
-                              tool.id === 'inl-tetum' ? 'text-purple-700' :
-                              'text-gray-700'
-                            }`}>
-                              {termCount.toLocaleString()}
-                            </span>
-                            <span className="text-gray-500">Verified Terms</span>
+                        {tool.id !== "etymology" && (
+                          <div className="flex flex-col items-center space-y-2">
+                            <div className="flex items-center space-x-2">
+                              <span className={`text-2xl font-bold ${
+                                tool.id === 'medical' ? 'text-red-700' :
+                                tool.id === 'legal' ? 'text-blue-700' :
+                                tool.id === 'asean' ? 'text-green-700' :
+                                tool.id === 'inl-tetum' ? 'text-purple-700' :
+                                'text-gray-700'
+                              }`}>
+                                {termCount.toLocaleString()}
+                              </span>
+                              <span className="text-gray-500">Verified Terms</span>
+                            </div>
                           </div>
-                        </div>
+                        )}
                         
                         {/* Special buttons for advanced modules */}
                         {tool.id === "medical" && (
