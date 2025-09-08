@@ -1178,7 +1178,13 @@ Provide only the translation without additional explanation.`;
 5. Language influences (Portuguese, Malay, indigenous)
 6. Tetum expressions and compound words using this word
 
-TETUM EXPRESSIONS: Tetum is rich in word combinations. Find common expressions, compound words, and metaphorical phrases that use "${word.trim()}" as a component. Examples: if the word is "fuan" (heart), include "ai-fuan" (fruit), "fuan-kanek" (heart/mind), "fuan-boot" (generous), etc.
+TETUM EXPRESSIONS: ONLY include expressions that you can verify exist in authentic Tetum sources or official documentation. DO NOT invent or create new expressions. If you cannot find verified, documented expressions using "${word.trim()}", leave the expressions array empty. Only include expressions that are documented in:
+- Official INL (Instituto Nacional de Linguística) materials
+- Published Tetum dictionaries or linguistic studies  
+- Verified Tetum language resources
+- Academic linguistic publications about Tetum
+
+STRICT REQUIREMENT: Every expression must be authentic and verifiable. If unsure about authenticity, exclude it.
 
 SPELLING STANDARDS: Follow the official INL Tetum dictionary spelling conventions. Use proper Tetum orthography as established by the Instituto Nacional de Linguística.${spellingContext}
 
