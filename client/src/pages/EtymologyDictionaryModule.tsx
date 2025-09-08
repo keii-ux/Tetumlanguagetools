@@ -283,12 +283,33 @@ export default function EtymologyDictionaryModule() {
                     </div>
                   )}
 
-                  {/* Tetum Expressions */}
+                  {/* Related Words */}
+                  {etymologyResult.related_words && etymologyResult.related_words.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                        <Languages className="w-4 h-4 text-orange-600" />
+                        Related Words
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {etymologyResult.related_words.map((word, index) => (
+                          <Badge key={index} variant="outline" className="bg-orange-50 border-orange-200 text-orange-700 cursor-pointer hover:bg-orange-100"
+                                 onClick={() => {
+                                   setSearchTerm(word);
+                                   handleSearch();
+                                 }}>
+                            {word}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Expressions and other words */}
                   {etymologyResult.expressions && etymologyResult.expressions.length > 0 && (
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
                         <Languages className="w-4 h-4 text-orange-600" />
-                        Tetum Expressions & Compounds
+                        Expressions and other words
                       </h4>
                       <div className="space-y-3 bg-amber-50 p-4 rounded-lg">
                         {etymologyResult.expressions.map((expr, index) => (
@@ -309,27 +330,6 @@ export default function EtymologyDictionaryModule() {
                               </span>
                             </div>
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Related Words */}
-                  {etymologyResult.related_words && etymologyResult.related_words.length > 0 && (
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
-                        <Languages className="w-4 h-4 text-orange-600" />
-                        Related Words
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {etymologyResult.related_words.map((word, index) => (
-                          <Badge key={index} variant="outline" className="bg-orange-50 border-orange-200 text-orange-700 cursor-pointer hover:bg-orange-100"
-                                 onClick={() => {
-                                   setSearchTerm(word);
-                                   handleSearch();
-                                 }}>
-                            {word}
-                          </Badge>
                         ))}
                       </div>
                     </div>
