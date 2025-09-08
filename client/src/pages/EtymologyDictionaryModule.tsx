@@ -109,9 +109,9 @@ export default function EtymologyDictionaryModule() {
                 Word History Research
               </div>
               <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                Tetum Language Word
+                Tetum Language
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-amber-300 block">
-                  Etymology
+                  Word Etymology
                 </span>
               </h1>
               <p className="text-xl text-orange-100 mb-8 leading-relaxed">Explore word histories, language connections, and meaning development over time.</p>
