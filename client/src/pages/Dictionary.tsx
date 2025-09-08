@@ -109,7 +109,7 @@ const TOOL_CARDS = [
   },
   {
     id: "inl-tetum",
-    title: "Tetum Monolingual Dictionary",
+    title: "Disionáriu Nasionál Tetun Ofisiál",
     category: "Reference", 
     description: "Dictionary of the Tetum Language (INL), with nearly 10,000 entries. Definitions as in original document and spellchecked",
     icon: Languages,
