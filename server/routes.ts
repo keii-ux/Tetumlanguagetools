@@ -1139,17 +1139,11 @@ Provide only the translation without additional explanation.`;
         return res.status(400).json({ error: "Word parameter is required" });
       }
 
-      if (!process.env.OPENAI_API_KEY) {
+      if (!process.env.OPENROUTER_API_KEY) {
         return res.status(500).json({ 
-          error: "OpenAI API key not configured. Etymology research requires API access."
+          error: "OpenRouter API key not configured. Etymology research requires API access."
         });
       }
-
-      // Dynamic import of OpenAI
-      const { default: OpenAI } = await import("openai");
-      const openai = new OpenAI({ 
-        apiKey: process.env.OPENAI_API_KEY 
-      });
 
       const prompt = `Research the etymology of the Tetum word "${word.trim()}". Provide a comprehensive analysis including:
 
@@ -1169,27 +1163,59 @@ Respond in JSON format with the following structure:
   "historical_forms": ["array of historical forms if known"],
   "meaning_evolution": "how the meaning has changed over time",
   "related_words": ["array of related words"],
-  "source": "AI Etymology Research via OpenAI"
+  "source": "AI Etymology Research via OpenRouter"
 }`;
 
-      const response = await openai.chat.completions.create({
-        model: "gpt-4o", // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
-        messages: [
-          {
-            role: "system",
-            content: "You are a linguistic expert specializing in Tetum language etymology and historical linguistics. Provide accurate, scholarly information about word origins and development."
-          },
-          {
-            role: "user",
-            content: prompt
-          }
-        ],
-        response_format: { type: "json_object" },
-        max_tokens: 1500,
-        temperature: 0.3
+      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "Content-Type": "application/json",
+          "HTTP-Referer": "https://replit.com", // Optional: identify your app
+          "X-Title": "Tetum Etymology Dictionary" // Optional: show app name in logs
+        },
+        body: JSON.stringify({
+          model: "anthropic/claude-3.5-sonnet", // Use a capable model for linguistic research
+          messages: [
+            {
+              role: "system",
+              content: "You are a linguistic expert specializing in Tetum language etymology and historical linguistics. Provide accurate, scholarly information about word origins and development. Always respond in valid JSON format."
+            },
+            {
+              role: "user", 
+              content: prompt
+            }
+          ],
+          max_tokens: 1500,
+          temperature: 0.3
+        })
       });
 
-      const result = JSON.parse(response.choices[0].message.content || "{}");
+      if (!response.ok) {
+        throw new Error(`OpenRouter API request failed: ${response.status} ${response.statusText}`);
+      }
+
+      const apiResult = await response.json();
+      
+      if (!apiResult.choices || !apiResult.choices[0] || !apiResult.choices[0].message) {
+        throw new Error("Invalid response format from OpenRouter API");
+      }
+
+      let result;
+      try {
+        result = JSON.parse(apiResult.choices[0].message.content);
+      } catch (parseError) {
+        // If JSON parsing fails, create a basic structure with the content
+        result = {
+          word: word.trim(),
+          language: "Tetum",
+          etymology: apiResult.choices[0].message.content || "Etymology information not available",
+          historical_forms: [],
+          meaning_evolution: "Information not available in structured format",
+          related_words: [],
+          source: "AI Etymology Research via OpenRouter"
+        };
+      }
       
       // Ensure all required fields are present
       const etymologyResult = {
@@ -1199,7 +1225,7 @@ Respond in JSON format with the following structure:
         historical_forms: Array.isArray(result.historical_forms) ? result.historical_forms : [],
         meaning_evolution: result.meaning_evolution || "Meaning evolution information not available",
         related_words: Array.isArray(result.related_words) ? result.related_words : [],
-        source: result.source || "AI Etymology Research via OpenAI"
+        source: result.source || "AI Etymology Research via OpenRouter"
       };
 
       res.json(etymologyResult);
