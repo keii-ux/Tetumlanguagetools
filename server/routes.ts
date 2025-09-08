@@ -1145,22 +1145,49 @@ Provide only the translation without additional explanation.`;
         });
       }
 
-      const prompt = `Analyze the etymology of the Tetum word "${word.trim()}". Provide concise information about:
+      // Get INL Tetum dictionary entries for spelling reference
+      const allEntries = await storage.getAllEntries();
+      const inlEntries = allEntries.filter(e => e.dictionaryType === "inl-tetum");
+      
+      // Find exact match or similar entries for spelling reference
+      const exactMatch = inlEntries.find(e => 
+        e.tetum?.toLowerCase() === word.trim().toLowerCase()
+      );
+      
+      const similarEntries = inlEntries.filter(e => 
+        e.tetum?.toLowerCase().includes(word.trim().toLowerCase()) ||
+        word.trim().toLowerCase().includes(e.tetum?.toLowerCase() || '')
+      ).slice(0, 5); // Limit to 5 similar entries
+
+      let spellingContext = "";
+      if (exactMatch) {
+        spellingContext = `\n\nIMPORTANT: The official INL spelling is "${exactMatch.tetum}". Use this exact spelling throughout your response.`;
+        if (exactMatch.explanation) {
+          spellingContext += ` INL definition: "${exactMatch.explanation}"`;
+        }
+      } else if (similarEntries.length > 0) {
+        const similarWords = similarEntries.map(e => e.tetum).join(", ");
+        spellingContext = `\n\nNote: Similar words in INL dictionary: ${similarWords}. Ensure spelling follows INL standards.`;
+      }
+
+      const prompt = `Analyze the etymology of the Tetum word "${word.trim()}" following INL (Instituto Nacional de Linguística) spelling standards. Provide concise information about:
 1. Word origin and etymology
 2. Historical forms (if known)  
 3. Meaning evolution
-4. Related words
+4. Related words (use INL spelling)
 5. Language influences (Portuguese, Malay, indigenous)
+
+SPELLING STANDARDS: Follow the official INL Tetum dictionary spelling conventions. Use proper Tetum orthography as established by the Instituto Nacional de Linguística.${spellingContext}
 
 Respond in this exact JSON format:
 {
-  "word": "${word.trim()}",
+  "word": "${exactMatch ? exactMatch.tetum : word.trim()}",
   "language": "Tetum",
-  "etymology": "concise etymology explanation",
+  "etymology": "concise etymology explanation using INL spelling standards",
   "historical_forms": ["form1", "form2"],
   "meaning_evolution": "brief meaning evolution",
   "related_words": ["word1", "word2"],
-  "source": "AI Etymology Research via OpenRouter"
+  "source": "AI Etymology Research via OpenRouter (INL spelling standards)"
 }`;
 
       const controller = new AbortController();
