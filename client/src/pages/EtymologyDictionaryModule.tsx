@@ -177,9 +177,7 @@ export default function EtymologyDictionaryModule() {
                   <Search className="w-5 h-5 text-orange-600" />
                   <CardTitle className="text-orange-900">Word Etymology Search</CardTitle>
                 </div>
-                <CardDescription>
-                  Enter a Tetum word to discover its historical origins and linguistic development
-                </CardDescription>
+                
               </CardHeader>
               <CardContent>
                 <div className="flex gap-4">
