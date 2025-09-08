@@ -1213,14 +1213,14 @@ Respond in this exact JSON format:
           messages: [
             {
               role: "system",
-              content: "You are a Tetum linguistics expert. Provide concise, accurate etymology information in valid JSON format only."
+              content: "You are a Tetum linguistics expert. Provide concise, accurate etymology information in valid JSON format only. Always include the expressions field with Tetum compound words."
             },
             {
               role: "user", 
               content: prompt
             }
           ],
-          max_tokens: 800, // Reduced for faster responses
+          max_tokens: 1200, // Increased to ensure expressions are included
           temperature: 0.2
         }),
         signal: controller.signal
@@ -1258,6 +1258,7 @@ Respond in this exact JSON format:
           historical_forms: [],
           meaning_evolution: "Detailed analysis available in etymology section",
           related_words: [],
+          expressions: [], // Ensure expressions field is always present
           source: "AI Etymology Research via OpenRouter"
         };
       }
