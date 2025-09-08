@@ -160,7 +160,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const inlTetumPath = path.resolve(process.cwd(), "attached_assets", "inl_tt_dic.json");
           let fileContent = await fs.readFile(inlTetumPath, "utf-8");
           
-          // Better regex pattern to handle nested quotes and complex content
+          // Enhanced single pattern to capture more entries
           const objectMatches = fileContent.match(/\{[\s\S]*?"word"[\s\S]*?"class"[\s\S]*?"meaning"[\s\S]*?\}/g);
           if (objectMatches) {
             const cleanedObjects = [];

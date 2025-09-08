@@ -1622,7 +1622,10 @@
     {
       "word": "alkaparra,",
       "class": "Substantivu",
-      "meaning": "Ai-horis ida ne'ebé fó fuan ki'ikoan no meer hanesan azeitona, ne'ebé serve atu halo budu ka tempra hahán, liuliu na'an tunu.",
+      "meaning": "Ai-horis ida ne'ebé fó fuan ki'ikoan no meer hanesan azeitona, ne'ebé serve atu halo budu ka tempra hahán, liuliu na'an tunu."
+   ```json
+[
+    {
       "word": "alkari,",
       "class": "Substantivu",
       "meaning": "Kulit mate iha ema nia ulun-kulit neʼebé nakloke iha fuuk laran no halo ulun katar. Sin. kaspa, kohu."
