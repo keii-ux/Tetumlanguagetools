@@ -445,7 +445,7 @@ export default function Dictionary() {
 
             {/* Right Illustration/Card */}
             <div className="lg:flex justify-center">
-              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 max-w-md">
+              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 max-w-md text-[20px]">
                 <div className="flex items-center space-x-3 mb-8">
                   <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-xl flex items-center justify-center">
                     <Languages className="w-7 h-7 text-white" />
