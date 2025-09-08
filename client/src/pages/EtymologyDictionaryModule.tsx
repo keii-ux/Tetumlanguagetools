@@ -99,7 +99,6 @@ export default function EtymologyDictionaryModule() {
           </div>
         </div>
       </div>
-
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-orange-600 via-orange-700 to-amber-700 text-white py-16">
         <div className="max-w-6xl mx-auto px-4">
@@ -115,10 +114,7 @@ export default function EtymologyDictionaryModule() {
                   Etymology
                 </span>
               </h1>
-              <p className="text-xl text-orange-100 mb-8 leading-relaxed">
-                Discover the historical origins and evolution of Tetum words through AI-powered linguistic research. 
-                Explore word histories, language connections, and meaning development over time.
-              </p>
+              <p className="text-xl text-orange-100 mb-8 leading-relaxed">Explore word histories, language connections, and meaning development over time.</p>
               <div className="flex items-center space-x-8 text-orange-100">
                 <div>
                   <div className="text-2xl font-bold text-white">AI-Powered</div>
@@ -159,7 +155,6 @@ export default function EtymologyDictionaryModule() {
           </div>
         </div>
       </div>
-
       {/* Main Content */}
       <div className="flex-1 max-w-6xl mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -488,7 +483,6 @@ export default function EtymologyDictionaryModule() {
           </TabsContent>
         </Tabs>
       </div>
-
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-4 text-center">
         <p className="text-sm">©2024-2025 All Rights Reserved</p>
