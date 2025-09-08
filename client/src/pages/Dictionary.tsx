@@ -488,7 +488,7 @@ export default function Dictionary() {
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Professional Language Toolkit</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Each tool content was carefully curated and proofread, based on authentic sources and official documents</p>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Each tool was carefully designed and curated by language experts. All content was based on authentic official sources and agrees with the INL standards.</p>
           </div>
 
           {/* Tool Cards Grid */}
