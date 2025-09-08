@@ -79,6 +79,7 @@ export function INLTetumDictionarySearch({ onEntrySelect }: INLTetumDictionarySe
   }, []);
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
+    console.log("Entry selected in INLTetumDictionarySearch:", entry);
     setShowDropdown(false);
     setSearchTerm("");
     onEntrySelect?.(entry);
@@ -100,8 +101,11 @@ export function INLTetumDictionarySearch({ onEntrySelect }: INLTetumDictionarySe
       const response = await fetch(`/api/inl-tetum/search?${queryParams}`);
       if (response.ok) {
         const results = await response.json();
+        console.log("Search results:", results.length, results.slice(0, 2));
         setEntries(results);
         setShowDropdown(true);
+      } else {
+        console.error("Search request failed:", response.status, response.statusText);
       }
     } catch (error) {
       console.error("Search error:", error);

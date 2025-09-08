@@ -23,6 +23,7 @@ export default function INLTetumDictionaryModule() {
   const wordsWithDefinitions = inlEntries.filter(entry => entry.explanation && entry.explanation.trim().length > 0).length;
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
+    console.log("Entry selected in INLTetumDictionaryModule:", entry);
     setSelectedEntry(entry);
   };
 
