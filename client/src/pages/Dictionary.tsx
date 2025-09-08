@@ -634,7 +634,7 @@ export default function Dictionary() {
                                 }}
                               >
                                 <History className="w-3 h-3 mr-2" />
-                                Research Etymology
+                                Advance Search
                               </Button>
                             </Link>
                           </div>
