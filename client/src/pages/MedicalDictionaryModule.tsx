@@ -71,7 +71,7 @@ export default function MedicalDictionaryModule() {
                 Healthcare Terminology
               </div>
               <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                Disionáriu Médiku
+                Medical Dictionary
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-pink-300 block">
                   Tetum-English
                 </span>
