@@ -343,7 +343,6 @@ export default function ASEANTerminologyModule() {
       <footer className="bg-gray-900 text-white py-6 text-center">
         <div className="max-w-6xl mx-auto px-4">
           <p className="text-sm">All Rights Reserved  ©Liantek 2025 </p>
-          <p className="text-xs text-gray-400 mt-1">ASEAN Terminology - Supporting International Communication</p>
         </div>
       </footer>
     </div>
