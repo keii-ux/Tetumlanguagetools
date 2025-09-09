@@ -19,26 +19,16 @@ import {
   Settings,
   ChevronRight,
   Menu,
-  X,
-  ChevronDown
+  X
 } from "lucide-react";
 import { useSearchEntries, useAddSearchHistory, useAllEntries, useDictionaryStats } from "@/lib/search";
 import { SearchQuery, DictionaryEntry } from "@shared/schema";
 import { buildSearchQuery } from "@/lib/dictionaries";
 import { TermDetail } from "@/components/TermDetail";
 import { BookmarkPanel } from "@/components/BookmarkPanel";
-import { useTranslation } from "@/contexts/TranslationContext";
-import { useTranslateText } from "@/hooks/useTranslateText";
-import { TranslatedText } from "@/components/TranslatedText";
 
 const DEFAULT_USER_ID = "demo-user";
 
-// Language options for website interface
-const LANGUAGE_OPTIONS = [
-  { code: "en" as const, label: "English", flag: "🇺🇸" },
-  { code: "pt" as const, label: "Português", flag: "🇵🇹" },
-  { code: "tet" as const, label: "Tetum", flag: "🇹🇱" },
-];
 
 const NAVIGATION_ITEMS = [
   {
@@ -133,7 +123,6 @@ const TOOL_CARDS = [
 ];
 
 export default function Dictionary() {
-  const { currentLanguage, setLanguage } = useTranslation();
   const [searchQuery, setSearchQuery] = useState<SearchQuery>(buildSearchQuery({}));
   const [selectedTool, setSelectedTool] = useState<string | null>(null);
   const [selectedEntry, setSelectedEntry] = useState<DictionaryEntry | null>(null);
@@ -141,7 +130,6 @@ export default function Dictionary() {
   const [showHistory, setShowHistory] = useState(false);
   const [globalSearch, setGlobalSearch] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
   const [currentView, setCurrentView] = useState<'home' | 'medical' | 'legal' | 'asean' | 'inl-tetum'>('home');
   
   const { data: stats } = useDictionaryStats();
@@ -382,41 +370,6 @@ export default function Dictionary() {
               />
             </div>
 
-            {/* Language Selector */}
-            <div className="relative">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
-                className="flex items-center space-x-2 text-gray-600 hover:text-green-600 border-gray-300"
-              >
-                <span>{LANGUAGE_OPTIONS.find(lang => lang.code === currentLanguage)?.flag}</span>
-                <span className="hidden sm:inline">{LANGUAGE_OPTIONS.find(lang => lang.code === currentLanguage)?.label}</span>
-                <ChevronDown className="w-4 h-4" />
-              </Button>
-              
-              {showLanguageDropdown && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
-                  <div className="py-1">
-                    {LANGUAGE_OPTIONS.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => {
-                          setLanguage(lang.code);
-                          setShowLanguageDropdown(false);
-                        }}
-                        className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center space-x-3 ${
-                          currentLanguage === lang.code ? "bg-green-50 text-green-600" : "text-gray-700"
-                        }`}
-                      >
-                        <span>{lang.flag}</span>
-                        <span>{lang.label}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
           </div>
         </div>
       </header>
@@ -428,20 +381,18 @@ export default function Dictionary() {
             <div>
               <div className="inline-flex items-center px-4 py-2 rounded-full text-sm bg-blue-800/50 text-blue-100 mb-8">
                 <Settings className="w-4 h-4 mr-2" />
-                <TranslatedText text="Professional Tools" />
+                Professional Tools
               </div>
               
               <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-                <TranslatedText text="Technical" />
+                Technical
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
-                  <TranslatedText text=" Tetum Glossaries " />
+                  {" "}Tetum Glossaries{" "}
                 </span>
-                <TranslatedText text="& Dictionaries" />
+                & Dictionaries
               </h1>
               
-              <p className="text-blue-100 mb-10 max-w-lg text-[18px]">
-                <TranslatedText text="Specialized dictionaries and glossaries designed for professional use across multiple languages, with focus on Tetum, and technical domains, such as medical and legal, following the INL standard." />
-              </p>
+              <p className="text-blue-100 mb-10 max-w-lg text-[18px]">Specialized dictionaries and glossaries designed for professional use across multiple languages, with focus on Tetum, and technical domains, such as medical and legal, following the INL standard.</p>
 
               
 
@@ -449,15 +400,15 @@ export default function Dictionary() {
               <div className="flex items-center space-x-8 text-blue-100">
                 <div>
                   <div className="text-2xl font-bold text-white">{stats?.total || 0}</div>
-                  <div className="text-sm"><TranslatedText text="Total Terms" /></div>
+                  <div className="text-sm">Total Terms</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-white">4</div>
-                  <div className="text-sm"><TranslatedText text="Dictionaries" /></div>
+                  <div className="text-sm">Dictionaries</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-white">3</div>
-                  <div className="text-sm"><TranslatedText text="Languages" /></div>
+                  <div className="text-sm">Languages</div>
                 </div>
               </div>
             </div>
@@ -470,7 +421,7 @@ export default function Dictionary() {
                     <Languages className="w-7 h-7 text-white" />
                   </div>
                   <div>
-                    <TranslatedText text="All-in-one multilingual language tools" as="h3" className="text-xl font-bold" />
+                    <h3 className="text-xl font-bold">All-in-one multilingual language tools</h3>
                   </div>
                 </div>
                 
@@ -506,8 +457,8 @@ export default function Dictionary() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <TranslatedText text="Professional Language Toolkit" as="h2" className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4" />
-            <TranslatedText text="Each tool was carefully designed and curated by language experts. All content was based on authentic official sources and agrees with the INL standards." as="p" className="text-xl text-gray-600 max-w-3xl mx-auto" />
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Professional Language Toolkit</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Each tool was carefully designed and curated by language experts. All content was based on authentic official sources and agrees with the INL standards.</p>
           </div>
 
           {/* Tool Cards Grid */}
