@@ -47,7 +47,7 @@ export default function INLTetumDictionaryModule() {
                   <BookOpen className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-gray-900 dark:text-white">INL Tetum Dictionary</h1>
+                  <h1 className="text-xl font-bold text-gray-900 dark:text-white">Tetum Language Dictionary</h1>
                 </div>
               </div>
             </div>
@@ -73,7 +73,7 @@ export default function INLTetumDictionaryModule() {
                 Official INL Dictionary
               </div>
               <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                Tetum Monolingual
+                Tetum Language
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-indigo-300 block">
                   Dictionary
                 </span>
