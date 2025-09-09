@@ -92,7 +92,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     };
   }
 
-  // Initialize dictionary data from JSON files
+  // Initialize dictionary data from JSON files with comprehensive error handling
   async function initializeDictionaries() {
     try {
       // Load MEDICAL dictionary - Use the correct medical-dic_tt_en.json file
@@ -109,99 +109,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         medicalTetumEnData = [];
       }
       
-      // Load INL Tetum dictionary from the new JSON file with improved error handling
+      // Load INL Tetum dictionary with simplified error handling
       let inlTetumData: any[] = [];
       try {
         const inlTetumPath = path.resolve(process.cwd(), "attached_assets", "inl_tt_dic.json");
-        let fileContent = await fs.readFile(inlTetumPath, "utf-8");
-        
-        // First attempt: Parse the file as-is
-        try {
-          inlTetumData = JSON.parse(fileContent);
-          console.log(`INL Tetum dictionary loaded successfully with ${inlTetumData.length} entries`);
-        } catch (directParseError: any) {
-          console.warn("Direct parsing failed, trying with cleanup:", directParseError.message);
-          
-          // Clean up encoding issues and malformed JSON
-          fileContent = fileContent
-            // Remove byte order mark and encoding issues
-            .replace(/^\uFEFF/, '')
-            // Remove problematic characters
-            .replace(/M-CM-/g, '')
-            .replace(/M-bM-\^@M-\^Y/g, 'e')
-            .replace(/M-CM-!/g, 'a')
-            .replace(/M-CM-:/g, 'u')
-            .replace(/M-CM-\)/g, 'e')
-            .replace(/M-CM-1/g, 'n')
-            .replace(/M-CM--/g, 'o')
-            .replace(/M-CM-3/g, 'o')
-            .replace(/M-CM-\^/g, '')
-            .replace(/M-CM-\"/g, '')
-            .replace(/M-/g, '')
-            .replace(/\^/g, '')
-            // Fix common JSON formatting issues
-            .replace(/,(\s*[}\]])/g, '$1') // Remove trailing commas
-            .replace(/\n\s*\n/g, '\n') // Remove empty lines
-            .trim();
-          
-          try {
-            inlTetumData = JSON.parse(fileContent);
-            console.log(`INL Tetum dictionary loaded with cleanup: ${inlTetumData.length} entries`);
-          } catch (cleanupParseError: any) {
-            console.warn("Cleanup parsing failed, attempting advanced recovery:", cleanupParseError.message);
-            throw cleanupParseError; // Let the main catch block handle advanced recovery
-          }
-        }
-      } catch (parseError) {
-        console.warn("INL Tetum dictionary parsing failed, attempting line-by-line recovery:", parseError);
-        
-        // Advanced Recovery: Extract objects one by one with better pattern matching
-        try {
-          const inlTetumPath = path.resolve(process.cwd(), "attached_assets", "inl_tt_dic.json");
-          let fileContent = await fs.readFile(inlTetumPath, "utf-8");
-          
-          // Enhanced single pattern to capture more entries
-          const objectMatches = fileContent.match(/\{[\s\S]*?"word"[\s\S]*?"class"[\s\S]*?"meaning"[\s\S]*?\}/g);
-          if (objectMatches) {
-            const cleanedObjects = [];
-            
-            for (let i = 0; i < objectMatches.length; i++) {
-              const obj = objectMatches[i];
-              try {
-                // Clean each object more carefully
-                let cleaned = obj
-                  .replace(/M-CM-/g, '')
-                  .replace(/M-bM-\^@M-\^Y/g, 'e')
-                  .replace(/M-CM-!/g, 'a')
-                  .replace(/M-CM-:/g, 'u')
-                  .replace(/M-CM-\)/g, 'e')
-                  .replace(/M-CM-1/g, 'n')
-                  .replace(/M-CM--/g, 'o')
-                  .replace(/M-CM-3/g, 'o')
-                  .replace(/[^\x00-\x7F\u00A0-\uFFFF]/g, '');
-                
-                const parsed = JSON.parse(cleaned);
-                if (parsed && parsed.word && parsed.meaning) {
-                  cleanedObjects.push(parsed);
-                }
-              } catch (objError: any) {
-                // Skip malformed objects but log for debugging
-                if (i < 10) { // Only log first few errors to avoid spam
-                  console.warn(`Skipping malformed object at index ${i}:`, objError.message);
-                }
-              }
-            }
-            
-            inlTetumData = cleanedObjects;
-            console.log(`INL Tetum dictionary recovered ${inlTetumData.length} entries from corrupted file`);
-          } else {
-            console.error("No valid JSON objects found in INL Tetum dictionary file");
-            inlTetumData = [];
-          }
-        } catch (recoveryError) {
-          console.error("INL Tetum dictionary recovery failed:", recoveryError);
-          inlTetumData = [];
-        }
+        const fileContent = await fs.readFile(inlTetumPath, "utf-8");
+        inlTetumData = JSON.parse(fileContent);
+        console.log(`INL Tetum dictionary loaded successfully with ${inlTetumData.length} entries`);
+      } catch (parseError: any) {
+        console.warn("INL Tetum dictionary loading failed, using empty dataset:", parseError.message);
+        inlTetumData = [];
       }
 
       // Load LEGAL dictionaries - Portuguese/Tetum/English, Tetum Legal Glossary, and Portuguese Legal Glossary
@@ -473,8 +390,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   }
 
-  // Initialize dictionaries on startup
-  await initializeDictionaries();
+  // Initialize dictionaries on startup with comprehensive error handling
+  try {
+    await initializeDictionaries();
+  } catch (initError) {
+    console.error("Critical error during dictionary initialization - continuing with empty dictionaries:", initError);
+    // Server will continue with empty storage, allowing the application to start
+  }
 
   // Generic search entries
   app.get("/api/search", async (req, res) => {
