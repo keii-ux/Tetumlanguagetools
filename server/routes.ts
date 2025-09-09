@@ -1291,6 +1291,77 @@ Respond in this exact JSON format:
     }
   });
 
+  // Translation endpoints
+  app.post("/api/translate", async (req, res) => {
+    try {
+      const { text, targetLanguage, sourceLanguage } = req.body;
+      
+      if (!text || !targetLanguage) {
+        return res.status(400).json({ 
+          error: "Missing required parameters: text and targetLanguage" 
+        });
+      }
+
+      if (!['tet', 'pt', 'en'].includes(targetLanguage)) {
+        return res.status(400).json({ 
+          error: "Invalid target language. Must be 'tet', 'pt', or 'en'" 
+        });
+      }
+
+      // Import the translation function
+      const { translateText } = await import('./translation');
+      
+      const result = await translateText({
+        text,
+        targetLanguage,
+        sourceLanguage
+      });
+
+      res.json(result);
+    } catch (error) {
+      console.error("Translation error:", error);
+      res.status(500).json({ 
+        error: "Translation failed. Please try again.",
+        details: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  app.post("/api/translate/bulk", async (req, res) => {
+    try {
+      const { texts, targetLanguage } = req.body;
+      
+      if (!Array.isArray(texts) || !targetLanguage) {
+        return res.status(400).json({ 
+          error: "Missing required parameters: texts (array) and targetLanguage" 
+        });
+      }
+
+      if (!['tet', 'pt', 'en'].includes(targetLanguage)) {
+        return res.status(400).json({ 
+          error: "Invalid target language. Must be 'tet', 'pt', or 'en'" 
+        });
+      }
+
+      // Import the translation function
+      const { translateBulkTexts } = await import('./translation');
+      
+      const translatedTexts = await translateBulkTexts(texts, targetLanguage);
+
+      res.json({ 
+        translations: translatedTexts,
+        targetLanguage,
+        count: translatedTexts.length
+      });
+    } catch (error) {
+      console.error("Bulk translation error:", error);
+      res.status(500).json({ 
+        error: "Bulk translation failed. Please try again.",
+        details: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
