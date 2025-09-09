@@ -61,7 +61,6 @@ export default function ASEANTerminologyModule() {
           </div>
         </div>
       </div>
-
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-green-600 via-green-700 to-teal-700 text-white py-16">
         <div className="max-w-6xl mx-auto px-4">
@@ -121,7 +120,6 @@ export default function ASEANTerminologyModule() {
           </div>
         </div>
       </div>
-
       {/* Main Content */}
       <div className="flex-1 max-w-6xl mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -341,11 +339,10 @@ export default function ASEANTerminologyModule() {
           </TabsContent>
         </Tabs>
       </div>
-      
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-6 text-center">
         <div className="max-w-6xl mx-auto px-4">
-          <p className="text-sm">All Rights Reserved©Liantek, 2025, Timor-Leste</p>
+          <p className="text-sm">All Rights Reserved  ©Liantek 2025 </p>
           <p className="text-xs text-gray-400 mt-1">ASEAN Terminology - Supporting International Communication</p>
         </div>
       </footer>
