@@ -32,7 +32,7 @@ export async function translateText(request: TranslationRequest): Promise<Transl
   
   try {
     const response = await openai.chat.completions.create({
-      model: "google/gemini-2.0-flash-thinking-exp",
+      model: "anthropic/claude-3-haiku",
       messages: [
         {
           role: "system",
