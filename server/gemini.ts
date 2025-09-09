@@ -1,6 +1,13 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
+// Ensure we use the correct GEMINI_API_KEY and not GOOGLE_API_KEY
+const getGeminiClient = () => {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error("GEMINI_API_KEY environment variable is required");
+  }
+  return new GoogleGenAI({ apiKey });
+};
 
 export interface EnhancedTermExplanation {
   tetumEquivalents: string[];
@@ -49,6 +56,7 @@ Focus on:
 
 Provide authoritative and scholarly information suitable for academic and professional use.`;
 
+    const ai = getGeminiClient();
     const response = await ai.models.generateContent({
       model: "gemini-2.5-pro",
       config: {
@@ -118,6 +126,7 @@ export async function getTermTranslationSuggestions(
   try {
     const prompt = `Translate the term "${term}" to ${targetLanguage}. Provide 3-5 most accurate translations as a JSON array of strings. Focus on legal and technical accuracy.`;
 
+    const ai = getGeminiClient();
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       config: {
@@ -191,6 +200,7 @@ ${spellingContext}
 
 Return a comprehensive JSON response with scholarly rigor:`;
 
+    const ai = getGeminiClient();
     const response = await ai.models.generateContent({
       model: "gemini-2.5-pro",
       config: {
