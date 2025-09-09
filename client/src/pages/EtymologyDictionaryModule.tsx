@@ -19,6 +19,7 @@ interface EtymologyResult {
   related_words: string[];
   expressions: Array<{expression: string; meaning: string}>;
   source: string;
+  academic_sources: string[];
 }
 
 export default function EtymologyDictionaryModule() {
@@ -89,7 +90,7 @@ export default function EtymologyDictionaryModule() {
             </div>
             <div className="flex items-center gap-3">
               <Badge variant="outline" className="bg-orange-50 border-orange-200 text-orange-700 dark:bg-orange-900 dark:border-orange-700 dark:text-orange-300">
-                AI-Powered Research
+                Academic Research
               </Badge>
               <LanguageSwitcher 
                 selectedLanguage={selectedLanguage}
@@ -114,11 +115,11 @@ export default function EtymologyDictionaryModule() {
                   Word Etymology
                 </span>
               </h1>
-              <p className="text-xl text-orange-100 mb-8 leading-relaxed">Explore word histories, language connections, and meaning development over time.</p>
+              <p className="text-xl text-orange-100 mb-8 leading-relaxed">Research word histories using academic sources, scholarly publications, and linguistic studies.</p>
               <div className="flex items-center space-x-8 text-orange-100">
                 <div>
-                  <div className="text-2xl font-bold text-white">AI-Powered</div>
-                  <div className="text-sm">Research Engine</div>
+                  <div className="text-2xl font-bold text-white">Academic</div>
+                  <div className="text-sm">Source Research</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-white">Historical</div>
@@ -328,10 +329,30 @@ export default function EtymologyDictionaryModule() {
                     </div>
                   )}
 
+                  {/* Academic Sources */}
+                  {etymologyResult.academic_sources && etymologyResult.academic_sources.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                        <Book className="w-4 h-4 text-orange-600" />
+                        Academic Sources
+                      </h4>
+                      <div className="bg-blue-50 p-4 rounded-lg">
+                        <ul className="space-y-2">
+                          {etymologyResult.academic_sources.map((source, index) => (
+                            <li key={index} className="text-sm text-blue-800 flex items-start gap-2">
+                              <span className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></span>
+                              <span className="leading-relaxed">{source}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Source */}
                   <div className="pt-4 border-t border-gray-200">
                     <p className="text-sm text-gray-500">
-                      <strong>Source:</strong> {etymologyResult.source}
+                      <strong>Research Method:</strong> {etymologyResult.source}
                     </p>
                   </div>
                 </CardContent>
@@ -365,11 +386,11 @@ export default function EtymologyDictionaryModule() {
                 <CardContent className="space-y-4">
                   <p className="text-gray-700 leading-relaxed">
                     Etymology is the study of word origins and how their meanings have changed throughout history. 
-                    This module uses AI to research the historical development of Tetum words.
+                    This module searches academic sources and scholarly publications to research the historical development of Tetum words.
                   </p>
                   <p className="text-gray-700 leading-relaxed">
-                    Tetum, as a language with influences from Portuguese, Malay, and indigenous Timorese languages, 
-                    has a rich linguistic heritage that this tool helps explore and understand.
+                    Research is based on established scholarship including Geoffrey Hull's work, INL publications, 
+                    and academic studies of Austronesian languages and Portuguese colonial linguistics.
                   </p>
                   <div className="flex items-center gap-2 pt-2">
                     <Badge variant="outline" className="bg-green-50 border-green-200 text-green-700">

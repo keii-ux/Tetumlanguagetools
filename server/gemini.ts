@@ -140,3 +140,122 @@ export async function getTermTranslationSuggestions(
     return [term];
   }
 }
+
+export interface EtymologyResult {
+  word: string;
+  language: string;
+  etymology: string;
+  historical_forms: string[];
+  meaning_evolution: string;
+  related_words: string[];
+  expressions: Array<{expression: string; meaning: string}>;
+  source: string;
+  academic_sources: string[];
+}
+
+export async function searchWordEtymology(
+  word: string,
+  spellingContext: string = ""
+): Promise<EtymologyResult> {
+  try {
+    const prompt = `You are a linguistic researcher specializing in Tetum language etymology. Research the etymology of the Tetum word "${word}" using academic and scholarly sources.
+
+ACADEMIC RESEARCH REQUIREMENTS:
+- Base your research on real academic sources and linguistic studies
+- Reference established scholarship on Austronesian languages, Portuguese colonial linguistics, and Timorese language studies
+- Cite actual academic papers, dictionaries, and linguistic research when available
+- Use scholarly databases and published works on Tetum linguistics
+- Follow INL (Instituto Nacional de Linguística) spelling standards
+
+REQUIRED ANALYSIS:
+1. **Etymology & Origin**: Research the word's etymological roots from academic sources
+2. **Historical Development**: Document historical forms based on linguistic studies
+3. **Meaning Evolution**: Track semantic changes using scholarly evidence
+4. **Language Influences**: Identify Portuguese, Malay, indigenous, or other influences with academic backing
+5. **Related Words**: List cognates and related terms from linguistic research
+6. **Academic Sources**: List actual academic references used
+
+ACADEMIC SOURCES TO CONSIDER:
+- Geoffrey Hull's "The Languages of East Timor" (2001)
+- INL (Instituto Nacional de Linguística) publications
+- CNRT language documentation projects
+- Academic papers on Austronesian linguistics
+- Portuguese colonial linguistic documentation
+- Comparative studies of Timor-Leste languages
+- University research on Tetum lexicography
+
+EXPRESSION GUIDELINES:
+Only include expressions that are documented in academic or official sources. Do not create or invent expressions.
+
+${spellingContext}
+
+Return a comprehensive JSON response with scholarly rigor:`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-pro",
+      config: {
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: "object",
+          properties: {
+            word: { type: "string" },
+            language: { type: "string" },
+            etymology: { type: "string" },
+            historical_forms: { 
+              type: "array", 
+              items: { type: "string" } 
+            },
+            meaning_evolution: { type: "string" },
+            related_words: { 
+              type: "array", 
+              items: { type: "string" } 
+            },
+            expressions: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  expression: { type: "string" },
+                  meaning: { type: "string" }
+                },
+                required: ["expression", "meaning"]
+              }
+            },
+            source: { type: "string" },
+            academic_sources: { 
+              type: "array", 
+              items: { type: "string" } 
+            }
+          },
+          required: ["word", "language", "etymology", "historical_forms", "meaning_evolution", "related_words", "expressions", "source", "academic_sources"]
+        },
+      },
+      contents: prompt,
+    });
+
+    const rawJson = response.text;
+    if (rawJson) {
+      const data: EtymologyResult = JSON.parse(rawJson);
+      return {
+        ...data,
+        source: "Academic Etymology Research via Gemini AI"
+      };
+    } else {
+      throw new Error("Empty response from Gemini model");
+    }
+  } catch (error) {
+    console.error(`Failed to research etymology for word "${word}":`, error);
+    // Return fallback data
+    return {
+      word: word,
+      language: "Tetum",
+      etymology: "Etymology research temporarily unavailable. Academic sources could not be accessed at this time.",
+      historical_forms: [],
+      meaning_evolution: "Meaning evolution data temporarily unavailable.",
+      related_words: [],
+      expressions: [],
+      source: "Academic Etymology Research via Gemini AI (Fallback)",
+      academic_sources: []
+    };
+  }
+}

@@ -1061,9 +1061,9 @@ Provide only the translation without additional explanation.`;
         return res.status(400).json({ error: "Word parameter is required" });
       }
 
-      if (!process.env.OPENROUTER_API_KEY) {
+      if (!process.env.GEMINI_API_KEY) {
         return res.status(500).json({ 
-          error: "OpenRouter API key not configured. Etymology research requires API access."
+          error: "Gemini API key not configured. Etymology research requires API access."
         });
       }
 
@@ -1092,116 +1092,9 @@ Provide only the translation without additional explanation.`;
         spellingContext = `\n\nNote: Similar words in INL dictionary: ${similarWords}. Ensure spelling follows INL standards.`;
       }
 
-      const prompt = `Analyze the etymology of the Tetum word "${word.trim()}" following INL (Instituto Nacional de Linguística) spelling standards. Provide concise information about:
-1. Word origin and etymology
-2. Historical forms (if known)  
-3. Meaning evolution
-4. Related words (use INL spelling)
-5. Language influences (Portuguese, Malay, indigenous)
-6. Tetum expressions and compound words using this word
-
-TETUM EXPRESSIONS: ONLY include expressions that you can verify exist in authentic Tetum sources or official documentation. DO NOT invent or create new expressions. If you cannot find verified, documented expressions using "${word.trim()}", leave the expressions array empty. Only include expressions that are documented in:
-- Official INL (Instituto Nacional de Linguística) materials
-- Published Tetum dictionaries or linguistic studies  
-- Verified Tetum language resources
-- Academic linguistic publications about Tetum
-
-STRICT REQUIREMENT: Every expression must be authentic and verifiable. If unsure about authenticity, exclude it.
-
-SPELLING STANDARDS: Follow the official INL Tetum dictionary spelling conventions. Use proper Tetum orthography as established by the Instituto Nacional de Linguística.${spellingContext}
-
-Respond in this exact JSON format:
-{
-  "word": "${exactMatch ? exactMatch.tetum : word.trim()}",
-  "language": "Tetum",
-  "etymology": "concise etymology explanation using INL spelling standards",
-  "historical_forms": ["form1", "form2"],
-  "meaning_evolution": "brief meaning evolution",
-  "related_words": ["word1", "word2"],
-  "expressions": [
-    {"expression": "compound1", "meaning": "meaning of compound1"},
-    {"expression": "compound2", "meaning": "meaning of compound2"}
-  ],
-  "source": "AI Etymology Research via OpenRouter (INL spelling standards)"
-}`;
-
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-
-      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json",
-          "HTTP-Referer": "https://replit.com",
-          "X-Title": "Tetum Etymology Dictionary"
-        },
-        body: JSON.stringify({
-          model: "anthropic/claude-3-haiku", // Faster model for quicker responses
-          messages: [
-            {
-              role: "system",
-              content: "You are a Tetum linguistics expert. Provide concise, accurate etymology information in valid JSON format only. Always include the expressions field with Tetum compound words."
-            },
-            {
-              role: "user", 
-              content: prompt
-            }
-          ],
-          max_tokens: 1200, // Increased to ensure expressions are included
-          temperature: 0.2
-        }),
-        signal: controller.signal
-      });
-
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        throw new Error(`OpenRouter API request failed: ${response.status} ${response.statusText}`);
-      }
-
-      const apiResult = await response.json();
-      
-      if (!apiResult?.choices?.[0]?.message?.content) {
-        throw new Error("Invalid API response structure");
-      }
-
-      let result;
-      const content = apiResult.choices[0].message.content.trim();
-      
-      try {
-        // Try to extract JSON from response
-        const jsonMatch = content.match(/\{[\s\S]*\}/);
-        if (jsonMatch) {
-          result = JSON.parse(jsonMatch[0]);
-        } else {
-          throw new Error("No JSON found in response");
-        }
-      } catch (parseError) {
-        // Quick fallback for parsing errors
-        result = {
-          word: word.trim(),
-          language: "Tetum",
-          etymology: content.substring(0, 300) + "...", // Truncate long responses
-          historical_forms: [],
-          meaning_evolution: "Detailed analysis available in etymology section",
-          related_words: [],
-          expressions: [], // Ensure expressions field is always present
-          source: "AI Etymology Research via OpenRouter"
-        };
-      }
-      
-      // Ensure all required fields are present
-      const etymologyResult = {
-        word: result.word || word.trim(),
-        language: result.language || "Tetum",
-        etymology: result.etymology || "Etymology information not available",
-        historical_forms: Array.isArray(result.historical_forms) ? result.historical_forms : [],
-        meaning_evolution: result.meaning_evolution || "Meaning evolution information not available",
-        related_words: Array.isArray(result.related_words) ? result.related_words : [],
-        expressions: Array.isArray(result.expressions) ? result.expressions : [],
-        source: result.source || "AI Etymology Research via OpenRouter"
-      };
+      // Use the new Gemini-based etymology search function
+      const { searchWordEtymology } = await import("./gemini");
+      const etymologyResult = await searchWordEtymology(word.trim(), spellingContext);
 
       res.json(etymologyResult);
     } catch (error) {
