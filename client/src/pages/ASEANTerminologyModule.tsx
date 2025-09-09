@@ -50,9 +50,6 @@ export default function ASEANTerminologyModule() {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <Badge variant="outline" className="bg-green-50 border-green-200 text-green-700 dark:bg-green-900 dark:border-green-700 dark:text-green-300">
-                {totalASEANEntries.toLocaleString()} entries
-              </Badge>
               <LanguageSwitcher 
                 selectedLanguage={selectedLanguage}
                 onLanguageChange={setSelectedLanguage}
