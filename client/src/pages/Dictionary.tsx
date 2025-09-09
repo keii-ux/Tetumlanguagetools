@@ -115,16 +115,6 @@ const TOOL_CARDS = [
     bgColor: "bg-purple-50",
     iconColor: "text-purple-500",
   },
-  {
-    id: "etymology",
-    title: "Tetum Etymology Dictionary",
-    category: "Research", 
-    description: "AI-powered research tool for discovering word origins, historical development, and linguistic connections of Tetum words",
-    icon: History,
-    color: "bg-orange-500",
-    bgColor: "bg-orange-50",
-    iconColor: "text-orange-500",
-  },
 ];
 
 export default function Dictionary() {
@@ -150,10 +140,6 @@ export default function Dictionary() {
     } else if (toolId === "asean") {
       // Navigate to ASEAN terminology module
       window.location.href = "/asean-terminology";
-      return;
-    } else if (toolId === "etymology") {
-      // Navigate to etymology dictionary module
-      window.location.href = "/etymology-dictionary";
       return;
     } else {
       setSelectedTool(toolId);
@@ -588,23 +574,6 @@ export default function Dictionary() {
                           </div>
                         )}
                         
-                        {tool.id === "etymology" && (
-                          <div className="mt-4 pt-4 border-t border-gray-100 flex justify-center">
-                            <Link href="/etymology-dictionary">
-                              <Button 
-                                variant="outline" 
-                                size="sm" 
-                                className="text-xs bg-orange-100 border-orange-200 text-orange-700 hover:bg-orange-200"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                }}
-                              >
-                                <History className="w-3 h-3 mr-2" />
-                                Advance Search
-                              </Button>
-                            </Link>
-                          </div>
-                        )}
                       </div>
                     </div>
                   </div>
