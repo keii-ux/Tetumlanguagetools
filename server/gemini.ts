@@ -6,7 +6,19 @@ const getGeminiClient = () => {
   if (!apiKey) {
     throw new Error("GEMINI_API_KEY environment variable is required");
   }
-  return new GoogleGenAI({ apiKey });
+  
+  // Temporarily unset GOOGLE_API_KEY to prevent GoogleGenAI from auto-picking it
+  const originalGoogleKey = process.env.GOOGLE_API_KEY;
+  delete process.env.GOOGLE_API_KEY;
+  
+  const client = new GoogleGenAI({ apiKey });
+  
+  // Restore GOOGLE_API_KEY for other services that might need it
+  if (originalGoogleKey) {
+    process.env.GOOGLE_API_KEY = originalGoogleKey;
+  }
+  
+  return client;
 };
 
 export interface EnhancedTermExplanation {
