@@ -141,7 +141,7 @@ export default function Dictionary() {
   const [showHistory, setShowHistory] = useState(false);
   const [globalSearch, setGlobalSearch] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
+  
   const [currentView, setCurrentView] = useState<'home' | 'medical' | 'legal' | 'asean' | 'inl-tetum'>('home');
   
   const { data: stats } = useDictionaryStats();
@@ -382,41 +382,7 @@ export default function Dictionary() {
               />
             </div>
 
-            {/* Language Selector */}
-            <div className="relative">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
-                className="flex items-center space-x-2 text-gray-600 hover:text-green-600 border-gray-300"
-              >
-                <span>{LANGUAGE_OPTIONS.find(lang => lang.code === currentLanguage)?.flag}</span>
-                <span className="hidden sm:inline">{LANGUAGE_OPTIONS.find(lang => lang.code === currentLanguage)?.label}</span>
-                <ChevronDown className="w-4 h-4" />
-              </Button>
-              
-              {showLanguageDropdown && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
-                  <div className="py-1">
-                    {LANGUAGE_OPTIONS.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => {
-                          setLanguage(lang.code);
-                          setShowLanguageDropdown(false);
-                        }}
-                        className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center space-x-3 ${
-                          currentLanguage === lang.code ? "bg-green-50 text-green-600" : "text-gray-700"
-                        }`}
-                      >
-                        <span>{lang.flag}</span>
-                        <span>{lang.label}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
+            
           </div>
         </div>
       </header>
