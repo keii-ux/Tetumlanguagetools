@@ -111,7 +111,7 @@ const TOOL_CARDS = [
     id: "inl-tetum",
     title: "Disionáriu Nasionál Tetun Ofisiál",
     category: "Reference", 
-    description: "Dictionary of the Tetum Language with nearly 10,000 entries, from official sources such as the Instituto Nacional Linguistica (INL)",
+    description: "Dictionary of the Tetum Language with more than 10,000 entries, from official sources such as the Instituto Nacional Linguistica (INL)",
     icon: Languages,
     color: "bg-purple-500",
     bgColor: "bg-purple-50",
