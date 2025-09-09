@@ -297,21 +297,7 @@ export function ASEANTerminologySearch({ onEntrySelect }: ASEANTerminologySearch
                 </div>
               )}
 
-              {/* Language Filter */}
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-600">Filter results:</span>
-                <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-                  <SelectTrigger className="w-36">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Languages</SelectItem>
-                    <SelectItem value="english">English</SelectItem>
-                    <SelectItem value="tetum">Tetum</SelectItem>
-                    <SelectItem value="portuguese">Portuguese</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+              
             </div>
           </div>
         </CardContent>
