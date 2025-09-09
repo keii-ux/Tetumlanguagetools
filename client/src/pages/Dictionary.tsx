@@ -52,11 +52,6 @@ const NAVIGATION_ITEMS = [
     active: false,
   },
   {
-    icon: BookOpen,
-    label: "Etymology Dictionary",
-    active: false,
-  },
-  {
     icon: Book,
     label: "Unified Grammar",
     active: false,
