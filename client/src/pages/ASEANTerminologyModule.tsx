@@ -144,9 +144,7 @@ export default function ASEANTerminologyModule() {
                   <Search className="w-5 h-5 text-green-600" />
                   <CardTitle className="text-green-900">Search ASEAN Terminology</CardTitle>
                 </div>
-                <CardDescription>
-                  Search and translate {totalASEANEntries} authentic ASEAN abbreviations and terms with Google Translate API
-                </CardDescription>
+                
               </CardHeader>
               <CardContent>
                 <ASEANTerminologySearch onEntrySelect={handleEntrySelect} />
