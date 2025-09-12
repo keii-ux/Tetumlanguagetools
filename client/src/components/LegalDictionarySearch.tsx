@@ -505,15 +505,7 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage, onEnhan
                 </div>
               )}
 
-              <div className="flex items-start gap-3">
-                <span className="text-gray-500 font-medium">3.</span>
-                <div className="flex-1">
-                  <p className="text-gray-700">
-                    Cross-reference term used in multilingual legal contexts and jurisprudence 
-                    across Tetum, Portuguese, and English legal systems in Timor-Leste.
-                  </p>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>
