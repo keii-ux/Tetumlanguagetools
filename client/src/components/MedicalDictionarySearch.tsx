@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useSearchEntries, useMedicalEntries } from "@/lib/search";
 import { DictionaryEntry } from "@shared/schema";
+import { AIFallbackSearch } from "@/components/AIFallbackSearch";
 
 interface MedicalDictionarySearchProps {
   onEntrySelect?: (entry: DictionaryEntry) => void;
@@ -543,10 +544,21 @@ export function MedicalDictionarySearch({ onEntrySelect, selectedLanguage }: Med
           </div>
         )}
 
-        {/* No Results */}
-        {showResults && searchResults.length === 0 && !isLoading && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6 text-center">
-            <p className="text-gray-500">No medical terms found for "{wordSearch}"</p>
+        {/* AI Fallback when no results found */}
+        {showResults && searchResults.length === 0 && !isLoading && wordSearch.trim() && (
+          <div className="space-y-4">
+            <div className="bg-white rounded-lg border border-gray-200 p-6 text-center">
+              <p className="text-gray-500 mb-4">No medical terms found for "{wordSearch}" in local dictionary</p>
+              <p className="text-sm text-blue-600">Searching with AI-powered medical terminology...</p>
+            </div>
+            <AIFallbackSearch 
+              searchTerm={wordSearch}
+              domain="medical"
+              onAddToLocalDictionary={(result) => {
+                // Future feature: Add AI-generated terms to local dictionary
+                console.log('AI result could be added to dictionary:', result);
+              }}
+            />
           </div>
         )}
 

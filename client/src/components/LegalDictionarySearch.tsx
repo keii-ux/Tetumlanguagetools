@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { useSearchEntries, useLegalEntries } from "@/lib/search";
 import type { DictionaryEntry } from "@shared/schema";
+import { AIFallbackSearch } from "@/components/AIFallbackSearch";
 
 interface LegalDictionarySearchProps {
   onEntrySelect?: (entry: DictionaryEntry) => void;
@@ -517,10 +518,21 @@ export function LegalDictionarySearch({ onEntrySelect, selectedLanguage, onEnhan
           </div>
         </div>
       )}
-      {/* No Results */}
-      {showResults && searchResults.length === 0 && !isLoading && (
-        <div className="bg-white rounded-lg border border-gray-200 p-6 text-center">
-          <p className="text-gray-500">No legal terms found for "{searchTerm}"</p>
+      {/* AI Fallback when no results found */}
+      {showResults && searchResults.length === 0 && !isLoading && searchTerm.trim() && (
+        <div className="space-y-4">
+          <div className="bg-white rounded-lg border border-gray-200 p-6 text-center">
+            <p className="text-gray-500 mb-4">No legal terms found for "{searchTerm}" in local dictionary</p>
+            <p className="text-sm text-blue-600">Searching with AI-powered legal terminology...</p>
+          </div>
+          <AIFallbackSearch 
+            searchTerm={searchTerm}
+            domain="legal"
+            onAddToLocalDictionary={(result) => {
+              // Future feature: Add AI-generated terms to local dictionary
+              console.log('AI result could be added to dictionary:', result);
+            }}
+          />
         </div>
       )}
       {/* Loading */}
