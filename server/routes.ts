@@ -668,6 +668,55 @@ Provide only the translation without additional explanation.`;
     }
   });
 
+  // AI Fallback translation for terms not found in local dictionaries  
+  app.post("/api/ai-fallback/translate", async (req, res) => {
+    try {
+      const { term, domain = 'general', sourceLanguage = 'en' } = req.body;
+      
+      if (!term) {
+        return res.status(400).json({ error: "Missing required parameter: term" });
+      }
+
+      const { getCachedAITranslation } = await import('./ai-fallback.js');
+      const result = await getCachedAITranslation(term, domain, sourceLanguage);
+      
+      res.json(result);
+    } catch (error) {
+      console.error("AI fallback translation error:", error);
+      res.status(500).json({ 
+        error: "AI translation failed",
+        tetumTranslation: req.body.term || "",
+        portugueseTranslation: req.body.term || "",
+        confidence: 0.1
+      });
+    }
+  });
+
+  // Enhanced legal analysis for legal terms
+  app.post("/api/ai-fallback/legal-analysis", async (req, res) => {
+    try {
+      const { term, sourceLanguage = 'en' } = req.body;
+      
+      if (!term) {
+        return res.status(400).json({ error: "Missing required parameter: term" });
+      }
+
+      const { getEnhancedLegalAnalysis } = await import('./ai-fallback.js');
+      const result = await getEnhancedLegalAnalysis(term, sourceLanguage);
+      
+      res.json(result);
+    } catch (error) {
+      console.error("Enhanced legal analysis error:", error);
+      res.status(500).json({ 
+        error: "Legal analysis failed",
+        analysis: "Analysis temporarily unavailable",
+        timorLesteContext: "Context analysis temporarily unavailable",
+        relatedTerms: [],
+        usageExamples: []
+      });
+    }
+  });
+
   // Get entries by dictionary type
   app.get("/api/medical/entries", async (req, res) => {
     try {
