@@ -7,6 +7,15 @@ import path from "path";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
+  // Health check endpoints - mounted first for immediate availability during startup
+  app.get("/api", (req, res) => {
+    res.status(200).send("Dictionary API is running");
+  });
+  
+  app.head("/api", (req, res) => {
+    res.sendStatus(200);
+  });
+
   // Helper function to safely convert values to strings
   const safeStringify = (value: any): string => {
     if (value === null || value === undefined) return "";
@@ -397,6 +406,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     console.error("Critical error during dictionary initialization - continuing with empty dictionaries:", initError);
     // Server will continue with empty storage, allowing the application to start
   }
+
 
   // Generic search entries
   app.get("/api/search", async (req, res) => {
