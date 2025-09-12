@@ -528,15 +528,7 @@ export function MedicalDictionarySearch({ onEntrySelect, selectedLanguage }: Med
                   </div>
                 )}
 
-                <div className="flex items-start gap-3">
-                  <span className="text-gray-500 font-medium">3.</span>
-                  <div className="flex-1">
-                    <p className="text-gray-700">
-                      Cross-reference term used in bilingual medical contexts and healthcare communication 
-                      between Tetum and English speaking medical professionals.
-                    </p>
-                  </div>
-                </div>
+                
               </div>
             </div>
 
