@@ -24,6 +24,8 @@ interface TranslationProviderProps {
   children: React.ReactNode;
 }
 
+const MAX_CACHE_SIZE = 1000; // Limit cache to 1000 entries to prevent memory issues
+
 export function TranslationProvider({ children }: TranslationProviderProps) {
   const [currentLanguage, setCurrentLanguage] = useState<Language>('en');
   const [translationCache, setTranslationCache] = useState<TranslationCache>({});
@@ -76,15 +78,26 @@ export function TranslationProvider({ children }: TranslationProviderProps) {
       const result = await response.json();
       const translatedText = result.translatedText || text;
 
-      // Cache the translation
+      // Cache the translation with size limit
       const cacheKey = getCacheKey(text);
-      setTranslationCache(prev => ({
-        ...prev,
-        [cacheKey]: {
-          ...prev[cacheKey],
-          [lang]: translatedText
+      setTranslationCache(prev => {
+        const newCache = {
+          ...prev,
+          [cacheKey]: {
+            ...prev[cacheKey],
+            [lang]: translatedText
+          }
+        };
+        
+        // If cache is getting too large, remove oldest entries
+        const keys = Object.keys(newCache);
+        if (keys.length > MAX_CACHE_SIZE) {
+          const entriesToRemove = keys.slice(0, keys.length - MAX_CACHE_SIZE);
+          entriesToRemove.forEach(key => delete newCache[key]);
         }
-      }));
+        
+        return newCache;
+      });
 
       return translatedText;
     } catch (error) {
@@ -139,15 +152,26 @@ export function TranslationProvider({ children }: TranslationProviderProps) {
         
         results[originalIndex] = translation;
         
-        // Cache the translation
+        // Cache the translation with size limit
         const cacheKey = getCacheKey(originalText);
-        setTranslationCache(prev => ({
-          ...prev,
-          [cacheKey]: {
-            ...prev[cacheKey],
-            [lang]: translation
+        setTranslationCache(prev => {
+          const newCache = {
+            ...prev,
+            [cacheKey]: {
+              ...prev[cacheKey],
+              [lang]: translation
+            }
+          };
+          
+          // If cache is getting too large, remove oldest entries
+          const keys = Object.keys(newCache);
+          if (keys.length > MAX_CACHE_SIZE) {
+            const entriesToRemove = keys.slice(0, keys.length - MAX_CACHE_SIZE);
+            entriesToRemove.forEach(key => delete newCache[key]);
           }
-        }));
+          
+          return newCache;
+        });
       });
 
       return results;
