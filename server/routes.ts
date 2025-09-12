@@ -717,6 +717,54 @@ Provide only the translation without additional explanation.`;
     }
   });
 
+  // Enhanced AI translation with web search and memory storage
+  app.post("/api/ai-fallback/enhanced-translate", async (req, res) => {
+    try {
+      const { term, domain = 'general', sourceLanguage = 'en' } = req.body;
+      
+      if (!term) {
+        return res.status(400).json({ error: "Missing required parameter: term" });
+      }
+
+      const { getMemoryCachedTranslation } = await import('./ai-fallback.js');
+      const result = await getMemoryCachedTranslation(term, domain, sourceLanguage);
+      
+      res.json(result);
+    } catch (error) {
+      console.error("Enhanced AI translation error:", error);
+      res.status(500).json({ 
+        error: "Enhanced translation failed",
+        aiTranslation: {
+          tetumTranslation: req.body.term || "",
+          portugueseTranslation: req.body.term || "",
+          confidence: 0.1
+        },
+        webSources: [],
+        combinedAnalysis: "Enhanced analysis temporarily unavailable",
+        memoryStored: false
+      });
+    }
+  });
+
+  // Memory cache statistics endpoint
+  app.get("/api/ai-fallback/memory-stats", async (req, res) => {
+    try {
+      const { getMemoryCacheStats } = await import('./ai-fallback.js');
+      const stats = getMemoryCacheStats();
+      
+      res.json(stats);
+    } catch (error) {
+      console.error("Memory stats error:", error);
+      res.status(500).json({ 
+        error: "Failed to get memory stats",
+        totalEntries: 0,
+        domainBreakdown: {},
+        oldestEntry: 0,
+        newestEntry: 0
+      });
+    }
+  });
+
   // Get entries by dictionary type
   app.get("/api/medical/entries", async (req, res) => {
     try {

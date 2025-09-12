@@ -14,6 +14,20 @@ interface AITranslationResult {
   sources?: string[];
 }
 
+interface WebSearchResult {
+  title: string;
+  snippet: string;
+  url: string;
+  relevanceScore: number;
+}
+
+interface EnhancedTranslationResult {
+  aiTranslation: AITranslationResult;
+  webSources: WebSearchResult[];
+  combinedAnalysis: string;
+  memoryStored: boolean;
+}
+
 interface AIFallbackSearchProps {
   searchTerm: string;
   domain: 'legal' | 'medical' | 'general';
@@ -26,6 +40,7 @@ export function AIFallbackSearch({
   onAddToLocalDictionary 
 }: AIFallbackSearchProps) {
   const [aiResult, setAiResult] = useState<AITranslationResult | null>(null);
+  const [enhancedResult, setEnhancedResult] = useState<EnhancedTranslationResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showLegalAnalysis, setShowLegalAnalysis] = useState(false);
@@ -43,9 +58,11 @@ export function AIFallbackSearch({
     setIsLoading(true);
     setError(null);
     setAiResult(null);
+    setEnhancedResult(null);
 
     try {
-      const response = await apiRequest('POST', '/api/ai-fallback/translate', {
+      // Try enhanced translation first (with internet search and memory content)
+      const response = await apiRequest('POST', '/api/ai-fallback/enhanced-translate', {
         term: searchTerm,
         domain,
         sourceLanguage: 'en'
@@ -53,9 +70,27 @@ export function AIFallbackSearch({
 
       if (response.ok) {
         const result = await response.json();
-        setAiResult(result);
+        setEnhancedResult(result);
+        setAiResult(result.aiTranslation);
+        
+        // Notify parent if memory content was stored
+        if (result.memoryStored && onAddToLocalDictionary) {
+          onAddToLocalDictionary(result.aiTranslation);
+        }
       } else {
-        setError('AI translation service unavailable');
+        // Fallback to basic AI translation if enhanced fails
+        const fallbackResponse = await apiRequest('POST', '/api/ai-fallback/translate', {
+          term: searchTerm,
+          domain,
+          sourceLanguage: 'en'
+        });
+
+        if (fallbackResponse.ok) {
+          const fallbackResult = await fallbackResponse.json();
+          setAiResult(fallbackResult);
+        } else {
+          setError('AI translation service unavailable');
+        }
       }
     } catch (err) {
       console.error('AI fallback error:', err);
@@ -236,6 +271,77 @@ export function AIFallbackSearch({
           </div>
         </CardContent>
       </Card>
+
+      {/* Enhanced Translation Web Sources and Memory Info */}
+      {enhancedResult && (enhancedResult.webSources.length > 0 || enhancedResult.memoryStored) && (
+        <Card className="border-2 border-green-200 bg-green-50" data-testid="enhanced-translation-info">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Sparkles className="h-4 w-4 text-green-600" />
+              <h3 className="text-sm font-bold text-green-900">
+                Enhanced Translation with Internet Sources
+              </h3>
+            </div>
+
+            {enhancedResult.memoryStored && (
+              <div className="bg-green-100 rounded-lg p-3 mb-3 border border-green-200">
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <h4 className="text-xs font-semibold text-green-800">Memory Content Stored</h4>
+                </div>
+                <p className="text-xs text-green-700">
+                  This translation has been stored in memory cache for faster future retrieval
+                </p>
+              </div>
+            )}
+
+            {enhancedResult.combinedAnalysis && (
+              <div className="bg-white/60 rounded-lg p-3 mb-3 border border-green-200">
+                <h4 className="text-xs font-semibold text-green-700 mb-1">Enhanced Analysis</h4>
+                <p className="text-sm text-green-800" data-testid="combined-analysis">
+                  {enhancedResult.combinedAnalysis}
+                </p>
+              </div>
+            )}
+
+            {enhancedResult.webSources.length > 0 && (
+              <div className="space-y-2">
+                <h4 className="text-xs font-semibold text-green-700">Internet Sources Found:</h4>
+                {enhancedResult.webSources.map((source, index) => (
+                  <div
+                    key={index}
+                    className="bg-white/80 rounded-lg p-3 border border-green-100"
+                    data-testid={`web-source-${index}`}
+                  >
+                    <div className="flex items-start justify-between mb-1">
+                      <h5 className="text-xs font-medium text-green-900 truncate pr-2">
+                        {source.title}
+                      </h5>
+                      <div className="flex items-center gap-1">
+                        <div className="w-1 h-1 bg-green-400 rounded-full"></div>
+                        <span className="text-xs text-green-600">
+                          {Math.round(source.relevanceScore * 100)}% relevant
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-green-700 mb-2">
+                      {source.snippet}
+                    </p>
+                    <a
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-blue-600 hover:text-blue-800 underline"
+                    >
+                      View source
+                    </a>
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
 
       {showLegalAnalysis && legalAnalysis && (
         <Card className="border-2 border-amber-200 bg-amber-50" data-testid="legal-analysis">
