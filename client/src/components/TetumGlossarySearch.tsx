@@ -167,9 +167,7 @@ export function TetumGlossarySearch({ onEntrySelect }: TetumGlossarySearchProps)
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
           Glosáriu Legál Tetum
         </h2>
-        <p className="text-gray-600 dark:text-gray-300">
-          Buka termu legál ho esplikasaun iha lian Tetum
-        </p>
+        
       </div>
 
       <div ref={searchRef} className="relative">
