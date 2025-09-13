@@ -9,7 +9,7 @@ import {
   type SearchHistory,
   type InsertSearchHistory,
   type SearchQuery
-} from "@shared/schema";
+} from "../shared/schema";
 
 export interface IStorage {
   // Dictionary entries
@@ -230,9 +230,10 @@ export class MemStorage implements IStorage {
   async createBookmark(bookmark: InsertBookmark): Promise<Bookmark> {
     const id = this.currentBookmarkId++;
     const newBookmark: Bookmark = { 
-      ...bookmark, 
       id,
-      entryId: bookmark.entryId || null,
+      userId: bookmark.userId,
+      entryId: bookmark.entryId,
+      createdAt: new Date().toISOString(),
     };
     const key = `${bookmark.userId}-${bookmark.entryId}`;
     this.bookmarksMap.set(key, newBookmark);
@@ -252,7 +253,12 @@ export class MemStorage implements IStorage {
 
   async addSearchHistory(history: InsertSearchHistory): Promise<SearchHistory> {
     const id = this.currentHistoryId++;
-    const newHistory: SearchHistory = { ...history, id };
+    const newHistory: SearchHistory = { 
+      id,
+      userId: history.userId,
+      query: history.query,
+      searchedAt: new Date().toISOString(),
+    };
     this.searchHistoryMap.set(`${history.userId}-${id}`, newHistory);
     return newHistory;
   }

@@ -19,11 +19,11 @@ export function log(message: string, source = "express") {
   console.log(`${formattedTime} [${source}] ${message}`);
 }
 
-export async function setupVite(app: Express, server: Server) {
+export async function setupVite({ app, server }: { app: Express; server: Server; }): Promise<void> {
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },
-    allowedHosts: true as const, // Forces literal 'true'; or use ['localhost'] for string[];
+    allowedHosts: true as const,
   };
   const vite = await createViteServer({
     ...viteConfig,
@@ -35,7 +35,7 @@ export async function setupVite(app: Express, server: Server) {
         process.exit(1);
       },
     },
-     server: serverOptions,
+    server: serverOptions,
     appType: "custom",
   });
 
@@ -49,7 +49,7 @@ export async function setupVite(app: Express, server: Server) {
         "..",
         "client",
         "index.html",
-     );
+      );
 
       // always reload the index.html file from disk incase it changes
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
@@ -65,7 +65,6 @@ export async function setupVite(app: Express, server: Server) {
     }
   });
 }
-
 export function serveStatic(app: Express) {
   const distPath = path.resolve(import.meta.dirname, "public");
 

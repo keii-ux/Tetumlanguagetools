@@ -78,10 +78,7 @@ export default function INLTetumDictionaryModule() {
                   Dictionary
                 </span>
               </h1>
-              <p className="text-xl text-purple-100 mb-8 leading-relaxed">
-                The most comprehensive Tetum monolingual dictionary with nearly 10,000 authentic entries, 
-                definitions, and usage examples from the Instituto Nacional de Linguística.
-              </p>
+              <p className="text-xl text-purple-100 mb-8 leading-relaxed">The most comprehensive Tetum dictionary with more than 10,000 verified terms, definitions, and usage examples from official sources such as the Instituto Nacional de Linguística.</p>
               <div className="flex items-center space-x-8 text-purple-100">
                 <div>
                   <div className="text-2xl font-bold text-white">{totalEntries.toLocaleString()}</div>

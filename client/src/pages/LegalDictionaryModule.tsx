@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, Scale, Info, Search, Star, Book, Award, Globe, Shield, Users, FileText, BookOpen, Gavel } from "lucide-react";
+import { ArrowLeft, Scale, Info, Search, Star, Book, Award, Globe, Shield, Users, FileText, BookOpen, Gavel, Menu, X, ChevronDown, Wifi, WifiOff } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -20,6 +20,8 @@ export default function LegalDictionaryModule() {
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [activeTab, setActiveTab] = useState("search");
   const [activeGlossary, setActiveGlossary] = useState("legal");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showStats, setShowStats] = useState(false);
   const { data: stats } = useDictionaryStats();
 
   const handleEntrySelect = (entry: DictionaryEntry) => {
@@ -38,101 +40,216 @@ export default function LegalDictionaryModule() {
   const totalLegalEntries = (stats?.legal || 0) + (stats?.["tetum-glossary"] || 0) + (stats?.["portuguese-glossary"] || 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-slate-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 flex flex-col">
-      {/* Professional Header */}
-      <div className="sticky top-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-blue-200 dark:border-gray-700 z-10 shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 py-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+      {/* Mobile-First Header */}
+      <div className="sticky top-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 z-20 shadow-sm">
+        <div className="px-4 py-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link href="/">
-                <Button variant="ghost" size="sm" className="p-2 hover:bg-blue-100 dark:hover:bg-gray-800">
-                  <ArrowLeft className="w-4 h-4" />
+            <div className="flex items-center gap-3">
+              <Link href="/" data-testid="button-back-home">
+                <Button variant="ghost" size="sm" className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800">
+                  <ArrowLeft className="w-5 h-5" />
                 </Button>
               </Link>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
-                  <Scale className="w-6 h-6 text-white" />
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                  <Scale className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-gray-900 dark:text-white">Tetum Legal Dictionary</h1>
+                  <h1 className="text-lg font-bold text-gray-900 dark:text-white">Legal Dictionary</h1>
+                  {stats?.offline && (
+                    <div className="flex items-center gap-1 text-xs text-amber-600 dark:text-amber-400">
+                      <WifiOff className="w-3 h-3" />
+                      <span>Offline Mode</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <Badge variant="outline" className="bg-blue-50 border-blue-200 text-blue-700 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-300">
-                {totalLegalEntries.toLocaleString()} entries
-              </Badge>
-              <LanguageSwitcher 
-                selectedLanguage={selectedLanguage}
-                onLanguageChange={setSelectedLanguage}
-              />
+            
+            {/* Mobile Menu Toggle */}
+            <div className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowStats(!showStats)}
+                className="p-2 md:hidden"
+                data-testid="button-toggle-stats"
+              >
+                <Badge variant="outline" className="text-xs">
+                  {totalLegalEntries.toLocaleString()}
+                </Badge>
+              </Button>
+              
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 md:hidden"
+                data-testid="button-mobile-menu"
+              >
+                {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </Button>
+              
+              {/* Desktop Controls */}
+              <div className="hidden md:flex items-center gap-3">
+                <Badge variant="outline" className="bg-blue-50 border-blue-200 text-blue-700 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-300">
+                  {totalLegalEntries.toLocaleString()} entries
+                </Badge>
+                <LanguageSwitcher 
+                  selectedLanguage={selectedLanguage}
+                  onLanguageChange={setSelectedLanguage}
+                />
+              </div>
+            </div>
+          </div>
+          
+          {/* Mobile Stats Panel */}
+          {showStats && (
+            <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg md:hidden">
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{stats?.legal || 0}</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">Legal Terms</div>
+                </div>
+                <div>
+                  <div className="text-lg font-bold text-indigo-600 dark:text-indigo-400">{stats?.["tetum-glossary"] || 0}</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">Tetum</div>
+                </div>
+                <div>
+                  <div className="text-lg font-bold text-purple-600 dark:text-purple-400">{stats?.["portuguese-glossary"] || 0}</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">Portuguese</div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        
+        {/* Mobile Navigation Menu */}
+        {isMobileMenuOpen && (
+          <div className="border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 md:hidden">
+            <div className="p-4 space-y-3">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Dictionary Type</label>
+                <div className="flex flex-wrap gap-2">
+                  <Button
+                    variant={activeGlossary === "legal" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => { setActiveGlossary("legal"); setIsMobileMenuOpen(false); }}
+                    className="text-xs"
+                  >
+                    Legal Dictionary
+                  </Button>
+                  <Button
+                    variant={activeGlossary === "tetum" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => { setActiveGlossary("tetum"); setIsMobileMenuOpen(false); }}
+                    className="text-xs"
+                  >
+                    Tetum Glossary
+                  </Button>
+                  <Button
+                    variant={activeGlossary === "portuguese" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => { setActiveGlossary("portuguese"); setIsMobileMenuOpen(false); }}
+                    className="text-xs"
+                  >
+                    Portuguese
+                  </Button>
+                </div>
+              </div>
+              <div>
+                <LanguageSwitcher 
+                  selectedLanguage={selectedLanguage}
+                  onLanguageChange={setSelectedLanguage}
+                />
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Simplified Mobile-First Hero */}
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-8 md:py-12">
+        <div className="px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-500/20 text-blue-100 mb-4">
+              <Gavel className="w-4 h-4 mr-2" />
+              Legal Terminology
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold mb-3 leading-tight">
+              Professional Legal Dictionary
+            </h2>
+            
+            {/* Quick Dictionary Type Selector - Mobile */}
+            <div className="md:hidden space-y-3">
+              <div className="flex justify-center gap-2 flex-wrap">
+                <Button
+                  variant={activeGlossary === "legal" ? "secondary" : "outline"}
+                  size="sm"
+                  onClick={() => setActiveGlossary("legal")}
+                  className="text-xs bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  data-testid="button-legal-dict"
+                >
+                  Legal ({stats?.legal || 0})
+                </Button>
+                <Button
+                  variant={activeGlossary === "tetum" ? "secondary" : "outline"}
+                  size="sm"
+                  onClick={() => setActiveGlossary("tetum")}
+                  className="text-xs bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  data-testid="button-tetum-glossary"
+                >
+                  Tetum ({stats?.["tetum-glossary"] || 0})
+                </Button>
+                <Button
+                  variant={activeGlossary === "portuguese" ? "secondary" : "outline"}
+                  size="sm"
+                  onClick={() => setActiveGlossary("portuguese")}
+                  className="text-xs bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  data-testid="button-portuguese-glossary"
+                >
+                  Portuguese ({stats?.["portuguese-glossary"] || 0})
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 text-white py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center px-4 py-2 rounded-full text-sm bg-blue-500/20 text-blue-100 mb-6">
-                <Gavel className="w-4 h-4 mr-2" />
-                Legal Terminology
-              </div>
-              <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                Legal Tetum
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-indigo-300 block">
-                  Dictionary
-                </span>
-              </h1>
-              <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-                Comprehensive legal terminology resource with over {totalLegalEntries.toLocaleString()} legal terms 
-                in Tetum, Portuguese, and English, essential for legal professionals and students.
-              </p>
-              <div className="flex items-center space-x-8 text-blue-100">
-                <div>
-                  <div className="text-2xl font-bold text-white">{totalLegalEntries.toLocaleString()}</div>
-                  <div className="text-sm">Legal Terms</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-white">3</div>
-                  <div className="text-sm">Languages</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-white">100%</div>
-                  <div className="text-sm">Legal Focus</div>
-                </div>
-              </div>
-            </div>
-            <div className="lg:flex justify-center">
-              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 max-w-md">
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
-                    <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
-                    <span className="text-sm font-medium">Tetum Legal Dictionary</span>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
-                    <div className="w-3 h-3 bg-indigo-400 rounded-full"></div>
-                    <span className="text-sm font-medium">Tetum Legal Glossary</span>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
-                    <div className="w-3 h-3 bg-blue-300 rounded-full"></div>
-                    <span className="text-sm font-medium">Portuguese Glossary</span>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
-                    <div className="w-3 h-3 bg-indigo-300 rounded-full"></div>
-                    <span className="text-sm font-medium">Constitutional Terms</span>
-                  </div>
-                </div>
-              </div>
+      {/* Main Content - Mobile Optimized */}
+      <div className="flex-1 px-4 py-6">
+        <div className="max-w-4xl mx-auto">
+          {/* Desktop Dictionary Type Selector */}
+          <div className="hidden md:flex justify-center mb-6">
+            <div className="flex gap-2 p-1 bg-gray-100 dark:bg-gray-800 rounded-lg">
+              <Button
+                variant={activeGlossary === "legal" ? "default" : "ghost"}
+                size="sm"
+                onClick={() => setActiveGlossary("legal")}
+                className="text-sm"
+              >
+                Legal Dictionary ({stats?.legal || 0})
+              </Button>
+              <Button
+                variant={activeGlossary === "tetum" ? "default" : "ghost"}
+                size="sm"
+                onClick={() => setActiveGlossary("tetum")}
+                className="text-sm"
+              >
+                Tetum Glossary ({stats?.["tetum-glossary"] || 0})
+              </Button>
+              <Button
+                variant={activeGlossary === "portuguese" ? "default" : "ghost"}
+                size="sm"
+                onClick={() => setActiveGlossary("portuguese")}
+                className="text-sm"
+              >
+                Portuguese ({stats?.["portuguese-glossary"] || 0})
+              </Button>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="flex-1 max-w-6xl mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-8 bg-white shadow-sm">
             <TabsTrigger value="search" className="flex items-center gap-2">
@@ -151,11 +268,8 @@ export default function LegalDictionaryModule() {
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <Search className="w-5 h-5 text-blue-600" />
-                  <CardTitle className="text-blue-900">Search Legal Terminology</CardTitle>
+                  <CardTitle className="text-blue-900">Legal Dictionary Search</CardTitle>
                 </div>
-                <CardDescription>
-                  Choose from {totalLegalEntries.toLocaleString()} legal terms across three comprehensive resources
-                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-3 gap-4 mb-6">
@@ -313,10 +427,6 @@ export default function LegalDictionaryModule() {
                         <span className="w-6 h-6 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center text-sm font-bold">2</span>
                         Search Legal Terms
                       </h4>
-                      <p className="text-gray-700 text-sm leading-relaxed">
-                        Enter legal terms in Tetum, Portuguese, or English. The system provides predictive 
-                        suggestions and cross-language matching for comprehensive results.
-                      </p>
                     </div>
                   </div>
                   
@@ -391,6 +501,7 @@ export default function LegalDictionaryModule() {
             </Card>
           </TabsContent>
         </Tabs>
+        </div>
       </div>
 
       {/* Enhanced Term Detail Modal */}

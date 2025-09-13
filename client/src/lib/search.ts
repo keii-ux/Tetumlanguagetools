@@ -1,9 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { DictionaryEntry, SearchQuery, Bookmark, SearchHistory } from "@shared/schema";
+import { apiRequest } from "./queryClient";
+import { DictionaryEntry, SearchQuery, Bookmark, SearchHistory } from "../../../shared/schema";
+import { offlineManager, useOfflineStatus } from "./offlineManager";
 
-// Search entries with module-specific routing
+// Enhanced search entries with offline-first approach
 export function useSearchEntries(searchQuery: SearchQuery) {
+  const isOffline = useOfflineStatus();
   const queryParams = new URLSearchParams();
   
   Object.entries(searchQuery).forEach(([key, value]) => {
@@ -37,24 +39,97 @@ export function useSearchEntries(searchQuery: SearchQuery) {
 
   return useQuery<DictionaryEntry[]>({
     queryKey: [endpoint, queryParams.toString()],
+    queryFn: async () => {
+      // Try offline search first if we're offline
+      if (isOffline) {
+        console.log('Using offline search for:', searchQuery);
+        return await offlineManager.searchOffline(searchQuery);
+      }
+      
+      // Try online search with offline fallback
+      try {
+        const response = await fetch(`${endpoint}?${queryParams.toString()}`, {
+          credentials: 'include'
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return await response.json();
+      } catch (error) {
+        console.warn('Online search failed, falling back to offline:', error);
+        return await offlineManager.searchOffline(searchQuery);
+      }
+    },
     enabled: !!searchQuery.query?.trim() || searchQuery.dictionaryType !== "all",
     staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 30, // 30 minutes
   });
 }
 
-// Get all entries
+// Get all entries with offline fallback
 export function useAllEntries() {
+  const isOffline = useOfflineStatus();
+  
   return useQuery<DictionaryEntry[]>({
     queryKey: ["/api/entries"],
+    queryFn: async () => {
+      if (isOffline) {
+        // Get from all cached dictionaries when offline
+        const stats = await offlineManager.getCachedStats();
+        if (stats) {
+          return await offlineManager.searchOffline({ 
+            query: "", 
+            dictionaryType: "all",
+            language: "all",
+            exactMatch: false,
+            includeDefinitions: true,
+            caseSensitive: false
+          });
+        }
+        return [];
+      }
+      
+      try {
+        const response = await fetch("/api/entries", { credentials: 'include' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return await response.json();
+      } catch (error) {
+        console.warn('Failed to fetch entries online, using offline fallback');
+        return await offlineManager.searchOffline({ 
+          query: "", 
+          dictionaryType: "all",
+          language: "all",
+          exactMatch: false,
+          includeDefinitions: true,
+          caseSensitive: false
+        });
+      }
+    },
     staleTime: 1000 * 60 * 10, // 10 minutes
+    gcTime: 1000 * 60 * 60, // 1 hour
   });
 }
 
-// Get medical entries
+// Get medical entries with offline fallback
 export function useMedicalEntries() {
+  const isOffline = useOfflineStatus();
+  
   return useQuery<DictionaryEntry[]>({
     queryKey: ["/api/medical/entries"],
+    queryFn: async () => {
+      if (isOffline) {
+        return await offlineManager.getCachedEntries('medical');
+      }
+      
+      try {
+        const response = await fetch("/api/medical/entries", { credentials: 'include' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return await response.json();
+      } catch (error) {
+        console.warn('Failed to fetch medical entries online, using offline fallback');
+        return await offlineManager.getCachedEntries('medical');
+      }
+    },
     staleTime: 1000 * 60 * 10, // 10 minutes
+    gcTime: 1000 * 60 * 60, // 1 hour
   });
 }
 
@@ -74,8 +149,10 @@ export function useEntry(id: number | null) {
   });
 }
 
-// Get dictionary statistics
+// Get dictionary statistics with offline fallback
 export function useDictionaryStats() {
+  const isOffline = useOfflineStatus();
+  
   return useQuery<{
     total: number;
     legal: number;
@@ -86,9 +163,38 @@ export function useDictionaryStats() {
     "portuguese-glossary": number;
     "tetum-monolingual": number;
     "portuguese-legal": number;
+    "inl-tetum": number;
+    offline?: boolean;
   }>({
     queryKey: ["/api/stats"],
+    queryFn: async () => {
+      if (isOffline) {
+        const cachedStats = await offlineManager.getCachedStats();
+        return cachedStats ? { ...cachedStats, offline: true } : {
+          total: 0, legal: 0, medical: 0, general: 0, asean: 0,
+          "tetum-glossary": 0, "portuguese-glossary": 0, 
+          "tetum-monolingual": 0, "portuguese-legal": 0,
+          "inl-tetum": 0, offline: true
+        };
+      }
+      
+      try {
+        const response = await fetch("/api/stats", { credentials: 'include' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return await response.json();
+      } catch (error) {
+        console.warn('Failed to fetch stats online, using offline fallback');
+        const cachedStats = await offlineManager.getCachedStats();
+        return cachedStats ? { ...cachedStats, offline: true } : {
+          total: 0, legal: 0, medical: 0, general: 0, asean: 0,
+          "tetum-glossary": 0, "portuguese-glossary": 0, 
+          "tetum-monolingual": 0, "portuguese-legal": 0,
+          "inl-tetum": 0, offline: true
+        };
+      }
+    },
     staleTime: 1000 * 60 * 15, // 15 minutes
+    gcTime: 1000 * 60 * 60, // 1 hour
   });
 }
 

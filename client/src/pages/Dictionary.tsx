@@ -30,6 +30,11 @@ import { BookmarkPanel } from "@/components/BookmarkPanel";
 import { useTranslation } from "@/contexts/TranslationContext";
 import { useTranslateText } from "@/hooks/useTranslateText";
 import { TranslatedText } from "@/components/TranslatedText";
+import { usePullToRefresh } from "@/hooks/usePullToRefresh";
+import PullToRefreshIndicator from "@/components/PullToRefreshIndicator";
+import { queryClient } from "@/lib/queryClient";
+import { VirtualizedList, useOptimalItemHeight } from "@/components/VirtualizedList";
+import { PWAInstallPrompt, ConnectionStatus } from "@/components/PWAInstallPrompt";
 
 const DEFAULT_USER_ID = "demo-user";
 
@@ -134,13 +139,24 @@ export default function Dictionary() {
   const { data: allEntries = [], isLoading: allLoading } = useAllEntries();
   const addSearchHistory = useAddSearchHistory();
 
+  // Pull to refresh functionality
+  const handleRefresh = async () => {
+    await queryClient.invalidateQueries({ queryKey: ['/api/stats'] });
+    await queryClient.invalidateQueries({ queryKey: ['/api/entries'] });
+    await queryClient.refetchQueries({ queryKey: ['/api/stats'] });
+    await queryClient.refetchQueries({ queryKey: ['/api/entries'] });
+  };
+
+  const { isPulling, pullDistance, isRefreshing } = usePullToRefresh({
+    onRefresh: handleRefresh,
+    disabled: selectedTool !== null, // Disable when viewing specific tool results
+  });
+
+  const itemHeight = useOptimalItemHeight(80);
+
   const handleToolSelect = (toolId: string) => {
     if (toolId === "legal") {
       setCurrentView('legal');
-    } else if (toolId === "asean") {
-      // Navigate to ASEAN terminology module
-      window.location.href = "/asean-terminology";
-      return;
     } else {
       setSelectedTool(toolId);
       const newQuery = buildSearchQuery({ 
@@ -261,51 +277,105 @@ export default function Dictionary() {
                   </div>
                 </Card>
               ) : (
-                <div className="space-y-4">
-                  {displayResults.map((entry) => (
-                    <Card 
-                      key={entry.id}
-                      className="p-6 hover:shadow-lg transition-shadow cursor-pointer border hover:border-green-200"
-                      onClick={() => setSelectedEntry(entry)}
-                    >
-                      <div>
-                        <div className="flex items-start justify-between mb-3">
-                          <h3 className="text-lg font-semibold text-gray-900">
-                            {entry.tetum || entry.portuguese || entry.english || "Unknown"}
-                          </h3>
-                          <Badge variant="secondary" className="text-xs">
-                            {entry.category || entry.dictionaryType}
-                          </Badge>
-                        </div>
-                        
-                        <div className="space-y-2 mb-3">
-                          {entry.portuguese && (
-                            <div className="flex">
-                              <span className="text-xs font-medium text-gray-500 w-12">PT:</span>
-                              <span className="text-gray-700">{entry.portuguese}</span>
-                            </div>
+                displayResults.length > 50 ? (
+                  <VirtualizedList
+                    items={displayResults}
+                    itemHeight={itemHeight}
+                    className="space-y-2"
+                    data-testid="virtualized-search-results"
+                    getItemKey={(entry, index) => entry.id?.toString() ?? entry.tetum ?? `${entry.english}-${entry.portuguese}-${index}`}
+                    renderItem={(entry, index, isVisible) => (
+                      <Card
+                        className={`p-6 hover:shadow-lg transition-shadow cursor-pointer border hover:border-green-200 ${!isVisible ? 'bg-gray-50' : ''}`}
+                        onClick={() => setSelectedEntry(entry)}
+                        data-testid={`search-result-card-${index}`}
+                      >
+                        <div>
+                          <div className="flex items-start justify-between mb-3">
+                            <h3 className="text-lg font-semibold text-gray-900">
+                              {entry.tetum || entry.portuguese || entry.english || "Unknown"}
+                            </h3>
+                            <Badge variant="secondary" className="text-xs">
+                              {entry.category || entry.dictionaryType}
+                            </Badge>
+                          </div>
+                          
+                          <div className="space-y-2 mb-3">
+                            {entry.portuguese && (
+                              <div className="flex">
+                                <span className="text-xs font-medium text-gray-500 w-12">PT:</span>
+                                <span className="text-gray-700">{entry.portuguese}</span>
+                              </div>
+                            )}
+                            {entry.english && (
+                              <div className="flex">
+                                <span className="text-xs font-medium text-gray-500 w-12">EN:</span>
+                                <span className="text-gray-700">{entry.english}</span>
+                              </div>
+                            )}
+                          </div>
+                          
+                          {entry.explanation && (
+                            <p className="text-sm text-gray-600 line-clamp-2">
+                              {entry.explanation}
+                            </p>
                           )}
-                          {entry.english && (
-                            <div className="flex">
-                              <span className="text-xs font-medium text-gray-500 w-12">EN:</span>
-                              <span className="text-gray-700">{entry.english}</span>
-                            </div>
+                          
+                          <div className="flex justify-between items-center mt-3 text-xs text-gray-500">
+                            <span>Source: {entry.source}</span>
+                          </div>
+                        </div>
+                      </Card>
+                    )}
+                  />
+                ) : (
+                  <div className="space-y-4">
+                    {displayResults.map((entry, index) => (
+                      <Card 
+                        key={entry.id}
+                        className="p-6 hover:shadow-lg transition-shadow cursor-pointer border hover:border-green-200"
+                        onClick={() => setSelectedEntry(entry)}
+                        data-testid={`search-result-card-${index}`}
+                      >
+                        <div>
+                          <div className="flex items-start justify-between mb-3">
+                            <h3 className="text-lg font-semibold text-gray-900">
+                              {entry.tetum || entry.portuguese || entry.english || "Unknown"}
+                            </h3>
+                            <Badge variant="secondary" className="text-xs">
+                              {entry.category || entry.dictionaryType}
+                            </Badge>
+                          </div>
+                          
+                          <div className="space-y-2 mb-3">
+                            {entry.portuguese && (
+                              <div className="flex">
+                                <span className="text-xs font-medium text-gray-500 w-12">PT:</span>
+                                <span className="text-gray-700">{entry.portuguese}</span>
+                              </div>
+                            )}
+                            {entry.english && (
+                              <div className="flex">
+                                <span className="text-xs font-medium text-gray-500 w-12">EN:</span>
+                                <span className="text-gray-700">{entry.english}</span>
+                              </div>
+                            )}
+                          </div>
+                          
+                          {entry.explanation && (
+                            <p className="text-sm text-gray-600 line-clamp-2">
+                              {entry.explanation}
+                            </p>
                           )}
+                          
+                          <div className="flex justify-between items-center mt-3 text-xs text-gray-500">
+                            <span>Source: {entry.source}</span>
+                          </div>
                         </div>
-                        
-                        {entry.explanation && (
-                          <p className="text-sm text-gray-600 line-clamp-2">
-                            {entry.explanation}
-                          </p>
-                        )}
-                        
-                        <div className="flex justify-between items-center mt-3 text-xs text-gray-500">
-                          <span>Source: {entry.source}</span>
-                        </div>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
+                      </Card>
+                    ))}
+                  </div>
+                )
               )}
             </div>
 
@@ -350,8 +420,19 @@ export default function Dictionary() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
+      {/* PWA Components */}
+      <PWAInstallPrompt />
+      <ConnectionStatus />
+      
+      {/* Pull to Refresh Indicator */}
+      <PullToRefreshIndicator
+        isPulling={isPulling}
+        pullDistance={pullDistance}
+        isRefreshing={isRefreshing}
+      />
+      
       {/* Top Navigation Header */}
-      <header className="bg-white shadow-sm">
+      <header className="bg-white shadow-sm sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -360,11 +441,108 @@ export default function Dictionary() {
                 src="/liantek-logo.png" 
                 alt="LianTek" 
                 className="h-14 w-auto object-contain"
+                data-testid="logo-liantek"
               />
             </div>
 
-            
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
+              <Link href="/medical-dictionary">
+                <Button variant="ghost" size="sm" className="text-gray-600 hover:text-red-600 transition-colors" data-testid="nav-medical">
+                  <Stethoscope className="w-4 h-4 mr-2" />
+                  Medical
+                </Button>
+              </Link>
+              <Link href="/legal-dictionary">
+                <Button variant="ghost" size="sm" className="text-gray-600 hover:text-blue-600 transition-colors" data-testid="nav-legal">
+                  <Scale className="w-4 h-4 mr-2" />
+                  Legal
+                </Button>
+              </Link>
+              <Link href="/asean-terminology">
+                <Button variant="ghost" size="sm" className="text-gray-600 hover:text-green-600 transition-colors" data-testid="nav-asean">
+                  <Globe className="w-4 h-4 mr-2" />
+                  ASEAN
+                </Button>
+              </Link>
+              <Link href="/inl-tetum-dictionary">
+                <Button variant="ghost" size="sm" className="text-gray-600 hover:text-purple-600 transition-colors" data-testid="nav-tetum">
+                  <Languages className="w-4 h-4 mr-2" />
+                  Tetum
+                </Button>
+              </Link>
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+                aria-label="Toggle mobile menu"
+                data-testid="button-mobile-menu"
+              >
+                {mobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </Button>
+            </div>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden border-t border-gray-200 py-4 bg-white" data-testid="mobile-navigation-menu">
+              <nav className="space-y-1">
+                <Link href="/medical-dictionary">
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-start text-gray-600 hover:text-red-600 hover:bg-red-50 py-3 px-4 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                    data-testid="mobile-nav-medical"
+                  >
+                    <Stethoscope className="w-5 h-5 mr-3" />
+                    Medical Dictionary
+                  </Button>
+                </Link>
+                <Link href="/legal-dictionary">
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-start text-gray-600 hover:text-blue-600 hover:bg-blue-50 py-3 px-4 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                    data-testid="mobile-nav-legal"
+                  >
+                    <Scale className="w-5 h-5 mr-3" />
+                    Legal Dictionary
+                  </Button>
+                </Link>
+                <Link href="/asean-terminology">
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-start text-gray-600 hover:text-green-600 hover:bg-green-50 py-3 px-4 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                    data-testid="mobile-nav-asean"
+                  >
+                    <Globe className="w-5 h-5 mr-3" />
+                    ASEAN Terminology
+                  </Button>
+                </Link>
+                <Link href="/inl-tetum-dictionary">
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-start text-gray-600 hover:text-purple-600 hover:bg-purple-50 py-3 px-4 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                    data-testid="mobile-nav-tetum"
+                  >
+                    <Languages className="w-5 h-5 mr-3" />
+                    Tetum Dictionary
+                  </Button>
+                </Link>
+              </nav>
+            </div>
+          )}
         </div>
       </header>
       {/* Hero Section */}
@@ -386,8 +564,10 @@ export default function Dictionary() {
                 <TranslatedText text="& Dictionaries" />
               </h1>
               
+              
+              
               <p className="text-blue-100 mb-10 max-w-lg text-[18px]">
-                <TranslatedText text="Specialized dictionaries and glossaries designed for professional use across multiple languages, with focus on Tetum, and technical domains, such as medical and legal, following the INL standard." />
+                <TranslatedText text="Dictionary of the Tetum Language with more than 10,000 entries, from official sources such as the official Tetum dictionary from INL." />
               </p>
 
               
@@ -417,7 +597,7 @@ export default function Dictionary() {
                     <Languages className="w-7 h-7 text-white" />
                   </div>
                   <div>
-                    <TranslatedText text="All-in-one multilingual language tools" as="h3" className="text-xl font-bold" />
+                    <TranslatedText text="Professional Language Tools" as="h3" className="text-xl font-bold" />
                   </div>
                 </div>
                 

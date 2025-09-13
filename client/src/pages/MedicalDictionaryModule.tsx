@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, Stethoscope, Info, Search, Star, Book, Award, Globe, Heart, Activity, Shield, Users } from "lucide-react";
+import { ArrowLeft, Stethoscope, Info, Search, Star, Book, Award, Globe, Heart, Activity, Shield, Users, Scale, Languages } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -35,7 +35,7 @@ export default function MedicalDictionaryModule() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <Link href="/">
-                <Button variant="ghost" size="sm" className="p-2 hover:bg-red-100 dark:hover:bg-gray-800">
+                <Button variant="ghost" size="sm" className="p-2 hover:bg-red-100 dark:hover:bg-gray-800" data-testid="button-back-home">
                   <ArrowLeft className="w-4 h-4" />
                 </Button>
               </Link>
@@ -48,14 +48,53 @@ export default function MedicalDictionaryModule() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <Badge variant="outline" className="bg-red-50 border-red-200 text-red-700 dark:bg-red-900 dark:border-red-700 dark:text-red-300">
+            
+            {/* Desktop Controls */}
+            <div className="hidden md:flex items-center gap-3">
+              <Badge variant="outline" className="bg-red-50 border-red-200 text-red-700 dark:bg-red-900 dark:border-red-700 dark:text-red-300" data-testid="badge-entries-count">
                 {totalMedicalEntries.toLocaleString()} entries
               </Badge>
               <LanguageSwitcher 
                 selectedLanguage={selectedLanguage}
                 onLanguageChange={setSelectedLanguage}
               />
+            </div>
+
+            {/* Mobile Controls */}
+            <div className="flex md:hidden items-center gap-2">
+              <Badge variant="outline" className="bg-red-50 border-red-200 text-red-700 dark:bg-red-900 dark:border-red-700 dark:text-red-300 text-xs" data-testid="badge-entries-count-mobile">
+                {totalMedicalEntries.toLocaleString()}
+              </Badge>
+              <LanguageSwitcher 
+                selectedLanguage={selectedLanguage}
+                onLanguageChange={setSelectedLanguage}
+              />
+            </div>
+          </div>
+
+          {/* Mobile Navigation Bar */}
+          <div className="md:hidden mt-4 pt-4 border-t border-red-100">
+            <div className="flex items-center justify-between">
+              <div className="flex space-x-1 overflow-x-auto">
+                <Link href="/legal-dictionary">
+                  <Button variant="outline" size="sm" className="whitespace-nowrap text-xs px-3 py-2 border-blue-200 text-blue-600 hover:bg-blue-50" data-testid="mobile-nav-legal-quick">
+                    <Scale className="w-3 h-3 mr-1" />
+                    Legal
+                  </Button>
+                </Link>
+                <Link href="/asean-terminology">
+                  <Button variant="outline" size="sm" className="whitespace-nowrap text-xs px-3 py-2 border-green-200 text-green-600 hover:bg-green-50" data-testid="mobile-nav-asean-quick">
+                    <Globe className="w-3 h-3 mr-1" />
+                    ASEAN
+                  </Button>
+                </Link>
+                <Link href="/inl-tetum-dictionary">
+                  <Button variant="outline" size="sm" className="whitespace-nowrap text-xs px-3 py-2 border-purple-200 text-purple-600 hover:bg-purple-50" data-testid="mobile-nav-tetum-quick">
+                    <Languages className="w-3 h-3 mr-1" />
+                    Tetum
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

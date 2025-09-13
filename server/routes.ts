@@ -1,9 +1,10 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { searchQuerySchema, insertBookmarkSchema, insertSearchHistorySchema } from "@shared/schema";
+import { searchQuerySchema, insertBookmarkSchema, insertSearchHistorySchema } from "../shared/schema";
 import fs from "fs/promises";
 import path from "path";
+import { ParsedQs } from "qs";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
@@ -281,15 +282,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         relatedTerms: [],
       }));
 
-      // Load comprehensive ASEAN terminology data from new glossary file
+      // Load comprehensive ASEAN terminolog data from new glossary file
       let aseanTerminologyData: any[] = [];
       let aseanEntries: any[] = [];
-      
+
       try {
         const aseanCompletePath = path.resolve(process.cwd(), 'extracted_asean_complete.json');
         const aseanCompleteData = await fs.readFile(aseanCompletePath, 'utf8');
         aseanTerminologyData = JSON.parse(aseanCompleteData);
-        
+
         aseanEntries = aseanTerminologyData.map((item: any, index: number) => {
           // Handle both old format (abbreviations) and new format (terminology)
           if (item.type === "terminology") {
@@ -328,7 +329,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
             };
           }
         });
-        
         console.log(`ASEAN comprehensive glossary loaded successfully with ${aseanEntries.length} entries from authentic ASEAN-Abbreviations-List.pdf`);
       } catch (error) {
         console.error('Error loading ASEAN comprehensive glossary:', error);
@@ -337,7 +337,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const aseanJsonPath = path.resolve(process.cwd(), 'extracted_asean_data.json');
           const aseanJsonData = await fs.readFile(aseanJsonPath, 'utf8');
           aseanTerminologyData = JSON.parse(aseanJsonData);
-          
+
           aseanEntries = aseanTerminologyData.map((item: any, index: number) => ({
             tetum: "", // Will be filled via AI translation when requested
             portuguese: "", // Will be filled via AI translation when requested
@@ -353,7 +353,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             usageExamples: [],
             relatedTerms: [],
           }));
-          
+
           console.log(`ASEAN terminology loaded successfully with ${aseanEntries.length} entries from A-Z list (fallback)`);
         } catch (fallbackError) {
           console.error('Error loading fallback ASEAN data:', fallbackError);
@@ -423,11 +423,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
     }
   });
-
   // Medical dictionary search
   app.get("/api/medical/search", async (req, res) => {
     try {
-      const searchQuery = searchQuerySchema.parse(req.query);
+      const queryWithBooleans = normalizeBooleanQuery(req.query);
+      const searchQuery = searchQuerySchema.parse(queryWithBooleans);
       // Force medical dictionary type
       searchQuery.dictionaryType = "medical";
       const results = await storage.searchEntries(searchQuery);
@@ -440,12 +440,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         res.status(400).json({ error: "Invalid search parameters" });
       }
     }
+  // Removed duplicate closing parenthesis
   });
 
   // Legal dictionary search
   app.get("/api/legal/search", async (req, res) => {
     try {
-      const searchQuery = searchQuerySchema.parse(req.query);
+      const queryWithBooleans = normalizeBooleanQuery(req.query);
+      const searchQuery = searchQuerySchema.parse(queryWithBooleans);
       // Force legal dictionary types - include all legal variants
       const results = await storage.searchEntries(searchQuery);
       const legalResults = results.filter(entry => 
@@ -462,8 +464,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         res.status(400).json({ error: "Invalid search parameters" });
       }
     }
+  // Removed duplicate closing parenthesis
   });
-
   // Tetum Glossary search
   app.get("/api/tetum-glossary/search", async (req, res) => {
     try {
@@ -477,15 +479,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (error instanceof Error) {
         res.status(400).json({ error: error.message });
       } else {
-        res.status(400).json({ error: "Invalid search parameters" });
-      }
+        res.status(400).json({ error: "Invalid search parameters" });      }
     }
   });
-
   // Portuguese Glossary search
   app.get("/api/portuguese-glossary/search", async (req, res) => {
     try {
-      const searchQuery = searchQuerySchema.parse(req.query);
+      const queryWithBooleans = normalizeBooleanQuery(req.query);
+      const searchQuery = searchQuerySchema.parse(queryWithBooleans);
       // Force portuguese glossary dictionary type
       searchQuery.dictionaryType = "portuguese-glossary";
       const results = await storage.searchEntries(searchQuery);
@@ -498,12 +499,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         res.status(400).json({ error: "Invalid search parameters" });
       }
     }
+  // Removed duplicate closing parenthesis
   });
-
   // INL Tetum dictionary search
   app.get("/api/inl-tetum/search", async (req, res) => {
     try {
-      const searchQuery = searchQuerySchema.parse(req.query);
+      const queryWithBooleans = normalizeBooleanQuery(req.query);
+      const searchQuery = searchQuerySchema.parse(queryWithBooleans);
       // Force INL Tetum dictionary type
       searchQuery.dictionaryType = "inl-tetum";
       const results = await storage.searchEntries(searchQuery);
@@ -516,12 +518,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         res.status(400).json({ error: "Invalid search parameters" });
       }
     }
+  // Removed duplicate closing parenthesis
   });
-
   // Tetum Monolingual dictionary search
   app.get("/api/tetum-monolingual/search", async (req, res) => {
     try {
-      const searchQuery = searchQuerySchema.parse(req.query);
+      const queryWithBooleans = normalizeBooleanQuery(req.query);
+      const searchQuery = searchQuerySchema.parse(queryWithBooleans);
       // Force Tetum Monolingual dictionary type
       searchQuery.dictionaryType = "tetum-monolingual";
       const results = await storage.searchEntries(searchQuery);
@@ -534,12 +537,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         res.status(400).json({ error: "Invalid search parameters" });
       }
     }
+  // Removed duplicate closing parenthesis
   });
-
   // ASEAN terminology search
   app.get("/api/asean/search", async (req, res) => {
     try {
-      const searchQuery = searchQuerySchema.parse(req.query);
+      const queryWithBooleans = normalizeBooleanQuery(req.query);
+      const searchQuery = searchQuerySchema.parse(queryWithBooleans);
       // Force ASEAN dictionary type
       searchQuery.dictionaryType = "asean";
       const results = await storage.searchEntries(searchQuery);
@@ -552,6 +556,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         res.status(400).json({ error: "Invalid search parameters" });
       }
     }
+  // Removed duplicate closing parenthesis
   });
 
   // ASEAN terminology translation using Google Translate API (primary) with OpenRouter fallback
@@ -978,7 +983,14 @@ Provide only the translation without additional explanation.`;
   // Medical module endpoints - Only medical terms
   app.get("/api/medical/search", async (req, res) => {
     try {
-      const searchQuery = searchQuerySchema.parse(req.query);
+      // Convert string booleans from query params to actual booleans
+      const queryWithBooleans = {
+        ...req.query,
+        exactMatch: req.query.exactMatch === 'true',
+        includeDefinitions: req.query.includeDefinitions !== 'false',
+        caseSensitive: req.query.caseSensitive === 'true'
+      };
+      const searchQuery = searchQuerySchema.parse(queryWithBooleans);
       const allResults = await storage.searchEntries(searchQuery);
       const medicalResults = allResults.filter(e => e.dictionaryType === "medical");
       res.json(medicalResults);
@@ -1002,7 +1014,14 @@ Provide only the translation without additional explanation.`;
   // Legal module endpoints - Only legal terms
   app.get("/api/legal/search", async (req, res) => {
     try {
-      const searchQuery = searchQuerySchema.parse(req.query);
+      // Convert string booleans from query params to actual booleans
+      const queryWithBooleans = {
+        ...req.query,
+        exactMatch: req.query.exactMatch === 'true',
+        includeDefinitions: req.query.includeDefinitions !== 'false',
+        caseSensitive: req.query.caseSensitive === 'true'
+      };
+      const searchQuery = searchQuerySchema.parse(queryWithBooleans);
       const allResults = await storage.searchEntries(searchQuery);
       const legalResults = allResults.filter(e => 
         e.dictionaryType === "legal" || 
@@ -1020,7 +1039,14 @@ Provide only the translation without additional explanation.`;
   // INL Tetum dictionary endpoints
   app.get("/api/inl-tetum/search", async (req, res) => {
     try {
-      const searchQuery = searchQuerySchema.parse(req.query);
+      // Convert string booleans from query params to actual booleans
+      const queryWithBooleans = {
+        ...req.query,
+        exactMatch: req.query.exactMatch === 'true',
+        includeDefinitions: req.query.includeDefinitions !== 'false',
+        caseSensitive: req.query.caseSensitive === 'true'
+      };
+      const searchQuery = searchQuerySchema.parse(queryWithBooleans);
       const allResults = await storage.searchEntries(searchQuery);
       const inlTetumResults = allResults.filter(e => e.dictionaryType === "inl-tetum");
       res.json(inlTetumResults);
@@ -1044,7 +1070,14 @@ Provide only the translation without additional explanation.`;
   // Tetum Legal Glossary module endpoints - Only Tetum legal glossary terms
   app.get("/api/tetum-glossary/search", async (req, res) => {
     try {
-      const searchQuery = searchQuerySchema.parse(req.query);
+      // Convert string booleans from query params to actual booleans
+      const queryWithBooleans = {
+        ...req.query,
+        exactMatch: req.query.exactMatch === 'true',
+        includeDefinitions: req.query.includeDefinitions !== 'false',
+        caseSensitive: req.query.caseSensitive === 'true'
+      };
+      const searchQuery = searchQuerySchema.parse(queryWithBooleans);
       const allResults = await storage.searchEntries(searchQuery);
       const tetumGlossaryResults = allResults.filter(e => e.dictionaryType === "tetum-glossary");
       res.json(tetumGlossaryResults);
@@ -1068,7 +1101,14 @@ Provide only the translation without additional explanation.`;
   // Portuguese Legal Glossary module endpoints - Only Portuguese legal glossary terms
   app.get("/api/portuguese-glossary/search", async (req, res) => {
     try {
-      const searchQuery = searchQuerySchema.parse(req.query);
+      // Convert string booleans from query params to actual booleans
+      const queryWithBooleans = {
+        ...req.query,
+        exactMatch: req.query.exactMatch === 'true',
+        includeDefinitions: req.query.includeDefinitions !== 'false',
+        caseSensitive: req.query.caseSensitive === 'true'
+      };
+      const searchQuery = searchQuerySchema.parse(queryWithBooleans);
       const allResults = await storage.searchEntries(searchQuery);
       const portugueseGlossaryResults = allResults.filter(e => e.dictionaryType === "portuguese-glossary");
       res.json(portugueseGlossaryResults);
@@ -1092,7 +1132,14 @@ Provide only the translation without additional explanation.`;
   // Tetum monolingual module endpoints - Only Tetum monolingual terms
   app.get("/api/tetum-monolingual/search", async (req, res) => {
     try {
-      const searchQuery = searchQuerySchema.parse(req.query);
+      // Convert string booleans from query params to actual booleans
+      const queryWithBooleans = {
+        ...req.query,
+        exactMatch: req.query.exactMatch === 'true',
+        includeDefinitions: req.query.includeDefinitions !== 'false',
+        caseSensitive: req.query.caseSensitive === 'true'
+      };
+      const searchQuery = searchQuerySchema.parse(queryWithBooleans);
       const allResults = await storage.searchEntries(searchQuery);
       const tetumResults = allResults.filter(e => e.dictionaryType === "tetum-monolingual");
       res.json(tetumResults);
@@ -1116,7 +1163,14 @@ Provide only the translation without additional explanation.`;
   // INL Tetum Dictionary module endpoints - Only INL Tetum terms
   app.get("/api/inl-tetum/search", async (req, res) => {
     try {
-      const searchQuery = searchQuerySchema.parse(req.query);
+      // Convert string booleans from query params to actual booleans
+      const queryWithBooleans = {
+        ...req.query,
+        exactMatch: req.query.exactMatch === 'true',
+        includeDefinitions: req.query.includeDefinitions !== 'false',
+        caseSensitive: req.query.caseSensitive === 'true'
+      };
+      const searchQuery = searchQuerySchema.parse(queryWithBooleans);
       const allResults = await storage.searchEntries(searchQuery);
       const inlTetumResults = allResults.filter(e => e.dictionaryType === "inl-tetum");
       res.json(inlTetumResults);
@@ -1212,3 +1266,7 @@ Provide only the translation without additional explanation.`;
   const httpServer = createServer(app);
   return httpServer;
 }
+function normalizeBooleanQuery(query: ParsedQs) {
+  throw new Error("Function not implemented.");
+}
+

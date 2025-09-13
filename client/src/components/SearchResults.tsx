@@ -1,21 +1,22 @@
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Card, CardContent } from "../components/ui/card";
+// Or update the path to the correct location if "../components/ui/card" is not correct.
+// If the file does not exist, create 'card.tsx' or 'card.js' in 'src/components/ui/' with the Card and CardContent exports.
+import { Button } from "../components/ui/button";
+import { Badge } from "../components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
 import { Bookmark, BookmarkCheck, ChevronDown, ChevronUp, List, Grid, X } from "lucide-react";
-import { DictionaryEntry, SearchQuery } from "@shared/schema";
-import { getDictionaryColor, highlightSearchTerm, DICTIONARY_TYPES } from "@/lib/dictionaries";
-import { useCreateBookmark, useDeleteBookmark, useBookmarks } from "@/lib/search";
-
-interface SearchResultsProps {
-  results: DictionaryEntry[];
-  searchQuery: SearchQuery;
-  isLoading: boolean;
-  onEntrySelect: (entry: DictionaryEntry) => void;
-  onRemoveFilter: (filter: string) => void;
-  userId: string;
-}
+// Update the path below to the correct relative path where DictionaryEntry and SearchQuery are defined.
+// For example, if your schema is in src/shared/schema.ts, use:
+// Update the path below to the correct location of your schema file.
+// For example, if your schema is in 'src/types/schema.ts', use:
+import { DictionaryEntry } from "../../../shared/schema";
+// If you do not have this file, create 'src/types/schema.ts' and export DictionaryEntry and SearchQuery interfaces.
+// Update the path below to the correct location of your dictionaries module.
+// For example, if your dictionaries file is in 'src/lib/dictionaries.ts', use:
+import { getDictionaryColor, highlightSearchTerm, DICTIONARY_TYPES } from "../lib/dictionaries";
+import { useCreateBookmark, useDeleteBookmark, useBookmarks } from "../lib/search";
+import { SearchResultsProps } from "./SearchResultsProps";
 
 type SortOption = "relevance" | "alphabetical" | "source";
 type ViewMode = "list" | "grid";
@@ -131,7 +132,7 @@ export function SearchResults({
             </p>
           </div>
           <div className="flex items-center space-x-4">
-            <Select value={sortBy} onValueChange={setSortBy}>
+            <Select value={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
               <SelectTrigger className="w-48">
                 <SelectValue />
               </SelectTrigger>
@@ -313,7 +314,7 @@ export function SearchResults({
                       <div>
                         <span className="text-xs font-medium text-slate-700">Examples: </span>
                         <ul className="list-disc list-inside text-sm text-slate-600 ml-4">
-                          {entry.usageExamples.map((example, idx) => (
+                          {entry.usageExamples.map((example: string, idx: number) => (
                             <li key={idx}>{example}</li>
                           ))}
                         </ul>

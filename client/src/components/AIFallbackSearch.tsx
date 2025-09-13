@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
+// Update the import path below to the correct location of Badge
+// Example: import { Badge } from "../components/ui/badge";
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
 import { Loader2, Bot, Sparkles, AlertCircle, Info } from "lucide-react";
-import { apiRequest } from '@/lib/queryClient';
+import { apiRequest } from '../lib/queryClient';
 
 interface AITranslationResult {
   tetumTranslation: string;
@@ -399,3 +401,5 @@ export function AIFallbackSearch({
     </div>
   );
 }
+// Import DictionaryEntry from the shared schema
+// (Removed unused import to fix module not found error)

@@ -52,6 +52,9 @@ export const searchQuerySchema = z.object({
   exactMatch: z.boolean().default(false),
   includeDefinitions: z.boolean().default(true),
   caseSensitive: z.boolean().default(false),
+  category: z.string().optional(),
+  sortBy: z.enum(["relevance", "alphabetical"]).default("relevance"),
+  limit: z.number().default(100),
 });
 
 export type SearchQuery = z.infer<typeof searchQuerySchema>;
